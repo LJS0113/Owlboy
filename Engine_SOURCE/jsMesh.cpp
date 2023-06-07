@@ -47,6 +47,8 @@ namespace js
 		if (!GetDevice()->CreateBuffer(mIndexBuffer.GetAddressOf(), &mIBDesc, &sub))
 			return false;
 
+		int a = 0;
+
 		return true;
 	}
 	void Mesh::BindBuffer()

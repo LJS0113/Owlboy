@@ -361,6 +361,5 @@ namespace js::graphics
 		// È­¸é¿¡ ±×·ÁÁÜ
 		mSwapChain->Present(0, 0);
 	}
-
 }
 
