@@ -47,7 +47,7 @@ namespace js
 		if (!GetDevice()->CreateBuffer(mIndexBuffer.GetAddressOf(), &mIBDesc, &sub))
 			return false;
 
-		int a = 0;
+		int b = 0;
 
 		return true;
 	}
