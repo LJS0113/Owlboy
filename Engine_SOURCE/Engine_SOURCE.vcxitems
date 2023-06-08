@@ -16,30 +16,44 @@
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsApplication.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsComponent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsConstantBuffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsEngine.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsEntity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsEnums.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsGameObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsGraphicDevice_DX11.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsGraphics.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsInput.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsLayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsMath.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsMesh.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsResource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsResources.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsScene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsSceneManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsShader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsTime.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)jsApplication.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsComponent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsConstantBuffer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsEntity.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsGameObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsGraphicDevice_DX11.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsInput.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsLayer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsMath.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsMesh.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsResource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsResources.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsScene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsSceneManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsScript.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsShader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsTime.cpp" />
   </ItemGroup>

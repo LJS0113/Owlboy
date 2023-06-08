@@ -2,7 +2,6 @@
 #include "jsTime.h"
 #include "jsInput.h"
 #include "jsRenderer.h"
-#include "jsMath.h"
 
 namespace js
 {
@@ -11,7 +10,6 @@ namespace js
 		, mHwnd(NULL)
 		, mWidth(-1)
 		, mHeight(-1)
-		, pos(0.0f, 0.0f, 0.0f, 1.0f)
 	{
 	}
 	Application::~Application()
@@ -29,32 +27,16 @@ namespace js
 		Input::Initialize();
 
 		renderer::Initialize();
+
+		mScene = new Scene();
+		mScene->Initialize();
 	}
 	void Application::Update()
 	{
 		Time::Update();
 		Input::Update();
 
-
-		if (Input::GetKeyDown(eKeyCode::W))
-		{
-			pos.y += 0.1f;
-		}
-		if (Input::GetKeyDown(eKeyCode::A))
-		{
-			pos.x -= 0.1f;
-		}
-		if (Input::GetKeyDown(eKeyCode::S))
-		{
-			pos.y -= 0.1f;
-		}
-		if (Input::GetKeyDown(eKeyCode::D))
-		{
-			pos.x += 0.1f;
-		}
-		js::graphics::GetDevice()->SetConstantBuffer(renderer::triangleConstantBuffer, &pos, sizeof(Vector4));
-		js::graphics::GetDevice()->BindConstantBuffer(eShaderStage::VS, eCBType::Transform, renderer::triangleConstantBuffer);
-
+		mScene->Update();
 	}
 	void Application::LateUpdate()
 	{
@@ -64,6 +46,8 @@ namespace js
 		Time::Render();
 
 		graphicDevice->Draw();
+		mScene->Render();
+		graphicDevice->Present();
 	}
 	void Application::SetWindow(HWND hwnd, UINT width, UINT height)
 	{

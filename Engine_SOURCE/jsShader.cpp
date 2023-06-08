@@ -3,10 +3,13 @@
 namespace js
 {
 	Shader::Shader()
+		: mInputLayout(nullptr)
+		, mTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST)
 	{
 	}
 	Shader::~Shader()
 	{
+		mInputLayout->Release();
 	}
 	HRESULT Shader::Load(const std::wstring& path)
 	{
@@ -27,7 +30,7 @@ namespace js
 			GetDevice()->CompileFromFile(fullpath, funcName, "vs_5_0", mVSBlob.GetAddressOf());
 			GetDevice()->CreateVertexShader(mVSBlob->GetBufferPointer(), mVSBlob->GetBufferSize(), mVS.GetAddressOf());
 		}
-		else if (stage == eShaderStage::VS)
+		else if (stage == eShaderStage::PS)
 		{
 			GetDevice()->CompileFromFile(fullpath, funcName, "ps_5_0", mPSBlob.GetAddressOf());
 			GetDevice()->CreatePixelShader(mPSBlob->GetBufferPointer(), mPSBlob->GetBufferSize(), mPS.GetAddressOf());
@@ -37,6 +40,9 @@ namespace js
 	}
 	void Shader::Binds()
 	{
+		GetDevice()->BindPrimitiveTopology(mTopology);
+		GetDevice()->BindInputLayout(mInputLayout);
+
 		GetDevice()->BindVertexShader(mVS.Get());
 		GetDevice()->BindPixelShader(mPS.Get());
 	}

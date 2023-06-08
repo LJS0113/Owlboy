@@ -3,6 +3,7 @@
 #include "jsGraphicDevice_DX11.h"
 #include "jsMesh.h"
 #include "jsShader.h"
+#include "jsConstantBuffer.h"
 
 
 using namespace js::math;
@@ -15,12 +16,10 @@ namespace renderer
 	};
 
 	extern Vertex vertexes[];
-	extern ID3D11InputLayout* triangleLayout;
+
 	extern js::Mesh* mesh;
-	extern ID3D11Buffer* triangleConstantBuffer;
-	extern ID3DBlob* errorBlob;
 	extern js::Shader* shader;
-	extern ID3D11PixelShader* trianglePSShader;
+	extern js::graphics::ConstantBuffer* constantBuffer;
 
 	void Initialize();
 	void Release();
