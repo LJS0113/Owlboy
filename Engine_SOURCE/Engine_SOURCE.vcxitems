@@ -28,6 +28,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)jsLayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsMath.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsMesh.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsPlayScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsResource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsResources.h" />
@@ -48,6 +49,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)jsLayer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsMath.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsMesh.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsPlayScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsResource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsResources.cpp" />

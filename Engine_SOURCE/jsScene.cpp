@@ -16,19 +16,23 @@ namespace js
 	}
 	void Scene::Update()
 	{
-		for (GameObject* gameObj : mGameObjects)
+		for (Layer* layer : mLayers)
 		{
-			gameObj->Update();
+			layer->Update();
 		}
 	}
 	void Scene::LateUpdate()
 	{
+		for (Layer* layer : mLayers)
+		{
+			layer->Update();
+		}
 	}
 	void Scene::Render()
 	{
-		for (GameObject* gameObj : mGameObjects)
+		for (Layer* layer : mLayers)
 		{
-			gameObj->Render();
+			layer->Render();
 		}
 	}
 }

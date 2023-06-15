@@ -1,6 +1,6 @@
 #pragma once
 #include "jsEntity.h"
-#include "jsGameObject.h"
+#include "jsLayer.h"
 
 namespace js
 {
@@ -16,7 +16,7 @@ namespace js
 		virtual void Render();
 
 	private:
-		std::vector<GameObject*> mGameObjects;
+		std::vector<Layer*> mLayers;
 	};
 
 }

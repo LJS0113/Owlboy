@@ -4,9 +4,7 @@ namespace renderer
 {
 	using namespace js;
 	using namespace js::graphics;
-
 	Vertex vertexes[4] = {};
-
 	js::Mesh* mesh = nullptr;
 	js::Shader* shader = nullptr;
 	js::graphics::ConstantBuffer* constantBuffer = nullptr;

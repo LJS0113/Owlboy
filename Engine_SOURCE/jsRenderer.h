@@ -16,7 +16,6 @@ namespace renderer
 	};
 
 	extern Vertex vertexes[];
-
 	extern js::Mesh* mesh;
 	extern js::Shader* shader;
 	extern js::graphics::ConstantBuffer* constantBuffer;
