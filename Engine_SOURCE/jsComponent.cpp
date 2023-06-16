@@ -2,8 +2,8 @@
 
 namespace js
 {
-	Component::Component()
-		: mType(eComponentType::End)
+	Component::Component(eComponentType type)
+		: mType(type)
 	{
 	}
 	Component::~Component()

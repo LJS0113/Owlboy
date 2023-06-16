@@ -1,13 +1,15 @@
 #pragma once
-#include "jsScene.h"
+#include "jsComponent.h"
+#include "jsMesh.h"
+#include "jsShader.h"
 
 namespace js
 {
-	class PlayScene : public Scene
+	class MeshRenderer : public Component
 	{
 	public:
-		PlayScene();
-		~PlayScene();
+		MeshRenderer();
+		~MeshRenderer();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
@@ -15,7 +17,7 @@ namespace js
 		virtual void Render() override;
 
 	private:
-
+		Mesh* mMesh;
+		Shader* mShader;
 	};
-
 }

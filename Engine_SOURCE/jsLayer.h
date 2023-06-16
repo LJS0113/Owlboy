@@ -14,6 +14,8 @@ namespace js
 		virtual void LateUpdate();
 		virtual void Render();
 
+		void AddGameObject(GameObject* gameObj);
+
 	private:
 		std::vector<GameObject*> mGameObjects;
 	};

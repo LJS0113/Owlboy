@@ -5,6 +5,7 @@ namespace js
 {
 	Scene::Scene()
 	{
+		mLayers.resize((int)js::enums::eLayerType::End);
 	}
 	Scene::~Scene()
 	{
@@ -12,27 +13,30 @@ namespace js
 
 	void Scene::Initialize()
 	{
-		// 여기서 초기 게임 맵데이터를 세팅해줘야한다.
 	}
 	void Scene::Update()
 	{
-		for (Layer* layer : mLayers)
+		for (Layer& layer : mLayers)
 		{
-			layer->Update();
+			layer.Update();
 		}
 	}
 	void Scene::LateUpdate()
 	{
-		for (Layer* layer : mLayers)
+		for (Layer& layer : mLayers)
 		{
-			layer->Update();
+			layer.LateUpdate();
 		}
 	}
 	void Scene::Render()
 	{
-		for (Layer* layer : mLayers)
+		for (Layer& layer : mLayers)
 		{
-			layer->Render();
+			layer.Render();
 		}
+	}
+	void Scene::AddGameObject(eLayerType type, GameObject* gameObj)
+	{
+		mLayers[(int)type].AddGameObject(gameObj);
 	}
 }

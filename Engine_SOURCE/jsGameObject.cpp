@@ -1,13 +1,14 @@
 #include "jsGameObject.h"
 #include "jsRenderer.h"
 #include "jsGraphicDevice_DX11.h"
-
+#include "jsTransform.h"
 
 namespace js
 {
 	GameObject::GameObject()
 		: mState(eState::Active)
 	{
+		AddComponent<Transform>();
 	}
 	GameObject::~GameObject()
 	{
@@ -17,13 +18,23 @@ namespace js
 	}
 	void GameObject::Update()
 	{
-		// 공의 움직임 구현
-
+		for (Component* comp : mComponents)
+		{
+			comp->Update();
+		}
 	}
 	void GameObject::LateUpdate()
 	{
+		for (Component* comp : mComponents)
+		{
+			comp->LateUpdate();
+		}
 	}
 	void GameObject::Render()
 	{
+		for (Component* comp : mComponents)
+		{
+			comp->Render();
+		}
 	}
 }
