@@ -275,6 +275,35 @@ namespace js::graphics
 		mContext->CSSetConstantBuffers((UINT)type, 1, &buffer);
 	}
 
+	void GraphicDevice_DX11::BindShaderResource(eShaderStage stage, UINT startSlot, ID3D11ShaderResourceView** ppSRV)
+	{
+		switch (stage)
+		{
+		case eShaderStage::VS:
+			mContext->VSSetShaderResources(startSlot, 1, ppSRV);
+			break;
+		case eShaderStage::HS:
+			mContext->HSSetShaderResources(startSlot, 1, ppSRV);
+			break;
+		case eShaderStage::DS:
+			mContext->DSSetShaderResources(startSlot, 1, ppSRV);
+			break;
+		case eShaderStage::GS:
+			mContext->GSSetShaderResources(startSlot, 1, ppSRV);
+			break;
+		case eShaderStage::PS:
+			mContext->PSSetShaderResources(startSlot, 1, ppSRV);
+			break;
+		case eShaderStage::CS:
+			mContext->CSSetShaderResources(startSlot, 1, ppSRV);
+			break;
+		case eShaderStage::End:
+			break;
+		default:
+			break;
+		}
+	}
+
 	void GraphicDevice_DX11::ClearTarget()
 	{
 		FLOAT bgColor[4] = { 0.2f, 0.2f, 0.2f, 1.0f };

@@ -11,10 +11,12 @@ namespace js
 		static void LateUpdate();
 		static void Render();
 
+		static Scene* GetActiveScene() { return mActiveScene; }
+		static Scene* LoadScene(std::wstring name);
+
 	private:
 		static Scene* mActiveScene;
-
-		//std::map<std::wstring, Scene*> mScenes;
+		static std::map<std::wstring, Scene*> mScenes;
 	};
 
 }

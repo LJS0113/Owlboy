@@ -26,10 +26,10 @@
       <Filter>GameObject\Component\Script</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)jsLayer.cpp">
-      <Filter>Scene\Layer</Filter>
+      <Filter>Resource\Scene\Layer</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)jsPlayScene.cpp">
-      <Filter>Scene</Filter>
+      <Filter>Resource\Scene</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)jsTransform.cpp">
       <Filter>GameObject\Component\Transform</Filter>
@@ -56,13 +56,16 @@
       <Filter>Graphics\Shader</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)jsSceneManager.cpp">
-      <Filter>Scene\SceneManager</Filter>
+      <Filter>Resource\Scene\SceneManager</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)jsScene.cpp">
-      <Filter>Scene\Base</Filter>
+      <Filter>Resource\Scene\Base</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)jsGameObject.cpp">
       <Filter>GameObject\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsTexture.cpp">
+      <Filter>Resource</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -103,10 +106,10 @@
       <Filter>GameObject\Component\Script</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsLayer.h">
-      <Filter>Scene\Layer</Filter>
+      <Filter>Resource\Scene\Layer</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsPlayScene.h">
-      <Filter>Scene</Filter>
+      <Filter>Resource\Scene</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsTransform.h">
       <Filter>GameObject\Component\Transform</Filter>
@@ -133,13 +136,16 @@
       <Filter>Graphics\Shader</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsSceneManager.h">
-      <Filter>Scene\SceneManager</Filter>
+      <Filter>Resource\Scene\SceneManager</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsScene.h">
-      <Filter>Scene\Base</Filter>
+      <Filter>Resource\Scene\Base</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsGameObject.h">
       <Filter>GameObject\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsTexture.h">
+      <Filter>Resource</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -173,12 +179,6 @@
     <Filter Include="GameObject">
       <UniqueIdentifier>{cb26e049-324b-42f2-81bf-a409eb354af8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene">
-      <UniqueIdentifier>{8bad54af-126b-4f4c-8b4f-89c28c7dd1f0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scene\Layer">
-      <UniqueIdentifier>{deb72b9d-f3f1-4ba3-93d7-71887dbd2b56}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Graphics\ConstantBuffer">
       <UniqueIdentifier>{67f00901-d606-4bd6-a8fa-de7afbd9e207}</UniqueIdentifier>
     </Filter>
@@ -193,12 +193,6 @@
     </Filter>
     <Filter Include="Graphics\Shader">
       <UniqueIdentifier>{08dcbee5-f36a-4076-98a7-9defd07a6858}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scene\SceneManager">
-      <UniqueIdentifier>{ab199595-e3a8-4521-9f4d-8e8e5b660f6e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scene\Base">
-      <UniqueIdentifier>{a3250f8e-de77-4cf0-9b20-5cbbe6816c30}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameObject\Base">
       <UniqueIdentifier>{e6ccd715-ec37-4142-bff8-da540bc82d96}</UniqueIdentifier>
@@ -217,6 +211,18 @@
     </Filter>
     <Filter Include="GameObject\Component\Base">
       <UniqueIdentifier>{d75ee139-e2b5-49ae-83a2-6ac1e5fc3d3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Scene">
+      <UniqueIdentifier>{8bad54af-126b-4f4c-8b4f-89c28c7dd1f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Scene\Layer">
+      <UniqueIdentifier>{deb72b9d-f3f1-4ba3-93d7-71887dbd2b56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Scene\SceneManager">
+      <UniqueIdentifier>{ab199595-e3a8-4521-9f4d-8e8e5b660f6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Scene\Base">
+      <UniqueIdentifier>{a3250f8e-de77-4cf0-9b20-5cbbe6816c30}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

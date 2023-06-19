@@ -37,6 +37,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)jsSceneManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsShader.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsTexture.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsTime.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsTransform.h" />
   </ItemGroup>
@@ -60,6 +61,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)jsSceneManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsScript.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsShader.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsTexture.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsTime.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsTransform.cpp" />
   </ItemGroup>
