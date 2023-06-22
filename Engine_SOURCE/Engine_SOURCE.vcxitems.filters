@@ -73,6 +73,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)jsCameraScript.cpp">
       <Filter>GameObject\Component\Script</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsCamera.cpp">
+      <Filter>GameObject\Component\Camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsApplication.h">
@@ -159,6 +162,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)jsCameraScript.h">
       <Filter>GameObject\Component\Script</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsCamera.h">
+      <Filter>GameObject\Component\Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="High Level Interface">
@@ -238,6 +244,9 @@
     </Filter>
     <Filter Include="Resource\Material">
       <UniqueIdentifier>{5f8cfdd8-9068-4b55-b13d-d14614db8c77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Component\Camera">
+      <UniqueIdentifier>{bceb4b23-6b3e-4e71-9e46-4d7e5caf33b2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

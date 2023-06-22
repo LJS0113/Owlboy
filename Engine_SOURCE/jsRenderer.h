@@ -17,6 +17,13 @@ namespace renderer
 		Vector2 uv;
 	};
 
+	CBUFFER(TransformCB, CBSLOT_TRANSFORM)
+	{
+		Matrix mWorld;
+		Matrix mView;
+		Matrix mProjection;
+	};
+
 	extern Vertex vertexes[];
 	extern js::Mesh* mesh;
 	extern js::Shader* shader;

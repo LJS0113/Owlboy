@@ -18,10 +18,10 @@ struct VSOut
 
 cbuffer Transform : register(b0)
 {
-    float4 Position;
-    //float4 Rotation;
-    //float4 Scale;
-	
+    //float4 Position;
+    row_major matrix mWorld;
+    row_major matrix mView;
+    row_major matrix mProjection;
 }
 
 VSOut main(VSIn In)
@@ -29,9 +29,11 @@ VSOut main(VSIn In)
 	// 0.0f로 모든값 초기화.
     VSOut Out = (VSOut) 0.0f;
 
-    Out.Pos = float4(In.Pos, 1.0f);
-    Out.Pos.x += Position.x;
-    //Out.Pos.y += Position.y;
+    float4 world = mul(float4(In.Pos, 1.0f), mWorld);
+    //float4 view = mul(world, mView);
+    //float4 proj = mul(view, mProjection);
+    
+    Out.Pos = world;
     Out.UV = In.UV;
     Out.Color = In.Color;
 
