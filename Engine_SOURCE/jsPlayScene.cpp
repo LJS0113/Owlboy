@@ -3,6 +3,7 @@
 #include "jsMeshRenderer.h"
 #include "jsResources.h"
 #include "jsMesh.h"
+#include "jsCameraScript.h"
 
 namespace js
 {
@@ -19,6 +20,8 @@ namespace js
 		MeshRenderer* mr = player->AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(Resources::Find<Material>(L"SpriteMaterial"));
+
+		player->AddComponent<CameraScript>();
 
 		//GameObject* player2 = new GameObject();
 		//AddGameObject(eLayerType::Player, player2);

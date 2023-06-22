@@ -16,6 +16,7 @@
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsApplication.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsCameraScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsConstantBuffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsEngine.h" />
@@ -44,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)jsApplication.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsCameraScript.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsConstantBuffer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsEntity.cpp" />

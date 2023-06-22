@@ -70,6 +70,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)jsMaterial.cpp">
       <Filter>Resource\Material</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsCameraScript.cpp">
+      <Filter>GameObject\Component\Script</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsApplication.h">
@@ -152,6 +155,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsMaterial.h">
       <Filter>Resource\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsCameraScript.h">
+      <Filter>GameObject\Component\Script</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

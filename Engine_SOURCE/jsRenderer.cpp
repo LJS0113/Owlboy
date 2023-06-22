@@ -36,7 +36,7 @@ namespace renderer
 		arrLayout[2].SemanticName = "TEXCOORD";
 		arrLayout[2].SemanticIndex = 0;
 
-		Shader* shader = js::Resources::Find<Shader>(L"TriangleShader");
+		std::shared_ptr<Shader> shader = js::Resources::Find<Shader>(L"TriangleShader");
 		js::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
 			, shader->GetVSCode()
 			, shader->GetInputLayoutAddressOf());
@@ -62,8 +62,9 @@ namespace renderer
 
 	void LoadBuffer()
 	{
-		Mesh* mesh = new js::Mesh();
+		std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>();
 		Resources::Insert(L"RectMesh", mesh);
+
 		mesh->CreateVertexBuffer(vertexes, 4);
 
 		std::vector<UINT> indexes = {};
@@ -87,19 +88,19 @@ namespace renderer
 
 	void LoadShader()
 	{
-		Shader* shader = new js::Shader();
+		std::shared_ptr<Shader> shader = std::make_shared<Shader>();
 		shader->Create(eShaderStage::VS, L"TriangleVS.hlsl", "main");
 		shader->Create(eShaderStage::PS, L"TrianglePS.hlsl", "main");
 		js::Resources::Insert(L"TriangleShader", shader);
 
-		Shader* spriteShader = new js::Shader();
+		std::shared_ptr<Shader> spriteShader = std::make_shared<Shader>();
 		spriteShader->Create(eShaderStage::VS, L"SpriteVS.hlsl", "main");
 		spriteShader->Create(eShaderStage::PS, L"SpritePS.hlsl", "main");
 		js::Resources::Insert(L"SpriteShader", spriteShader);
 
-		Texture* texture = Resources::Load<Texture>(L"Link", L"..\\Resources\\Texture\\link.png");
+		std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"Link", L"..\\Resources\\Texture\\link.png");
 
-		Material* spriteMaterial = new js::graphics::Material();
+		std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
 		spriteMaterial->SetShader(spriteShader);
 		spriteMaterial->SetTexture(texture);
 		Resources::Insert(L"SpriteMaterial", spriteMaterial);
@@ -128,7 +129,7 @@ namespace renderer
 		LoadShader();
 		SetupState();
 
-		Texture* texture = Resources::Load<Texture>(L"Smile", L"..\\Resources\\Texture\\Smile.png");
+		std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"Smile", L"..\\Resources\\Texture\\Smile.png");
 		texture = Resources::Load<Texture>(L"Link", L"..\\Resources\\Texture\\link.png");
 
 		texture->BindShader(eShaderStage::PS, 0);

@@ -85,7 +85,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     }
 
     renderer::Release();
-    js::Resources::Release();
     js::SceneManager::Release();
 
     return (int) msg.wParam;
