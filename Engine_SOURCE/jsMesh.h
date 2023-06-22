@@ -18,6 +18,7 @@ namespace js
 		bool CreateIndexBuffer(void* data, UINT count);
 
 		void BindBuffer(); // Buffer 파이프라인에 묶어준다.
+		void Render();
 
 		UINT GetIndexCount() { return mIndexCount; }
 

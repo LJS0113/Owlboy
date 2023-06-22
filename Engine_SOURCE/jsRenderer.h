@@ -7,6 +7,7 @@
 
 
 using namespace js::math;
+using namespace js::graphics;
 namespace renderer
 {
 	struct Vertex
@@ -19,7 +20,7 @@ namespace renderer
 	extern Vertex vertexes[];
 	extern js::Mesh* mesh;
 	extern js::Shader* shader;
-	extern js::graphics::ConstantBuffer* constantBuffer;
+	extern js::graphics::ConstantBuffer* constantBuffer[(UINT)eCBType::End];
 
 	void Initialize();
 	void Release();

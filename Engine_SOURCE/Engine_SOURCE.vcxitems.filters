@@ -67,6 +67,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)jsTexture.cpp">
       <Filter>Resource</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsMaterial.cpp">
+      <Filter>Resource\Material</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsApplication.h">
@@ -147,6 +150,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)jsTexture.h">
       <Filter>Resource</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsMaterial.h">
+      <Filter>Resource\Material</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="High Level Interface">
@@ -223,6 +229,9 @@
     </Filter>
     <Filter Include="Resource\Scene\Base">
       <UniqueIdentifier>{a3250f8e-de77-4cf0-9b20-5cbbe6816c30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Material">
+      <UniqueIdentifier>{5f8cfdd8-9068-4b55-b13d-d14614db8c77}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

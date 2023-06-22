@@ -1,6 +1,8 @@
 #include "jsPlayScene.h"
 #include "jsTransform.h"
 #include "jsMeshRenderer.h"
+#include "jsResources.h"
+#include "jsMesh.h"
 
 namespace js
 {
@@ -14,7 +16,9 @@ namespace js
 	{
 		GameObject* player = new GameObject();
 		AddGameObject(eLayerType::Player, player);
-		player->AddComponent<MeshRenderer>();
+		MeshRenderer* mr = player->AddComponent<MeshRenderer>();
+		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		mr->SetMaterial(Resources::Find<Material>(L"SpriteMaterial"));
 
 		//GameObject* player2 = new GameObject();
 		//AddGameObject(eLayerType::Player, player2);

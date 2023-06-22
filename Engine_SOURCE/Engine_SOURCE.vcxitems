@@ -26,6 +26,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)jsGraphics.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsInput.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsLayer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsMaterial.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsMath.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsMesh.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsMeshRenderer.h" />
@@ -50,6 +51,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)jsGraphicDevice_DX11.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsInput.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsLayer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsMaterial.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsMath.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsMesh.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsMeshRenderer.cpp" />

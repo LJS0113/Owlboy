@@ -5,6 +5,8 @@
 #include "Editor_Window.h"
 #include "jsApplication.h"
 #include "jsRenderer.h"
+#include "jsResources.h"
+#include "jsSceneManager.h"
 
 // 정적 라이브러리를 추가하는 방법.
 // 소스코드로 추가하는 방식.
@@ -43,7 +45,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(lpCmdLine);
 
     // TODO: 여기에 코드를 입력합니다.
-
+    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+    //_CrtSetBreakAlloc(371);
+    // 
     // 전역 문자열을 초기화합니다.
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
     LoadStringW(hInstance, IDC_EDITORWINDOW, szWindowClass, MAX_LOADSTRING);
@@ -81,6 +85,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     }
 
     renderer::Release();
+    js::Resources::Release();
+    js::SceneManager::Release();
+
     return (int) msg.wParam;
 }
 

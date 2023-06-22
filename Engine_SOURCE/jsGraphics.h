@@ -19,9 +19,17 @@ namespace js::graphics
 		End,
 	};
 
+	enum class eSamplerType
+	{
+		Point,
+		Anisotropic,
+		End,
+	};
+
 	enum class eCBType
 	{
 		Transform,
+		Material,
 		End,
 	};
 
