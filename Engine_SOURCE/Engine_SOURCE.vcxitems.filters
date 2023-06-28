@@ -47,13 +47,13 @@
       <Filter>Graphics\GraphicDevice</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)jsMesh.cpp">
-      <Filter>Graphics\Mesh</Filter>
+      <Filter>Resource\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)jsRenderer.cpp">
       <Filter>Graphics\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)jsShader.cpp">
-      <Filter>Graphics\Shader</Filter>
+      <Filter>Resource\Shader</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)jsSceneManager.cpp">
       <Filter>Resource\Scene\SceneManager</Filter>
@@ -64,9 +64,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)jsGameObject.cpp">
       <Filter>GameObject\Base</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)jsTexture.cpp">
-      <Filter>Resource</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)jsMaterial.cpp">
       <Filter>Resource\Material</Filter>
     </ClCompile>
@@ -75,6 +72,15 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)jsCamera.cpp">
       <Filter>GameObject\Component\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsTitleScene.cpp">
+      <Filter>Resource\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsEndingScene.cpp">
+      <Filter>Resource\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsTexture.cpp">
+      <Filter>Resource\Texture</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -136,13 +142,13 @@
       <Filter>Graphics\GraphicDevice</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsMesh.h">
-      <Filter>Graphics\Mesh</Filter>
+      <Filter>Resource\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsRenderer.h">
       <Filter>Graphics\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsShader.h">
-      <Filter>Graphics\Shader</Filter>
+      <Filter>Resource\Shader</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsSceneManager.h">
       <Filter>Resource\Scene\SceneManager</Filter>
@@ -153,9 +159,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)jsGameObject.h">
       <Filter>GameObject\Base</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)jsTexture.h">
-      <Filter>Resource</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsMaterial.h">
       <Filter>Resource\Material</Filter>
     </ClInclude>
@@ -164,6 +167,15 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsCamera.h">
       <Filter>GameObject\Component\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsTitleScene.h">
+      <Filter>Resource\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsEndingScene.h">
+      <Filter>Resource\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsTexture.h">
+      <Filter>Resource\Texture</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -203,14 +215,8 @@
     <Filter Include="Graphics\GraphicDevice">
       <UniqueIdentifier>{4fc7431d-623f-4a11-ad86-d4dc28c2b6dc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Graphics\Mesh">
-      <UniqueIdentifier>{a585a549-e6dc-402f-bfda-925c00b6fba8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Graphics\Renderer">
       <UniqueIdentifier>{c4a8a862-4a77-4d98-9145-2a50b2d3bdd4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\Shader">
-      <UniqueIdentifier>{08dcbee5-f36a-4076-98a7-9defd07a6858}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameObject\Base">
       <UniqueIdentifier>{e6ccd715-ec37-4142-bff8-da540bc82d96}</UniqueIdentifier>
@@ -242,11 +248,20 @@
     <Filter Include="Resource\Scene\Base">
       <UniqueIdentifier>{a3250f8e-de77-4cf0-9b20-5cbbe6816c30}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Component\Camera">
+      <UniqueIdentifier>{bceb4b23-6b3e-4e71-9e46-4d7e5caf33b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Texture">
+      <UniqueIdentifier>{a594edf5-c9d1-4f27-836e-39f337fc2aaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Mesh">
+      <UniqueIdentifier>{a585a549-e6dc-402f-bfda-925c00b6fba8}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Resource\Material">
       <UniqueIdentifier>{5f8cfdd8-9068-4b55-b13d-d14614db8c77}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObject\Component\Camera">
-      <UniqueIdentifier>{bceb4b23-6b3e-4e71-9e46-4d7e5caf33b2}</UniqueIdentifier>
+    <Filter Include="Resource\Shader">
+      <UniqueIdentifier>{08dcbee5-f36a-4076-98a7-9defd07a6858}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

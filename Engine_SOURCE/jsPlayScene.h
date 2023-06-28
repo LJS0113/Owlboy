@@ -14,6 +14,9 @@ namespace js
 		virtual void LateUpdate() override;
 		virtual void Render() override;
 
+		virtual void OnEnter() override;
+		virtual void OnExit() override;
+
 	private:
 
 	};

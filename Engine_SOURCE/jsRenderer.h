@@ -29,6 +29,10 @@ namespace renderer
 	extern js::Shader* shader;
 	extern js::graphics::ConstantBuffer* constantBuffer[(UINT)eCBType::End];
 
+	extern Microsoft::WRL::ComPtr<ID3D11RasterizerState> rasterizerStates[];
+	extern Microsoft::WRL::ComPtr<ID3D11DepthStencilState> depthStencilStates[];
+	extern Microsoft::WRL::ComPtr<ID3D11BlendState> blendStates[];
+
 	void Initialize();
 	void Release();
 }
