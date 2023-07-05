@@ -28,9 +28,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)jsLayer.cpp">
       <Filter>Resource\Scene\Layer</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)jsPlayScene.cpp">
-      <Filter>Resource\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)jsTransform.cpp">
       <Filter>GameObject\Component\Transform</Filter>
     </ClCompile>
@@ -67,17 +64,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)jsMaterial.cpp">
       <Filter>Resource\Material</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)jsCameraScript.cpp">
-      <Filter>GameObject\Component\Script</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)jsCamera.cpp">
       <Filter>GameObject\Component\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)jsTitleScene.cpp">
-      <Filter>Resource\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)jsEndingScene.cpp">
-      <Filter>Resource\Scene</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)jsTexture.cpp">
       <Filter>Resource\Texture</Filter>
@@ -123,9 +111,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)jsLayer.h">
       <Filter>Resource\Scene\Layer</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)jsPlayScene.h">
-      <Filter>Resource\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsTransform.h">
       <Filter>GameObject\Component\Transform</Filter>
     </ClInclude>
@@ -162,17 +147,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)jsMaterial.h">
       <Filter>Resource\Material</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)jsCameraScript.h">
-      <Filter>GameObject\Component\Script</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsCamera.h">
       <Filter>GameObject\Component\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)jsTitleScene.h">
-      <Filter>Resource\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)jsEndingScene.h">
-      <Filter>Resource\Scene</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsTexture.h">
       <Filter>Resource\Texture</Filter>

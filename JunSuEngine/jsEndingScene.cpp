@@ -7,6 +7,7 @@
 #include "jsResources.h"
 #include "jsMeshRenderer.h"
 #include "jsGameObject.h"
+#include "jsTitleScene.h" 
 
 namespace js
 {
@@ -24,6 +25,7 @@ namespace js
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(Resources::Find<Material>(L"Ending_SkyMaterial"));
 		player->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, 0.0f));
+		player->GetComponent<Transform>()->SetScale(Vector3(8.0f, 4.5f, 1.0f));
 
 		// Main Camera
 		GameObject* camera = new GameObject();

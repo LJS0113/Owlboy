@@ -149,8 +149,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
+    <ClInclude Include="jsCameraScript.h" />
+    <ClInclude Include="jsEndingScene.h" />
+    <ClInclude Include="jsPlayScene.h" />
+    <ClInclude Include="jsTitleScene.h" />
+    <ClInclude Include="jsTutorialScene.h" />
+    <ClInclude Include="jsVellieScene.h" />
+    <ClInclude Include="LoadScenes.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="jsCameraScript.cpp" />
+    <ClCompile Include="jsEndingScene.cpp" />
+    <ClCompile Include="jsPlayScene.cpp" />
+    <ClCompile Include="jsTitleScene.cpp" />
+    <ClCompile Include="jsTutorialScene.cpp" />
+    <ClCompile Include="jsVellieScene.cpp" />
     <ClCompile Include="JunSuEngine.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,13 +1,13 @@
 #pragma once
-#include "jsScene.h"
+#include "..\Engine_SOURCE\jsScene.h"
 
 namespace js
 {
-	class PlayScene : public Scene
+	class TutorialScene : public Scene
 	{
 	public:
-		PlayScene();
-		~PlayScene();
+		TutorialScene();
+		~TutorialScene();
 
 		virtual void Initialize() override;
 		virtual void Update() override;

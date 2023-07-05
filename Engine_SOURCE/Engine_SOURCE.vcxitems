@@ -17,10 +17,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsApplication.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsCamera.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)jsCameraScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsConstantBuffer.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)jsEndingScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsEngine.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsEntity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsEnums.h" />
@@ -33,7 +31,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)jsMath.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsMesh.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsMeshRenderer.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)jsPlayScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsResource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsResources.h" />
@@ -43,16 +40,13 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)jsShader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsTexture.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsTime.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)jsTitleScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsTransform.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)jsApplication.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsCamera.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)jsCameraScript.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsConstantBuffer.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)jsEndingScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsEntity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsGameObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsGraphicDevice_DX11.cpp" />
@@ -62,7 +56,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)jsMath.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsMesh.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsMeshRenderer.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)jsPlayScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsResource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsResources.cpp" />
@@ -72,7 +65,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)jsShader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsTexture.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsTime.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)jsTitleScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsTransform.cpp" />
   </ItemGroup>
   <ItemGroup>

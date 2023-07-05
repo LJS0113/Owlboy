@@ -5,11 +5,62 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Contents">
+      <UniqueIdentifier>{9189d822-ff8f-4272-9bde-d9d9f79675be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Load">
+      <UniqueIdentifier>{c34ac407-bec1-4f1e-a97f-c3e2164dcca3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene">
+      <UniqueIdentifier>{dd44068f-9294-45d3-b3cc-6e98eef61754}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script">
+      <UniqueIdentifier>{c9db27e6-a2f6-4db6-bee2-1efb0d98f3ac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="JunSuEngine.cpp" />
+    <ClCompile Include="jsCameraScript.cpp">
+      <Filter>Contents\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="jsEndingScene.cpp">
+      <Filter>Contents\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="jsPlayScene.cpp">
+      <Filter>Contents\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="jsTitleScene.cpp">
+      <Filter>Contents\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="jsTutorialScene.cpp">
+      <Filter>Contents\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="jsVellieScene.cpp">
+      <Filter>Contents\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
+    <ClInclude Include="LoadScenes.h">
+      <Filter>Contents\Load</Filter>
+    </ClInclude>
+    <ClInclude Include="jsCameraScript.h">
+      <Filter>Contents\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="jsEndingScene.h">
+      <Filter>Contents\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="jsPlayScene.h">
+      <Filter>Contents\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="jsTitleScene.h">
+      <Filter>Contents\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="jsTutorialScene.h">
+      <Filter>Contents\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="jsVellieScene.h">
+      <Filter>Contents\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

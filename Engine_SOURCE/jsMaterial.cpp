@@ -7,6 +7,7 @@ namespace js::graphics
 		: Resource(js::enums::eResourceType::Material)
 		, mShader(nullptr)
 		, mTexture(nullptr)
+		, mMode(eRenderingMode::Opqque)
 	{
 	}
 

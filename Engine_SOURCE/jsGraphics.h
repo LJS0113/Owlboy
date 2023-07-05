@@ -64,6 +64,14 @@ namespace js::graphics
 		OneOne,
 		End,
 	};
+
+	enum class eRenderingMode
+	{
+		Opqque,
+		CutOut,
+		Transparent,
+		End,
+	};
 	
 	struct GpuBuffer
 	{

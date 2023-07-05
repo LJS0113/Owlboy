@@ -15,6 +15,8 @@ namespace renderer
 	Microsoft::WRL::ComPtr<ID3D11DepthStencilState> depthStencilStates[(UINT)eDSType::End] = {};
 	Microsoft::WRL::ComPtr<ID3D11BlendState> blendStates[(UINT)eBSType::End] = {};
 
+	std::vector<js::Camera*> cameras = {};
+
 	void SetupState()
 	{
 #pragma region InputLayout
@@ -202,28 +204,139 @@ namespace renderer
 		std::shared_ptr<Material> spriteMaterial1 = std::make_shared<Material>();
 		spriteMaterial1->SetShader(spriteShader);
 		spriteMaterial1->SetTexture(texture1);
+		spriteMaterial1->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"SpriteMaterial02", spriteMaterial1);
 
+#pragma region TitleScene
 		// Title Sky
-		std::shared_ptr<Texture> titleTexture = Resources::Load<Texture>(L"TitleSky", L"..\\Resources\\Texture\\TitleSky.png");
+		std::shared_ptr<Texture> titleTexture = Resources::Load<Texture>(L"TitleSky", L"..\\Resources\\Texture\\TitleScene\\TitleSky.png");
 		std::shared_ptr<Material> titleMaterial = std::make_shared<Material>();
 		titleMaterial->SetShader(spriteShader);
 		titleMaterial->SetTexture(titleTexture);
 		Resources::Insert(L"TitleSkyMaterial", titleMaterial);
-				
-		// tutorial
+
+		
+		// Title MainRock
+		std::shared_ptr<Texture> titleRockTexture = Resources::Load<Texture>(L"TitleMainRock", L"..\\Resources\\Texture\\TitleScene\\TitleSceneRock.png");
+		std::shared_ptr<Material> titleRockMaterial = std::make_shared<Material>();
+		titleRockMaterial->SetShader(spriteShader);
+		titleRockMaterial->SetTexture(titleRockTexture);
+		Resources::Insert(L"TitleMainRockMaterial", titleRockMaterial);
+
+		// Title OtusHouseTop
+		std::shared_ptr<Texture> otusHouseTopTexture = Resources::Load<Texture>(L"OtusHouseTop", L"..\\Resources\\Texture\\TitleScene\\OtusHouseTop.png");
+		std::shared_ptr<Material> otusHouseTopMaterial = std::make_shared<Material>();
+		otusHouseTopMaterial->SetShader(spriteShader);
+		otusHouseTopMaterial->SetTexture(otusHouseTopTexture);
+		Resources::Insert(L"OtusHouseTopMaterial", otusHouseTopMaterial);
+	
+		// Title OtusHouseMiddle
+		std::shared_ptr<Texture> otusHouseMiddleTexture = Resources::Load<Texture>(L"OtusHouseMiddle", L"..\\Resources\\Texture\\TitleScene\\OtusHouseMiddle.png");
+		std::shared_ptr<Material> otusHouseMiddleMaterial = std::make_shared<Material>();
+		otusHouseMiddleMaterial->SetShader(spriteShader);
+		otusHouseMiddleMaterial->SetTexture(otusHouseMiddleTexture);
+		Resources::Insert(L"OtusHouseMiddleMaterial", otusHouseMiddleMaterial);
+
+		// Title OtusHouseTop
+		std::shared_ptr<Texture> logoTexture = Resources::Load<Texture>(L"Logo", L"..\\Resources\\Texture\\TitleScene\\OwlboyLogo.png");
+		std::shared_ptr<Material> logoMaterial = std::make_shared<Material>();
+		logoMaterial->SetShader(spriteShader);
+		logoMaterial->SetTexture(logoTexture);
+		Resources::Insert(L"LogoMaterial", logoMaterial);
+#pragma endregion
+#pragma region Tutorial
+		// Tutorial
 		std::shared_ptr<Texture> tutorialTexture = Resources::Load<Texture>(L"Tutorial", L"..\\Resources\\Texture\\Tutorial.bmp");
 		std::shared_ptr<Material> tutorialMaterial = std::make_shared<Material>();
 		tutorialMaterial->SetShader(spriteShader);
 		tutorialMaterial->SetTexture(tutorialTexture);
 		Resources::Insert(L"TutorialMaterial", tutorialMaterial);
-				
+#pragma endregion
+#pragma region VellieScene
+		std::shared_ptr<Texture> vellieTexture = Resources::Load<Texture>(L"VellieSky", L"..\\Resources\\Texture\\VellieScene\\skyScreen.png");
+		std::shared_ptr<Material> vellieMaterial = std::make_shared<Material>();
+		vellieMaterial->SetShader(spriteShader);
+		vellieMaterial->SetTexture(vellieTexture);
+		Resources::Insert(L"VellieSkyMaterial", vellieMaterial);
+
+		std::shared_ptr<Texture>  bomboShopTexture = Resources::Load<Texture>(L"BomboShop", L"..\\Resources\\Texture\\VellieScene\\bomboShopFront1.png");
+		std::shared_ptr<Material> bomboShopMaterial = std::make_shared<Material>();
+		bomboShopMaterial->SetShader(spriteShader);
+		bomboShopMaterial->SetTexture(bomboShopTexture);
+		Resources::Insert(L"BomboShopMaterial", bomboShopMaterial);
+
+		std::shared_ptr<Texture>  bomboHouseTexture = Resources::Load<Texture>(L"BomboHouse", L"..\\Resources\\Texture\\VellieScene\\bomboHouse.png");
+		std::shared_ptr<Material> bomboHouseMaterial = std::make_shared<Material>();
+		bomboHouseMaterial->SetShader(spriteShader);
+		bomboHouseMaterial->SetTexture(bomboHouseTexture);
+		Resources::Insert(L"BomboHouseMaterial", bomboHouseMaterial);
+
+		std::shared_ptr<Texture>  canonTexture = Resources::Load<Texture>(L"Canon", L"..\\Resources\\Texture\\VellieScene\\Cannon.png");
+		std::shared_ptr<Material> canonMaterial = std::make_shared<Material>();
+		canonMaterial->SetShader(spriteShader);
+		canonMaterial->SetTexture(canonTexture);
+		Resources::Insert(L"CanonMaterial", canonMaterial);
+
+		std::shared_ptr<Texture>  canonBottomTexture = Resources::Load<Texture>(L"CanonBottom", L"..\\Resources\\Texture\\VellieScene\\caveSegment3.png");
+		std::shared_ptr<Material> canonBottomMaterial = std::make_shared<Material>();
+		canonBottomMaterial->SetShader(spriteShader);
+		canonBottomMaterial->SetTexture(canonBottomTexture);
+		Resources::Insert(L"CanonBottomMaterial", canonBottomMaterial);
+
+		std::shared_ptr<Texture>  otusHouseOutsideTexture = Resources::Load<Texture>(L"OtusHouseOutside", L"..\\Resources\\Texture\\VellieScene\\island01.png");
+		std::shared_ptr<Material> otusHouseOutsideMaterial = std::make_shared<Material>();
+		otusHouseOutsideMaterial->SetShader(spriteShader);
+		otusHouseOutsideMaterial->SetTexture(otusHouseOutsideTexture);
+		Resources::Insert(L"OtusHouseOutsideMaterial", otusHouseOutsideMaterial);
+
+#pragma endregion
+
+#pragma region PlayScene
+		// Boss Stage
+		std::shared_ptr<Texture> bossBGTexture = Resources::Load<Texture>(L"BossStage", L"..\\Resources\\Texture\\BossStage.bmp");
+		std::shared_ptr<Material> bossBGMaterial = std::make_shared<Material>();
+		bossBGMaterial->SetShader(spriteShader);
+		bossBGMaterial->SetTexture(bossBGTexture);
+		Resources::Insert(L"BossStageMaterial", bossBGMaterial);
+#pragma endregion
+	
 		// Ending Sky
 		std::shared_ptr<Texture> endingTexture = Resources::Load<Texture>(L"Ending_Sky", L"..\\Resources\\Texture\\Ending_Sky.png");
 		std::shared_ptr<Material> endingMaterial = std::make_shared<Material>();
 		endingMaterial->SetShader(spriteShader);
 		endingMaterial->SetTexture(endingTexture);
 		Resources::Insert(L"Ending_SkyMaterial", endingMaterial);
+
+#pragma region UI
+		// Otus Hp Bar
+		std::shared_ptr<Texture> otusHpTexture = Resources::Load<Texture>(L"OtusHpBar", L"..\\Resources\\Texture\\hpBarFront.bmp");
+		std::shared_ptr<Material> otusHpMaterial = std::make_shared<Material>();
+		otusHpMaterial->SetShader(spriteShader);
+		otusHpMaterial->SetTexture(otusHpTexture);
+		Resources::Insert(L"OtusHpBarMaterial", otusHpMaterial);
+
+		// Boss Hp Bar
+		std::shared_ptr<Texture>  bossHpTexture = Resources::Load<Texture>(L"BossHpBar", L"..\\Resources\\Texture\\bossBar.png");
+		std::shared_ptr<Material> bossHpMaterial = std::make_shared<Material>();
+		bossHpMaterial->SetShader(spriteShader);
+		bossHpMaterial->SetTexture(bossHpTexture);
+		Resources::Insert(L"BossHpBarMaterial", bossHpMaterial);
+
+		// Boss Hp Bar On
+		std::shared_ptr<Texture>  bossHpOnTexture = Resources::Load<Texture>(L"BossHpBarOn", L"..\\Resources\\Texture\\bossBarOn.png");
+		std::shared_ptr<Material> bossHpOnMaterial = std::make_shared<Material>();
+		bossHpOnMaterial->SetShader(spriteShader);
+		bossHpOnMaterial->SetTexture(bossHpOnTexture);
+		Resources::Insert(L"BossHpBarOnMaterial", bossHpOnMaterial);
+
+		// Boss Hp Bar Off
+		std::shared_ptr<Texture>  bossHpOffTexture = Resources::Load<Texture>(L"BossHpOffBar", L"..\\Resources\\Texture\\bossBarOff.png");
+		std::shared_ptr<Material> bossHpOffMaterial = std::make_shared<Material>();
+		bossHpOffMaterial->SetShader(spriteShader);
+		bossHpOffMaterial->SetTexture(bossHpOffTexture);
+		Resources::Insert(L"BossHpBarOffMaterial", bossHpOffMaterial);
+#pragma endregion
+
 
 
 	}
@@ -250,6 +363,17 @@ namespace renderer
 		LoadShader();
 		SetupState();
 
+	}
+	void Render()
+	{
+		for (Camera* cam : cameras)
+		{
+			if (cam == nullptr)
+				continue;
+
+			cam->Render();
+		}
+		cameras.clear();
 	}
 	void renderer::Release()
 	{

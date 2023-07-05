@@ -3,21 +3,21 @@
 
 #include "framework.h"
 #include "Editor_Window.h"
-#include "jsApplication.h"
-#include "jsRenderer.h"
-#include "jsResources.h"
-#include "jsSceneManager.h"
+
+#include "..\Engine_SOURCE\jsApplication.h"
+#include "..\Engine_SOURCE\jsRenderer.h"
+#include "..\Engine_SOURCE\jsResources.h"
+#include "LoadScenes.h"
 
 // 정적 라이브러리를 추가하는 방법.
 // 소스코드로 추가하는 방식.
 // 비쥬얼스튜디오 옵션에 추가해서 사용하는 방식.
 
-
-//#ifdef _DEBUG
-//#pragma comment(lib, "..\\x64\\Debug\\Engine_SOURCE.lib")
-//#else
-//#pragma comment(lib, "..\\x64\\Release\\Engine_SOURCE.lib")
-//#endif
+#ifdef _DEBUG
+#pragma comment(lib, "..\\x64\\Debug\\JunSuEngine.lib")
+#else
+#pragma comment(lib, "..\\x64\\Release\\JunSuEngine.lib")
+#endif
 
 js::Application application;
 
@@ -46,7 +46,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     // TODO: 여기에 코드를 입력합니다.
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-    //_CrtSetBreakAlloc(371);
+    //_CrtSetBreakAlloc(381);
     // 
     // 전역 문자열을 초기화합니다.
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
@@ -86,7 +86,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     }
 
     renderer::Release();
-    js::SceneManager::Release();
+    //js::SceneManager::Release();
 
     return (int) msg.wParam;
 }
@@ -100,7 +100,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 //
 ATOM MyRegisterClass(HINSTANCE hInstance)
 {
-    WNDCLASSEXW wcex;
+    WNDCLASSEXW wcex = {};
 
     wcex.cbSize = sizeof(WNDCLASSEX);
 
@@ -112,7 +112,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_EDITORWINDOW));
     wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);
     wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);
-    wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_EDITORWINDOW);
+    wcex.lpszMenuName   = NULL;//MAKEINTRESOURCEW(IDC_EDITORWINDOW);
     wcex.lpszClassName  = szWindowClass;
     wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
@@ -147,6 +147,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    UpdateWindow(hWnd);
 
    application.Initialize();
+   js::InitializeScenes();
 
    return TRUE;
 }
