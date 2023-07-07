@@ -4,7 +4,6 @@
 struct VSIn
 {
     float3 Pos : POSITION;
-    float4 Color : COLOR;
     float2 UV : TEXCOORD;
 };
 
@@ -13,23 +12,21 @@ struct VSOut
 {
 	// SV_POSITION은 무조건 float4로 맞춰줘야함. 3으로 하니까 오류났음.
     float4 Pos : SV_Position;
-    float4 Color : COLOR;
     float2 UV : TEXCOORD;
+    float2 GridPos : POSITION;
 };
-
-
 
 VSOut main(VSIn In)
 {
-	// 0.0f로 모든값 초기화.
     VSOut Out = (VSOut) 0.0f;
-    float4 world = mul(float4(In.Pos, 1.0f), WorldMatrix);
-    float4 view = mul(world, ViewMatrix);
-    float4 proj = mul(view, ProjectionMatrix);
+    float2 gridPos = float2(0.0f, 0.0f);
+    gridPos.x = In.Pos.x * 1.0f * Resolution.x + CameraPosition.x * CameraScale.x;
+    gridPos.y = In.Pos.y * 1.0f * Resolution.y + CameraPosition.y * CameraScale.y;
     
-    Out.Pos = proj;
-    Out.Color = In.Color;
+    const float meshScale = 2.0f;
+    Out.Pos = float4(In.Pos.xy * meshScale, 0.999f, 1.0f);
     Out.UV = In.UV;
-
+    Out.GridPos = gridPos;
+    
     return Out;
 }

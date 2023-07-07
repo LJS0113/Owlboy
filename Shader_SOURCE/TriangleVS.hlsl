@@ -1,3 +1,4 @@
+#include "globals.hlsli"
 
 // VSIn은 버텍스셰이더로 들어오는 정보.(정점데이터)
 struct VSIn
@@ -15,14 +16,6 @@ struct VSOut
 	float4 Color : COLOR;
     float2 UV : TEXCOORD;
 };
-
-cbuffer Transform : register(b0)
-{
-    float4 Position;
-    //float4 Rotation;
-    //float4 Scale;
-	
-}
 
 VSOut main(VSIn In) 
 {

@@ -52,6 +52,12 @@ namespace renderer
 		js::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
 			, shader->GetVSCode()
 			, shader->GetInputLayoutAddressOf());
+
+		shader = js::Resources::Find<Shader>(L"GridShader");
+		js::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
+			, shader->GetVSCode()
+			, shader->GetInputLayoutAddressOf());
+
 #pragma endregion
 
 #pragma region Sampler State
@@ -90,11 +96,11 @@ namespace renderer
 
 #pragma region Depth Stencil State
 		D3D11_DEPTH_STENCIL_DESC depthStencilDesc = {};
-		
+
 		// Less
 		depthStencilDesc.DepthEnable = true;	// 깊이 체크를 할건지 안할건지.
 		depthStencilDesc.DepthFunc = D3D11_COMPARISON_FUNC::D3D11_COMPARISON_LESS;		// 더 작은값을 그려주겠다.
-		depthStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;	
+		depthStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
 		depthStencilDesc.StencilEnable = false;
 		GetDevice()->CreateDepthStencilState(&depthStencilDesc, depthStencilStates[(UINT)eDSType::Less].GetAddressOf());
 
@@ -156,6 +162,25 @@ namespace renderer
 
 	}
 
+	void LoadMesh()
+	{
+		vertexes[0].pos = Vector3(-0.5f, 0.5f, 0.0f);
+		vertexes[0].color = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
+		vertexes[0].uv = Vector2(0.0f, 0.0f);
+
+		vertexes[1].pos = Vector3(0.5f, 0.5f, 0.0f);
+		vertexes[1].color = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
+		vertexes[1].uv = Vector2(1.0f, 0.0f);
+
+		vertexes[2].pos = Vector3(0.5f, -0.5f, 0.0f);
+		vertexes[2].color = Vector4(0.0f, 0.0f, 1.0f, 1.0f);
+		vertexes[2].uv = Vector2(1.0f, 1.0f);
+
+		vertexes[3].pos = Vector3(-0.5f, -0.5f, 0.0f);
+		vertexes[3].color = Vector4(1.0f, 1.0f, 1.0f, 1.0f);
+		vertexes[3].uv = Vector2(0.0f, 1.0f);
+	}
+
 	void LoadBuffer()
 	{
 		std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>();
@@ -174,12 +199,13 @@ namespace renderer
 
 		mesh->CreateIndexBuffer(indexes.data(), indexes.size());
 
+		// Constant Buffer
 		constantBuffer[(UINT)eCBType::Transform] = new ConstantBuffer(eCBType::Transform);
 		constantBuffer[(UINT)eCBType::Transform]->Create(sizeof(TransformCB));
 
-		//Vector4 pos(0.2f, 0.0f, 0.0f, 1.0f);
-		//constantBuffer->SetData(&pos);
-		//constantBuffer->Bind(eShaderStage::VS);
+		// Constant Buffer
+		constantBuffer[(UINT)eCBType::Grid] = new ConstantBuffer(eCBType::Grid);
+		constantBuffer[(UINT)eCBType::Grid]->Create(sizeof(GridCB));
 	}
 
 	void LoadShader()
@@ -194,6 +220,16 @@ namespace renderer
 		spriteShader->Create(eShaderStage::PS, L"SpritePS.hlsl", "main");
 		js::Resources::Insert(L"SpriteShader", spriteShader);
 
+		std::shared_ptr<Shader> gridShader = std::make_shared<Shader>();
+		gridShader->Create(eShaderStage::VS, L"GridVS.hlsl", "main");
+		gridShader->Create(eShaderStage::PS, L"GridPS.hlsl", "main");
+		js::Resources::Insert(L"GridShader", gridShader);
+	}
+
+	void LoadMaterial()
+	{
+		std::shared_ptr<Shader> spriteShader = Resources::Find<Shader>(L"SpriteShader");
+
 		std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"Link", L"..\\Resources\\Texture\\link.png");
 		std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
 		spriteMaterial->SetShader(spriteShader);
@@ -207,6 +243,12 @@ namespace renderer
 		spriteMaterial1->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"SpriteMaterial02", spriteMaterial1);
 
+		std::shared_ptr<Shader> gridShader = Resources::Find<Shader>(L"GridShader");
+		std::shared_ptr<Material> gridMaterial = std::make_shared<Material>();
+		gridMaterial->SetShader(gridShader);
+		Resources::Insert(L"GridMaterial", gridMaterial);
+
+		
 #pragma region TitleScene
 		// Title Sky
 		std::shared_ptr<Texture> titleTexture = Resources::Load<Texture>(L"TitleSky", L"..\\Resources\\Texture\\TitleScene\\TitleSky.png");
@@ -215,7 +257,7 @@ namespace renderer
 		titleMaterial->SetTexture(titleTexture);
 		Resources::Insert(L"TitleSkyMaterial", titleMaterial);
 
-		
+
 		// Title MainRock
 		std::shared_ptr<Texture> titleRockTexture = Resources::Load<Texture>(L"TitleMainRock", L"..\\Resources\\Texture\\TitleScene\\TitleSceneRock.png");
 		std::shared_ptr<Material> titleRockMaterial = std::make_shared<Material>();
@@ -229,7 +271,7 @@ namespace renderer
 		otusHouseTopMaterial->SetShader(spriteShader);
 		otusHouseTopMaterial->SetTexture(otusHouseTopTexture);
 		Resources::Insert(L"OtusHouseTopMaterial", otusHouseTopMaterial);
-	
+
 		// Title OtusHouseMiddle
 		std::shared_ptr<Texture> otusHouseMiddleTexture = Resources::Load<Texture>(L"OtusHouseMiddle", L"..\\Resources\\Texture\\TitleScene\\OtusHouseMiddle.png");
 		std::shared_ptr<Material> otusHouseMiddleMaterial = std::make_shared<Material>();
@@ -299,13 +341,14 @@ namespace renderer
 		bossBGMaterial->SetTexture(bossBGTexture);
 		Resources::Insert(L"BossStageMaterial", bossBGMaterial);
 #pragma endregion
-	
+#pragma region EndingScene
 		// Ending Sky
 		std::shared_ptr<Texture> endingTexture = Resources::Load<Texture>(L"Ending_Sky", L"..\\Resources\\Texture\\Ending_Sky.png");
 		std::shared_ptr<Material> endingMaterial = std::make_shared<Material>();
 		endingMaterial->SetShader(spriteShader);
 		endingMaterial->SetTexture(endingTexture);
 		Resources::Insert(L"Ending_SkyMaterial", endingMaterial);
+#pragma endregion
 
 #pragma region UI
 		// Otus Hp Bar
@@ -337,31 +380,16 @@ namespace renderer
 		Resources::Insert(L"BossHpBarOffMaterial", bossHpOffMaterial);
 #pragma endregion
 
-
-
 	}
 
 	void Initialize()
 	{
-		vertexes[0].pos = Vector3(-0.5f, 0.5f, 0.0f);
-		vertexes[0].color = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
-		vertexes[0].uv = Vector2(0.0f, 0.0f);
 
-		vertexes[1].pos = Vector3(0.5f, 0.5f, 0.0f);
-		vertexes[1].color = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
-		vertexes[1].uv = Vector2(1.0f, 0.0f);
-
-		vertexes[2].pos = Vector3(0.5f, -0.5f, 0.0f);
-		vertexes[2].color = Vector4(0.0f, 0.0f, 1.0f, 1.0f);
-		vertexes[2].uv = Vector2(1.0f, 1.0f);
-
-		vertexes[3].pos = Vector3(-0.5f, -0.5f, 0.0f);
-		vertexes[3].color = Vector4(1.0f, 1.0f, 1.0f, 1.0f);
-		vertexes[3].uv = Vector2(0.0f, 1.0f);
-
+		LoadMesh();
 		LoadBuffer();
 		LoadShader();
 		SetupState();
+		LoadMaterial();
 
 	}
 	void Render()

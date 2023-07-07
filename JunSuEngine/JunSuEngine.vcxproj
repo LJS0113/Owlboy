@@ -151,6 +151,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="jsCameraScript.h" />
     <ClInclude Include="jsEndingScene.h" />
+    <ClInclude Include="jsGridScript.h" />
     <ClInclude Include="jsPlayScene.h" />
     <ClInclude Include="jsTitleScene.h" />
     <ClInclude Include="jsTutorialScene.h" />
@@ -160,6 +161,7 @@
   <ItemGroup>
     <ClCompile Include="jsCameraScript.cpp" />
     <ClCompile Include="jsEndingScene.cpp" />
+    <ClCompile Include="jsGridScript.cpp" />
     <ClCompile Include="jsPlayScene.cpp" />
     <ClCompile Include="jsTitleScene.cpp" />
     <ClCompile Include="jsTutorialScene.cpp" />

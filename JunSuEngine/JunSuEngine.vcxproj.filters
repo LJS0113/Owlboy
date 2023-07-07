@@ -38,6 +38,9 @@
     <ClCompile Include="jsVellieScene.cpp">
       <Filter>Contents\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="jsGridScript.cpp">
+      <Filter>Contents\Script</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -61,6 +64,9 @@
     </ClInclude>
     <ClInclude Include="jsVellieScene.h">
       <Filter>Contents\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="jsGridScript.h">
+      <Filter>Contents\Script</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
