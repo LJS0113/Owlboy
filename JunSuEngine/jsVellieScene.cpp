@@ -121,7 +121,7 @@ namespace js
 	{
 		if (Input::GetKeyState(eKeyCode::N) == eKeyState::Down)
 		{
-			SceneManager::LoadScene(L"PlayScene");
+			SceneManager::LoadScene(L"BossScene");
 		}
 		Scene::Update();
 	}

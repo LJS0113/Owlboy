@@ -8,7 +8,7 @@ namespace js
 	class GameObject : public Entity
 	{
 	public:
-		enum eState
+		enum class eState
 		{
 			Active,
 			Paused,
@@ -63,6 +63,9 @@ namespace js
 			comp->SetOwner(this);
 			return comp;
 		}
+
+		void SetState(eState state) { mState = state; }
+		eState GetState() { return mState; }
 
 	private:
 		eState mState;

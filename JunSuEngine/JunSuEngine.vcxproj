@@ -149,6 +149,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
+    <ClInclude Include="jsBossScene.h" />
     <ClInclude Include="jsCameraScript.h" />
     <ClInclude Include="jsEndingScene.h" />
     <ClInclude Include="jsGridScript.h" />
@@ -159,6 +160,7 @@
     <ClInclude Include="LoadScenes.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="jsBossScene.cpp" />
     <ClCompile Include="jsCameraScript.cpp" />
     <ClCompile Include="jsEndingScene.cpp" />
     <ClCompile Include="jsGridScript.cpp" />

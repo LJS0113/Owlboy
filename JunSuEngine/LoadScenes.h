@@ -5,6 +5,7 @@
 #include "jsEndingScene.h"
 #include "jsTutorialScene.h"
 #include "jsVellieScene.h"
+#include "jsBossScene.h"
 #ifdef _DEBUG
 #pragma comment(lib, "..\\x64\\Debug\\JunSuEngine.lib")
 #else
@@ -18,9 +19,10 @@ namespace js
 		SceneManager::CreateScene<TitleScene>(L"TitleScene");
 		SceneManager::CreateScene<TutorialScene>(L"TutorialScene");
 		SceneManager::CreateScene<VellieScene>(L"VellieScene");
+		SceneManager::CreateScene<BossScene>(L"BossScene");
 		SceneManager::CreateScene<PlayScene>(L"PlayScene");
 		SceneManager::CreateScene<EndingScene>(L"EndingScene");
 
-		SceneManager::LoadScene(L"TitleScene");
+		SceneManager::LoadScene(L"PlayScene");
 	}
 }

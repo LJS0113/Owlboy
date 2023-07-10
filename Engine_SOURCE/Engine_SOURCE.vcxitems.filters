@@ -153,6 +153,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)jsTexture.h">
       <Filter>Resource\Texture</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsObject.h">
+      <Filter>Common\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="High Level Interface">
@@ -238,6 +241,9 @@
     </Filter>
     <Filter Include="Resource\Shader">
       <UniqueIdentifier>{08dcbee5-f36a-4076-98a7-9defd07a6858}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Object">
+      <UniqueIdentifier>{c6acd6a2-d3ac-45fc-b911-509c885fb478}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

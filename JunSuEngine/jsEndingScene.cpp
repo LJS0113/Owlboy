@@ -38,7 +38,7 @@ namespace js
 	{
 		if (Input::GetKeyState(eKeyCode::N) == eKeyState::Down)
 		{
-			SceneManager::LoadScene(L"TitleScene");
+			SceneManager::LoadScene(L"PlayScene");
 		}
 		Scene::Update();
 	}

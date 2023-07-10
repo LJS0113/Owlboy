@@ -31,6 +31,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)jsMath.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsMesh.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsMeshRenderer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsResource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsResources.h" />
