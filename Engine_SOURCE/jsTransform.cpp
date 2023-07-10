@@ -69,4 +69,33 @@ namespace js
 		cb->Bind(eShaderStage::VS);
 	}
 
+	Vector3 Transform::GetWorldPos(Vector3 pos)
+	{
+		Vector3 position;
+		Viewport viewport;
+		viewport.width = 1600.0f;
+		viewport.height = 900.0f;
+		viewport.x = 0;
+		viewport.y = 0;
+		viewport.minDepth = 0.0f;
+		viewport.maxDepth = 1.0f;
+
+		position = viewport.Project(pos, Camera::GetProjectionMatrix(), Camera::GetViewMatrix(), Matrix::Identity);
+		return position;
+	}
+
+	Vector3 Transform::GetNDCPos(Vector3 pos)
+	{
+		Vector3 position;
+		Viewport viewport;
+		viewport.width = 1600.0f;
+		viewport.height = 900.0f;
+		viewport.x = 0;
+		viewport.y = 0;
+		viewport.minDepth = 0.0f;
+		viewport.maxDepth = 1.0f;
+
+		position = viewport.Unproject(pos, Camera::GetProjectionMatrix(), Camera::GetViewMatrix(), Matrix::Identity);
+		return position;
+	}
 }

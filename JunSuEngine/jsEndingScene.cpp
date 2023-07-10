@@ -8,6 +8,7 @@
 #include "jsMeshRenderer.h"
 #include "jsGameObject.h"
 #include "jsTitleScene.h" 
+#include "jsObject.h"
 
 namespace js
 {
@@ -19,18 +20,14 @@ namespace js
 	}
 	void EndingScene::Initialize()
 	{
-		GameObject* player = new GameObject();
-		AddGameObject(eLayerType::Player, player);
+		GameObject* player = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 0.0f), eLayerType::Player);
 		MeshRenderer* mr = player->AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(Resources::Find<Material>(L"Ending_SkyMaterial"));
-		player->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, 0.0f));
 		player->GetComponent<Transform>()->SetScale(Vector3(8.0f, 4.5f, 1.0f));
 
 		// Main Camera
-		GameObject* camera = new GameObject();
-		AddGameObject(eLayerType::Player, camera);
-		camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
+		GameObject* camera = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, -10.0f), eLayerType::Player);
 		Camera* cameraComp = camera->AddComponent<Camera>();
 		camera->AddComponent<CameraScript>();
 	}

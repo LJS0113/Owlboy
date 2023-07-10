@@ -46,21 +46,17 @@ namespace js
 
 
 		{
-			GameObject* player = new GameObject();
+			GameObject* player = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.0f), eLayerType::Player);
 			player->SetName(L"Smile");
-			AddGameObject(eLayerType::Player, player);
 			MeshRenderer* mr = player->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(Resources::Find<Material>(L"SpriteMaterial02"));
-			player->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, 1.0f));
 			//player->AddComponent<CameraScript>();
 		}
 		Camera* cameraComp = nullptr;
 		{
 			// Main Camera
-			GameObject* camera = new GameObject();
-			AddGameObject(eLayerType::Player, camera);
-			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
+			GameObject* camera = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, -10.0f), eLayerType::Player);
 			cameraComp = camera->AddComponent<Camera>();
 			cameraComp->TurnLayerMask(eLayerType::UI, false);
 			camera->AddComponent<CameraScript>();
@@ -68,9 +64,7 @@ namespace js
 
 		{
 			// UI Camera
-			GameObject* camera = new GameObject();
-			AddGameObject(eLayerType::Player, camera);
-			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
+			GameObject* camera = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, -10.0f), eLayerType::Player);
 			Camera* cameraComp = camera->AddComponent<Camera>();
 			cameraComp->TurnLayerMask(eLayerType::Player, false);
 			cameraComp->TurnLayerMask(eLayerType::BG, false);
@@ -78,9 +72,9 @@ namespace js
 		}
 
 		{
-			GameObject* grid = new GameObject();
+			// Grid 
+			GameObject* grid = object::Instantiate<GameObject>(eLayerType::Grid);
 			player->SetName(L"Grid");
-			AddGameObject(eLayerType::Grid, grid);
 			MeshRenderer* mr = grid->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(Resources::Find<Material>(L"GridMaterial"));
@@ -99,20 +93,6 @@ namespace js
 	}
 	void PlayScene::LateUpdate()
 	{
-		//
-		//Vector3 pos(600, 450, 0.0f);
-		//Vector3 pos2(600, 450, 1000.0f);
-		//Viewport viewport;
-		//viewport.width = 1600.0f;
-		//viewport.height = 900.0f;
-		//viewport.x = 0;
-		//viewport.y = 0;
-		//viewport.minDepth = 0.0f;
-		//viewport.maxDepth = 1.0f;
-
-		//pos = viewport.Unproject(pos, Camera::GetProjectionMatrix(), Camera::GetViewMatrix(), Matrix::Identity);
-		//pos2 = viewport.Unproject(pos2, Camera::GetProjectionMatrix(), Camera::GetViewMatrix(), Matrix::Identity);
-
 		Scene::LateUpdate();
 	}
 	void PlayScene::Render()

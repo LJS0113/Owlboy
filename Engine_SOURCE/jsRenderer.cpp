@@ -331,6 +331,12 @@ namespace renderer
 		otusHouseOutsideMaterial->SetTexture(otusHouseOutsideTexture);
 		Resources::Insert(L"OtusHouseOutsideMaterial", otusHouseOutsideMaterial);
 
+		std::shared_ptr<Texture>  labTexture = Resources::Load<Texture>(L"Lab", L"..\\Resources\\Texture\\VellieScene\\Lab_island.png");
+		std::shared_ptr<Material> labMaterial = std::make_shared<Material>();
+		labMaterial->SetShader(spriteShader);
+		labMaterial->SetTexture(labTexture);
+		Resources::Insert(L"LabMaterial", labMaterial);
+
 #pragma endregion
 
 #pragma region PlayScene

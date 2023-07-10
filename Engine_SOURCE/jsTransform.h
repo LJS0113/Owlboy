@@ -35,6 +35,8 @@ namespace js
 
 		void SetParent(Transform* transform) { mParent = transform; }
 		Transform* GetParent() { return mParent; }
+		static Vector3 GetWorldPos(Vector3 pos);
+		static Vector3 GetNDCPos(Vector3 pos);
 
 	private:
 		Vector3 mPosition;

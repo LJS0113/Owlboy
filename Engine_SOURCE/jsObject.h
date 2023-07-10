@@ -31,7 +31,7 @@ namespace js::object
 	}
 
 	template <typename T>
-	static __forceinline T* Instantiate(Vector3 pos, Vector3 rotate,  enums::eLayerType layer)
+	static __forceinline T* Instantiate(Vector3 pos, Vector3 rotate, enums::eLayerType layer)
 	{
 		T* gameObj = new T();
 		Transform* tr = gameObj->GetComponent<Transform>();
@@ -63,4 +63,6 @@ namespace js::object
 	{
 		gameObj->SetState(js::GameObject::eState::Dead);
 	}
+
+
 }

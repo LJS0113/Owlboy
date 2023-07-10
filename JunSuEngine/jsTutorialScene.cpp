@@ -6,6 +6,7 @@
 #include "jsCamera.h"
 #include "jsCameraScript.h"
 #include "jsSceneManager.h"
+#include "jsObject.h"
 
 namespace js
 {
@@ -17,40 +18,31 @@ namespace js
 	}
 	void TutorialScene::Initialize()
 	{
-		GameObject* player = new GameObject();
-		AddGameObject(eLayerType::BG, player);
+		GameObject* player = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 2.0f), eLayerType::BG);
 		MeshRenderer* mr = player->AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(Resources::Find<Material>(L"TutorialMaterial"));
-		player->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, 2.0f));
 		player->GetComponent<Transform>()->SetScale(Vector3(8.0f, 4.5f, 1.0f));
 
 		{
 			// otus hp bar
-			GameObject* hpBar = new GameObject();
-			AddGameObject(eLayerType::UI, hpBar);
+			GameObject* hpBar = object::Instantiate<GameObject>(Vector3(-3.0f, 2.0f, 1.0f), eLayerType::UI);
 			MeshRenderer* mr = hpBar->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(Resources::Find<Material>(L"OtusHpBarMaterial"));
-			hpBar->GetComponent<Transform>()->SetPosition(Vector3(-3.0f, 2.0f, 1.0f));
 			hpBar->GetComponent<Transform>()->SetScale(Vector3(1.0f, 0.2f, 1.0f));
 		}
 		// Main Camera
-		GameObject* camera = new GameObject();
-		AddGameObject(eLayerType::Player, camera);
-		camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
+		GameObject* camera = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, -10.0f), eLayerType::Player);
 		Camera* cameraComp = camera->AddComponent<Camera>();
 		cameraComp->TurnLayerMask(eLayerType::UI, false);
 		camera->AddComponent<CameraScript>();
 
 		{
 			// UI Camera
-			GameObject* camera = new GameObject();
-			AddGameObject(eLayerType::Player, camera);
-			camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
+			GameObject* camera = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, -10.0f), eLayerType::Player);
 			Camera* cameraComp = camera->AddComponent<Camera>();
 			cameraComp->TurnLayerMask(eLayerType::BG, false);
-			//camera->AddComponent<CameraScript>();
 		}
 	}
 	void TutorialScene::Update()

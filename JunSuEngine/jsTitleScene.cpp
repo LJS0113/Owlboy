@@ -7,6 +7,7 @@
 #include "jsResources.h"
 #include "jsMeshRenderer.h"
 #include "jsPlayScene.h"
+#include "jsObject.h"
 
 namespace js
 {
@@ -18,58 +19,46 @@ namespace js
 	}
 	void TitleScene::Initialize()
 	{
-		GameObject* titleBG = new GameObject();
-		AddGameObject(eLayerType::BG, titleBG);
+		GameObject* titleBG = object::Instantiate<GameObject>(Vector3(0.5f, 0.0f, 2.0f), eLayerType::BG);
 		MeshRenderer* mr = titleBG->AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(Resources::Find<Material>(L"TitleSkyMaterial"));
-		titleBG->GetComponent<Transform>()->SetPosition(Vector3(0.5f, 0.0f, 2.0f));
 		titleBG->GetComponent<Transform>()->SetScale(Vector3(9.0f, 4.5f, 1.0f));
 
 		{
 			// MainRock
-			GameObject* titleBG = new GameObject();
-			AddGameObject(eLayerType::Player, titleBG);
+			GameObject* titleBG = object::Instantiate<GameObject>(Vector3(2.5f, -0.5f, 1.0f), eLayerType::Player);
 			MeshRenderer* mr = titleBG->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(Resources::Find<Material>(L"TitleMainRockMaterial"));
-			titleBG->GetComponent<Transform>()->SetPosition(Vector3(2.5f, -0.5f, 1.0f));
 			titleBG->GetComponent<Transform>()->SetScale(Vector3(2.0f, 2.0f, 1.0f));
 		}	
 		{
 			// OtusHouseTop
-			GameObject* titleBG = new GameObject();
-			AddGameObject(eLayerType::Player, titleBG);
+			GameObject* titleBG = object::Instantiate<GameObject>(Vector3(-3.15f, 1.0f, 1.1f), eLayerType::Player);
 			MeshRenderer* mr = titleBG->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(Resources::Find<Material>(L"OtusHouseTopMaterial"));
-			titleBG->GetComponent<Transform>()->SetPosition(Vector3(-3.15f, 1.0f, 1.1f));
 			titleBG->GetComponent<Transform>()->SetScale(Vector3(2.0f, 2.1f, 1.0f));
 		}
 		{
 			// OtusHouseMiddle
-			GameObject* titleBG = new GameObject();
-			AddGameObject(eLayerType::Player, titleBG);
+			GameObject* titleBG = object::Instantiate<GameObject>(Vector3(-3.0f, -1.0f, 1.0f), eLayerType::Player);
 			MeshRenderer* mr = titleBG->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh")); 
 			mr->SetMaterial(Resources::Find<Material>(L"OtusHouseMiddleMaterial"));
-			titleBG->GetComponent<Transform>()->SetPosition(Vector3(-3.0f, -1.0f, 1.0f));
 			titleBG->GetComponent<Transform>()->SetScale(Vector3(2.0f, 2.0f, 1.0f));
 		}
 		{
 			// Logo
-			GameObject* titleBG = new GameObject();
-			AddGameObject(eLayerType::Player, titleBG);
+			GameObject* titleBG = object::Instantiate<GameObject>(Vector3(0.0f, 1.0f, 1.0f), eLayerType::Player);
 			MeshRenderer* mr = titleBG->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(Resources::Find<Material>(L"LogoMaterial"));
-			titleBG->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 1.0f, 1.0f));
 			titleBG->GetComponent<Transform>()->SetScale(Vector3(2.0f, 1.0f, 1.0f));
 		}
 		// Main Camera
-		GameObject* camera = new GameObject();
-		AddGameObject(eLayerType::Player, camera);
-		camera->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, -10.0f));
+		GameObject* camera = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, -10.0f), eLayerType::Player);
 		Camera* cameraComp = camera->AddComponent<Camera>();
 		camera->AddComponent<CameraScript>();
 	}
