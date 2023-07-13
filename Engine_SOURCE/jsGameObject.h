@@ -64,6 +64,21 @@ namespace js
 			return comp;
 		}
 
+		template <typename T>
+		std::vector<T*> GetComponents()
+		{
+			std::vector<T*> comps;
+			T* component;
+			for (Component* comp : mComponents)
+			{
+				component = dynamic_cast<T*>(comp);
+				if (component != nullptr)
+					comps.push_back(component);
+			}
+
+			return comps;
+		}
+
 		void SetState(eState state) { mState = state; }
 		eState GetState() { return mState; }
 

@@ -10,6 +10,8 @@
 #include "jsEndingScene.h"
 #include "jsGridScript.h"
 #include "jsObject.h"
+#include "jsRenderer.h"
+#include "jsCollider2D.h"
 
 namespace js
 {
@@ -27,6 +29,10 @@ namespace js
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(Resources::Find<Material>(L"SpriteMaterial"));
 		//player->AddComponent<CameraScript>();
+		player->GetComponent<Transform>()->SetPosition(Vector3(-2.0f, 0.0f, 1.0001f));
+		player->AddComponent<Collider2D>();
+		//Collider2D* cd = player->AddComponent<Collider2D>();
+		//cd->SetCenter(Vector2(0.5f, 0.0f));
 
 		//GameObject* player2 = new GameObject();
 		//player2->SetName(L"ZeldaChild");
@@ -60,6 +66,8 @@ namespace js
 			cameraComp = camera->AddComponent<Camera>();
 			cameraComp->TurnLayerMask(eLayerType::UI, false);
 			camera->AddComponent<CameraScript>();
+			renderer::cameras.push_back(cameraComp);
+			renderer::mainCamera = cameraComp;
 		}
 
 		{
@@ -72,14 +80,14 @@ namespace js
 		}
 
 		{
-			// Grid 
-			GameObject* grid = object::Instantiate<GameObject>(eLayerType::Grid);
-			player->SetName(L"Grid");
-			MeshRenderer* mr = grid->AddComponent<MeshRenderer>();
-			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			mr->SetMaterial(Resources::Find<Material>(L"GridMaterial"));
-			GridScript* gridSc = grid->AddComponent<GridScript>();
-			gridSc->SetCamera(cameraComp);
+			//// Grid 
+			//GameObject* grid = object::Instantiate<GameObject>(eLayerType::Grid);
+			//player->SetName(L"Grid");
+			//MeshRenderer* mr = grid->AddComponent<MeshRenderer>();
+			//mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			//mr->SetMaterial(Resources::Find<Material>(L"GridMaterial"));
+			//GridScript* gridSc = grid->AddComponent<GridScript>();
+			//gridSc->SetCamera(cameraComp);
 		}
 		
 	}

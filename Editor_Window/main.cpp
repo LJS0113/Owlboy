@@ -8,6 +8,7 @@
 #include "..\Engine_SOURCE\jsRenderer.h"
 #include "..\Engine_SOURCE\jsResources.h"
 #include "LoadScenes.h"
+#include "guiEditor.h"
 
 // 정적 라이브러리를 추가하는 방법.
 // 소스코드로 추가하는 방식.
@@ -46,7 +47,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     // TODO: 여기에 코드를 입력합니다.
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-    //_CrtSetBreakAlloc(381);
+    //_CrtSetBreakAlloc(268);
     // 
     // 전역 문자열을 초기화합니다.
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
@@ -81,17 +82,17 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         {
             // 여기서 게임 로직이 돌아가야한다.
             application.Run();
+            gui::Editor::Run();
+            application.Present();
         }
 
     }
 
     renderer::Release();
-    //js::SceneManager::Release();
-
+    js::SceneManager::Release();
+    gui::Editor::Release();
     return (int) msg.wParam;
 }
-
-
 
 //
 //  함수: MyRegisterClass()
@@ -148,6 +149,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    application.Initialize();
    js::InitializeScenes();
+   gui::Editor::Initialize();
 
    return TRUE;
 }

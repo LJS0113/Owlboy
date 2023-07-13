@@ -6,6 +6,7 @@
 #include "jsTutorialScene.h"
 #include "jsVellieScene.h"
 #include "jsBossScene.h"
+
 #ifdef _DEBUG
 #pragma comment(lib, "..\\x64\\Debug\\JunSuEngine.lib")
 #else

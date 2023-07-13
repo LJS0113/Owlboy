@@ -47,11 +47,19 @@ namespace js
 		graphicDevice->ClearTarget();
 		graphicDevice->UpdateViewPort();
 		
-		//SceneManager::Render();
 		renderer::Render();
-		
+	}
+
+	void Application::Destroy()
+	{
+		SceneManager::Destroy();
+	}
+
+	void Application::Present()
+	{
 		graphicDevice->Present();
 	}
+
 	void Application::SetWindow(HWND hwnd, UINT width, UINT height)
 	{
 		if (graphicDevice == nullptr)

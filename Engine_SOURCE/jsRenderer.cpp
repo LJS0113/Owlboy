@@ -7,7 +7,6 @@ namespace renderer
 {
 	using namespace js;
 	using namespace js::graphics;
-	Vertex vertexes[4] = {};
 	js::graphics::ConstantBuffer* constantBuffer[(UINT)eCBType::End] = {};
 	Microsoft::WRL::ComPtr<ID3D11SamplerState> samplerState[(UINT)eSamplerType::End] = {};
 
@@ -15,7 +14,9 @@ namespace renderer
 	Microsoft::WRL::ComPtr<ID3D11DepthStencilState> depthStencilStates[(UINT)eDSType::End] = {};
 	Microsoft::WRL::ComPtr<ID3D11BlendState> blendStates[(UINT)eBSType::End] = {};
 
+	js::Camera* mainCamera = nullptr;
 	std::vector<js::Camera*> cameras = {};
+	std::vector<DebugMesh> debugMeshs = {};
 
 	void SetupState()
 	{
@@ -54,6 +55,11 @@ namespace renderer
 			, shader->GetInputLayoutAddressOf());
 
 		shader = js::Resources::Find<Shader>(L"GridShader");
+		js::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
+			, shader->GetVSCode()
+			, shader->GetInputLayoutAddressOf());
+
+		shader = js::Resources::Find<Shader>(L"DebugShader");
 		js::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
 			, shader->GetVSCode()
 			, shader->GetInputLayoutAddressOf());
@@ -164,6 +170,11 @@ namespace renderer
 
 	void LoadMesh()
 	{
+		std::vector<Vertex> vertexes = {};
+		std::vector<UINT> indexes = {};
+
+		// RECT
+		vertexes.resize(4);
 		vertexes[0].pos = Vector3(-0.5f, 0.5f, 0.0f);
 		vertexes[0].color = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
 		vertexes[0].uv = Vector2(0.0f, 0.0f);
@@ -179,16 +190,12 @@ namespace renderer
 		vertexes[3].pos = Vector3(-0.5f, -0.5f, 0.0f);
 		vertexes[3].color = Vector4(1.0f, 1.0f, 1.0f, 1.0f);
 		vertexes[3].uv = Vector2(0.0f, 1.0f);
-	}
 
-	void LoadBuffer()
-	{
+		// Vertex Buffer
 		std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>();
 		Resources::Insert(L"RectMesh", mesh);
 
-		mesh->CreateVertexBuffer(vertexes, 4);
-
-		std::vector<UINT> indexes = {};
+		mesh->CreateVertexBuffer(vertexes.data(), vertexes.size());
 		indexes.push_back(0);
 		indexes.push_back(1);
 		indexes.push_back(2);
@@ -199,6 +206,48 @@ namespace renderer
 
 		mesh->CreateIndexBuffer(indexes.data(), indexes.size());
 
+		// RECT Debug Mesh
+		std::shared_ptr<Mesh> rectDebug = std::make_shared<Mesh>();
+		Resources::Insert(L"DebugRect", rectDebug);
+		rectDebug->CreateVertexBuffer(vertexes.data(), vertexes.size());
+		rectDebug->CreateIndexBuffer(indexes.data(), indexes.size());
+
+		// Circle Debug Mesh
+		vertexes.clear();
+		indexes.clear();
+
+		Vertex center = {};
+		center.pos = Vector3(0.0f, 0.0f, 0.0f);
+		center.color = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
+		vertexes.push_back(center);
+
+		int iSlice = 40;
+		float fRadius = 0.5f;
+		float fTheta = XM_2PI / (float)iSlice;
+
+		for (int i = 0; i < iSlice; ++i)
+		{
+			center.pos = Vector3(fRadius * cosf(fTheta * (float)i)
+				, fRadius * sinf(fTheta * (float)i)
+				, 0.0f);
+			center.color = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
+			vertexes.push_back(center);
+		}
+
+		for (int i = 0; i < vertexes.size() - 2; ++i)
+		{
+			indexes.push_back(i + 1);
+		}
+		indexes.push_back(1);
+
+		std::shared_ptr<Mesh> circleDebug = std::make_shared<Mesh>();
+		Resources::Insert(L"DebugCircle", circleDebug);
+		circleDebug->CreateVertexBuffer(vertexes.data(), vertexes.size());
+		circleDebug->CreateIndexBuffer(indexes.data(), indexes.size());
+	}
+
+	void LoadBuffer()
+	{
 		// Constant Buffer
 		constantBuffer[(UINT)eCBType::Transform] = new ConstantBuffer(eCBType::Transform);
 		constantBuffer[(UINT)eCBType::Transform]->Create(sizeof(TransformCB));
@@ -224,6 +273,14 @@ namespace renderer
 		gridShader->Create(eShaderStage::VS, L"GridVS.hlsl", "main");
 		gridShader->Create(eShaderStage::PS, L"GridPS.hlsl", "main");
 		js::Resources::Insert(L"GridShader", gridShader);
+
+		std::shared_ptr<Shader> debugShader = std::make_shared<Shader>();
+		debugShader->Create(eShaderStage::VS, L"DebugVS.hlsl", "main");
+		debugShader->Create(eShaderStage::PS, L"DebugPS.hlsl", "main");
+		debugShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D_PRIMITIVE_TOPOLOGY_LINESTRIP);
+		debugShader->SetRSState(eRSType::SolidNone);
+		debugShader->SetDSState(eDSType::End);
+		js::Resources::Insert(L"DebugShader", debugShader);
 	}
 
 	void LoadMaterial()
@@ -248,6 +305,10 @@ namespace renderer
 		gridMaterial->SetShader(gridShader);
 		Resources::Insert(L"GridMaterial", gridMaterial);
 
+		std::shared_ptr<Shader> debugShader = Resources::Find<Shader>(L"DebugShader");
+		std::shared_ptr<Material> debugMaterial = std::make_shared<Material>();
+		debugMaterial->SetShader(debugShader);
+		Resources::Insert(L"DebugMaterial", debugMaterial);
 		
 #pragma region TitleScene
 		// Title Sky
@@ -398,6 +459,11 @@ namespace renderer
 		LoadMaterial();
 
 	}
+	void PushDebugMeshAttribute(DebugMesh mesh)
+	{
+		debugMeshs.push_back(mesh);
+	}
+
 	void Render()
 	{
 		for (Camera* cam : cameras)

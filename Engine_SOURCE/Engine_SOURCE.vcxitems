@@ -17,6 +17,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsApplication.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsCamera.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsCollider2D.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsCollisionManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsConstantBuffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsEngine.h" />
@@ -46,6 +48,8 @@
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)jsApplication.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsCamera.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsCollider2D.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsCollisionManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsConstantBuffer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsEntity.cpp" />

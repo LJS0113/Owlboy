@@ -1,6 +1,7 @@
 #pragma once
-#include "jsScript.h"
-#include "jsCamera.h"
+#include "..\Engine_SOURCE\jsScript.h"
+#include "..\Engine_SOURCE\jsCamera.h"
+
 
 namespace js
 {

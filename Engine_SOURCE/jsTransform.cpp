@@ -61,8 +61,8 @@ namespace js
 	{
 		renderer::TransformCB trCB = {};
 		trCB.mWorld = mWorld;
-		trCB.mView = Camera::GetViewMatrix();
-		trCB.mProjection = Camera::GetProjectionMatrix();
+		trCB.mView = Camera::GetGpuViewMatrix();
+		trCB.mProjection = Camera::GetGpuProjectionMatrix();
 
 		ConstantBuffer* cb = renderer::constantBuffer[(UINT)eCBType::Transform];
 		cb->SetData(&trCB);
@@ -80,7 +80,7 @@ namespace js
 		viewport.minDepth = 0.0f;
 		viewport.maxDepth = 1.0f;
 
-		position = viewport.Project(pos, Camera::GetProjectionMatrix(), Camera::GetViewMatrix(), Matrix::Identity);
+		position = viewport.Project(pos, Camera::GetGpuProjectionMatrix(), Camera::GetGpuViewMatrix(), Matrix::Identity);
 		return position;
 	}
 
@@ -95,7 +95,7 @@ namespace js
 		viewport.minDepth = 0.0f;
 		viewport.maxDepth = 1.0f;
 
-		position = viewport.Unproject(pos, Camera::GetProjectionMatrix(), Camera::GetViewMatrix(), Matrix::Identity);
+		position = viewport.Unproject(pos, Camera::GetGpuProjectionMatrix(), Camera::GetGpuViewMatrix(), Matrix::Identity);
 		return position;
 	}
 }

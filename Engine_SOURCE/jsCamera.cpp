@@ -187,6 +187,8 @@ namespace js
 		{
 			if (gameObj == nullptr)
 				continue;
+			if (gameObj->GetState() != GameObject::eState::Active)
+				continue;
 
 			gameObj->Render();
 		}
@@ -196,6 +198,8 @@ namespace js
 		for (GameObject* gameObj : mCutOutGameObjects)
 		{
 			if (gameObj == nullptr)
+				continue;
+			if (gameObj->GetState() != GameObject::eState::Active)
 				continue;
 
 			gameObj->Render();
@@ -207,6 +211,8 @@ namespace js
 		for (GameObject* gameObj : mTransparentGameObjects)
 		{
 			if (gameObj == nullptr)
+				continue;
+			if (gameObj->GetState() != GameObject::eState::Active)
 				continue;
 
 			gameObj->Render();
