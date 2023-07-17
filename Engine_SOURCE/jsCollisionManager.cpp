@@ -22,7 +22,7 @@ namespace js
 		{
 			for (UINT row = 0; row < (UINT)eLayerType::End; row++)
 			{
-				if (mMatrix[row] == true)
+				if (mMatrix[column][row] == true)
 				{
 					LayerCollision((eLayerType)column, (eLayerType)row);
 				}
@@ -113,46 +113,66 @@ namespace js
 		// To do... (숙제)
 		// 분리축이 어렵다 하시는분들은
 
+		// Rect vs Rect 
+		// 0 --- 1
+		// |     |
+		// 3 --- 2
+		Vector3 arrLocalPos[4] =
+		{
+		   Vector3{-0.5f, 0.5f, 0.0f}
+		   ,Vector3{0.5f, 0.5f, 0.0f}
+		   ,Vector3{0.5f, -0.5f, 0.0f}
+		   ,Vector3{-0.5f, -0.5f, 0.0f}
+		};
+
 		Transform* leftTr = left->GetOwner()->GetComponent<Transform>();
 		Transform* rightTr = right->GetOwner()->GetComponent<Transform>();
 
-		Vector3 leftAxis[2] = { leftTr->Right(), leftTr->Up() };
-		Vector3 rightAxis[2] = { rightTr->Right(), rightTr->Up() };
+		Matrix leftMatrix = leftTr->GetMatrix();
+		Matrix rightMatrix = rightTr->GetMatrix();
 
-		Vector3 diffLen = leftTr->GetPosition() - rightTr->GetPosition();
+		Vector3 Axis[4] = {};
 
-		if (leftAxis[0] == Vector3::Zero) 
-			return false;
+		Vector3 leftScale = Vector3(left->GetSize().x, left->GetSize().y, 1.0f);
+		Matrix finalLeft = Matrix::CreateScale(leftScale);
+		finalLeft *= leftMatrix;
 
-		for (int i = 0; i < 2; ++i)
+		Vector3 rightScale = Vector3(right->GetSize().x, right->GetSize().y, 1.0f);
+		Matrix finalRight = Matrix::CreateScale(rightScale);
+		finalRight *= rightMatrix;
+
+		Axis[0] = Vector3::Transform(arrLocalPos[1], finalLeft);
+		Axis[1] = Vector3::Transform(arrLocalPos[3], finalLeft);
+		Axis[2] = Vector3::Transform(arrLocalPos[1], finalRight);
+		Axis[3] = Vector3::Transform(arrLocalPos[3], finalRight);
+
+		Axis[0] -= Vector3::Transform(arrLocalPos[0], finalLeft);
+		Axis[1] -= Vector3::Transform(arrLocalPos[0], finalLeft);
+		Axis[2] -= Vector3::Transform(arrLocalPos[0], finalRight);
+		Axis[3] -= Vector3::Transform(arrLocalPos[0], finalRight);
+
+		for (size_t i = 0; i < 4; i++)
+			Axis[i].z = 0.0f;
+
+		Vector3 vc = leftTr->GetPosition() - rightTr->GetPosition();
+		vc.z = 0.0f;
+
+		Vector3 centerDir = vc;
+		for (size_t i = 0; i < 4; i++)
 		{
-			Vector3 axisX = leftAxis[i];
+			Vector3 vA = Axis[i];
 
-			float distance = abs(diffLen.Dot(axisX));
-			float diff = 0.f;
-			diff += abs(axisX.Dot(leftTr->Up() * leftTr->GetScale().y * 0.5f));
-			diff += abs(axisX.Dot(leftTr->Right() * leftTr->GetScale().x * 0.5f));
-			diff += abs(axisX.Dot(rightTr->Up() * rightTr->GetScale().y * 0.5f));
-			diff += abs(axisX.Dot(rightTr->Right() * rightTr->GetScale().x * 0.5f));
+			float projDistance = 0.0f;
+			for (size_t j = 0; j < 4; j++)
+			{
+				projDistance += fabsf(Axis[j].Dot(vA) / 2.0f);
+			}
 
-			if (diff < distance)
+			if (projDistance < fabsf(centerDir.Dot(vA)))
 				return false;
 		}
 
-		for (int i = 0; i < 2; ++i)
-		{
-			Vector3 axisX = rightAxis[i];
-
-			float distance = abs(diffLen.Dot(axisX));
-			float diff = 0.f;
-			diff += abs(axisX.Dot(leftTr->Up() * leftTr->GetScale().y * 0.5f));
-			diff += abs(axisX.Dot(leftTr->Right() * leftTr->GetScale().x * 0.5f));
-			diff += abs(axisX.Dot(rightTr->Up() * rightTr->GetScale().y * 0.5f));
-			diff += abs(axisX.Dot(rightTr->Right() * rightTr->GetScale().x * 0.5f));
-
-			if (diff < distance)
-				return false;
-		}
+		return true;
 
 		// 원 - 원 충돌
 		leftTr = left->GetOwner()->GetComponent<Transform>();
