@@ -4,14 +4,7 @@
 External/DirectXTex/Lib/Debug/*
 !../External/DirectXTex/Lib/Debug/DirectXTex.lib
 
-External/**
-!External/DirectXTex/
-!External/DirectXTex/Lib
-!External/DirectXTex/Lib/Debug
-!External/DirectXTex/Lib/Debug/DirectXTex.lib
-!External/DirectXTex/Lib/Release
-!External/DirectXTex/Lib/Release/DirectXTex.lib
-
+!/External/
 
 
 # User-specific files
@@ -258,4 +251,4 @@ ModelManifest.xml
 .fake/
 
 
-
+!/External/**/*

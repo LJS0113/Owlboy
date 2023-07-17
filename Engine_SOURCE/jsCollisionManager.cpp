@@ -121,7 +121,8 @@ namespace js
 
 		Vector3 diffLen = leftTr->GetPosition() - rightTr->GetPosition();
 
-		if (leftAxis[0] == Vector3::Zero) return false;
+		if (leftAxis[0] == Vector3::Zero) 
+			return false;
 
 		for (int i = 0; i < 2; ++i)
 		{
