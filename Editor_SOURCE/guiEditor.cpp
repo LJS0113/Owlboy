@@ -28,7 +28,7 @@ namespace gui
 	{
 		mDebugObjects.resize((UINT)eColliderType::End);
 
-		std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"DebugRect"); 
+		std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"DebugCircle"); 
 		std::shared_ptr<Material> material = Resources::Find<Material>(L"DebugMaterial");
 
 		mDebugObjects[(UINT)eColliderType::Rect] = new DebugObject();

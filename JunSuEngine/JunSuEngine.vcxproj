@@ -151,8 +151,13 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="jsBossScene.h" />
     <ClInclude Include="jsCameraScript.h" />
+    <ClInclude Include="jsCloudScript.h" />
+    <ClInclude Include="jsDungeonScene.h" />
     <ClInclude Include="jsEndingScene.h" />
     <ClInclude Include="jsGridScript.h" />
+    <ClInclude Include="jsHouseScene.h" />
+    <ClInclude Include="jsMonsterScript.h" />
+    <ClInclude Include="jsPlayerScript.h" />
     <ClInclude Include="jsPlayScene.h" />
     <ClInclude Include="jsTitleScene.h" />
     <ClInclude Include="jsTutorialScene.h" />
@@ -162,8 +167,13 @@
   <ItemGroup>
     <ClCompile Include="jsBossScene.cpp" />
     <ClCompile Include="jsCameraScript.cpp" />
+    <ClCompile Include="jsCloudScript.cpp" />
+    <ClCompile Include="jsDungeonScene.cpp" />
     <ClCompile Include="jsEndingScene.cpp" />
     <ClCompile Include="jsGridScript.cpp" />
+    <ClCompile Include="jsHouseScene.cpp" />
+    <ClCompile Include="jsMonsterScript.cpp" />
+    <ClCompile Include="jsPlayerScript.cpp" />
     <ClCompile Include="jsPlayScene.cpp" />
     <ClCompile Include="jsTitleScene.cpp" />
     <ClCompile Include="jsTutorialScene.cpp" />

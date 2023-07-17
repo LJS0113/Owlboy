@@ -12,6 +12,9 @@
 #include "jsObject.h"
 #include "jsRenderer.h"
 #include "jsCollider2D.h"
+#include "jsPlayerScript.h"
+#include "jsMonsterScript.h"
+#include "jsCollisionManager.h"
 
 namespace js
 {
@@ -30,10 +33,11 @@ namespace js
 		mr->SetMaterial(Resources::Find<Material>(L"SpriteMaterial"));
 		//player->AddComponent<CameraScript>();
 		player->GetComponent<Transform>()->SetPosition(Vector3(-2.0f, 0.0f, 1.0001f));
-		player->AddComponent<Collider2D>(); 
-
+		player->AddComponent<PlayerScript>();
 		Collider2D* cd = player->AddComponent<Collider2D>();
 			//cd->SetCenter(Vector2(0.5f, 0.0f));
+
+			
 
 			//const float pi = 3.141592f;
 			//float degree = pi / 2.0f;
@@ -43,17 +47,20 @@ namespace js
 
 
 		{
-			GameObject* player = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.0f), eLayerType::Player);
+			GameObject* player = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.0f), eLayerType::Monster);
 			player->SetName(L"Smile");
 			MeshRenderer* mr = player->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(Resources::Find<Material>(L"SpriteMaterial02"));
-			//player->AddComponent<CameraScript>();
+			player->AddComponent<Collider2D>();
+			player->AddComponent<MonsterScript>();
+			player->GetComponent<Transform>()->SetScale(Vector3(2.0f, 2.0f, 1.0f));
 		}
+
 		Camera* cameraComp = nullptr;
 		{
 			// Main Camera
-			GameObject* camera = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, -10.0f), eLayerType::Player);
+			GameObject* camera = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, -10.0f), eLayerType::Camera);
 			cameraComp = camera->AddComponent<Camera>();
 			cameraComp->TurnLayerMask(eLayerType::UI, false);
 			camera->AddComponent<CameraScript>();
@@ -63,9 +70,10 @@ namespace js
 
 		{
 			// UI Camera
-			GameObject* camera = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, -10.0f), eLayerType::Player);
+			GameObject* camera = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, -10.0f), eLayerType::Camera);
 			Camera* cameraComp = camera->AddComponent<Camera>();
 			cameraComp->TurnLayerMask(eLayerType::Player, false);
+			cameraComp->TurnLayerMask(eLayerType::Monster, false);
 			cameraComp->TurnLayerMask(eLayerType::BG, false);
 			//camera->AddComponent<CameraScript>();
 		}
@@ -80,7 +88,7 @@ namespace js
 			//GridScript* gridSc = grid->AddComponent<GridScript>();
 			//gridSc->SetCamera(cameraComp);
 		}
-
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
 	}
 	void PlayScene::Update()
 	{

@@ -4,10 +4,11 @@
 #include "jsLayer.h"
 #include "jsGameObject.h"
 #include "jsCollider2D.h"
+#include "jsResources.h"
+#include "jsMesh.h"
 
 namespace js
 {
-
 	std::bitset<LAYER_MAX> CollisionManager::mMatrix[LAYER_MAX] = {};
 	std::map<UINT64, bool> CollisionManager::mCollisionMap = {};
 
@@ -39,7 +40,7 @@ namespace js
 		for (GameObject* leftObj : lefts)
 		{
 			Collider2D* leftCol = leftObj->GetComponent<Collider2D>();
-			if (leftObj == nullptr)
+			if (leftCol == nullptr)
 				continue;
 			if (leftObj->GetState() != GameObject::eState::Active)
 				continue;
@@ -47,11 +48,12 @@ namespace js
 			for (GameObject* rightObj : rights)
 			{
 				Collider2D* rightCol = rightObj->GetComponent<Collider2D>();
-				if (rightObj == nullptr)
+				if (rightCol == nullptr)
 					continue;
 				if (rightObj->GetState() != GameObject::eState::Active)
 					continue;
-
+				if (left == right)
+					continue;
 				ColliderCollision(leftCol, rightCol);
 			}
 		}
@@ -81,6 +83,7 @@ namespace js
 				// 최초 충돌
 				left->OnCollisionEnter(right);
 				right->OnCollisionEnter(left);
+				iter->second = true;
 			}
 			else
 			{
@@ -96,6 +99,7 @@ namespace js
 			{
 				left->OnCollisionExit(right);
 				right->OnCollisionExit(left);
+				iter->second = false;
 			}
 		}
 
@@ -109,16 +113,62 @@ namespace js
 		// To do... (숙제)
 		// 분리축이 어렵다 하시는분들은
 
-
-
-
-		// 원 - 원 충돌
 		Transform* leftTr = left->GetOwner()->GetComponent<Transform>();
 		Transform* rightTr = right->GetOwner()->GetComponent<Transform>();
 
+		Vector3 leftAxis[2] = { leftTr->Right(), leftTr->Up() };
+		Vector3 rightAxis[2] = { rightTr->Right(), rightTr->Up() };
+
+		Vector3 diffLen = leftTr->GetPosition() - rightTr->GetPosition();
+
+		if (leftAxis[0] == Vector3::Zero) return false;
+
+		for (int i = 0; i < 2; ++i)
+		{
+			Vector3 axisX = leftAxis[i];
+
+			float distance = abs(diffLen.Dot(axisX));
+			float diff = 0.f;
+			diff += abs(axisX.Dot(leftTr->Up() * leftTr->GetScale().y * 0.5f));
+			diff += abs(axisX.Dot(leftTr->Right() * leftTr->GetScale().x * 0.5f));
+			diff += abs(axisX.Dot(rightTr->Up() * rightTr->GetScale().y * 0.5f));
+			diff += abs(axisX.Dot(rightTr->Right() * rightTr->GetScale().x * 0.5f));
+
+			if (diff < distance)
+				return false;
+		}
+
+		for (int i = 0; i < 2; ++i)
+		{
+			Vector3 axisX = rightAxis[i];
+
+			float distance = abs(diffLen.Dot(axisX));
+			float diff = 0.f;
+			diff += abs(axisX.Dot(leftTr->Up() * leftTr->GetScale().y * 0.5f));
+			diff += abs(axisX.Dot(leftTr->Right() * leftTr->GetScale().x * 0.5f));
+			diff += abs(axisX.Dot(rightTr->Up() * rightTr->GetScale().y * 0.5f));
+			diff += abs(axisX.Dot(rightTr->Right() * rightTr->GetScale().x * 0.5f));
+
+			if (diff < distance)
+				return false;
+		}
+
+		// 원 - 원 충돌
+		leftTr = left->GetOwner()->GetComponent<Transform>();
+		rightTr = right->GetOwner()->GetComponent<Transform>();
+
+		Vector3 leftPos = leftTr->GetPosition();
+		Vector3 rightPos = rightTr->GetPosition();
+
+		std::shared_ptr<Mesh> debugMesh = Resources::Find<Mesh>(L"DebugCircle");
+		float radius = debugMesh->GetRadius();
+		float leftRadius = radius * leftTr->GetScale().x;
+		float rightRadius = radius * rightTr->GetScale().x;
 
 
-
+		float distance = pow(abs(leftPos.x - rightPos.x), 2) + pow(abs(leftPos.y - rightPos.y), 2);
+		if (distance <= leftRadius + rightRadius)
+			return true;
 
 		return false;
 	}

@@ -244,6 +244,7 @@ namespace renderer
 		Resources::Insert(L"DebugCircle", circleDebug);
 		circleDebug->CreateVertexBuffer(vertexes.data(), vertexes.size());
 		circleDebug->CreateIndexBuffer(indexes.data(), indexes.size());
+		circleDebug->SetRadius(fRadius);
 	}
 
 	void LoadBuffer()
@@ -355,6 +356,14 @@ namespace renderer
 		tutorialMaterial->SetTexture(tutorialTexture);
 		Resources::Insert(L"TutorialMaterial", tutorialMaterial);
 #pragma endregion
+#pragma region HouseScene
+		std::shared_ptr<Texture> houseTexture = Resources::Load<Texture>(L"House", L"..\\Resources\\Texture\\VellieScene\\Owlboyhouse.png");
+		std::shared_ptr<Material> houseMaterial = std::make_shared<Material>();
+		houseMaterial->SetShader(spriteShader);
+		houseMaterial->SetTexture(houseTexture);
+		Resources::Insert(L"HouseMaterial", houseMaterial);
+#pragma endregion
+
 #pragma region VellieScene
 		std::shared_ptr<Texture> vellieTexture = Resources::Load<Texture>(L"VellieSky", L"..\\Resources\\Texture\\VellieScene\\skyScreen.png");
 		std::shared_ptr<Material> vellieMaterial = std::make_shared<Material>();
@@ -398,9 +407,39 @@ namespace renderer
 		labMaterial->SetTexture(labTexture);
 		Resources::Insert(L"LabMaterial", labMaterial);
 
+		std::shared_ptr<Texture> cloud1Texture = Resources::Load<Texture>(L"Cloud1", L"..\\Resources\\Texture\\VellieScene\\cloud01.png");
+		std::shared_ptr<Material> cloud1Material = std::make_shared<Material>();
+		cloud1Material->SetShader(spriteShader);
+		cloud1Material->SetTexture(cloud1Texture);
+		Resources::Insert(L"Cloud1Material", cloud1Material);
+
+		std::shared_ptr<Texture> cloud2Texture = Resources::Load<Texture>(L"Cloud2", L"..\\Resources\\Texture\\VellieScene\\cloud02.png");
+		std::shared_ptr<Material> cloud2Material = std::make_shared<Material>();
+		cloud2Material->SetShader(spriteShader);
+		cloud2Material->SetTexture(cloud2Texture);
+		Resources::Insert(L"Cloud2Material", cloud2Material);
+
+		std::shared_ptr<Texture> cloud3Texture = Resources::Load<Texture>(L"Cloud3", L"..\\Resources\\Texture\\VellieScene\\cloud03.png");
+		std::shared_ptr<Material> cloud3Material = std::make_shared<Material>();
+		cloud3Material->SetShader(spriteShader);
+		cloud3Material->SetTexture(cloud3Texture);
+		Resources::Insert(L"Cloud3Material", cloud3Material);
+#pragma endregion
+#pragma region DungeonScene
+		std::shared_ptr<Texture> dundeonTexture = Resources::Load<Texture>(L"Dungeon", L"..\\Resources\\Texture\\dungeon.bmp");
+		std::shared_ptr<Material> dungeonMaterial = std::make_shared<Material>();
+		dungeonMaterial->SetShader(spriteShader);
+		dungeonMaterial->SetTexture(dundeonTexture);
+		Resources::Insert(L"DungeonMaterial", dungeonMaterial);
+
+		std::shared_ptr<Texture> testTexture = Resources::Load<Texture>(L"Test", L"..\\Resources\\Texture\\vellie.png");
+		std::shared_ptr<Material> testMaterial = std::make_shared<Material>();
+		testMaterial->SetShader(spriteShader);
+		testMaterial->SetTexture(testTexture);
+		Resources::Insert(L"TestMaterial", testMaterial);
 #pragma endregion
 
-#pragma region PlayScene
+#pragma region BossScene
 		// Boss Stage
 		std::shared_ptr<Texture> bossBGTexture = Resources::Load<Texture>(L"BossStage", L"..\\Resources\\Texture\\BossStage.bmp");
 		std::shared_ptr<Material> bossBGMaterial = std::make_shared<Material>();
@@ -418,6 +457,27 @@ namespace renderer
 #pragma endregion
 
 #pragma region UI
+		// Coin 
+		std::shared_ptr<Texture> coinTexture = Resources::Load<Texture>(L"Coin", L"..\\Resources\\Texture\\coin_15x17.png");
+		std::shared_ptr<Material> coinMaterial = std::make_shared<Material>();
+		coinMaterial->SetShader(spriteShader);
+		coinMaterial->SetTexture(coinTexture);
+		Resources::Insert(L"CoinMaterial", coinMaterial);
+
+		// Hp Bar Icon
+		std::shared_ptr<Texture> otusHpIconTexture = Resources::Load<Texture>(L"OtusHpIcon", L"..\\Resources\\Texture\\gunnerIcon.png");
+		std::shared_ptr<Material> otusHpIconMaterial = std::make_shared<Material>();
+		otusHpIconMaterial->SetShader(spriteShader);
+		otusHpIconMaterial->SetTexture(otusHpIconTexture);
+		Resources::Insert(L"OtusHpIconMaterial", otusHpIconMaterial);
+
+		// Hp Bar Icon frame
+		std::shared_ptr<Texture> otusHpframeTexture = Resources::Load<Texture>(L"OtusHpIconframe", L"..\\Resources\\Texture\\sprFrame_36x32.png");
+		std::shared_ptr<Material> otusHpframeMaterial = std::make_shared<Material>();
+		otusHpframeMaterial->SetShader(spriteShader);
+		otusHpframeMaterial->SetTexture(otusHpframeTexture);
+		Resources::Insert(L"OtusHpIconframeMaterial", otusHpframeMaterial);
+
 		// Otus Hp Bar
 		std::shared_ptr<Texture> otusHpTexture = Resources::Load<Texture>(L"OtusHpBar", L"..\\Resources\\Texture\\hpBarFront.bmp");
 		std::shared_ptr<Material> otusHpMaterial = std::make_shared<Material>();
@@ -445,6 +505,8 @@ namespace renderer
 		bossHpOffMaterial->SetShader(spriteShader);
 		bossHpOffMaterial->SetTexture(bossHpOffTexture);
 		Resources::Insert(L"BossHpBarOffMaterial", bossHpOffMaterial);
+
+
 #pragma endregion
 
 	}

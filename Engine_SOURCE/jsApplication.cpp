@@ -3,6 +3,7 @@
 #include "jsInput.h"
 #include "jsRenderer.h"
 #include "jsSceneManager.h"
+#include "jsCollisionManager.h"
 
 namespace js
 {
@@ -34,6 +35,7 @@ namespace js
 	{
 		Time::Update();
 		Input::Update();
+		CollisionManager::Update();
 		SceneManager::Update();
 	}
 	void Application::LateUpdate()

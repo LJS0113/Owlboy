@@ -3,7 +3,7 @@
 
 namespace js
 {
-#define LAYER_MAX (UINT)eLayerType::End
+#define LAYER_MAX (UINT)eLayerType::End 
 	using namespace enums;
 	class Collider2D;
 	class CollisionManager 

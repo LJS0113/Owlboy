@@ -10,6 +10,7 @@ namespace js
 		, mVBDesc{}
 		, mIBDesc{}
 		, mIndexCount(0)
+		, mRadius(0.0f)
 	{
 	}
 	Mesh::~Mesh()

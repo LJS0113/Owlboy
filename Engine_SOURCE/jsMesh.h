@@ -22,6 +22,9 @@ namespace js
 
 		UINT GetIndexCount() { return mIndexCount; }
 
+		void SetRadius(float radius) { mRadius = radius; }
+		float GetRadius() { return mRadius; }
+
 	private:
 		Microsoft::WRL::ComPtr<ID3D11Buffer> mVertexBuffer;
 		Microsoft::WRL::ComPtr<ID3D11Buffer> mIndexBuffer;
@@ -30,6 +33,7 @@ namespace js
 		D3D11_BUFFER_DESC mIBDesc;
 
 		UINT mIndexCount;
+		float mRadius;
 	};
 
 }
