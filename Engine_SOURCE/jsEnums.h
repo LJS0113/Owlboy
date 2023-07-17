@@ -22,7 +22,7 @@ namespace js::enums
 		Player,
 		Monster,
 		UI,
-		End,
+		End = 16,
 	};
 
 	enum class eResourceType

@@ -30,25 +30,16 @@ namespace js
 		mr->SetMaterial(Resources::Find<Material>(L"SpriteMaterial"));
 		//player->AddComponent<CameraScript>();
 		player->GetComponent<Transform>()->SetPosition(Vector3(-2.0f, 0.0f, 1.0001f));
-		player->AddComponent<Collider2D>();
-		//Collider2D* cd = player->AddComponent<Collider2D>();
-		//cd->SetCenter(Vector2(0.5f, 0.0f));
+		player->AddComponent<Collider2D>(); 
 
-		//GameObject* player2 = new GameObject();
-		//player2->SetName(L"ZeldaChild");
-		//AddGameObject(eLayerType::Player, player2);
-		//MeshRenderer* mr2 = player2->AddComponent<MeshRenderer>();
-		//mr2->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		//mr2->SetMaterial(Resources::Find<Material>(L"SpriteMaterial"));
-		//player2->GetComponent<Transform>()->SetPosition(Vector3(1.0f, 0.0f, 1.0001f));
+		Collider2D* cd = player->AddComponent<Collider2D>();
+			//cd->SetCenter(Vector2(0.5f, 0.0f));
 
-		//player2->GetComponent<Transform>()->SetParent(player->GetComponent<Transform>());
+			//const float pi = 3.141592f;
+			//float degree = pi / 2.0f;
 
-		//const float pi = 3.141592f;
-		//float degree = pi / 2.0f;
-
-		//player->GetComponent<Transform>()->SetPosition(Vector3(-3.0f, 0.0f, 1.0001f));
-		//player->GetComponent<Transform>()->SetRotation(Vector3(0.0f, 0.0f, degree));
+			//player->GetComponent<Transform>()->SetPosition(Vector3(-3.0f, 0.0f, 1.0001f));
+			//player->GetComponent<Transform>()->SetRotation(Vector3(0.0f, 0.0f, degree));
 
 
 		{
@@ -89,7 +80,7 @@ namespace js
 			//GridScript* gridSc = grid->AddComponent<GridScript>();
 			//gridSc->SetCamera(cameraComp);
 		}
-		
+
 	}
 	void PlayScene::Update()
 	{
