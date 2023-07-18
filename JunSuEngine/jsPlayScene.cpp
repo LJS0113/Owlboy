@@ -55,13 +55,11 @@ namespace js
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(Resources::Find<Material>(L"SpriteMaterial02"));
 			Collider2D* cd = player->AddComponent<Collider2D>();
-<<<<<<< HEAD
 			cd->SetSize(Vector2(1.0f, 1.0f));
 			player->AddComponent<MonsterScript>();
 			//player->GetComponent<Transform>()->SetScale(Vector3(2.0f, 2.0f, 1.0f));
-=======
 			player->AddComponent<MonsterScript>();
->>>>>>> 35a4854df502ebe48a6bd657703d66d37416a031
+
 		}
 
 		Camera* cameraComp = nullptr;

@@ -22,7 +22,6 @@ namespace js
 		void SetType(eColliderType type) { mType = type; }
 		Vector2 GetSize() { return mSize; }
 		void SetSize(Vector2 size) { mSize = size; }
-		Vector2 GetSize() { return mSize; }
 		void SetCenter(Vector2 center) { mCenter = center; }
 		UINT GetColliderID() { return mColliderID; }
 

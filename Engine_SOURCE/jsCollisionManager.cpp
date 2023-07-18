@@ -173,7 +173,7 @@ namespace js
 		}
 
 		return true;
-<<<<<<< HEAD
+
 
 		//// 원 - 원 충돌
 		//leftTr = left->GetOwner()->GetComponent<Transform>();
@@ -181,8 +181,7 @@ namespace js
 
 		//Vector3 leftPos = leftTr->GetPosition();
 		//Vector3 rightPos = rightTr->GetPosition();
-=======
->>>>>>> 35a4854df502ebe48a6bd657703d66d37416a031
+
 
 		//std::shared_ptr<Mesh> debugMesh = Resources::Find<Mesh>(L"DebugCircle");
 		//float radius = debugMesh->GetRadius();
