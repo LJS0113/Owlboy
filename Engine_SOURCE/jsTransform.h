@@ -37,6 +37,7 @@ namespace js
 		Transform* GetParent() { return mParent; }
 		static Vector3 GetWorldPos(Vector3 pos);
 		static Vector3 GetNDCPos(Vector3 pos);
+		Matrix& GetMatrix() { return mWorld; }
 
 	private:
 		Vector3 mPosition;

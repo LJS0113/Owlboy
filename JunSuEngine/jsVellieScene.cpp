@@ -38,6 +38,7 @@ namespace js
 			vellieBG->AddComponent<CloudScript>();
 		}
 
+
 		{
 			// Cloud2
 			GameObject* vellieBG = object::Instantiate<GameObject>(Vector3(-2.5f, 2.0f, 1.9f), eLayerType::BG);

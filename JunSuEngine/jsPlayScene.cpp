@@ -26,6 +26,8 @@ namespace js
 	}
 	void PlayScene::Initialize()
 	{
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
+
 		GameObject* player = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.0001f), eLayerType::Player);
 		player->SetName(L"Zelda");
 		MeshRenderer* mr = player->AddComponent<MeshRenderer>();
@@ -35,7 +37,7 @@ namespace js
 		player->GetComponent<Transform>()->SetPosition(Vector3(-2.0f, 0.0f, 1.0001f));
 		player->AddComponent<PlayerScript>();
 		Collider2D* cd = player->AddComponent<Collider2D>();
-			//cd->SetCenter(Vector2(0.5f, 0.0f));
+		cd->SetSize(Vector2(1.2f, 1.2f));
 
 			
 
@@ -52,9 +54,10 @@ namespace js
 			MeshRenderer* mr = player->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(Resources::Find<Material>(L"SpriteMaterial02"));
-			player->AddComponent<Collider2D>();
+			Collider2D* cd = player->AddComponent<Collider2D>();
+			cd->SetSize(Vector2(1.0f, 1.0f));
 			player->AddComponent<MonsterScript>();
-			player->GetComponent<Transform>()->SetScale(Vector3(2.0f, 2.0f, 1.0f));
+			//player->GetComponent<Transform>()->SetScale(Vector3(2.0f, 2.0f, 1.0f));
 		}
 
 		Camera* cameraComp = nullptr;
@@ -88,7 +91,7 @@ namespace js
 			//GridScript* gridSc = grid->AddComponent<GridScript>();
 			//gridSc->SetCamera(cameraComp);
 		}
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
+
 	}
 	void PlayScene::Update()
 	{
