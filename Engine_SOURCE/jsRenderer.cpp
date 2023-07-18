@@ -280,7 +280,10 @@ namespace renderer
 		debugShader->Create(eShaderStage::PS, L"DebugPS.hlsl", "main");
 		debugShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 		debugShader->SetRSState(eRSType::WireframeNone);
+<<<<<<< HEAD
 		debugShader->SetDSState(eDSType::End);
+=======
+>>>>>>> 35a4854df502ebe48a6bd657703d66d37416a031
 		js::Resources::Insert(L"DebugShader", debugShader);
 	}
 

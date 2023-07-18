@@ -38,6 +38,10 @@ namespace js
 		static Vector3 GetWorldPos(Vector3 pos);
 		static Vector3 GetNDCPos(Vector3 pos);
 		Matrix& GetMatrix() { return mWorld; }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 35a4854df502ebe48a6bd657703d66d37416a031
 
 	private:
 		Vector3 mPosition;
