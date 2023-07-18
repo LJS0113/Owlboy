@@ -27,7 +27,7 @@ namespace js
 		MeshRenderer* mr = player->AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(Resources::Find<Material>(L"HouseMaterial"));
-		player->GetComponent<Transform>()->SetScale(Vector3(8.0f, 4.5f, 1.0f));
+		player->GetComponent<Transform>()->SetScale(Vector3(6.0f, 4.5f, 1.0f));
 
 		{
 			// coin

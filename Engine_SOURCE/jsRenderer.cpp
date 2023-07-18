@@ -313,12 +313,18 @@ namespace renderer
 		
 #pragma region TitleScene
 		// Title Sky
-		std::shared_ptr<Texture> titleTexture = Resources::Load<Texture>(L"TitleSky", L"..\\Resources\\Texture\\TitleScene\\TitleSky.png");
+		std::shared_ptr<Texture> titleTexture = Resources::Load<Texture>(L"TitleSky", L"..\\Resources\\Texture\\TitleScene\\title.png");
 		std::shared_ptr<Material> titleMaterial = std::make_shared<Material>();
 		titleMaterial->SetShader(spriteShader);
 		titleMaterial->SetTexture(titleTexture);
 		Resources::Insert(L"TitleSkyMaterial", titleMaterial);
 
+		// Title Cloud
+		std::shared_ptr<Texture> titleCloudTexture = Resources::Load<Texture>(L"TitleCloud", L"..\\Resources\\Texture\\TitleScene\\startBackgroundCloud_800x800.bmp");
+		std::shared_ptr<Material> titleCloudMaterial = std::make_shared<Material>();
+		titleCloudMaterial->SetShader(spriteShader);
+		titleCloudMaterial->SetTexture(titleCloudTexture);
+		Resources::Insert(L"TitleCloudMaterial", titleCloudMaterial);
 
 		// Title MainRock
 		std::shared_ptr<Texture> titleRockTexture = Resources::Load<Texture>(L"TitleMainRock", L"..\\Resources\\Texture\\TitleScene\\TitleSceneRock.png");
