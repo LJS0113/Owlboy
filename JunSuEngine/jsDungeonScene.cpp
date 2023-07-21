@@ -22,12 +22,21 @@ namespace js
 
 	void DungeonScene::Initialize()
 	{
+		// 던전 확대버전
 		GameObject* player = object::Instantiate<GameObject>(Vector3(-10.0f, 0.0f, 3.0f), eLayerType::Player);
 		player->SetName(L"DungeonStage");
 		MeshRenderer* mr = player->AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(Resources::Find<Material>(L"DungeonMaterial"));
 		player->GetComponent<Transform>()->SetScale(Vector3(30.0f, 4.5f, 1.0f));
+
+		// 던전 원본
+		//GameObject* player = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 3.0f), eLayerType::Player);
+		//player->SetName(L"DungeonStage");
+		//MeshRenderer* mr = player->AddComponent<MeshRenderer>();
+		//mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//mr->SetMaterial(Resources::Find<Material>(L"DungeonMaterial"));
+		//player->GetComponent<Transform>()->SetScale(Vector3(9.0f, 4.5f, 1.0f));
 
 		//player = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 2.0f), eLayerType::Player);
 		//mr = player->AddComponent<MeshRenderer>();

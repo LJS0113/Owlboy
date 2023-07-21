@@ -31,6 +31,16 @@ namespace renderer
 		Vector2 Resolution;
 	};
 
+	CBUFFER(AnimatorCB, CBSLOT_ANIMATION2D)
+	{
+		Vector2 spriteLeftTop;
+		Vector2 spriteSize;
+		Vector2 spriteOffset;
+		Vector2 atlasSize;
+		UINT animationType;
+	};
+
+
 	extern js::Mesh* mesh;
 	extern js::Shader* shader;
 	extern js::graphics::ConstantBuffer* constantBuffer[(UINT)eCBType::End];

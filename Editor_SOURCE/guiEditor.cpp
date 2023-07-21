@@ -37,17 +37,17 @@ namespace gui
 		mr->SetMaterial(material);
 		mr->SetMesh(mesh);
 
-		EditorObject* grid = new EditorObject();
-		grid->SetName(L"Grid");
+		//EditorObject* grid = new EditorObject();
+		//grid->SetName(L"Grid");
 
-		mr = grid->AddComponent<MeshRenderer>();
-		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		mr->SetMaterial(Resources::Find<Material>(L"GridMaterial"));
+		//mr = grid->AddComponent<MeshRenderer>();
+		//mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//mr->SetMaterial(Resources::Find<Material>(L"GridMaterial"));
 
-		GridScript* gridSC = grid->AddComponent<GridScript>();
-		gridSC->SetCamera(renderer::cameras[0]);
+		//GridScript* gridSC = grid->AddComponent<GridScript>();
+		//gridSC->SetCamera(renderer::cameras[0]);
 
-		mEditorObjects.push_back(grid);
+		//mEditorObjects.push_back(grid);
 	}
 
 	void Editor::Run()

@@ -15,6 +15,7 @@
 
 #define CBSLOT_TRANSFORM		0
 #define CBSLOT_GRID				2
+#define CBSLOT_ANIMATION2D		3
 //#define CBSLOT_PARTICLE			1
 
 namespace js::graphics
@@ -35,6 +36,7 @@ namespace js::graphics
 		Transform,
 		Material,
 		Grid,
+		Animatior,
 		End,
 	};
 	

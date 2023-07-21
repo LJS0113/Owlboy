@@ -45,27 +45,7 @@ namespace js
 		}
 
 		template <typename T>
-		T* AddComponent()
-		{
-			T* comp = new T();
-
-			Component* buff = dynamic_cast<Component*>(comp);
-			Script* script = dynamic_cast<Script*>(buff);
-
-			if (buff == nullptr)
-				return nullptr;
-
-			if (script == nullptr)
-				mComponents.push_back(buff);
-			else
-				mScripts.push_back(script);
-
-			comp->SetOwner(this);
-			return comp;
-		}
-
-		template <typename T>
-		const std::vector<T*>& GetComponents()
+		const std::vector<T*> GetComponents()
 		{
 			std::vector<T*> comps;
 			T* component;
@@ -84,6 +64,26 @@ namespace js
 			}
 
 			return comps;
+		}
+
+		template <typename T>
+		T* AddComponent()
+		{
+			T* comp = new T();
+
+			Component* buff = dynamic_cast<Component*>(comp);
+			Script* script = dynamic_cast<Script*>(buff);
+
+			if (buff == nullptr)
+				return nullptr;
+
+			if (script == nullptr)
+				mComponents.push_back(buff);
+			else
+				mScripts.push_back(script);
+
+			comp->SetOwner(this);
+			return comp;
 		}
 
 		void SetState(eState state) { mState = state; }

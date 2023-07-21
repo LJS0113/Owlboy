@@ -2,6 +2,7 @@
 #include "jsGameObject.h"
 #include "jsTransform.h"
 #include "jsRenderer.h"
+#include "jsAnimator.h"
 
 namespace js
 {
@@ -33,6 +34,10 @@ namespace js
 
 		mMesh->BindBuffer();
 		mMaterial->Binds();
+
+		Animator* animator = GetOwner()->GetComponent<Animator>();
+		if (animator)
+			animator->Binds();
 		mMesh->Render();
 
 		mMaterial->Clear();

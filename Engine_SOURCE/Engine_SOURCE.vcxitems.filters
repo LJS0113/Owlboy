@@ -74,6 +74,12 @@
       <Filter>GameObject\Component\Collider</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)jsCollisionManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsAnimation.cpp">
+      <Filter>Resource\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsAnimator.cpp">
+      <Filter>GameObject\Component\Animator</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsApplication.h">
@@ -164,6 +170,12 @@
       <Filter>GameObject\Component\Collider</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsCollisionManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsAnimation.h">
+      <Filter>Resource\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsAnimator.h">
+      <Filter>GameObject\Component\Animator</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="High Level Interface">
@@ -255,6 +267,12 @@
     </Filter>
     <Filter Include="Resource\Scene\Manager">
       <UniqueIdentifier>{ab199595-e3a8-4521-9f4d-8e8e5b660f6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Animation">
+      <UniqueIdentifier>{bc05cb5a-2106-4842-ad6c-ab039ef9ca13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Component\Animator">
+      <UniqueIdentifier>{d621fbab-4f64-460d-a8e0-1d9f5c12812b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

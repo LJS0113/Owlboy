@@ -24,6 +24,9 @@ namespace js::graphics
 		void BindShader(eShaderStage stage, UINT startSlot);
 		void Clear();
 
+		size_t GetWidth() { return mImage.GetMetadata().width; }
+		size_t GetHeight() { return mImage.GetMetadata().height; }
+
 	private:
 		ScratchImage mImage;
 		Microsoft::WRL::ComPtr<ID3D11Texture2D> mTexture;

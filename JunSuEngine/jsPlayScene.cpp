@@ -15,6 +15,7 @@
 #include "jsPlayerScript.h"
 #include "jsMonsterScript.h"
 #include "jsCollisionManager.h"
+#include "jsAnimator.h"
 
 namespace js
 {
@@ -39,13 +40,18 @@ namespace js
 		Collider2D* cd = player->AddComponent<Collider2D>();
 		cd->SetSize(Vector2(1.2f, 1.2f));
 
-			
+		std::shared_ptr<Texture> atlas = Resources::Load<Texture>(L"LinkSprite", L"..\\Resources\\Texture\\linkSprites.png");
 
-			//const float pi = 3.141592f;
-			//float degree = pi / 2.0f;
+		Animator* at = player->AddComponent<Animator>();
+		at->Create(L"Idle", atlas, Vector2(0.0f, 0.0f), Vector2(120.0f, 130.0f), 3);
+		at->PlayAnimation(L"Idle", true);
 
-			//player->GetComponent<Transform>()->SetPosition(Vector3(-3.0f, 0.0f, 1.0001f));
-			//player->GetComponent<Transform>()->SetRotation(Vector3(0.0f, 0.0f, degree));
+
+		const float pi = 3.141592f;
+		float degree = pi / 2.0f;
+
+		//player->GetComponent<Transform>()->SetPosition(Vector3(-3.0f, 0.0f, 1.0001f));
+		//player->GetComponent<Transform>()->SetRotation(Vector3(0.0f, 0.0f, degree));
 
 
 		{

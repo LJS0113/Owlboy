@@ -256,6 +256,10 @@ namespace renderer
 		// Constant Buffer
 		constantBuffer[(UINT)eCBType::Grid] = new ConstantBuffer(eCBType::Grid);
 		constantBuffer[(UINT)eCBType::Grid]->Create(sizeof(GridCB));
+
+		// Constant Buffer
+		constantBuffer[(UINT)eCBType::Animatior] = new ConstantBuffer(eCBType::Animatior);
+		constantBuffer[(UINT)eCBType::Animatior]->Create(sizeof(AnimatorCB));
 	}
 
 	void LoadShader()
@@ -371,11 +375,18 @@ namespace renderer
 #pragma endregion
 
 #pragma region VellieScene
-		std::shared_ptr<Texture> vellieTexture = Resources::Load<Texture>(L"VellieSky", L"..\\Resources\\Texture\\VellieScene\\skyScreen.png");
+
+		std::shared_ptr<Texture> vellieTexture = Resources::Load<Texture>(L"Vellie", L"..\\Resources\\Texture\\VellieScene\\Vellie.png");
 		std::shared_ptr<Material> vellieMaterial = std::make_shared<Material>();
 		vellieMaterial->SetShader(spriteShader);
 		vellieMaterial->SetTexture(vellieTexture);
-		Resources::Insert(L"VellieSkyMaterial", vellieMaterial);
+		Resources::Insert(L"VellieMaterial", vellieMaterial);
+
+		std::shared_ptr<Texture> vellieskyTexture = Resources::Load<Texture>(L"VellieSky", L"..\\Resources\\Texture\\VellieScene\\skyScreen.png");
+		std::shared_ptr<Material> vellieskyMaterial = std::make_shared<Material>();
+		vellieskyMaterial->SetShader(spriteShader);
+		vellieskyMaterial->SetTexture(vellieskyTexture);
+		Resources::Insert(L"VellieSkyMaterial", vellieskyMaterial);
 
 		std::shared_ptr<Texture>  bomboShopTexture = Resources::Load<Texture>(L"BomboShop", L"..\\Resources\\Texture\\VellieScene\\bomboShopFront1.png");
 		std::shared_ptr<Material> bomboShopMaterial = std::make_shared<Material>();
