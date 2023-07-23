@@ -3,14 +3,14 @@
 #include "jsGameObject.h"
 #include "jsInput.h"
 #include "jsTime.h"
+#include "jsTexture.h"
+#include "jsResources.h"
+#include "jsAnimator.h"
 
 
 
 namespace js
 {
-
-
-
 	PlayerScript::PlayerScript()
 	{
 	}
@@ -21,6 +21,7 @@ namespace js
 
 	void PlayerScript::Initialize()
 	{
+
 	}
 
 	void PlayerScript::Update()

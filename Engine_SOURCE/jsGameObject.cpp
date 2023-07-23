@@ -32,6 +32,7 @@ namespace js
 	}
 	void GameObject::Initialize()
 	{
+
 	}
 	void GameObject::Update()
 	{

@@ -7,6 +7,8 @@
 #include "jsCameraScript.h"
 #include "jsSceneManager.h"
 #include "jsObject.h"
+#include "jsPlayerScript.h"
+#include "jsAnimator.h"
 
 namespace js
 {
@@ -18,11 +20,29 @@ namespace js
 	}
 	void TutorialScene::Initialize()
 	{
-		GameObject* player = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 2.0f), eLayerType::BG);
+		GameObject* player = object::Instantiate<GameObject>(Vector3(0.5f, 0.0f, 2.0f), eLayerType::Player);
 		MeshRenderer* mr = player->AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		mr->SetMaterial(Resources::Find<Material>(L"TutorialMaterial"));
-		player->GetComponent<Transform>()->SetScale(Vector3(8.0f, 4.5f, 1.0f));
+		mr->SetMaterial(Resources::Find<Material>(L"SpriteMaterial"));
+		
+		Transform* tr = player->GetComponent<Transform>();
+		//tr->SetScale(Vector3(3.0f, 3.0f, 1.0f));
+		player->AddComponent<PlayerScript>();
+		
+		Collider2D* cd = player->AddComponent<Collider2D>();
+		cd->SetSize(Vector2(1.0f, 1.0f));
+
+		std::shared_ptr<Texture> atlas = Resources::Load<Texture>(L"OtusSprite", L"..\\Resources\\Texture\\Player_Otus.png");
+		Animator* at = player->AddComponent<Animator>();
+		at->Create(L"Idle", atlas, Vector2(0.0f, 0.0f), Vector2(112.0f, 100.0f), 3);
+		at->PlayAnimation(L"Idle", true);
+		{
+			GameObject* player = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 2.0f), eLayerType::BG);
+			MeshRenderer* mr = player->AddComponent<MeshRenderer>();
+			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			mr->SetMaterial(Resources::Find<Material>(L"TutorialMaterial"));
+			player->GetComponent<Transform>()->SetScale(Vector3(8.0f, 4.5f, 1.0f));
+		}
 		{
 			// coin
 			GameObject* hpBar = object::Instantiate<GameObject>(Vector3(-3.6f, 1.6f, 1.0f), eLayerType::UI);
@@ -56,14 +76,14 @@ namespace js
 			hpBar->GetComponent<Transform>()->SetScale(Vector3(0.2f, 0.2f, 1.0f));
 		}
 		// Main Camera
-		GameObject* camera = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, -10.0f), eLayerType::Player);
+		GameObject* camera = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, -10.0f), eLayerType::Camera);
 		Camera* cameraComp = camera->AddComponent<Camera>();
 		cameraComp->TurnLayerMask(eLayerType::UI, false);
 		camera->AddComponent<CameraScript>();
 
 		{
 			// UI Camera
-			GameObject* camera = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, -10.0f), eLayerType::Player);
+			GameObject* camera = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, -10.0f), eLayerType::Camera);
 			Camera* cameraComp = camera->AddComponent<Camera>();
 			cameraComp->TurnLayerMask(eLayerType::BG, false);
 		}
