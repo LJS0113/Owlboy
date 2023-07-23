@@ -45,7 +45,7 @@ namespace js
 		at->Create(L"Idle", atlas, Vector2(0.0f, 0.0f), Vector2(120.0f, 130.0f), 3);
 		at->PlayAnimation(L"Idle", true);
 
-		player->AddComponent<PlayerScript>();
+		//player->AddComponent<PlayerScript>();
 
 		const float pi = 3.141592f;
 		float degree = pi / 2.0f;

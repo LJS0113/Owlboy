@@ -300,6 +300,7 @@ namespace renderer
 	void LoadMaterial()
 	{
 		std::shared_ptr<Shader> spriteShader = Resources::Find<Shader>(L"SpriteShader");
+		std::shared_ptr<Shader> spriteAniShader = Resources::Find<Shader>(L"SpriteAnimationShader");
 
 		std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"Link", L"..\\Resources\\Texture\\link.png");
 		std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
@@ -314,9 +315,8 @@ namespace renderer
 		spriteMaterial1->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"SpriteMaterial02", spriteMaterial1);
 
-		spriteShader = Resources::Find<Shader>(L"SpriteAnimationShader");
 		spriteMaterial1 = std::make_shared<Material>();
-		spriteMaterial1->SetShader(spriteShader);
+		spriteMaterial1->SetShader(spriteAniShader);
 		spriteMaterial1->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"SpriteAnimationMaterial", spriteMaterial1);
 

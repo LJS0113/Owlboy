@@ -83,7 +83,7 @@ namespace js
 				mScripts.push_back(script);
 
 			comp->SetOwner(this);
-			comp->Initialize();
+			//comp->Initialize();
 			return comp;
 		}
 
