@@ -21,7 +21,8 @@ namespace js
 
 	void PlayerScript::Initialize()
 	{
-
+		Animator* at = GetOwner()->GetComponent<Animator>();
+		at->CompleteEvent(L"Idle") = std::bind(&PlayerScript::Complete, this);
 	}
 
 	void PlayerScript::Update()
@@ -51,12 +52,8 @@ namespace js
 		}
 	}
 
-	void PlayerScript::LateUpdate()
+	void PlayerScript::Complete()
 	{
+		int a = 0;
 	}
-
-	void PlayerScript::Render()
-	{
-	}
-
 }

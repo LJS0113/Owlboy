@@ -33,10 +33,9 @@ namespace js
 		player->SetName(L"Zelda");
 		MeshRenderer* mr = player->AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		mr->SetMaterial(Resources::Find<Material>(L"SpriteMaterial"));
+		mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
 		//player->AddComponent<CameraScript>();
 		player->GetComponent<Transform>()->SetPosition(Vector3(-2.0f, 0.0f, 1.0001f));
-		player->AddComponent<PlayerScript>();
 		Collider2D* cd = player->AddComponent<Collider2D>();
 		cd->SetSize(Vector2(1.2f, 1.2f));
 
@@ -46,6 +45,7 @@ namespace js
 		at->Create(L"Idle", atlas, Vector2(0.0f, 0.0f), Vector2(120.0f, 130.0f), 3);
 		at->PlayAnimation(L"Idle", true);
 
+		player->AddComponent<PlayerScript>();
 
 		const float pi = 3.141592f;
 		float degree = pi / 2.0f;
@@ -63,9 +63,6 @@ namespace js
 			Collider2D* cd = player->AddComponent<Collider2D>();
 			cd->SetSize(Vector2(1.0f, 1.0f));
 			player->AddComponent<MonsterScript>();
-			//player->GetComponent<Transform>()->SetScale(Vector3(2.0f, 2.0f, 1.0f));
-			player->AddComponent<MonsterScript>();
-
 		}
 
 		Camera* cameraComp = nullptr;
@@ -80,13 +77,13 @@ namespace js
 		}
 
 		{
-			// UI Camera
-			GameObject* camera = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, -10.0f), eLayerType::Camera);
-			Camera* cameraComp = camera->AddComponent<Camera>();
-			cameraComp->TurnLayerMask(eLayerType::Player, false);
-			cameraComp->TurnLayerMask(eLayerType::Monster, false);
-			cameraComp->TurnLayerMask(eLayerType::BG, false);
-			//camera->AddComponent<CameraScript>();
+			//// UI Camera
+			//GameObject* camera = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, -10.0f), eLayerType::Camera);
+			//Camera* cameraComp = camera->AddComponent<Camera>();
+			//cameraComp->TurnLayerMask(eLayerType::Player, false);
+			//cameraComp->TurnLayerMask(eLayerType::Monster, false);
+			//cameraComp->TurnLayerMask(eLayerType::BG, false);
+			////camera->AddComponent<CameraScript>();
 		}
 
 		{

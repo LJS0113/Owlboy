@@ -64,6 +64,10 @@ namespace renderer
 			, shader->GetVSCode()
 			, shader->GetInputLayoutAddressOf());
 
+		shader = js::Resources::Find<Shader>(L"SpriteAnimationShader");
+		js::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
+			, shader->GetVSCode()
+			, shader->GetInputLayoutAddressOf());
 #pragma endregion
 
 #pragma region Sampler State
@@ -274,6 +278,11 @@ namespace renderer
 		spriteShader->Create(eShaderStage::PS, L"SpritePS.hlsl", "main");
 		js::Resources::Insert(L"SpriteShader", spriteShader);
 
+		std::shared_ptr<Shader> spriteAniShader = std::make_shared<Shader>();
+		spriteAniShader->Create(eShaderStage::VS, L"SpriteAnimationVS.hlsl", "main");
+		spriteAniShader->Create(eShaderStage::PS, L"SpriteAnimationPS.hlsl", "main");
+		js::Resources::Insert(L"SpriteAnimationShader", spriteAniShader);
+
 		std::shared_ptr<Shader> gridShader = std::make_shared<Shader>();
 		gridShader->Create(eShaderStage::VS, L"GridVS.hlsl", "main");
 		gridShader->Create(eShaderStage::PS, L"GridPS.hlsl", "main");
@@ -304,6 +313,12 @@ namespace renderer
 		spriteMaterial1->SetTexture(texture1);
 		spriteMaterial1->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"SpriteMaterial02", spriteMaterial1);
+
+		spriteShader = Resources::Find<Shader>(L"SpriteAnimationShader");
+		spriteMaterial1 = std::make_shared<Material>();
+		spriteMaterial1->SetShader(spriteShader);
+		spriteMaterial1->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"SpriteAnimationMaterial", spriteMaterial1);
 
 		std::shared_ptr<Shader> gridShader = Resources::Find<Shader>(L"GridShader");
 		std::shared_ptr<Material> gridMaterial = std::make_shared<Material>();

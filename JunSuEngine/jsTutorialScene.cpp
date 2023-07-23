@@ -27,15 +27,15 @@ namespace js
 		
 		Transform* tr = player->GetComponent<Transform>();
 		//tr->SetScale(Vector3(3.0f, 3.0f, 1.0f));
-		player->AddComponent<PlayerScript>();
+		//player->AddComponent<PlayerScript>();
 		
 		Collider2D* cd = player->AddComponent<Collider2D>();
 		cd->SetSize(Vector2(1.0f, 1.0f));
 
 		std::shared_ptr<Texture> atlas = Resources::Load<Texture>(L"OtusSprite", L"..\\Resources\\Texture\\Player_Otus.png");
 		Animator* at = player->AddComponent<Animator>();
-		at->Create(L"Idle", atlas, Vector2(0.0f, 0.0f), Vector2(112.0f, 100.0f), 3);
-		at->PlayAnimation(L"Idle", true);
+		at->Create(L"OtusIdle", atlas, Vector2(0.0f, 0.0f), Vector2(112.0f, 100.0f), 3);
+		at->PlayAnimation(L"OtusIdle", true);
 		{
 			GameObject* player = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 2.0f), eLayerType::BG);
 			MeshRenderer* mr = player->AddComponent<MeshRenderer>();
