@@ -2,6 +2,7 @@
 #include "jsResources.h"
 #include "jsTexture.h"
 #include "jsMaterial.h"
+#include "jsStructedBuffer.h"
 
 namespace renderer
 {
@@ -17,6 +18,10 @@ namespace renderer
 	js::Camera* mainCamera = nullptr;
 	std::vector<js::Camera*> cameras = {};
 	std::vector<DebugMesh> debugMeshs = {};
+
+	// light
+	std::vector<Light*> lights = {};
+	StructedBuffer* lightsBuffer = nullptr;
 
 	void SetupState()
 	{
@@ -264,6 +269,16 @@ namespace renderer
 		// Constant Buffer
 		constantBuffer[(UINT)eCBType::Animatior] = new ConstantBuffer(eCBType::Animatior);
 		constantBuffer[(UINT)eCBType::Animatior]->Create(sizeof(AnimatorCB));
+
+		// Constant Buffer
+		constantBuffer[(UINT)eCBType::Reverse] = new ConstantBuffer(eCBType::Reverse);
+		constantBuffer[(UINT)eCBType::Reverse]->Create(sizeof(SpriteReverseCB));
+
+		// light structed buffer
+		lightsBuffer = new StructedBuffer();
+		lightsBuffer->Create(sizeof(LightAttribute), 2, eSRVTpye::None);
+
+
 	}
 
 	void LoadShader()
@@ -558,8 +573,24 @@ namespace renderer
 		debugMeshs.push_back(mesh);
 	}
 
+	void BindLights()
+	{
+		std::vector<LightAttribute> lightsAttributes = {};
+		for (Light* light : lights)
+		{
+			LightAttribute attribute = light->GetAttribute();
+			lightsAttributes.push_back(attribute);
+		}
+
+		lightsBuffer->SetData(lightsAttributes.data(), lightsAttributes.size());
+		lightsBuffer->Bind(eShaderStage::VS, 13);
+		lightsBuffer->Bind(eShaderStage::PS, 13);
+	}
+
 	void Render()
 	{
+		BindLights();
+
 		for (Camera* cam : cameras)
 		{
 			if (cam == nullptr)
@@ -567,7 +598,9 @@ namespace renderer
 
 			cam->Render();
 		}
+
 		cameras.clear();
+		lights.clear();
 	}
 	void renderer::Release()
 	{
@@ -579,5 +612,8 @@ namespace renderer
 			delete buff;
 			buff = nullptr;
 		}
+
+		delete lightsBuffer;
+		lightsBuffer = nullptr;
 	}
 }

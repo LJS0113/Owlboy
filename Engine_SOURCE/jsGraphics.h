@@ -16,6 +16,7 @@
 #define CBSLOT_TRANSFORM		0
 #define CBSLOT_GRID				2
 #define CBSLOT_ANIMATION2D		3
+#define CBSLOT_SPRITEREVERSE	4
 //#define CBSLOT_PARTICLE			1
 
 namespace js::graphics
@@ -37,6 +38,7 @@ namespace js::graphics
 		Material,
 		Grid,
 		Animatior,
+		Reverse,
 		End,
 	};
 	
@@ -81,6 +83,12 @@ namespace js::graphics
 		End,
 	};
 	
+	enum class eSRVTpye
+	{
+		None,
+		End,
+	};
+
 	struct GpuBuffer
 	{
 		Microsoft::WRL::ComPtr<ID3D11Buffer> buffer;
@@ -105,6 +113,18 @@ namespace js::graphics
 		float raduis;
 		float duration;
 		float time;
+	};
+
+	struct LightAttribute
+	{
+		math::Vector4 color;
+		math::Vector4 position;
+		math::Vector4 direction;
+
+		enums::eLightType type;
+		float radius;
+		float angle;
+		int pad;
 	};
 
 }

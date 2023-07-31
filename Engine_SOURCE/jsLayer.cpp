@@ -19,6 +19,17 @@ namespace js
 	}
 	void Layer::Initialize()
 	{
+		for (GameObject* gameObj : mGameObjects)
+		{
+			if (gameObj == nullptr)
+				continue;
+
+			if (gameObj->GetState()
+				!= GameObject::eState::Active)
+				continue;
+
+			gameObj->Initialize();
+		}
 	}
 	void Layer::Update()
 	{

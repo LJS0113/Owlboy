@@ -193,6 +193,7 @@ namespace js::math
         static const Vector2 One;
         static const Vector2 UnitX;
         static const Vector2 UnitY;
+
     };
 
     // Binary operators
@@ -613,6 +614,7 @@ namespace js::math
     Matrix operator* (float S, const Matrix& M) noexcept;
 
 
+
     //-----------------------------------------------------------------------------
     // Plane
     struct Plane : public XMFLOAT4
@@ -979,6 +981,7 @@ namespace js::math
 #endif
         static RECT __cdecl ComputeTitleSafeArea(UINT backBufferWidth, UINT backBufferHeight) noexcept;
     };
+
 
 #include "jsMath.inl"
 }

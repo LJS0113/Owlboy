@@ -16,6 +16,7 @@ namespace js
 			Death,
 			Dash,
 			Jump,
+			Fly,
 		};
 		PlayerScript();
 		~PlayerScript();
@@ -35,10 +36,12 @@ namespace js
 		void jump();
 		void attack();
 		void death();
+		void fly();
 
 	private:
 		ePlayerState mState;
 		class Animator* mAnimator;
+		bool mbFly;
 	};
 
 }

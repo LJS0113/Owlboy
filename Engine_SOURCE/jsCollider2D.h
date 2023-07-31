@@ -22,20 +22,27 @@ namespace js
 		void SetType(eColliderType type) { mType = type; }
 		Vector2 GetSize() { return mSize; }
 		void SetSize(Vector2 size) { mSize = size; }
+		Vector3 GetPosition() { return mPosition; }
+		void SetPosition(Vector3 position) { mPosition = position; }
 		void SetCenter(Vector2 center) { mCenter = center; }
 		UINT GetColliderID() { return mColliderID; }
+
+		eColliderOwner GetColliderOwner() { return mColliderOwner; }
+		void SetColliderOwner(eColliderOwner colOwner) { mColliderOwner = colOwner; }
+
 
 	private:
 		static UINT mColliderNumber;
 		UINT mColliderID;
 
+		eColliderOwner mColliderOwner;
 		eColliderType mType;
+
 		Transform* mTransform;
 
 		Vector3 mPosition;
 		Vector2 mSize;
 		Vector2 mCenter;
-
 	};
 
 }

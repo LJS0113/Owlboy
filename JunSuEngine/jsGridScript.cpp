@@ -61,8 +61,6 @@ namespace js
 		cb->Bind(eShaderStage::VS);
 		cb->Bind(eShaderStage::PS);
 
-			 
-
 	}
 	void GridScript::LateUpdate()
 	{

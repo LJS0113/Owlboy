@@ -9,6 +9,9 @@
 #include "jsObject.h"
 #include "jsPlayerScript.h"
 #include "jsAnimator.h"
+#include "jsRigidBody.h"
+#include "jsGround.h"
+#include "jsCollisionManager.h"
 
 namespace js
 {
@@ -20,23 +23,21 @@ namespace js
 	}
 	void TutorialScene::Initialize()
 	{
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
+
 		GameObject* player = object::Instantiate<GameObject>(Vector3(0.5f, 0.0f, 1.0f), eLayerType::Player);
+		player->SetName(L"Otus");
 		MeshRenderer* mr = player->AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
+		//Rigidbody* playerRb = player->AddComponent<Rigidbody>();
 		player->AddComponent<PlayerScript>();
 		player->GetComponent<PlayerScript>()->Initialize();
 		Transform* tr = player->GetComponent<Transform>();
-		//tr->SetScale(Vector3(3.0f, 3.0f, 1.0f));
-
 		
 		Collider2D* cd = player->AddComponent<Collider2D>();
-		cd->SetSize(Vector2(1.0f, 1.0f));
-
-		//std::shared_ptr<Texture> atlas = Resources::Load<Texture>(L"OtusSprite", L"..\\Resources\\Texture\\Player_Otus.png");
-		//Animator* at = player->AddComponent<Animator>();
-		//at->Create(L"OtusIdle", atlas, Vector2(0.0f, 0.0f), Vector2(112.0f, 100.0f), 3);
-		//at->PlayAnimation(L"OtusIdle", true);
+		cd->SetSize(Vector2(0.5f, 0.6f));
+		cd->SetColliderOwner(eColliderOwner::Player);
 
 		{
 			GameObject* player = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 2.0f), eLayerType::BG);
@@ -44,6 +45,15 @@ namespace js
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(Resources::Find<Material>(L"TutorialMaterial"));
 			player->GetComponent<Transform>()->SetScale(Vector3(8.0f, 4.5f, 1.0f));
+		}
+		{
+			Ground* ground = object::Instantiate<Ground>(Vector3(0.0f, -1.9f, 2.0f), eLayerType::Ground);
+			ground->SetName(L"ground"); 
+			ground->SetPlayer(player);
+			ground->GetComponent<Transform>()->SetScale(Vector3(3.5f, 0.2f, 2.0f));
+			Collider2D* cd = ground->AddComponent<Collider2D>();
+			cd->SetColliderOwner(eColliderOwner::Ground);
+			//cd->SetCenter(Vector2(-0.05f, -1.9f));
 		}
 		{
 			// coin

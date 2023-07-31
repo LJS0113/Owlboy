@@ -5,6 +5,8 @@
 #include "jsShader.h"
 #include "jsConstantBuffer.h"
 #include "jsCamera.h"
+#include "jsLight.h"
+
 
 using namespace js::math;
 using namespace js::graphics;
@@ -40,6 +42,11 @@ namespace renderer
 		UINT animationType;
 	};
 
+	CBUFFER(SpriteReverseCB, CBSLOT_SPRITEREVERSE)
+	{
+		UINT reverse;
+	};
+
 
 	extern js::Mesh* mesh;
 	extern js::Shader* shader;
@@ -49,11 +56,13 @@ namespace renderer
 	extern Microsoft::WRL::ComPtr<ID3D11DepthStencilState> depthStencilStates[];
 	extern Microsoft::WRL::ComPtr<ID3D11BlendState> blendStates[];
 
+	extern std::vector<js::Light*> lights;
 	extern js::Camera* mainCamera;
 	extern std::vector<js::Camera*> cameras;
 	extern std::vector<DebugMesh> debugMeshs;
 
 	void Initialize();
+	void BindLights();
 	void Render();
 	void Release();
 

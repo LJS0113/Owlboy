@@ -11,6 +11,7 @@ namespace js
 		, mTransform(nullptr)
 		, mSize(Vector2::One)
 		, mCenter(Vector2::Zero)
+		, mColliderOwner(eColliderOwner::None)
 	{
 		mColliderNumber++;
 		mColliderID = mColliderNumber;

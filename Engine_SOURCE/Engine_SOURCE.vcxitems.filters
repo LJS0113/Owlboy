@@ -80,6 +80,21 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)jsAnimator.cpp">
       <Filter>GameObject\Component\Animator</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsRigidBody.cpp">
+      <Filter>GameObject\Component\RigidBody</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsPlayer.cpp">
+      <Filter>GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsLight.cpp">
+      <Filter>GameObject\Component\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsStructedBuffer.cpp">
+      <Filter>GameObject\Component\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsGround.cpp">
+      <Filter>GameObject\Ground</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsApplication.h">
@@ -175,6 +190,21 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsAnimator.h">
       <Filter>GameObject\Component\Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsRigidBody.h">
+      <Filter>GameObject\Component\RigidBody</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsPlayer.h">
+      <Filter>GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsLight.h">
+      <Filter>GameObject\Component\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsStructedBuffer.h">
+      <Filter>GameObject\Component\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsGround.h">
+      <Filter>GameObject\Ground</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -273,6 +303,18 @@
     </Filter>
     <Filter Include="GameObject\Component\Animator">
       <UniqueIdentifier>{d621fbab-4f64-460d-a8e0-1d9f5c12812b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Component\RigidBody">
+      <UniqueIdentifier>{2b5ad337-bb8a-4ef4-9187-e7c71949ab7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Player">
+      <UniqueIdentifier>{a104102d-55a7-4477-ae8b-faba41085538}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Component\Light">
+      <UniqueIdentifier>{908ad11d-25c6-41e6-8cd2-78a101b206d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Ground">
+      <UniqueIdentifier>{910c951d-6d1d-483d-aead-f490c5b2afc4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

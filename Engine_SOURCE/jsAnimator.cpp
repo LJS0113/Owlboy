@@ -54,7 +54,7 @@ namespace js
 	{
 	}
 
-	void Animator::Create(const std::wstring& name, std::shared_ptr<graphics::Texture> atlas, Vector2 leftTop, Vector2 size, UINT columnLength, Vector2 offset, float duration)
+	void Animator::Create(const std::wstring& name, std::shared_ptr<graphics::Texture> atlas, Vector2 leftTop, Vector2 size, UINT columnLength, bool left, Vector2 offset, float duration)
 	{
 		Animation* animation = FindAnimation(name);
 		if (animation != nullptr)
@@ -63,7 +63,7 @@ namespace js
 		animation = new Animation();
 		animation->SetKey(name);
 
-		animation->Create(name, atlas, leftTop, size, columnLength, offset, duration);
+		animation->Create(name, atlas, leftTop, size, columnLength, left, offset, duration);
 
 		mAnimations.insert(std::make_pair(name, animation));
 

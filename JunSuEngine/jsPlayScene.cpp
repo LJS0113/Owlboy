@@ -16,6 +16,7 @@
 #include "jsMonsterScript.h"
 #include "jsCollisionManager.h"
 #include "jsAnimator.h"
+#include "jsAnimator.h"
 
 namespace js
 {
@@ -64,6 +65,16 @@ namespace js
 			cd->SetSize(Vector2(1.0f, 1.0f));
 			player->AddComponent<MonsterScript>();
 		}
+
+		{	// light
+			GameObject* light = new GameObject();
+			light->SetName(L"Light");
+			AddGameObject(eLayerType::Light, light);
+			Light* lightComp = light->AddComponent<Light>();
+			lightComp->SetType(eLightType::Directional);
+			lightComp->SetColor(Vector4(1.0f, 0.0f, 1.0f, 1.0f));
+		}
+
 
 		Camera* cameraComp = nullptr;
 		{

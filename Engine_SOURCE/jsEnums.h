@@ -11,7 +11,9 @@ namespace js::enums
 		Particle,
 		MeshRenderer,
 		Animator,
+		RigidBody,
 		Script,
+		Light,
 		Camera,
 		End,
 	};
@@ -19,9 +21,11 @@ namespace js::enums
 	enum class eLayerType
 	{
 		BG,
+		Ground,
 		Grid,
 		Player,
 		Monster,
+		Light,
 		Camera,
 		UI,
 		End = 16,
@@ -43,6 +47,25 @@ namespace js::enums
 		Circle,
 		Sphere,
 		Cube,
+		End,
+	};
+
+	enum class eColliderOwner
+	{
+		None,
+		Player,
+		Monster,
+		Ground,
+		Bullet,
+		UI,
+		End,
+	};
+
+	enum class eLightType
+	{
+		Directional,
+		Point,
+		Spot,
 		End,
 	};
 }
