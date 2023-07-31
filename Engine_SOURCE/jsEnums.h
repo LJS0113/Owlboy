@@ -38,6 +38,7 @@ namespace js::enums
 		Material,
 		Mesh,
 		Animation,
+		ComputeShader,
 		End,
 	};
 

@@ -22,6 +22,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)jsCollider2D.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsCollisionManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsComponent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsComputeShader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsConstantBuffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsEngine.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsEntity.h" />
@@ -60,6 +61,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)jsCollider2D.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsCollisionManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsComponent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsComputeShader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsConstantBuffer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsEntity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsGameObject.cpp" />

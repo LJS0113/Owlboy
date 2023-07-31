@@ -17,6 +17,7 @@
 #include "jsCollisionManager.h"
 #include "jsAnimator.h"
 #include "jsAnimator.h"
+#include "jsComputeShader.h"
 
 namespace js
 {
@@ -53,7 +54,8 @@ namespace js
 
 		//player->GetComponent<Transform>()->SetPosition(Vector3(-3.0f, 0.0f, 1.0001f));
 		//player->GetComponent<Transform>()->SetRotation(Vector3(0.0f, 0.0f, degree));
-
+		ComputeShader* cs = new ComputeShader();
+		cs->Create(L"PaintCS.hlsl", "main");
 
 		{
 			GameObject* player = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.0f), eLayerType::Monster);
