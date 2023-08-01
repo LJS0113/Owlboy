@@ -279,8 +279,6 @@ namespace renderer
 		// light structed buffer
 		lightsBuffer = new StructedBuffer();
 		lightsBuffer->Create(sizeof(LightAttribute), 2, eSRVTpye::None);
-
-
 	}
 
 	void LoadShader()

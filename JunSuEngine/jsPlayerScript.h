@@ -42,6 +42,9 @@ namespace js
 		ePlayerState mState;
 		class Animator* mAnimator;
 		bool mbFly;
+		bool mbRight;
+		renderer::SpriteReverseCB reverseCB;
+		ConstantBuffer* cb;
 	};
 
 }

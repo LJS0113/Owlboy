@@ -9,14 +9,23 @@
 #include "jsMeshRenderer.h"
 #include "jsRigidBody.h"
 #include "jsCollider2D.h"
-
+#include "jsRenderer.h"
 
 namespace js
 {
 	PlayerScript::PlayerScript()
 		: mState(ePlayerState::None)
 		, mbFly(false)
+		, mAnimator(nullptr)
+		, mbRight(true)
+		, cb(nullptr)
+		, reverseCB{}
 	{
+		reverseCB.reverse = 0;
+
+		cb = renderer::constantBuffer[(UINT)eCBType::Reverse];
+		cb->SetData(&reverseCB);
+		cb->Bind(eShaderStage::PS);
 	}
 
 	PlayerScript::~PlayerScript()
@@ -30,42 +39,54 @@ namespace js
 		mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
 		mAnimator = GetOwner()->AddComponent<Animator>();
 
-		std::shared_ptr<Texture> atlas = Resources::Load<Texture>(L"OtusSpriteRight", L"..\\Resources\\Texture\\Otus\\OtusIdle.png");
-		mAnimator->Create(L"OtusIdleRight", atlas, Vector2(0.0f, 0.0f), Vector2(70.0f, 125.0f), 10);
-		mAnimator->Create(L"OtusIdleLeft", atlas, Vector2(0.0f, 125.0f), Vector2(70.0f, 125.0f), 10);
-
-		atlas = Resources::Load<Texture>(L"OtusWalk", L"..\\Resources\\Texture\\Otus\\OtusWalk.png");
-		mAnimator->Create(L"OtusMoveRight", atlas, Vector2(0.0f, 0.0f), Vector2(125.0f, 135.0f), 8);
-		mAnimator->Create(L"OtusMoveLeft", atlas, Vector2(0.0f, 135.0f), Vector2(125.0f, 135.0f), 8);
-
-		atlas = Resources::Load<Texture>(L"OtusJump", L"..\\Resources\\Texture\\Otus\\OtusJump.png");
-		mAnimator->Create(L"OtusJumpRight", atlas, Vector2(0.0f, 0.0f), Vector2(120.0f, 130.0f), 3);
-		mAnimator->Create(L"OtusJumpLeft", atlas, Vector2(0.0f, 130.0f), Vector2(120.0f, 130.0f), 3);
-		mAnimator->PlayAnimation(L"OtusIdleRight", true);
-
-		atlas = Resources::Load<Texture>(L"OtusJumpFall", L"..\\Resources\\Texture\\Otus\\otusJumpFall_700x280_5x2.bmp");
-		mAnimator->Create(L"OtusJumpFallRight", atlas, Vector2(0.0f, 0.0f), Vector2(140.0f, 140.0f), 5);
-		mAnimator->Create(L"OtusJumpFallLeft", atlas, Vector2(0.0f, 140.0f), Vector2(140.0f, 140.0f), 5);
-
-		atlas = Resources::Load<Texture>(L"OtusDash", L"..\\Resources\\Texture\\Otus\\otusRoll_1200x400_4x2.bmp");
-		mAnimator->Create(L"OtusDashRight", atlas, Vector2(0.0f, 0.0f), Vector2(300.0f, 200.0f), 4);
-		mAnimator->Create(L"OtusDashLeft", atlas, Vector2(0.0f, 200.0f), Vector2(300.0f, 200.0f), 4);
-
-		atlas = Resources::Load<Texture>(L"OtusAttackusDash", L"..\\Resources\\Texture\\Otus\\otusAttack_1350x260_5x2.bmp");
-		mAnimator->Create(L"OtusAttackRight", atlas, Vector2(0.0f, 0.0f), Vector2(270.0f, 130.0f), 5);
-		mAnimator->Create(L"OtusAttackLeft", atlas, Vector2(0.0f, 130.0f), Vector2(270.0f, 130.0f), 5);
-
-		atlas = Resources::Load<Texture>(L"OtusFly", L"..\\Resources\\Texture\\Otus\\otusFly_1530x390_6x2.bmp");
-		mAnimator->Create(L"OtusFlyRight", atlas, Vector2(0.0f, 0.0f), Vector2(255.0f, 195.0f), 6);
-		mAnimator->Create(L"OtusFlyLeft", atlas, Vector2(0.0f, 195.0f), Vector2(255.0f, 195.0f), 6);
-
-
+		std::shared_ptr<Texture> atlas = Resources::Load<Texture>(L"OtusSprite", L"..\\Resources\\Texture\\Otus\\Player_Otus.png");
+		mAnimator->Create(L"OtusIdleRight", atlas, Vector2(0.0f, 96.689f * 0), Vector2(112.0f, 96.689f), 3);
+		mAnimator->Create(L"OtusMoveRight", atlas, Vector2(0.0f, 96.689f * 1), Vector2(112.0f, 96.689f), 12);
+		mAnimator->Create(L"OtusFlyRight", atlas, Vector2(0.0f, 96.689f * 2), Vector2(112.0f, 96.689f), 6);
+		mAnimator->Create(L"OtusFallRight", atlas, Vector2(0.0f, 96.689f * 3), Vector2(112.0f, 96.689f), 3);
+		mAnimator->Create(L"OtusJumpRight", atlas, Vector2(0.0f, 96.689f * 4), Vector2(112.0f, 96.689f), 3);
+		mAnimator->Create(L"OtusJumpFallRight", atlas, Vector2(0.0f, 96.689f * 5), Vector2(112.0f, 96.689f), 5);
+		mAnimator->Create(L"OtusHangRight", atlas, Vector2(0.0f, 96.689f * 6), Vector2(112.0f, 96.689f), 9);
+		mAnimator->Create(L"OtusBed", atlas, Vector2(0.0f, 96.689f * 13), Vector2(112.0f, 96.689f), 14);
+		mAnimator->Create(L"OtusHitRight", atlas, Vector2(0.0f, 96.689f * 14), Vector2(112.0f, 96.689f), 6);
+		mAnimator->Create(L"OtusAttackRight", atlas, Vector2(0.0f, 96.689f * 19), Vector2(112.0f, 96.689f), 5);
+		mAnimator->Create(L"OtusDeadRight", atlas, Vector2(0.0f, 96.689f * 24), Vector2(112.0f, 96.689f), 12);
+		
+		mAnimator->Create(L"OtusIdleLeft", atlas, Vector2(1456.0f, 96.689f * 0), Vector2(-112.0f, 96.689f), 3);
+		mAnimator->Create(L"OtusMoveLeft", atlas, Vector2(1456.0f, 96.689f * 1), Vector2(-112.0f, 96.689f), 12);
+		mAnimator->Create(L"OtusFlyLeft", atlas, Vector2(1456.0f, 96.689f * 2), Vector2(-112.0f, 96.689f), 6);
+		mAnimator->Create(L"OtusFallLeft", atlas, Vector2(1456.0f, 96.689f * 3), Vector2(-112.0f, 96.689f), 3);
+		mAnimator->Create(L"OtusJumpLeft", atlas, Vector2(1456.0f, 96.689f * 4), Vector2(-112.0f, 96.689f), 3);
+		mAnimator->Create(L"OtusJumpFallLeft", atlas, Vector2(1456.0f, 96.689f * 5), Vector2(-112.0f, 96.689f), 5);
+		mAnimator->Create(L"OtusHangLeft", atlas, Vector2(1456.0f, 96.689f * 6), Vector2(-112.0f, 96.689f), 9);
+		mAnimator->Create(L"OtusHitLeft", atlas, Vector2(1456.0f, 96.689f * 14), Vector2(-112.0f, 96.689f), 6);
+		mAnimator->Create(L"OtusAttackLeft", atlas, Vector2(1456.0f, 96.689f * 19), Vector2(-112.0f, 96.689f), 5);
+		mAnimator->Create(L"OtusDeadLeft", atlas, Vector2(1456.0f, 96.689f * 24), Vector2(-112.0f, 96.689f), 12);
+	
 		mAnimator->PlayAnimation(L"OtusIdleRight", true);
 		mState = ePlayerState::Idle;
 	}
 
 	void PlayerScript::Update()
 	{
+		if (mbRight)
+		{
+			// 오른쪽이면 0, 왼쪽이면 1
+			reverseCB.reverse = 0;
+
+			cb = renderer::constantBuffer[(UINT)eCBType::Reverse];
+			cb->SetData(&reverseCB);
+			cb->Bind(eShaderStage::PS);
+		}
+		else
+		{
+			// 오른쪽이면 0, 왼쪽이면 1
+			reverseCB.reverse = 1;
+
+			cb = renderer::constantBuffer[(UINT)eCBType::Reverse];
+			cb->SetData(&reverseCB);
+			cb->Bind(eShaderStage::PS);
+		}
 		switch (mState)
 		{
 		case js::PlayerScript::ePlayerState::Idle:
@@ -139,10 +160,20 @@ namespace js
 			|| Input::GetKeyUp(eKeyCode::LEFT)
 			|| Input::GetKeyUp(eKeyCode::RIGHT))
 		{
-			if(!mbFly)
-				mAnimator->PlayAnimation(L"OtusIdleRight", true);
-			if(mbFly)
-				mAnimator->PlayAnimation(L"OtusFlyRight", true);
+			if (!mbFly)
+			{
+				if(mbRight)
+					mAnimator->PlayAnimation(L"OtusIdleRight", true);
+				else
+					mAnimator->PlayAnimation(L"OtusIdleLeft", true);
+			}
+			if (mbFly)
+			{
+				if (mbRight)
+					mAnimator->PlayAnimation(L"OtusFlyRight", true);
+				else
+					mAnimator->PlayAnimation(L"OtusFlyLeft", true);
+			}
 			mState = ePlayerState::Idle;
 		}
 
@@ -169,12 +200,13 @@ namespace js
 
 		if (Input::GetKeyDown(eKeyCode::DOWN))
 		{
-			mAnimator->PlayAnimation(L"OtusJumpFallRight", true);
+			mAnimator->PlayAnimation(L"OtusJumpFall", true);
 			mState = ePlayerState::Move;
 			mbFly = false;
 		}
 		if (Input::GetKeyDown(eKeyCode::LEFT))
 		{
+			mbRight = false;
 			if (mbFly)
 				mAnimator->PlayAnimation(L"OtusFlyLeft", true);
 			else
@@ -183,6 +215,7 @@ namespace js
 		}
 		if (Input::GetKeyDown(eKeyCode::RIGHT))
 		{
+			mbRight = true;
 			if (mbFly)
 				mAnimator->PlayAnimation(L"OtusFlyRight", true);
 			else
@@ -193,20 +226,30 @@ namespace js
 
 		if (Input::GetKeyDown(eKeyCode::UP))
 		{
-			mAnimator->PlayAnimation(L"OtusFlyRight", true);
+			if(mbRight)
+				mAnimator->PlayAnimation(L"OtusFlyRight", true);
+			else
+				mAnimator->PlayAnimation(L"OtusFlyLeft", true);
 			mbFly = true;
 			mState = ePlayerState::Move;
 		}
 
 		if (Input::GetKeyDown(eKeyCode::LBUTTON))
 		{
-			mAnimator->PlayAnimation(L"OtusAttackRight", false);
+			if(mbRight)
+				mAnimator->PlayAnimation(L"OtusAttackRight", false);
+			else
+				mAnimator->PlayAnimation(L"OtusAttackLeft", false);
 			mState = ePlayerState::Attack;
 		}
 
 		if (Input::GetKeyDown(eKeyCode::SPACE))
 		{
-			mAnimator->PlayAnimation(L"OtusDashRight", false);
+			
+			if (mbRight)
+				mAnimator->PlayAnimation(L"OtusDashRight", false);
+			else
+				mAnimator->PlayAnimation(L"OtusDashLeft", false);
 			mState = ePlayerState::Dash;
 		}
 	}
@@ -233,7 +276,7 @@ namespace js
 
 		if (Input::GetKeyUp(eKeyCode::UP))
 		{
-			if(!mbFly)
+			if (!mbFly)
 				mState = ePlayerState::Idle;
 
 		}
@@ -243,7 +286,10 @@ namespace js
 	{
 		if (Input::GetKeyUp(eKeyCode::LBUTTON))
 		{
-			mAnimator->PlayAnimation(L"OtusIdleRight", true);
+			if(mbRight)
+				mAnimator->PlayAnimation(L"OtusIdleRight", true);
+			else
+				mAnimator->PlayAnimation(L"OtusIdleLeft", true);
 			mState = ePlayerState::Idle;
 		}
 

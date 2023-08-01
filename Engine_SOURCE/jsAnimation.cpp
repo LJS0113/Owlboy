@@ -55,10 +55,9 @@ namespace js
 		, Vector2 leftTop
 		, Vector2 size
 		, UINT columnLength
-		, bool left
 		, Vector2 offset
-		, float duration 
-		)
+		, float duration
+	)
 	{
 		SetKey(name);
 		mAtlas = atlas;
@@ -66,39 +65,19 @@ namespace js
 		float width = (float)atlas->GetWidth();
 		float height = (float)atlas->GetHeight();
 
-		if (left == false)
+		for (size_t i = 0; i < columnLength; i++)
 		{
-			for (size_t i = 0; i < columnLength; i++)
-			{
-				Sprite sprite = {};
-				sprite.leftTop.x = leftTop.x + (i * size.x) / width;
-				sprite.leftTop.y = leftTop.y / height;
-				sprite.size.x = size.x / width;
-				sprite.size.y = size.y / height;
-				sprite.offset = offset;
-				sprite.atlasSize = Vector2(200.0f / width, 200.0f / height);
-				sprite.duration = duration;
+			Sprite sprite = {};
+			sprite.leftTop.x = (leftTop.x + (i * size.x)) / width;
+			sprite.leftTop.y = leftTop.y / height;
+			sprite.size.x = fabs(size.x / width);
+			sprite.size.y = fabs(size.y / height);
+			sprite.offset = offset;
+			sprite.atlasSize = Vector2(100.0f / width, 100.0f / height);
+			sprite.duration = duration;
 
-				mSprites.push_back(sprite);
-			}
+			mSprites.push_back(sprite);
 		}
-		else
-		{
-			for (size_t i = 0; i < columnLength; i++)
-			{
-				Sprite sprite = {};
-				sprite.leftTop.x = (width - leftTop.x) - (i * size.x) / width;
-				sprite.leftTop.y = leftTop.y / height;
-				sprite.size.x = size.x / width;
-				sprite.size.y = size.y / height;
-				sprite.offset = offset;
-				sprite.atlasSize = Vector2(200.0f / width, 200.0f / height);
-				sprite.duration = duration;
-
-				mSprites.push_back(sprite);
-			}
-		}
-
 	}
 
 	void Animation::Binds()
@@ -112,7 +91,7 @@ namespace js
 		data.spriteLeftTop = mSprites[mIndex].leftTop;
 		data.spriteSize = mSprites[mIndex].size;
 		data.spriteOffset = mSprites[mIndex].offset;
-		data.atlasSize= mSprites[mIndex].atlasSize;
+		data.atlasSize = mSprites[mIndex].atlasSize;
 		data.animationType = 1;
 
 		ConstantBuffer* cb = renderer::constantBuffer[(UINT)eCBType::Animatior];

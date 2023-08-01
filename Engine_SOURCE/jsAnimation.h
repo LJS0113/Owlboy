@@ -45,7 +45,6 @@ namespace js
 			, Vector2 leftTop
 			, Vector2 size
 			, UINT columnLength
-			, bool left = false
 			, Vector2 offset = Vector2::Zero
 			, float duration = 0.0f
 		);
