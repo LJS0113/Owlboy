@@ -8,6 +8,9 @@ namespace js::graphics
 	ComputeShader::ComputeShader()
 		: Resource(enums::eResourceType::ComputeShader)
 	{
+		mThreadGroupCountX = 32;
+		mThreadGroupCountY = 32;
+		mThreadGroupCountZ = 1;
 	}
 
 	ComputeShader::~ComputeShader()
@@ -27,5 +30,25 @@ namespace js::graphics
 		GetDevice()->CreateComputeShader(mCSBlob->GetBufferPointer(), mCSBlob->GetBufferSize(), mCS.GetAddressOf());
 
 		return true;
+	}
+
+	void ComputeShader::OnExecute()
+	{
+		Binds();
+
+		GetDevice()->BindComputeShader(mCS.Get());
+		GetDevice()->Dispatch(mGroupX, mGroupY, mGroupZ);
+
+		Clear();
+	}
+
+	void ComputeShader::Binds()
+	{
+
+	}
+
+	void ComputeShader::Clear()
+	{
+
 	}
 }

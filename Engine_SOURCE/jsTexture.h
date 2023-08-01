@@ -22,11 +22,13 @@ namespace js::graphics
 
 		bool Create(UINT width, UINT height, DXGI_FORMAT format, UINT bindFlag);
 		virtual HRESULT Load(const std::wstring& path) override;
-		void BindShader(eShaderStage stage, UINT startSlot);
+		void BindShaderResource(eShaderStage stage, UINT startSlot);
+		void BindUnorderedAccessViews(UINT slot);
+		void ClearUnorderedAccessView(UINT slot);
 		void Clear();
 
-		size_t GetWidth() { return mImage.GetMetadata().width; }
-		size_t GetHeight() { return mImage.GetMetadata().height; }
+		size_t GetWidth() { return mWidth; }
+		size_t GetHeight() { return mHeight; }
 
 		Microsoft::WRL::ComPtr<ID3D11RenderTargetView>    GetRTV() { return  mRTV; }
 		void SetRTV(Microsoft::WRL::ComPtr<ID3D11RenderTargetView> rtv) { mRTV = rtv; }
@@ -44,6 +46,8 @@ namespace js::graphics
 		Microsoft::WRL::ComPtr<ID3D11RenderTargetView> mRTV;
 		Microsoft::WRL::ComPtr<ID3D11DepthStencilView> mDSV;
 		Microsoft::WRL::ComPtr<ID3D11UnorderedAccessView> mUAV;
+		UINT mWidth;
+		UINT mHeight;
 
 		D3D11_TEXTURE2D_DESC mDesc;
 

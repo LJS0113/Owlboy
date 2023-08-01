@@ -3,6 +3,8 @@
 #include "jsTexture.h"
 #include "jsMaterial.h"
 #include "jsStructedBuffer.h"
+#include "jsPaintShader.h"
+
 
 namespace renderer
 {
@@ -310,6 +312,18 @@ namespace renderer
 		debugShader->SetRSState(eRSType::WireframeNone);
 		debugShader->SetDSState(eDSType::End);
 		js::Resources::Insert(L"DebugShader", debugShader);
+
+		std::shared_ptr<PaintShader> paintShader = std::make_shared<PaintShader>();
+		paintShader->Create(L"PaintCS.hlsl", "main");
+		js::Resources::Insert(L"PaintShader", paintShader);
+
+	}
+
+	void LoadTexture()
+	{
+		std::shared_ptr<Texture> uavTexture = std::make_shared<Texture>();
+		uavTexture->Create(1024,1024, DXGI_FORMAT_R8G8B8A8_UNORM, D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_UNORDERED_ACCESS);
+		Resources::Insert(L"PaintTexture", uavTexture);
 	}
 
 	void LoadMaterial()
@@ -323,7 +337,8 @@ namespace renderer
 		spriteMaterial->SetTexture(texture);
 		Resources::Insert(L"SpriteMaterial", spriteMaterial);
 
-		std::shared_ptr<Texture> texture1 = Resources::Load<Texture>(L"Smile", L"..\\Resources\\Texture\\Smile.png");
+		//std::shared_ptr<Texture> texture1 = Resources::Load<Texture>(L"Smile", L"..\\Resources\\Texture\\Smile.png");
+		std::shared_ptr<Texture> texture1 = Resources::Find<Texture>(L"PaintTexture");
 		std::shared_ptr<Material> spriteMaterial1 = std::make_shared<Material>();
 		spriteMaterial1->SetShader(spriteShader);
 		spriteMaterial1->SetTexture(texture1);
@@ -565,6 +580,7 @@ namespace renderer
 		LoadBuffer();
 		LoadShader();
 		SetupState();
+		LoadTexture();
 		LoadMaterial();
 
 	}

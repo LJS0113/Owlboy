@@ -96,6 +96,7 @@
       <Filter>GameObject\Ground</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)jsComputeShader.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsPaintShader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsApplication.h">
@@ -208,6 +209,7 @@
       <Filter>GameObject\Ground</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsComputeShader.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsPaintShader.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="High Level Interface">

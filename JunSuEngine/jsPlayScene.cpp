@@ -18,6 +18,9 @@
 #include "jsAnimator.h"
 #include "jsAnimator.h"
 #include "jsComputeShader.h"
+#include "jsPaintShader.h"
+
+
 
 namespace js
 {
@@ -54,8 +57,11 @@ namespace js
 
 		//player->GetComponent<Transform>()->SetPosition(Vector3(-3.0f, 0.0f, 1.0001f));
 		//player->GetComponent<Transform>()->SetRotation(Vector3(0.0f, 0.0f, degree));
-		ComputeShader* cs = new ComputeShader();
-		cs->Create(L"PaintCS.hlsl", "main");
+
+		std::shared_ptr<PaintShader> paintShader = Resources::Find<PaintShader>(L"PaintShader");
+		std::shared_ptr<Texture> paintTexture = Resources::Find<Texture>(L"PaintTexture");
+		paintShader->SetTarget(paintTexture);
+		paintShader->OnExecute();
 
 		{
 			GameObject* player = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 1.0f), eLayerType::Monster);
