@@ -59,6 +59,12 @@
     <ClCompile Include="jsCloudScript.cpp">
       <Filter>Contents\Script</Filter>
     </ClCompile>
+    <ClCompile Include="jsGroundScript.cpp">
+      <Filter>Contents\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="jsGeddyScript.cpp">
+      <Filter>Contents\Script</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -102,6 +108,12 @@
       <Filter>Contents\Scene</Filter>
     </ClInclude>
     <ClInclude Include="jsCloudScript.h">
+      <Filter>Contents\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="jsGroundScript.h">
+      <Filter>Contents\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="jsGeddyScript.h">
       <Filter>Contents\Script</Filter>
     </ClInclude>
   </ItemGroup>

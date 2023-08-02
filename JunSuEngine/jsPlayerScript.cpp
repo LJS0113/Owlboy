@@ -38,6 +38,7 @@ namespace js
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
 		mAnimator = GetOwner()->AddComponent<Animator>();
+		cd = GetOwner()->GetComponent<Collider2D>();
 
 		std::shared_ptr<Texture> atlas = Resources::Load<Texture>(L"OtusSprite", L"..\\Resources\\Texture\\Otus\\Player_Otus.png");
 		mAnimator->Create(L"OtusIdleRight", atlas, Vector2(0.0f, 96.689f * 0), Vector2(112.0f, 96.689f), 3);
@@ -125,18 +126,20 @@ namespace js
 	void PlayerScript::move()
 	{
 		Transform* tr = GetOwner()->GetComponent<Transform>();
+		
 		Vector3 pos = tr->GetPosition();
 
 		if (Input::GetKey(eKeyCode::LEFT))
 		{
-
+			cd->SetCenter(Vector2(0.1f, -0.05f));
 			pos.x -= 2.0f * Time::DeltaTime();
 			tr->SetPosition(pos);
 			mState = ePlayerState::Move;
 		}
 		else if (Input::GetKey(eKeyCode::RIGHT))
 		{
-
+			cd->SetSize(Vector2(0.1f, 0.2f));
+			cd->SetCenter(Vector2(-0.1f, -0.05f));
 			pos.x += 2.0f * Time::DeltaTime();
 			tr->SetPosition(pos);
 			mState = ePlayerState::Move;
@@ -197,6 +200,16 @@ namespace js
 
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		Vector3 pos = tr->GetPosition();
+		cd->SetSize(Vector2(0.1f, 0.2f));
+		if (mbRight)
+		{
+			cd->SetCenter(Vector2(-0.1f, -0.05f));
+		}
+		else
+		{
+			cd->SetCenter(Vector2(0.1f, -0.05f));
+		}
+
 
 		if (Input::GetKeyDown(eKeyCode::DOWN))
 		{
@@ -310,6 +323,7 @@ namespace js
 
 	void PlayerScript::OnCollisionEnter(Collider2D* other)
 	{
+		int a = 0;
 		//Transform* tr = GetOwner()->GetComponent<Transform>();
 		//Collider2D* cd = GetOwner()->GetComponent<Collider2D>();
 		//Rigidbody* rigid = GetOwner()->GetComponent<Rigidbody>();
@@ -325,6 +339,7 @@ namespace js
 	}
 	void PlayerScript::OnCollisionExit(Collider2D* other)
 	{
+		int a = 0;
 		//Collider2D* cd = GetOwner()->GetComponent<Collider2D>();
 		//Rigidbody* rigid = GetOwner()->GetComponent<Rigidbody>();
 

@@ -73,7 +73,7 @@ namespace js
 			sprite.size.x = fabs(size.x / width);
 			sprite.size.y = fabs(size.y / height);
 			sprite.offset = offset;
-			sprite.atlasSize = Vector2(100.0f / width, 100.0f / height);
+			sprite.atlasSize = Vector2(200.0f / width, 200.0f / height);
 			sprite.duration = duration;
 
 			mSprites.push_back(sprite);

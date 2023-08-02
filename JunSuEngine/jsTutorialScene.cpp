@@ -12,6 +12,10 @@
 #include "jsRigidBody.h"
 #include "jsGround.h"
 #include "jsCollisionManager.h"
+#include "jsGeddyScript.h"
+#include "jsPlayer.h"
+#include "jsGeddy.h"
+
 
 namespace js
 {
@@ -25,20 +29,32 @@ namespace js
 	{
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
 
-		GameObject* player = object::Instantiate<GameObject>(Vector3(0.5f, 0.0f, 1.0f), eLayerType::Player);
+		//GameObject* player = object::Instantiate<GameObject>(Vector3(0.5f, 0.0f, 1.0f), eLayerType::Player);
+		Player* player = object::Instantiate<Player>(Vector3(0.5f, 0.0f, 1.0f), eLayerType::Player);
 		player->SetName(L"Otus");
 		MeshRenderer* mr = player->AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
+		Transform* tr = player->GetComponent<Transform>();
+		Collider2D* cd = player->AddComponent<Collider2D>();
 		//Rigidbody* playerRb = player->AddComponent<Rigidbody>();
+		//playerRb->SetGround(true);
 		player->AddComponent<PlayerScript>();
 		player->GetComponent<PlayerScript>()->Initialize();
-		Transform* tr = player->GetComponent<Transform>();
-		
-		Collider2D* cd = player->AddComponent<Collider2D>();
-		cd->SetSize(Vector2(0.5f, 0.6f));
+		tr->SetScale(Vector3(2.5f, 2.5f, 1.0f));
+		//cd->SetSize(Vector2(0.0f, 0.0f));
+		//cd->SetCenter(Vector2(-0.1f, -0.05f));
 		cd->SetColliderOwner(eColliderOwner::Player);
 
+		{
+			Geddy* geddy = object::Instantiate<Geddy>(Vector3(0.5f, -0.2f, 1.0f), eLayerType::Player);
+			geddy->SetName(L"Geddy");
+			MeshRenderer* geddyMr = geddy->AddComponent<MeshRenderer>();
+			geddyMr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			geddyMr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
+			geddy->AddComponent<GeddyScript>();
+			geddy->GetComponent<GeddyScript>()->Initialize();
+		}
 		{
 			GameObject* player = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 2.0f), eLayerType::BG);
 			MeshRenderer* mr = player->AddComponent<MeshRenderer>();
@@ -49,7 +65,7 @@ namespace js
 		{
 			Ground* ground = object::Instantiate<Ground>(Vector3(0.0f, -1.9f, 2.0f), eLayerType::Ground);
 			ground->SetName(L"ground"); 
-			ground->SetPlayer(player);
+			//ground->SetPlayer(player);
 			ground->GetComponent<Transform>()->SetScale(Vector3(3.5f, 0.2f, 2.0f));
 			Collider2D* cd = ground->AddComponent<Collider2D>();
 			cd->SetColliderOwner(eColliderOwner::Ground);

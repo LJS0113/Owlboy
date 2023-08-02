@@ -97,6 +97,15 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)jsComputeShader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsPaintShader.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsGeddy.cpp">
+      <Filter>GameObject\Friend\Geddy</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsGeddyArm.cpp">
+      <Filter>GameObject\Friend\Geddy</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsAlphonse.cpp">
+      <Filter>GameObject\Friend\Alphonse</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsApplication.h">
@@ -210,6 +219,15 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsComputeShader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsPaintShader.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsGeddy.h">
+      <Filter>GameObject\Friend\Geddy</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsGeddyArm.h">
+      <Filter>GameObject\Friend\Geddy</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsAlphonse.h">
+      <Filter>GameObject\Friend\Alphonse</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="High Level Interface">
@@ -319,6 +337,15 @@
     </Filter>
     <Filter Include="GameObject\Ground">
       <UniqueIdentifier>{910c951d-6d1d-483d-aead-f490c5b2afc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Friend">
+      <UniqueIdentifier>{01f3a912-3628-4ae2-9c06-752f0809385d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Friend\Geddy">
+      <UniqueIdentifier>{4ed28737-2442-4b35-9c03-0e292fac261c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Friend\Alphonse">
+      <UniqueIdentifier>{c1dfd979-3e54-4146-abab-0eab4190b4bf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

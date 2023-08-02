@@ -72,27 +72,6 @@ namespace js
 			sideVelocity *= mLimitedVelocity.x;
 		}
 
-		//// 마찰력 조건 ( 적용된 힘이 없고, 속도가 0이 아님)
-		//if (!(mVelocity == Vector2::Zero))
-		//{
-		//	//속도에 반대방향으로 마찰력이 적용된다.
-		//	Vector2 friction = -mVelocity;
-		//	friction.Normalize();
-		//	friction =  mFriction * mMass * Time::DeltaTime();
-
-		//	//마찰력으로 인한 속도 감소는 현재 속도보다 큰 경우
-
-		//	if (mVelocity.Length() < friction.Length())
-		//	{
-		//		mVelocity = Vector2::Zero;
-		//	}
-		//	else
-		//	{
-		//		mVelocity += friction;
-		//	}
-		//}
-		////
-
 		// 속도에 맞게끔 물체를 이동시킨다.
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		Vector3 pos = tr->GetPosition();

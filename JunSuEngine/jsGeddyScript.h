@@ -1,30 +1,27 @@
 #pragma once
 #include "..\Engine_SOURCE\jsScript.h"
-
+#include "..\Engine_SOURCE\jsRenderer.h"
 
 namespace js
 {
-	class PlayerScript : public Script
+	class GeddyScript : public Script
 	{
 	public:
-		enum class ePlayerState
+		enum class eGeddyState
 		{
 			None,
 			Idle,
 			Move,
 			Attack,
 			Death,
-			Dash,
-			Jump,
 			Fly,
 		};
-		PlayerScript();
-		~PlayerScript();
+		GeddyScript();
+		~GeddyScript();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
 
-		void Complete();
 
 		virtual void OnCollisionEnter(class Collider2D* other) override;
 		virtual void OnCollisionStay(class Collider2D* other) override;
@@ -32,14 +29,13 @@ namespace js
 
 		void move();
 		void idle();
-		void dash();
 		void jump();
 		void attack();
 		void death();
 		void fly();
 
 	private:
-		ePlayerState mState;
+		eGeddyState mState;
 		class Animator* mAnimator;
 		bool mbFly;
 		bool mbRight;

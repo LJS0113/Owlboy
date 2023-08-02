@@ -154,7 +154,9 @@
     <ClInclude Include="jsCloudScript.h" />
     <ClInclude Include="jsDungeonScene.h" />
     <ClInclude Include="jsEndingScene.h" />
+    <ClInclude Include="jsGeddyScript.h" />
     <ClInclude Include="jsGridScript.h" />
+    <ClInclude Include="jsGroundScript.h" />
     <ClInclude Include="jsHouseScene.h" />
     <ClInclude Include="jsMonsterScript.h" />
     <ClInclude Include="jsPlayerScript.h" />
@@ -170,7 +172,9 @@
     <ClCompile Include="jsCloudScript.cpp" />
     <ClCompile Include="jsDungeonScene.cpp" />
     <ClCompile Include="jsEndingScene.cpp" />
+    <ClCompile Include="jsGeddyScript.cpp" />
     <ClCompile Include="jsGridScript.cpp" />
+    <ClCompile Include="jsGroundScript.cpp" />
     <ClCompile Include="jsHouseScene.cpp" />
     <ClCompile Include="jsMonsterScript.cpp" />
     <ClCompile Include="jsPlayerScript.cpp" />

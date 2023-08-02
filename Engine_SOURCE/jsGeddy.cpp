@@ -1,35 +1,31 @@
-#include "jsPlayer.h"
-
+#include "jsGeddy.h"
 
 namespace js
 {
-
-
-
-	Player::Player()
+	Geddy::Geddy()
 	{
 	}
 
-	Player::~Player()
+	Geddy::~Geddy()
 	{
 	}
 
-	void Player::Initialize()
+	void Geddy::Initialize()
 	{
 		GameObject::Initialize();
 	}
 
-	void Player::Update()
+	void Geddy::Update()
 	{
 		GameObject::Update();
 	}
 
-	void Player::Render()
+	void Geddy::Render()
 	{
 		GameObject::Render();
 	}
 
-	void Player::LateUpdate()
+	void Geddy::LateUpdate()
 	{
 		GameObject::LateUpdate();
 	}

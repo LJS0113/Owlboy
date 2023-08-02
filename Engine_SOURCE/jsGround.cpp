@@ -3,16 +3,16 @@
 #include "jsGameObject.h"
 #include "jsRigidBody.h"
 #include "jsComponent.h"
-
-
+#include "..\JunSuEngine\jsGroundScript.h"
 
 namespace js
 {
 
 	Ground::Ground()
-		: mCollider(nullptr)
-		, mPlayer(nullptr)
 	{
+		AddComponent<GroundScript>();
+		AddComponent<Collider2D>();
+
 	}
 
 	Ground::~Ground()
@@ -27,7 +27,6 @@ namespace js
 	void Ground::Update()
 	{
 		GameObject::Update();
-
 	}
 
 	void Ground::Render()
@@ -38,21 +37,6 @@ namespace js
 	void Ground::LateUpdate()
 	{
 		GameObject::LateUpdate();
-	}
-
-	void Ground::OnCollisionEnter(Collider2D* other)
-	{
-
-
-	}
-
-	void Ground::OnCollisionStay(Collider2D* other)
-	{
-	}
-
-	void Ground::OnCollisionExit(Collider2D* other)
-	{
-
 	}
 
 }

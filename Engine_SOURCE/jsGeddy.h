@@ -3,11 +3,11 @@
 
 namespace js
 {
-	class Player : public GameObject
+	class Geddy : public GameObject
 	{
 	public:
-		Player();
-		~Player();
+		Geddy();
+		~Geddy();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
