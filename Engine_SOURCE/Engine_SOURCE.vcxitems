@@ -43,6 +43,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)jsMeshRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsPaintShader.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsParticleSystem.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsPlayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsResource.h" />
@@ -82,6 +83,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)jsMesh.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsMeshRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsPaintShader.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsParticleSystem.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsPlayer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsResource.cpp" />

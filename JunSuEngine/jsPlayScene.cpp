@@ -19,7 +19,7 @@
 #include "jsAnimator.h"
 #include "jsComputeShader.h"
 #include "jsPaintShader.h"
-
+#include "jsParticleSystem.h"
 
 
 namespace js
@@ -42,7 +42,7 @@ namespace js
 		//player->AddComponent<CameraScript>();
 		player->GetComponent<Transform>()->SetPosition(Vector3(-2.0f, 0.0f, 1.0001f));
 		Collider2D* cd = player->AddComponent<Collider2D>();
-		cd->SetSize(Vector2(1.2f, 1.2f));
+		cd->SetSize(Vector2(1.0f, 1.0f));
 
 		std::shared_ptr<Texture> atlas = Resources::Load<Texture>(L"LinkSprite", L"..\\Resources\\Texture\\linkSprites.png");
 
@@ -73,7 +73,14 @@ namespace js
 			cd->SetSize(Vector2(1.0f, 1.0f));
 			player->AddComponent<MonsterScript>();
 		}
-
+		{
+			GameObject* player = new GameObject();
+			player->SetName(L"Particle");
+			AddGameObject(eLayerType::Monster, player);
+			ParticleSystem* mr = player->AddComponent<ParticleSystem>();
+			player->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, 1.0f));
+			player->GetComponent<Transform>()->SetScale(Vector3(0.2f, 0.2f, 0.2f));
+		}
 		{	// light
 			GameObject* light = new GameObject();
 			light->SetName(L"Light");

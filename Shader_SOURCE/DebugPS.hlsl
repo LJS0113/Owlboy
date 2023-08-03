@@ -8,7 +8,6 @@ struct VSIn
     float2 UV : TEXCOORD;
 };
 
-
 struct VSOut
 {
     float4 Pos : SV_Position;
