@@ -1,56 +1,44 @@
 #pragma once
-#include "..\Engine_SOURCE\jsScript.h"
+class GeddyArmScript
+{
+};
 
+#pragma once
+#include "..\Engine_SOURCE\jsScript.h"
+#include "..\Engine_SOURCE\jsRenderer.h"
 
 namespace js
 {
-	class PlayerScript : public Script
+	class GeddyArmScript : public Script
 	{
 	public:
-		enum class ePlayerState
+		enum class eGeddyArmState
 		{
-			None,
 			Idle,
-			Move,
 			Attack,
-			Hang,
-			Death,
-			Dash,
-			Jump,
-			Fly,
 		};
-		PlayerScript();
-		~PlayerScript();
+		GeddyArmScript();
+		~GeddyArmScript();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
 
-		void Complete();
 
 		virtual void OnCollisionEnter(class Collider2D* other) override;
 		virtual void OnCollisionStay(class Collider2D* other) override;
 		virtual void OnCollisionExit(class Collider2D* other) override;
 
-		void move();
 		void idle();
-		void dash();
-		void jump();
-		void hang();
 		void attack();
-		void death();
-		void fly();
-
-		ePlayerState GetState() { return mState; }
 
 	private:
-		ePlayerState mState;
+		eGeddyArmState mState;
 		class Animator* mAnimator;
-		bool mbFly;
+		bool mbHang;
 		bool mbRight;
 		renderer::SpriteReverseCB reverseCB;
 		ConstantBuffer* cb;
 		Collider2D* cd;
-
 	};
 
 }

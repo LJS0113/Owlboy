@@ -99,6 +99,9 @@ namespace js
 		case js::PlayerScript::ePlayerState::Attack:
 			attack();
 			break;
+		case js::PlayerScript::ePlayerState::Hang:
+			hang();
+			break;
 		case js::PlayerScript::ePlayerState::Death:
 			death();
 			break;
@@ -185,6 +188,12 @@ namespace js
 			mState = ePlayerState::Attack;
 		}
 
+		if (Input::GetKeyDown(eKeyCode::R))
+		{
+			mAnimator->PlayAnimation(L"OtusHangRight", false);
+			mState = ePlayerState::Hang;
+		}
+
 		if (Input::GetKeyDown(eKeyCode::SPACE))
 		{
 			mAnimator->PlayAnimation(L"OtusDashRight", false);
@@ -258,13 +267,22 @@ namespace js
 
 		if (Input::GetKeyDown(eKeyCode::SPACE))
 		{
-			
 			if (mbRight)
 				mAnimator->PlayAnimation(L"OtusDashRight", false);
 			else
 				mAnimator->PlayAnimation(L"OtusDashLeft", false);
 			mState = ePlayerState::Dash;
 		}
+
+		if (Input::GetKeyDown(eKeyCode::R))
+		{
+			if (mbRight)
+				mAnimator->PlayAnimation(L"OtusHangRight", false);
+			else
+				mAnimator->PlayAnimation(L"OtusHangLeft", false);
+			mState = ePlayerState::Hang;
+		}
+
 	}
 
 	void PlayerScript::dash()
@@ -293,6 +311,19 @@ namespace js
 				mState = ePlayerState::Idle;
 
 		}
+	}
+
+	void PlayerScript::hang()
+	{
+		if (Input::GetKeyDown(eKeyCode::RBUTTON))
+		{
+			if (mbRight)
+				mAnimator->PlayAnimation(L"OtusFallRight", true);
+			else
+				mAnimator->PlayAnimation(L"OtusFallLeft", true);
+			mState = ePlayerState::Idle;
+		}
+
 	}
 
 	void PlayerScript::attack()

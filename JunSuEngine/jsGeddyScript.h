@@ -9,12 +9,11 @@ namespace js
 	public:
 		enum class eGeddyState
 		{
-			None,
 			Idle,
-			Move,
 			Attack,
+			Hang,
+			Fall,
 			Death,
-			Fly,
 		};
 		GeddyScript();
 		~GeddyScript();
@@ -27,17 +26,16 @@ namespace js
 		virtual void OnCollisionStay(class Collider2D* other) override;
 		virtual void OnCollisionExit(class Collider2D* other) override;
 
-		void move();
 		void idle();
-		void jump();
 		void attack();
 		void death();
-		void fly();
+		void hang();
+		void fall();
 
 	private:
 		eGeddyState mState;
 		class Animator* mAnimator;
-		bool mbFly;
+		bool mbHang;
 		bool mbRight;
 		renderer::SpriteReverseCB reverseCB;
 		ConstantBuffer* cb;

@@ -1,14 +1,13 @@
 #pragma once
 #include "jsGameObject.h"
-#include "jsAnimator.h"
 
 namespace js
 {
-	class GeddyArm : public GameObject
+	class GeddyBullet : public GameObject
 	{
 	public:
-		GeddyArm();
-		~GeddyArm();
+		GeddyBullet();
+		~GeddyBullet();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
@@ -16,6 +15,5 @@ namespace js
 		virtual void LateUpdate() override;
 
 	private:
-		Animator* mAnimator;
 	};
 }

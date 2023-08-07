@@ -15,7 +15,7 @@
 #include "jsGeddyScript.h"
 #include "jsPlayer.h"
 #include "jsGeddy.h"
-
+#include "jsGeddyArm.h"
 
 namespace js
 {
@@ -47,13 +47,22 @@ namespace js
 		cd->SetColliderOwner(eColliderOwner::Player);
 
 		{
-			Geddy* geddy = object::Instantiate<Geddy>(Vector3(0.5f, -0.2f, 1.0f), eLayerType::Player);
+			Geddy* geddy = object::Instantiate<Geddy>(Vector3(0.5f, -0.2f, 1.1f), eLayerType::Player);
 			geddy->SetName(L"Geddy");
 			MeshRenderer* geddyMr = geddy->AddComponent<MeshRenderer>();
 			geddyMr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			geddyMr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
 			geddy->AddComponent<GeddyScript>();
 			geddy->GetComponent<GeddyScript>()->Initialize();
+			Transform* tr = geddy->GetComponent<Transform>();
+			tr->SetScale(Vector3(2.0f, 2.0f, 1.0f));
+			Vector3 geddyPos = tr->GetPosition();
+
+			GeddyArm* arm = object::Instantiate<GeddyArm>(Vector3(geddyPos.x, geddyPos.y , 1.0f), eLayerType::Player);
+			MeshRenderer* geddyArmMr = arm->AddComponent<MeshRenderer>();
+			geddyArmMr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			geddyArmMr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
+			int a = 0;
 		}
 		{
 			GameObject* player = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 2.0f), eLayerType::BG);
