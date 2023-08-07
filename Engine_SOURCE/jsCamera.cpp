@@ -13,8 +13,10 @@ namespace js
 {
 	bool CompareZSort(GameObject* a, GameObject* b)
 	{
-		if (a->GetComponent<Transform>()->GetPosition().z <= b->GetComponent<Transform>()->GetPosition().z)
+		if (a->GetComponent<Transform>()->GetPosition().z
+			<= b->GetComponent<Transform>()->GetPosition().z)
 			return false;
+
 		return true;
 	}
 
@@ -35,24 +37,29 @@ namespace js
 		, mView(Matrix::Identity)
 		, mProjection(Matrix::Identity)
 	{
-
-		EnabelLayerMasks();
+		EnableLayerMasks();
 	}
+
 	Camera::~Camera()
 	{
 	}
+
 	void Camera::Initialize()
 	{
+
 	}
+
 	void Camera::Update()
 	{
 	}
+
 	void Camera::LateUpdate()
 	{
 		CreateViewMatrix();
 		CreateProjectionMatrix(mType);
 		RegisterCameraInRenderer();
 	}
+
 	void Camera::Render()
 	{
 		View = mView;
@@ -60,14 +67,14 @@ namespace js
 
 		AlphaSortGameObjects();
 		ZSortTransparencyGameObjects();
-
 		RenderOpaque();
-		
+
 		DisableDepthStencilState();
 		RenderCutOut();
 		RenderTransparent();
 		EnableDepthStencilState();
 	}
+
 	bool Camera::CreateViewMatrix()
 	{
 		Transform* tr = GetOwner()->GetComponent<Transform>();
@@ -79,8 +86,8 @@ namespace js
 
 		// View Rotation Matrix
 		Vector3 up = tr->Up();
-		Vector3 foward = tr->Foward();
 		Vector3 right = tr->Right();
+		Vector3 foward = tr->Foward();
 
 		Matrix viewRotate;
 		viewRotate._11 = right.x;	viewRotate._12 = up.x;	viewRotate._13 = foward.x;
@@ -90,19 +97,20 @@ namespace js
 
 		return true;
 	}
+
 	bool Camera::CreateProjectionMatrix(eProjectionType type)
 	{
 		RECT rect = {};
 		GetClientRect(application.GetHwnd(), &rect);
 		float width = rect.right - rect.left;
 		float height = rect.bottom - rect.top;
-		mAspectRatio = width / height;
+		mAspectRatio = width / height;;
 
 		if (type == eProjectionType::OrthoGraphic)
 		{
-			float OrthoGraphicRatio = mSize / 1000.0f;
-			width *= OrthoGraphicRatio;
-			height *= OrthoGraphicRatio;
+			float OrthorGraphicRatio = mSize / 1000.0f;
+			width *= OrthorGraphicRatio;
+			height *= OrthorGraphicRatio;
 
 			mProjection = Matrix::CreateOrthographicLH(width, height, mNear, mFar);
 		}
@@ -113,6 +121,7 @@ namespace js
 
 		return true;
 	}
+
 	void Camera::RegisterCameraInRenderer()
 	{
 		renderer::cameras.push_back(this);
@@ -129,33 +138,39 @@ namespace js
 		mCutOutGameObjects.clear();
 		mTransparentGameObjects.clear();
 
-		// alpha sorting
+		//alpha sorting
 		Scene* scene = SceneManager::GetActiveScene();
 		for (size_t i = 0; i < (UINT)eLayerType::End; i++)
 		{
 			if (mLayerMask[i] == true)
 			{
 				Layer& layer = scene->GetLayer((eLayerType)i);
+				const std::vector<GameObject*> gameObjs
+					= layer.GetGameObjects();
 				// layer에 있는 게임오브젝트를 들고온다.
-				const std::vector<GameObject*> gameObjs = layer.GetGameObjects();
 
-				DivideAlphaBlendGameObjcets(gameObjs);
+				DivideAlphaBlendGameObjects(gameObjs);
 			}
 		}
 	}
 
 	void Camera::ZSortTransparencyGameObjects()
 	{
-		std::sort(mCutOutGameObjects.begin(), mCutOutGameObjects.end(), CompareZSort);
-		std::sort(mTransparentGameObjects.begin(), mTransparentGameObjects.end(), CompareZSort);
+		std::sort(mCutOutGameObjects.begin()
+			, mCutOutGameObjects.end()
+			, CompareZSort);
+		std::sort(mTransparentGameObjects.begin()
+			, mTransparentGameObjects.end()
+			, CompareZSort);
 	}
 
-	void Camera::DivideAlphaBlendGameObjcets(const std::vector<GameObject*> gameObjs)
+	void Camera::DivideAlphaBlendGameObjects(const std::vector<GameObject*> gameObjs)
 	{
 		for (GameObject* obj : gameObjs)
 		{
-			// 렌더러 컴포넌트가 없다면(그려질 필요가 없다면)
-			MeshRenderer* mr = obj->GetComponent<MeshRenderer>();
+			//렌더러 컴포넌트가 없다면?
+			MeshRenderer* mr
+				= obj->GetComponent<MeshRenderer>();
 			if (mr == nullptr)
 				continue;
 
@@ -163,7 +178,7 @@ namespace js
 			eRenderingMode mode = mt->GetRenderingMode();
 			switch (mode)
 			{
-			case js::graphics::eRenderingMode::Opqque:
+			case js::graphics::eRenderingMode::Opaque:
 				mOpaqueGameObjects.push_back(obj);
 				break;
 			case js::graphics::eRenderingMode::CutOut:
@@ -172,34 +187,35 @@ namespace js
 			case js::graphics::eRenderingMode::Transparent:
 				mTransparentGameObjects.push_back(obj);
 				break;
-			case js::graphics::eRenderingMode::End:
-				break;
 			default:
 				break;
 			}
 		}
 	}
 
-	
 	void Camera::RenderOpaque()
 	{
 		for (GameObject* gameObj : mOpaqueGameObjects)
 		{
 			if (gameObj == nullptr)
 				continue;
-			if (gameObj->GetState() != GameObject::eState::Active)
+			if (gameObj->GetState()
+				!= GameObject::eState::Active)
 				continue;
+
 
 			gameObj->Render();
 		}
 	}
+
 	void Camera::RenderCutOut()
 	{
 		for (GameObject* gameObj : mCutOutGameObjects)
 		{
 			if (gameObj == nullptr)
 				continue;
-			if (gameObj->GetState() != GameObject::eState::Active)
+			if (gameObj->GetState()
+				!= GameObject::eState::Active)
 				continue;
 
 			gameObj->Render();
@@ -212,7 +228,8 @@ namespace js
 		{
 			if (gameObj == nullptr)
 				continue;
-			if (gameObj->GetState() != GameObject::eState::Active)
+			if (gameObj->GetState()
+				!= GameObject::eState::Active)
 				continue;
 
 			gameObj->Render();
@@ -221,13 +238,15 @@ namespace js
 
 	void Camera::EnableDepthStencilState()
 	{
-		Microsoft::WRL::ComPtr<ID3D11DepthStencilState> dsState = renderer::depthStencilStates[(UINT)eDSType::Less];
+		Microsoft::WRL::ComPtr<ID3D11DepthStencilState> dsState
+			= renderer::depthStencilStates[(UINT)eDSType::Less];
 		GetDevice()->BindDepthStencilState(dsState.Get());
 	}
 
 	void Camera::DisableDepthStencilState()
 	{
-		Microsoft::WRL::ComPtr<ID3D11DepthStencilState> dsState = renderer::depthStencilStates[(UINT)eDSType::None];
+		Microsoft::WRL::ComPtr<ID3D11DepthStencilState> dsState
+			= renderer::depthStencilStates[(UINT)eDSType::None];
 		GetDevice()->BindDepthStencilState(dsState.Get());
 	}
 }

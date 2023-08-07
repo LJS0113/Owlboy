@@ -17,6 +17,12 @@
     <Filter Include="Contents\Script">
       <UniqueIdentifier>{c9db27e6-a2f6-4db6-bee2-1efb0d98f3ac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Script\Geddy">
+      <UniqueIdentifier>{11814933-7e46-463b-a66b-a0fea7ffbb0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Otus">
+      <UniqueIdentifier>{26c764b9-3af2-496a-90b8-48732be7d7dd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="JunSuEngine.cpp" />
@@ -47,9 +53,6 @@
     <ClCompile Include="jsMonsterScript.cpp">
       <Filter>Contents\Script</Filter>
     </ClCompile>
-    <ClCompile Include="jsPlayerScript.cpp">
-      <Filter>Contents\Script</Filter>
-    </ClCompile>
     <ClCompile Include="jsDungeonScene.cpp">
       <Filter>Contents\Scene</Filter>
     </ClCompile>
@@ -62,8 +65,14 @@
     <ClCompile Include="jsGroundScript.cpp">
       <Filter>Contents\Script</Filter>
     </ClCompile>
+    <ClCompile Include="jsGeddyArmScript.cpp">
+      <Filter>Contents\Script\Geddy</Filter>
+    </ClCompile>
     <ClCompile Include="jsGeddyScript.cpp">
-      <Filter>Contents\Script</Filter>
+      <Filter>Contents\Script\Geddy</Filter>
+    </ClCompile>
+    <ClCompile Include="jsPlayerScript.cpp">
+      <Filter>Contents\Script\Otus</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -98,9 +107,6 @@
     <ClInclude Include="jsMonsterScript.h">
       <Filter>Contents\Script</Filter>
     </ClInclude>
-    <ClInclude Include="jsPlayerScript.h">
-      <Filter>Contents\Script</Filter>
-    </ClInclude>
     <ClInclude Include="jsDungeonScene.h">
       <Filter>Contents\Scene</Filter>
     </ClInclude>
@@ -113,8 +119,14 @@
     <ClInclude Include="jsGroundScript.h">
       <Filter>Contents\Script</Filter>
     </ClInclude>
+    <ClInclude Include="jsGeddyArmScript.h">
+      <Filter>Contents\Script\Geddy</Filter>
+    </ClInclude>
     <ClInclude Include="jsGeddyScript.h">
-      <Filter>Contents\Script</Filter>
+      <Filter>Contents\Script\Geddy</Filter>
+    </ClInclude>
+    <ClInclude Include="jsPlayerScript.h">
+      <Filter>Contents\Script\Otus</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

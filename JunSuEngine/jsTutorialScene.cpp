@@ -62,7 +62,6 @@ namespace js
 			MeshRenderer* geddyArmMr = arm->AddComponent<MeshRenderer>();
 			geddyArmMr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			geddyArmMr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
-			int a = 0;
 		}
 		{
 			GameObject* player = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 2.0f), eLayerType::BG);

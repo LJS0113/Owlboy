@@ -22,7 +22,15 @@ cbuffer Animator : register(b3)
     uint animationType;
 }
 
-cbuffer SpriteReverse : register(b4)
+cbuffer ParticleSystem : register(b4)
+{
+    uint elementCount;
+    float elapsedTime;
+    int padd;
+    int padd2;
+}
+
+cbuffer SpriteReverse : register(b10)
 {
     uint reverse;
 }

@@ -12,7 +12,6 @@ namespace js
 	{
 		AddComponent<GroundScript>();
 		AddComponent<Collider2D>();
-
 	}
 
 	Ground::~Ground()

@@ -1,9 +1,4 @@
 #pragma once
-class GeddyArmScript
-{
-};
-
-#pragma once
 #include "..\Engine_SOURCE\jsScript.h"
 #include "..\Engine_SOURCE\jsRenderer.h"
 

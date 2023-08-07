@@ -31,6 +31,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)jsGameObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsGeddy.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsGeddyArm.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsGeddyBullet.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsGraphicDevice_DX11.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsGraphics.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsGround.h" />
@@ -43,6 +44,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)jsMeshRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsPaintShader.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsParticleShader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsParticleSystem.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsPlayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsRenderer.h" />
@@ -73,6 +75,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)jsGameObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsGeddy.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsGeddyArm.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsGeddyBullet.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsGraphicDevice_DX11.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsGround.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsInput.cpp" />
@@ -83,6 +86,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)jsMesh.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsMeshRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsPaintShader.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsParticleShader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsParticleSystem.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsPlayer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsRenderer.cpp" />

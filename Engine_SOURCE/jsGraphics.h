@@ -16,8 +16,9 @@
 #define CBSLOT_TRANSFORM		0
 #define CBSLOT_GRID				2
 #define CBSLOT_ANIMATION2D		3
-#define CBSLOT_SPRITEREVERSE	4
-//#define CBSLOT_PARTICLE			1
+#define CBSLOT_PARTICLE			4
+
+#define CBSLOT_SPRITEREVERSE	10
 
 namespace js::graphics
 {
@@ -39,6 +40,7 @@ namespace js::graphics
 		Grid,
 		Animatior,
 		Reverse,
+		Particle,
 		End,
 	};
 	
@@ -77,15 +79,17 @@ namespace js::graphics
 
 	enum class eRenderingMode
 	{
-		Opqque,
+		Opaque,
 		CutOut,
 		Transparent,
 		End,
 	};
 	
-	enum class eSRVTpye
+	enum class eViewType
 	{
 		None,
+		SRV,
+		UAV,
 		End,
 	};
 

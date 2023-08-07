@@ -47,6 +47,13 @@ namespace renderer
 		UINT reverse;
 	};
 
+	CBUFFER(ParticleCB, CBSLOT_PARTICLE)
+	{
+		UINT elementCount;
+		float elapsedTime;
+		int padd;
+		int padd2;
+	};
 
 	extern js::Mesh* mesh;
 	extern js::Shader* shader;

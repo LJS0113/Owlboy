@@ -28,26 +28,29 @@ namespace gui
 	{
 		mDebugObjects.resize((UINT)eColliderType::End);
 
-		std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"DebugRect"); 
-		std::shared_ptr<Material> material = Resources::Find<Material>(L"DebugMaterial");
+		std::shared_ptr<Mesh> mesh
+			= Resources::Find<Mesh>(L"DebugRect");
+		std::shared_ptr<Material> material
+			= Resources::Find<Material>(L"DebugMaterial");
 
 		mDebugObjects[(UINT)eColliderType::Rect] = new DebugObject();
 		mDebugObjects[(UINT)eColliderType::Rect]->AddComponent<Transform>();
-		MeshRenderer* mr = mDebugObjects[(UINT)eColliderType::Rect]->AddComponent<MeshRenderer>();
+		MeshRenderer* mr
+			= mDebugObjects[(UINT)eColliderType::Rect]->AddComponent<MeshRenderer>();
 		mr->SetMaterial(material);
 		mr->SetMesh(mesh);
 
-		//EditorObject* grid = new EditorObject();
-		//grid->SetName(L"Grid");
 
-		//mr = grid->AddComponent<MeshRenderer>();
-		//mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		//mr->SetMaterial(Resources::Find<Material>(L"GridMaterial"));
+		EditorObject* grid = new EditorObject();
+		grid->SetName(L"Grid");
 
-		//GridScript* gridSC = grid->AddComponent<GridScript>();
-		//gridSC->SetCamera(renderer::cameras[0]);
+		mr = grid->AddComponent<MeshRenderer>();
+		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		mr->SetMaterial(Resources::Find<Material>(L"GridMaterial"));
+		GridScript* gridSc = grid->AddComponent<GridScript>();
+		gridSc->SetCamera(renderer::cameras[0]);
 
-		//mEditorObjects.push_back(grid);
+		mEditorObjects.push_back(grid);
 	}
 
 	void Editor::Run()
@@ -118,7 +121,7 @@ namespace gui
 		Transform* tr = debugObj->GetComponent<Transform>();
 
 		Vector3 pos = mesh.position;
-		pos.z -= 0.001f;
+		pos.z -= 0.01f;
 
 		tr->SetPosition(pos);
 		tr->SetScale(mesh.scale);

@@ -1,6 +1,7 @@
 #pragma once
 #include "jsMeshRenderer.h"
 #include "jsStructedBuffer.h"
+#include "jsParticleShader.h"
 
 namespace js
 {
@@ -17,6 +18,7 @@ namespace js
 
 	private:
 		graphics::StructedBuffer* mBuffer;
+		std::shared_ptr<ParticleShader> mCS;
 
 		UINT mCount;
 		Vector4 mStartSize;
@@ -24,5 +26,6 @@ namespace js
 		Vector4 mStartColor;
 		Vector4 mEndColor;
 		float mLifeTime;
+		float mFrequency;
 	};
 }

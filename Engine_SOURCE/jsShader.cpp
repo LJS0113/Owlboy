@@ -38,7 +38,8 @@ namespace js
 		else if (stage == eShaderStage::GS)
 		{
 			GetDevice()->CompileFromFile(fullpath, funcName, "gs_5_0", mGSBlob.GetAddressOf());
-			GetDevice()->CreateGeometryShader(mGSBlob->GetBufferPointer(), mGSBlob->GetBufferSize(), mGS.GetAddressOf());
+			GetDevice()->CreateGeometryShader(mGSBlob->GetBufferPointer()
+				, mGSBlob->GetBufferSize(), mGS.GetAddressOf());
 		}
 		else if (stage == eShaderStage::PS)
 		{
@@ -58,11 +59,11 @@ namespace js
 		GetDevice()->BindPixelShader(mPS.Get());
 
 		Microsoft::WRL::ComPtr<ID3D11RasterizerState> rsState = renderer::rasterizerStates[(UINT)mRSType];
-		//Microsoft::WRL::ComPtr<ID3D11DepthStencilState> dsState = renderer::depthStencilStates[(UINT)mDSType];
+		Microsoft::WRL::ComPtr<ID3D11DepthStencilState> dsState = renderer::depthStencilStates[(UINT)mDSType];
 		Microsoft::WRL::ComPtr<ID3D11BlendState> bsState = renderer::blendStates[(UINT)mBSType];
 
 		GetDevice()->BindRasterizeState(rsState.Get());
-		//GetDevice()->BindDepthStencilState(dsState.Get());
+		GetDevice()->BindDepthStencilState(dsState.Get());
 		GetDevice()->BindBlendState(bsState.Get());
 	}
 }

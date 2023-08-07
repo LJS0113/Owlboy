@@ -107,6 +107,10 @@
       <Filter>GameObject\Friend\Alphonse</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)jsParticleSystem.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsGeddyBullet.cpp">
+      <Filter>GameObject\Friend\Geddy</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsParticleShader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsApplication.h">
@@ -230,6 +234,10 @@
       <Filter>GameObject\Friend\Alphonse</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsParticleSystem.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsGeddyBullet.h">
+      <Filter>GameObject\Friend\Geddy</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsParticleShader.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="High Level Interface">

@@ -31,13 +31,12 @@ namespace js
 		void RegisterCameraInRenderer();
 
 		void TurnLayerMask(eLayerType type, bool enable = true);
-		void EnabelLayerMasks() { mLayerMask.set();}
+		void EnableLayerMasks() { mLayerMask.set();}
 		void DisabelLayerMasks() { mLayerMask.reset(); }
 
 		void AlphaSortGameObjects();
 		void ZSortTransparencyGameObjects();
-		void DivideAlphaBlendGameObjcets(const std::vector<GameObject*> gameObjs);
-
+		void DivideAlphaBlendGameObjects(const std::vector<GameObject*> gameObjs);
 		void RenderOpaque();
 		void RenderCutOut();
 		void RenderTransparent();

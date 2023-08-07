@@ -13,6 +13,14 @@ namespace js::graphics
 		mThreadGroupCountZ = 1;
 	}
 
+	ComputeShader::ComputeShader(int x, int y, int z)
+		: Resource(enums::eResourceType::ComputeShader)
+	{
+		mThreadGroupCountX = x;
+		mThreadGroupCountY = y;
+		mThreadGroupCountZ = z;
+	}
+
 	ComputeShader::~ComputeShader()
 	{
 	}
