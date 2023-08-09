@@ -18,6 +18,7 @@ namespace js
 
 	private:
 		graphics::StructedBuffer* mBuffer;
+		graphics::StructedBuffer* mSharedBuffer;
 		std::shared_ptr<ParticleShader> mCS;
 
 		UINT mCount;
@@ -27,5 +28,7 @@ namespace js
 		Vector4 mEndColor;
 		float mLifeTime;
 		float mFrequency;
+
+		float mTime;
 	};
 }

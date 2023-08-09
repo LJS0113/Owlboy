@@ -142,4 +142,9 @@ namespace js::graphics
 		UINT active;
 	};
 
+	struct ParticleShared
+	{
+		UINT sharedActiveCount;
+	};
+
 }

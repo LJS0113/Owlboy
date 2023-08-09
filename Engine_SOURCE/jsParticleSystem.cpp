@@ -4,6 +4,7 @@
 #include "jsResources.h"
 #include "jsTransform.h"
 #include "jsGameObject.h"
+#include "jsTime.h"
 
 
 namespace js
@@ -15,6 +16,7 @@ namespace js
 		, mStartColor(Vector4::Zero)
 		, mEndColor(Vector4::Zero)
 		, mLifeTime(0.0f)
+		, mTime(0.0f)
 	{
 		std::shared_ptr<Mesh> mesh = Resources::Find<Mesh>(L"PointMesh");
 		SetMesh(mesh);
@@ -46,11 +48,15 @@ namespace js
 
 			particles[i].position = pos;
 			particles[i].speed = 1.0f;
-			particles[i].active = 1;
+			particles[i].active = 0;
 		}
 
 		mBuffer = new graphics::StructedBuffer();
 		mBuffer->Create(sizeof(Particle), 1000, eViewType::UAV, particles);
+
+		mSharedBuffer = new graphics::StructedBuffer();
+		mSharedBuffer->Create(sizeof(Particle), 1, eViewType::UAV, nullptr, true);
+
 		//mBuffer->SetData(particles, 1000);
 	}
 
@@ -68,7 +74,28 @@ namespace js
 
 	void ParticleSystem::LateUpdate()
 	{
+		float AliveTime = 1.0f / 1.0f;
+		mTime += Time::DeltaTime();
+
+		if (mTime > AliveTime)
+		{
+			float f = (mTime / AliveTime);
+			UINT AliveCount = (UINT)f;
+			mTime = f - floor(f);
+
+			ParticleShared shareData = {};
+			shareData.sharedActiveCount = 2;
+			mSharedBuffer->SetData(&shareData, 1);
+		}
+		else
+		{
+			ParticleShared shareData = {};
+			shareData.sharedActiveCount = 0;
+			mSharedBuffer->SetData(&shareData, 1);
+		}
+
 		mCS->SetParticleBuffer(mBuffer);
+		mCS->SetSharedBuffer(mSharedBuffer);
 		mCS->OnExecute();
 	}
 

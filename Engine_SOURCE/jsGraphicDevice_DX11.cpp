@@ -264,6 +264,11 @@ namespace js::graphics
 		mContext->OMSetBlendState(pBlendState, nullptr, 0xffffffff);
 	}
 
+	void GraphicDevice_DX11::CopyResource(ID3D11Resource* pDstResource, ID3D11Resource* pSrcResource)
+	{
+		mContext->CopyResource(pDstResource, pSrcResource);
+	}
+
 	void GraphicDevice_DX11::DrawIndexed(UINT IndexCount, UINT StartIndexLocation, INT BaseVertexLocation)
 	{
 		mContext->DrawIndexed(IndexCount, StartIndexLocation, BaseVertexLocation);

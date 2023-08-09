@@ -309,7 +309,7 @@ namespace renderer
 
 		// light structed buffer
 		lightsBuffer = new StructedBuffer();
-		lightsBuffer->Create(sizeof(LightAttribute), 2, eViewType::SRV, nullptr);
+		lightsBuffer->Create(sizeof(LightAttribute), 2, eViewType::SRV, nullptr, true);
 	}
 
 	void LoadShader()
@@ -367,6 +367,9 @@ namespace renderer
 		std::shared_ptr<Texture> uavTexture = std::make_shared<Texture>();
 		uavTexture->Create(1024,1024, DXGI_FORMAT_R8G8B8A8_UNORM, D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_UNORDERED_ACCESS);
 		Resources::Insert(L"PaintTexture", uavTexture);
+
+		std::shared_ptr<Texture> particle = std::make_shared<Texture>();
+		Resources::Load<Texture>(L"CartoonSmoke", L"..\\Resources\\particle\\CartoonSmoke.png");
 	}
 
 	void LoadMaterial()
@@ -380,7 +383,6 @@ namespace renderer
 		spriteMaterial->SetTexture(texture);
 		Resources::Insert(L"SpriteMaterial", spriteMaterial);
 
-		//std::shared_ptr<Texture> texture1 = Resources::Load<Texture>(L"Smile", L"..\\Resources\\Texture\\Smile.png");
 		std::shared_ptr<Texture> texture1 = Resources::Find<Texture>(L"PaintTexture");
 		std::shared_ptr<Material> spriteMaterial1 = std::make_shared<Material>();
 		spriteMaterial1->SetShader(shader);
@@ -407,7 +409,10 @@ namespace renderer
 		spriteMaterial = std::make_shared<Material>();
 		spriteMaterial->SetShader(shader);
 		spriteMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		std::shared_ptr<Texture> particleTexx = Resources::Find<Texture>(L"CartoonSmoke");
+		spriteMaterial->SetTexture(particleTexx);
 		Resources::Insert(L"ParticleMaterial", spriteMaterial);
+
 
 
 #pragma region TitleScene

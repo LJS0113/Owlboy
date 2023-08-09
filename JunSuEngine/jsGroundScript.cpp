@@ -1,6 +1,6 @@
 #include "jsGroundScript.h"
-
-
+#include "jsGameObject.h"
+#include "jsRigidBody.h"
 
 namespace js
 {
@@ -24,13 +24,24 @@ namespace js
 	}
 	void GroundScript::OnCollisionEnter(Collider2D* other)
 	{
-		int a = 0;
+		Transform* grTr = GetOwner()->GetComponent<Transform>();
+		Transform* playerTr = other->GetOwner()->GetComponent<Transform>();
+
+		Vector3 grPos = grTr->GetPosition();
+		Vector3 playerPos = playerTr->GetPosition();
+
+		playerPos.y = grPos.y + 0.2f;
+
+		playerTr->SetPosition(playerPos);
+		//other->GetOwner()->GetComponent<Rigidbody>()->SetGround(true);
 
 	}
 	void GroundScript::OnCollisionStay(Collider2D* other)
 	{
+
 	}
 	void GroundScript::OnCollisionExit(Collider2D* other)
 	{
+
 	}
 }

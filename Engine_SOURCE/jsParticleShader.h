@@ -15,9 +15,11 @@ namespace js::graphics
 		virtual void Clear() override;
 
 		void SetParticleBuffer(StructedBuffer* particleBuffer);
+		void SetSharedBuffer(StructedBuffer* sharedBuffer) { mSharedBuffer = sharedBuffer; }
 
 	private:
 		StructedBuffer* mParticleBuffer;
+		StructedBuffer* mSharedBuffer;
 	};
 
 }

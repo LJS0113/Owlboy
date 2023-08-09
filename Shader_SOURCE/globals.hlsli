@@ -56,10 +56,15 @@ struct Particle
     float4 position;
     float4 direction;
     
-    float endTime;
+    float endTime; 
     float time;
     float speed;
     uint active;
+};
+
+struct ParticleShared
+{
+    uint ActiveSharedCount;
 };
 
 StructuredBuffer<LightAttribute> lightsAttribute : register(t13);

@@ -37,14 +37,14 @@ namespace js
 		mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
 		Transform* tr = player->GetComponent<Transform>();
 		Collider2D* cd = player->AddComponent<Collider2D>();
-		//Rigidbody* playerRb = player->AddComponent<Rigidbody>();
-		//playerRb->SetGround(true);
+		Rigidbody* playerRb = player->AddComponent<Rigidbody>();
 		player->AddComponent<PlayerScript>();
 		player->GetComponent<PlayerScript>()->Initialize();
 		tr->SetScale(Vector3(2.5f, 2.5f, 1.0f));
 		//cd->SetSize(Vector2(0.0f, 0.0f));
 		//cd->SetCenter(Vector2(-0.1f, -0.05f));
 		cd->SetColliderOwner(eColliderOwner::Player);
+		cd->SetCenter(Vector2(-0.1f, -0.05f));
 
 		{
 			Geddy* geddy = object::Instantiate<Geddy>(Vector3(0.5f, -0.2f, 1.1f), eLayerType::Player);
