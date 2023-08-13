@@ -19,15 +19,16 @@ namespace js
 	private:
 		graphics::StructedBuffer* mBuffer;
 		graphics::StructedBuffer* mSharedBuffer;
+
 		std::shared_ptr<ParticleShader> mCS;
 
-		UINT mCount;
+		UINT    mCount;
 		Vector4 mStartSize;
 		Vector4 mEndSize;
 		Vector4 mStartColor;
 		Vector4 mEndColor;
-		float mLifeTime;
-		float mFrequency;
+		float   mLifeTime;
+		float	mFrequency;
 
 		float mTime;
 	};

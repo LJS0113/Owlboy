@@ -34,11 +34,10 @@ namespace js
 			pos.y += rand() % 10;
 
 			int sign = rand() % 2;
-			if(sign == 0)
+			if (sign == 0)
 				pos.x *= -1.0f;
-
 			sign = rand() % 2;
-			if(sign == 0)
+			if (sign == 0)
 				pos.y *= -1.0f;
 
 			particles[i].direction =
@@ -57,7 +56,10 @@ namespace js
 		mSharedBuffer = new graphics::StructedBuffer();
 		mSharedBuffer->Create(sizeof(Particle), 1, eViewType::UAV, nullptr, true);
 
-		//mBuffer->SetData(particles, 1000);
+		//ParticleShared shareData = {};
+		//shareData.sharedActiveCount = 1000;
+		//mSharedBuffer->SetData(&shareData, 1);
+		//mBuffer->SetData(particles, 100);
 	}
 
 	ParticleSystem::~ParticleSystem()
@@ -93,6 +95,7 @@ namespace js
 			shareData.sharedActiveCount = 0;
 			mSharedBuffer->SetData(&shareData, 1);
 		}
+
 
 		mCS->SetParticleBuffer(mBuffer);
 		mCS->SetSharedBuffer(mSharedBuffer);

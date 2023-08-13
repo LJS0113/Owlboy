@@ -39,8 +39,6 @@ float4 main(VSOut In) : SV_TARGET
         color = atlasTexture.Sample(anisotropicSampler, UV);
     }
     
-    if (color.r == 1.0f && color.g == 0.0f && color.b == 1.0f)
-        discard;
         
     float4 lightColor = float4(0.2f, 0.2f, 0.2f, 1.0f);
     

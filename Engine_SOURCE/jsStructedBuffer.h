@@ -13,7 +13,7 @@ namespace js::graphics
 
 		bool Create(UINT size, UINT stride, eViewType type, void* data, bool cpuAccess = false);
 		bool CreateRWBuffer();
-		void SetData(void* data, UINT bufferCount);
+		void SetData(void* data, UINT stride);
 		void GetData(void* data, UINT size);
 		void BindSRV(eShaderStage stage, UINT slot);
 		void BindUAV(UINT slot);

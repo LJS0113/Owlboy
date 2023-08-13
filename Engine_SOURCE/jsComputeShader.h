@@ -8,8 +8,8 @@ namespace js::graphics
 	class ComputeShader : public Resource
 	{
 	public:
-		ComputeShader();
 		ComputeShader(int x, int y, int z);
+		ComputeShader();
 		virtual ~ComputeShader();
 
 		bool Create(const std::wstring& name, const std::string& methodName);
