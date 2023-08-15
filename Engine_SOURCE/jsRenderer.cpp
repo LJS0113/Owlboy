@@ -390,10 +390,10 @@ namespace renderer
 		spriteMaterial1->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"SpriteMaterial02", spriteMaterial1);
 
-		spriteMaterial1 = std::make_shared<Material>();
-		spriteMaterial1->SetShader(spriteAniShader);
-		spriteMaterial1->SetRenderingMode(eRenderingMode::Transparent);
-		Resources::Insert(L"SpriteAnimationMaterial", spriteMaterial1);
+		std::shared_ptr<Material> spriteAniMaterial = std::make_shared<Material>();
+		spriteAniMaterial->SetShader(spriteAniShader);
+		spriteAniMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"SpriteAnimationMaterial", spriteAniMaterial);
 
 		std::shared_ptr<Shader> gridShader = Resources::Find<Shader>(L"GridShader");
 		std::shared_ptr<Material> gridMaterial = std::make_shared<Material>();

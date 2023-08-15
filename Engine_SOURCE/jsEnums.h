@@ -21,6 +21,7 @@ namespace js::enums
 	enum class eLayerType
 	{
 		BG,
+		Scenery,
 		Ground,
 		Grid,
 		Player,

@@ -88,6 +88,7 @@ namespace js
 			cb->SetData(&reverseCB);
 			cb->Bind(eShaderStage::PS);
 		}
+
 		switch (mState)
 		{
 		case js::PlayerScript::ePlayerState::Idle:

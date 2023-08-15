@@ -16,9 +16,9 @@
 #define CBSLOT_TRANSFORM		0
 #define CBSLOT_GRID				2
 #define CBSLOT_ANIMATION2D		3
-#define CBSLOT_PARTICLE			4
+#define CBSLOT_SPRITEREVERSE	4
+#define CBSLOT_PARTICLE			5
 
-#define CBSLOT_SPRITEREVERSE	10
 
 namespace js::graphics
 {

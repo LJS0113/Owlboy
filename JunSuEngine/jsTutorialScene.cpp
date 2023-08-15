@@ -29,7 +29,6 @@ namespace js
 	{
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
 
-		//GameObject* player = object::Instantiate<GameObject>(Vector3(0.5f, 0.0f, 1.0f), eLayerType::Player);
 		Player* player = object::Instantiate<Player>(Vector3(0.5f, 0.0f, 1.0f), eLayerType::Player);
 		player->SetName(L"Otus");
 		MeshRenderer* mr = player->AddComponent<MeshRenderer>();
@@ -37,7 +36,7 @@ namespace js
 		mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
 		Transform* tr = player->GetComponent<Transform>();
 		Collider2D* cd = player->AddComponent<Collider2D>();
-		Rigidbody* playerRb = player->AddComponent<Rigidbody>();
+		//Rigidbody* playerRb = player->AddComponent<Rigidbody>();
 		player->AddComponent<PlayerScript>();
 		player->GetComponent<PlayerScript>()->Initialize();
 		tr->SetScale(Vector3(2.5f, 2.5f, 1.0f));
