@@ -17,11 +17,17 @@
     <Filter Include="Contents\Script">
       <UniqueIdentifier>{c9db27e6-a2f6-4db6-bee2-1efb0d98f3ac}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Script\Geddy">
+    <Filter Include="Contents\Script\Player">
+      <UniqueIdentifier>{b5d64830-eb8e-45ba-9562-67001ba1187f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Player\Otus">
+      <UniqueIdentifier>{26c764b9-3af2-496a-90b8-48732be7d7dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Player\Geddy">
       <UniqueIdentifier>{11814933-7e46-463b-a66b-a0fea7ffbb0f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Script\Otus">
-      <UniqueIdentifier>{26c764b9-3af2-496a-90b8-48732be7d7dd}</UniqueIdentifier>
+    <Filter Include="Contents\Script\Monster">
+      <UniqueIdentifier>{8b174832-dd84-4811-a3da-255d42f32672}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -66,13 +72,16 @@
       <Filter>Contents\Script</Filter>
     </ClCompile>
     <ClCompile Include="jsGeddyArmScript.cpp">
-      <Filter>Contents\Script\Geddy</Filter>
+      <Filter>Contents\Script\Player\Geddy</Filter>
     </ClCompile>
     <ClCompile Include="jsGeddyScript.cpp">
-      <Filter>Contents\Script\Geddy</Filter>
+      <Filter>Contents\Script\Player\Geddy</Filter>
     </ClCompile>
     <ClCompile Include="jsPlayerScript.cpp">
-      <Filter>Contents\Script\Otus</Filter>
+      <Filter>Contents\Script\Player\Otus</Filter>
+    </ClCompile>
+    <ClCompile Include="jsMaskedTortoiseScript.cpp">
+      <Filter>Contents\Script\Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -120,13 +129,16 @@
       <Filter>Contents\Script</Filter>
     </ClInclude>
     <ClInclude Include="jsGeddyArmScript.h">
-      <Filter>Contents\Script\Geddy</Filter>
+      <Filter>Contents\Script\Player\Geddy</Filter>
     </ClInclude>
     <ClInclude Include="jsGeddyScript.h">
-      <Filter>Contents\Script\Geddy</Filter>
+      <Filter>Contents\Script\Player\Geddy</Filter>
     </ClInclude>
     <ClInclude Include="jsPlayerScript.h">
-      <Filter>Contents\Script\Otus</Filter>
+      <Filter>Contents\Script\Player\Otus</Filter>
+    </ClInclude>
+    <ClInclude Include="jsMaskedTortoiseScript.h">
+      <Filter>Contents\Script\Monster</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

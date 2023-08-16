@@ -17,6 +17,8 @@
 #include "jsGeddy.h"
 #include "jsGeddyArm.h"
 
+extern js::Player* gPlayer;
+
 namespace js
 {
 	TutorialScene::TutorialScene()
@@ -29,16 +31,17 @@ namespace js
 	{
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
 
-		Player* player = object::Instantiate<Player>(Vector3(0.5f, 0.0f, 1.0f), eLayerType::Player);
-		player->SetName(L"Otus");
-		MeshRenderer* mr = player->AddComponent<MeshRenderer>();
+		gPlayer = object::Instantiate<Player>(Vector3(0.5f, 0.0f, 1.0f), eLayerType::Player);
+		gPlayer->SetName(L"Otus");
+		MeshRenderer* mr = gPlayer->AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
-		Transform* tr = player->GetComponent<Transform>();
-		Collider2D* cd = player->AddComponent<Collider2D>();
+		gPlayer->AddComponent<Transform>();
+		Transform* tr = gPlayer->GetComponent<Transform>();
+		Collider2D* cd = gPlayer->AddComponent<Collider2D>();
 		//Rigidbody* playerRb = player->AddComponent<Rigidbody>();
-		player->AddComponent<PlayerScript>();
-		player->GetComponent<PlayerScript>()->Initialize();
+		gPlayer->AddComponent<PlayerScript>();
+		gPlayer->GetComponent<PlayerScript>()->Initialize();
 		tr->SetScale(Vector3(2.5f, 2.5f, 1.0f));
 		//cd->SetSize(Vector2(0.0f, 0.0f));
 		//cd->SetCenter(Vector2(-0.1f, -0.05f));

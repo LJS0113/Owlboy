@@ -69,7 +69,7 @@ namespace js
 		// Main Camera
 		GameObject* camera = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, -10.0f), eLayerType::Player);
 		Camera* cameraComp = camera->AddComponent<Camera>();
-		camera->AddComponent<CameraScript>();
+		//camera->AddComponent<CameraScript>();
 	}
 	void TitleScene::Update()
 	{

@@ -10,6 +10,11 @@
 #include "jsEndingScene.h"
 #include "jsGridScript.h"
 #include "jsObject.h"
+#include "jsPlayer.h"
+#include "jsPlayerScript.h"
+#include "jsMaskedTortoiseScript.h"
+#include "jsMonster.h"
+
 
 namespace js
 {
@@ -21,16 +26,37 @@ namespace js
 	}
 	void BossScene::Initialize()
 	{
-		GameObject* player = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 2.0f), eLayerType::BG);
-		player->SetName(L"BossStage");
-		MeshRenderer* mr = player->AddComponent<MeshRenderer>();
-		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		mr->SetMaterial(Resources::Find<Material>(L"BossStageMaterial"));
-		player->GetComponent<Transform>()->SetScale(Vector3(8.0f, 4.5f, 1.0f));
+		gPlayer = object::Instantiate<Player>(Vector3(-3.0f, -1.5f, 1.0f), eLayerType::Player);
+		gPlayer->SetName(L"Otus");
+		Transform* tr = gPlayer->GetComponent<Transform>();
+		Collider2D* cd = gPlayer->AddComponent<Collider2D>();
+		gPlayer->AddComponent<PlayerScript>();
+		gPlayer->GetComponent<PlayerScript>()->Initialize();
+		tr->SetScale(Vector3(2.5f, 2.5f, 1.0f));
+		//gPlayer->AddComponent<CameraScript>();
+
+		{
+			Monster* monster = object::Instantiate<Monster>(Vector3(0.0f, -1.2f, 1.0f), eLayerType::Monster);
+			monster->SetName(L"MaskedTortoise");
+			Transform* tr = monster->GetComponent<Transform>();
+			Collider2D* cd = monster->AddComponent<Collider2D>();
+			monster->AddComponent<MaskedTortoiseScript>();
+			monster->GetComponent<MaskedTortoiseScript>()->Initialize();
+			tr->SetScale(Vector3(2.0f, 2.0f, 1.0f));
+		}
+
+		{
+			GameObject* player = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 2.0f), eLayerType::BG);
+			player->SetName(L"BossStage");
+			MeshRenderer* mr = player->AddComponent<MeshRenderer>();
+			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			mr->SetMaterial(Resources::Find<Material>(L"BossStageMaterial"));
+			player->GetComponent<Transform>()->SetScale(Vector3(8.0f, 4.5f, 1.0f));
+		}
 
 		{
 			// coin
-			GameObject* hpBar = object::Instantiate<GameObject>(Vector3(-3.6f, 1.6f, 1.0f), eLayerType::UI);
+			GameObject* hpBar = object::Instantiate<GameObject>(Vector3(-3.6f, 1.6f, -5.0f), eLayerType::UI);
 			MeshRenderer* mr = hpBar->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(Resources::Find<Material>(L"CoinMaterial"));
@@ -38,7 +64,7 @@ namespace js
 		}
 		{
 			// otus hp bar
-			GameObject* hpBar = object::Instantiate<GameObject>(Vector3(-3.0f, 2.0f, 1.0f), eLayerType::UI);
+			GameObject* hpBar = object::Instantiate<GameObject>(Vector3(-3.0f, 2.0f, -5.0f), eLayerType::UI);
 			MeshRenderer* mr = hpBar->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(Resources::Find<Material>(L"OtusHpBarMaterial"));
@@ -46,7 +72,7 @@ namespace js
 		}
 		{
 			// otus hp bar Frame
-			GameObject* hpBar = object::Instantiate<GameObject>(Vector3(-3.6f, 2.0f, 1.1f), eLayerType::UI);
+			GameObject* hpBar = object::Instantiate<GameObject>(Vector3(-3.6f, 2.0f, -5.0f), eLayerType::UI);
 			MeshRenderer* mr = hpBar->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(Resources::Find<Material>(L"OtusHpIconframeMaterial"));
@@ -54,7 +80,7 @@ namespace js
 		}
 		{
 			// otus hp bar Icon
-			GameObject* hpBar = object::Instantiate<GameObject>(Vector3(-3.6f, 2.0f, 1.0f), eLayerType::UI);
+			GameObject* hpBar = object::Instantiate<GameObject>(Vector3(-3.6f, 2.0f, -5.0f), eLayerType::UI);
 			MeshRenderer* mr = hpBar->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(Resources::Find<Material>(L"OtusHpIconMaterial"));
@@ -62,7 +88,7 @@ namespace js
 		}
 		{
 			// Boss hp bar
-			GameObject* hpBar = object::Instantiate<GameObject>(Vector3(0.0f, -2.05f, 1.1f), eLayerType::UI);
+			GameObject* hpBar = object::Instantiate<GameObject>(Vector3(0.0f, -2.05f, -5.0f), eLayerType::UI);
 			MeshRenderer* mr = hpBar->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(Resources::Find<Material>(L"BossHpBarMaterial"));
@@ -70,7 +96,7 @@ namespace js
 		}
 		{
 			// Boss hp bar
-			GameObject* hpBar = object::Instantiate<GameObject>(Vector3(0.0f, -2.035f, 1.0f), eLayerType::UI);
+			GameObject* hpBar = object::Instantiate<GameObject>(Vector3(0.0f, -2.035f, -4.0f), eLayerType::UI);
 			MeshRenderer* mr = hpBar->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(Resources::Find<Material>(L"BossHpBarOnMaterial"));
@@ -79,7 +105,7 @@ namespace js
 		Camera* cameraComp = nullptr;
 		{
 			// Main Camera
-			GameObject* camera = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, -10.0f), eLayerType::Player);
+			GameObject* camera = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, -10.0f), eLayerType::Camera);
 			cameraComp = camera->AddComponent<Camera>();
 			cameraComp->TurnLayerMask(eLayerType::UI, false);
 			camera->AddComponent<CameraScript>();
@@ -87,9 +113,10 @@ namespace js
 
 		{
 			// UI Camera
-			GameObject* camera = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, -10.0f), eLayerType::Player);
+			GameObject* camera = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, -10.0f), eLayerType::Camera);
 			Camera* cameraComp = camera->AddComponent<Camera>();
 			cameraComp->TurnLayerMask(eLayerType::Player, false);
+			cameraComp->TurnLayerMask(eLayerType::Monster, false);
 			cameraComp->TurnLayerMask(eLayerType::BG, false);
 		}
 

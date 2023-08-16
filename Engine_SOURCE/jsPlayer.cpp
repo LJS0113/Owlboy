@@ -1,10 +1,9 @@
 #include "jsPlayer.h"
-
+#include "jsTransform.h"
 
 namespace js
 {
-
-
+	Player* gPlayer = nullptr;
 
 	Player::Player()
 	{

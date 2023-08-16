@@ -51,6 +51,9 @@ float4 main(VSOut In) : SV_TARGET
     
     if (color.a <= 0.0f)
         discard;
+     
+    if (color.r == 1.0f && color.g == 0.0f && color.b == 1.0f)
+        discard;
     
     return color;
 }

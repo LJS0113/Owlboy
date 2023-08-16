@@ -370,6 +370,13 @@ namespace renderer
 
 		std::shared_ptr<Texture> particle = std::make_shared<Texture>();
 		Resources::Load<Texture>(L"CartoonSmoke", L"..\\Resources\\particle\\CartoonSmoke.png");
+
+		std::shared_ptr<Texture> texture = std::make_shared<Texture>();
+		Resources::Load<Texture>(L"BossStage", L"..\\Resources\\Texture\\BossStage.bmp");
+
+		texture = std::make_shared<Texture>();
+		texture = Resources::Load<Texture>(L"Masked_Tortoise", L"..\\Resources\\Texture\\Monster\\Masked_Tortoise\\Masked Tortoise.png");
+
 	}
 
 	void LoadMaterial()
@@ -559,11 +566,9 @@ namespace renderer
 
 #pragma region BossScene
 		// Boss Stage
-		std::shared_ptr<Texture> bossBGTexture = Resources::Load<Texture>(L"BossStage", L"..\\Resources\\Texture\\BossStage.bmp");
-		std::shared_ptr<Material> bossBGMaterial = std::make_shared<Material>();
-		bossBGMaterial->SetShader(shader);
-		bossBGMaterial->SetTexture(bossBGTexture);
-		Resources::Insert(L"BossStageMaterial", bossBGMaterial);
+		UpLoad(shader, L"BossStage", L"BossStageMaterial");
+		UpLoad(spriteAniShader, L"Masked_Tortoise", L"Masked_Tortoise_Material");
+		
 #pragma endregion
 #pragma region EndingScene
 		// Ending Sky
@@ -687,5 +692,14 @@ namespace renderer
 
 		delete lightsBuffer;
 		lightsBuffer = nullptr;
+	}
+
+	void UpLoad(std::shared_ptr<Shader> shader, const std::wstring& textureName, const std::wstring& materialName)
+	{
+		std::shared_ptr<Texture> texture = Resources::Find<Texture>(textureName);
+		std::shared_ptr<Material> material = std::make_shared<Material>();
+		material->SetShader(shader);
+		material->SetTexture(texture);
+		Resources::Insert(materialName, material);
 	}
 }

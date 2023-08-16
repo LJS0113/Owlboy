@@ -3,11 +3,11 @@
 
 namespace js
 {
-	class Player : public GameObject
+	class Monster : public GameObject
 	{
 	public:
-		Player();
-		~Player();
+		Monster();
+		~Monster();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
@@ -17,5 +17,4 @@ namespace js
 	private:
 
 	};
-	extern Player* gPlayer;
 }

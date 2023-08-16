@@ -73,5 +73,7 @@ namespace renderer
 	void Render();
 	void Release();
 
+	void UpLoad(std::shared_ptr<js::Shader> shader, const std::wstring& textureName, const std::wstring& materialNam);
+
 	void PushDebugMeshAttribute(DebugMesh mesh);
 }

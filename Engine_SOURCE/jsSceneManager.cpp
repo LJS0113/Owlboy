@@ -53,6 +53,7 @@ namespace js
 		mActiveScene->OnExit();
 		mActiveScene = iter->second;
 		mActiveScene->OnEnter();
+		mActiveScene->Initialize();
 
 		return iter->second;
 	}

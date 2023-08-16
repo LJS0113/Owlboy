@@ -1,13 +1,15 @@
 #pragma once
 #include "jsGameObject.h"
 
+
 namespace js
 {
-	class Player : public GameObject
+
+	class Door : public GameObject
 	{
 	public:
-		Player();
-		~Player();
+		Door();
+		~Door();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
@@ -16,6 +18,7 @@ namespace js
 
 	private:
 
+
 	};
-	extern Player* gPlayer;
+
 }

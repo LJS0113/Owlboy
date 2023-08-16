@@ -25,7 +25,7 @@ namespace js
 
 			mScenes.insert(std::make_pair(name, scene));
 			mActiveScene = scene;
-			scene->Initialize();
+			//scene->Initialize();
 			return true;
 		}
 

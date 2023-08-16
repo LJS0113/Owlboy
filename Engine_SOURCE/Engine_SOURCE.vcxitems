@@ -25,6 +25,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)jsComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsComputeShader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsConstantBuffer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsDoor.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsEngine.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsEntity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsEnums.h" />
@@ -42,6 +43,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)jsMath.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsMesh.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsMeshRenderer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsMonster.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsPaintShader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsParticleShader.h" />
@@ -71,6 +73,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)jsComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsComputeShader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsConstantBuffer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsDoor.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsEntity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsGameObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsGeddy.cpp" />
@@ -85,6 +88,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)jsMath.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsMesh.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsMeshRenderer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsMonster.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsPaintShader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsParticleShader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsParticleSystem.cpp" />

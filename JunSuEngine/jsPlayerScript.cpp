@@ -355,30 +355,14 @@ namespace js
 
 	void PlayerScript::OnCollisionEnter(Collider2D* other)
 	{
-		int a = 0;
-		//Transform* tr = GetOwner()->GetComponent<Transform>();
-		//Collider2D* cd = GetOwner()->GetComponent<Collider2D>();
-		//Rigidbody* rigid = GetOwner()->GetComponent<Rigidbody>();
 
-		//if (other->GetColliderOwner() == eColliderOwner::Ground)
-		//{
-		//	int a = 0;
-		//	rigid->SetGround(true);
-		//}
 	}
 	void PlayerScript::OnCollisionStay(Collider2D* other)
 	{
 	}
 	void PlayerScript::OnCollisionExit(Collider2D* other)
 	{
-		int a = 0;
-		//Collider2D* cd = GetOwner()->GetComponent<Collider2D>();
-		//Rigidbody* rigid = GetOwner()->GetComponent<Rigidbody>();
 
-		//if (other->GetColliderOwner() == eColliderOwner::Player)
-		//{
-		//	rigid->SetGround(false);
-		//}
 	}
 
 }

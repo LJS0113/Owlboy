@@ -9,6 +9,8 @@
 #include "jsGameObject.h"
 #include "jsTitleScene.h" 
 #include "jsObject.h"
+#include "jsPlayerScript.h"
+#include "jsPlayer.h"
 
 namespace js
 {
@@ -22,13 +24,27 @@ namespace js
 
 	void DungeonScene::Initialize()
 	{
-		// 던전 확대버전
-		GameObject* player = object::Instantiate<GameObject>(Vector3(-10.0f, 0.0f, 3.0f), eLayerType::Player);
-		player->SetName(L"DungeonStage");
-		MeshRenderer* mr = player->AddComponent<MeshRenderer>();
-		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		mr->SetMaterial(Resources::Find<Material>(L"DungeonMaterial"));
-		player->GetComponent<Transform>()->SetScale(Vector3(30.0f, 4.5f, 1.0f));
+
+		gPlayer = object::Instantiate<Player>(Vector3(3.0f, -1.0f, 1.0f), eLayerType::Player);
+		gPlayer->SetName(L"Otus");
+		Transform* tr = gPlayer->GetComponent<Transform>();
+		Collider2D* cd = gPlayer->AddComponent<Collider2D>();
+		gPlayer->AddComponent<PlayerScript>();
+		gPlayer->GetComponent<PlayerScript>()->Initialize();
+		tr->SetScale(Vector3(2.5f, 2.5f, 1.0f));
+		gPlayer->AddComponent<CameraScript>();
+
+
+		{
+			// 던전 확대버전
+			GameObject* player = object::Instantiate<GameObject>(Vector3(-10.0f, 0.0f, 3.0f), eLayerType::Player);
+			player->SetName(L"DungeonStage");
+			MeshRenderer* mr = player->AddComponent<MeshRenderer>();
+			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			mr->SetMaterial(Resources::Find<Material>(L"DungeonMaterial"));
+			player->GetComponent<Transform>()->SetScale(Vector3(30.0f, 5.0f, 1.0f));
+		}
+
 
 		// 던전 원본
 		//GameObject* player = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 3.0f), eLayerType::Player);

@@ -26,7 +26,7 @@
       <Filter>GameObject\Component\Script</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)jsLayer.cpp">
-      <Filter>Resource\Scene\Layer</Filter>
+      <Filter>Scene\Layer</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)jsTransform.cpp">
       <Filter>GameObject\Component\Transform</Filter>
@@ -38,25 +38,25 @@
       <Filter>GameObject\Component\Base</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)jsConstantBuffer.cpp">
-      <Filter>GameObject\Component\Graphics\ConstantBuffer</Filter>
+      <Filter>Graphics\ConstantBuffer</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)jsGraphicDevice_DX11.cpp">
-      <Filter>GameObject\Component\Graphics\GraphicDevice</Filter>
+      <Filter>Graphics\GraphicDevice</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)jsMesh.cpp">
       <Filter>Resource\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)jsRenderer.cpp">
-      <Filter>GameObject\Component\Graphics\Renderer</Filter>
+      <Filter>Graphics\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)jsShader.cpp">
       <Filter>Resource\Shader</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)jsSceneManager.cpp">
-      <Filter>Resource\Scene\Manager</Filter>
+      <Filter>Scene\Manager</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)jsScene.cpp">
-      <Filter>Resource\Scene\Base</Filter>
+      <Filter>Scene\Base</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)jsGameObject.cpp">
       <Filter>GameObject\Base</Filter>
@@ -73,7 +73,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)jsCollider2D.cpp">
       <Filter>GameObject\Component\Collider</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)jsCollisionManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsAnimation.cpp">
       <Filter>Resource\Animation</Filter>
     </ClCompile>
@@ -89,14 +88,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)jsLight.cpp">
       <Filter>GameObject\Component\Light</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)jsStructedBuffer.cpp">
-      <Filter>GameObject\Component\Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)jsGround.cpp">
       <Filter>GameObject\Ground</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)jsComputeShader.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)jsPaintShader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsGeddy.cpp">
       <Filter>GameObject\Friend\Geddy</Filter>
     </ClCompile>
@@ -106,11 +100,33 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)jsAlphonse.cpp">
       <Filter>GameObject\Friend\Alphonse</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)jsParticleSystem.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsGeddyBullet.cpp">
       <Filter>GameObject\Friend\Geddy</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)jsParticleShader.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsDoor.cpp">
+      <Filter>GameObject\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsMonster.cpp">
+      <Filter>GameObject\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsParticleSystem.cpp">
+      <Filter>GameObject\Component\ParticleSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsStructedBuffer.cpp">
+      <Filter>Graphics\StructedBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsComputeShader.cpp">
+      <Filter>Resource\Shader\CS</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsPaintShader.cpp">
+      <Filter>Resource\Shader\CS</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsCollisionManager.cpp">
+      <Filter>Scene\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsParticleShader.cpp">
+      <Filter>Resource\Shader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsApplication.h">
@@ -138,7 +154,7 @@
       <Filter>Common</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsGraphics.h">
-      <Filter>GameObject\Component\Graphics</Filter>
+      <Filter>Graphics</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsEngine.h">
       <Filter>Common</Filter>
@@ -150,7 +166,7 @@
       <Filter>GameObject\Component\Script</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsLayer.h">
-      <Filter>Resource\Scene\Layer</Filter>
+      <Filter>Scene\Layer</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsTransform.h">
       <Filter>GameObject\Component\Transform</Filter>
@@ -162,25 +178,25 @@
       <Filter>GameObject\Component\Base</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsConstantBuffer.h">
-      <Filter>GameObject\Component\Graphics\ConstantBuffer</Filter>
+      <Filter>Graphics\ConstantBuffer</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsGraphicDevice_DX11.h">
-      <Filter>GameObject\Component\Graphics\GraphicDevice</Filter>
+      <Filter>Graphics\GraphicDevice</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsMesh.h">
       <Filter>Resource\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsRenderer.h">
-      <Filter>GameObject\Component\Graphics\Renderer</Filter>
+      <Filter>Graphics\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsShader.h">
       <Filter>Resource\Shader</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsSceneManager.h">
-      <Filter>Resource\Scene\Manager</Filter>
+      <Filter>Scene\Manager</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsScene.h">
-      <Filter>Resource\Scene\Base</Filter>
+      <Filter>Scene\Base</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsGameObject.h">
       <Filter>GameObject\Base</Filter>
@@ -200,7 +216,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)jsCollider2D.h">
       <Filter>GameObject\Component\Collider</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)jsCollisionManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsAnimation.h">
       <Filter>Resource\Animation</Filter>
     </ClInclude>
@@ -216,14 +231,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)jsLight.h">
       <Filter>GameObject\Component\Light</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)jsStructedBuffer.h">
-      <Filter>GameObject\Component\Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsGround.h">
       <Filter>GameObject\Ground</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)jsComputeShader.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)jsPaintShader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsGeddy.h">
       <Filter>GameObject\Friend\Geddy</Filter>
     </ClInclude>
@@ -233,11 +243,33 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)jsAlphonse.h">
       <Filter>GameObject\Friend\Alphonse</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)jsParticleSystem.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsGeddyBullet.h">
       <Filter>GameObject\Friend\Geddy</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)jsParticleShader.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsDoor.h">
+      <Filter>GameObject\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsMonster.h">
+      <Filter>GameObject\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsParticleSystem.h">
+      <Filter>GameObject\Component\ParticleSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsStructedBuffer.h">
+      <Filter>Graphics\StructedBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsComputeShader.h">
+      <Filter>Resource\Shader\CS</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsPaintShader.h">
+      <Filter>Resource\Shader\CS</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsCollisionManager.h">
+      <Filter>Scene\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsParticleShader.h">
+      <Filter>Resource\Shader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="High Level Interface">
@@ -279,20 +311,8 @@
     <Filter Include="GameObject\Component\Transform">
       <UniqueIdentifier>{5887978b-abb8-45d9-80e4-dd47798a48ed}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObject\Component\MeshRenderer">
-      <UniqueIdentifier>{3d982996-0fe3-414a-b28d-8cc05a9de625}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObject\Component\Base">
       <UniqueIdentifier>{d75ee139-e2b5-49ae-83a2-6ac1e5fc3d3e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource\Scene">
-      <UniqueIdentifier>{8bad54af-126b-4f4c-8b4f-89c28c7dd1f0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource\Scene\Layer">
-      <UniqueIdentifier>{deb72b9d-f3f1-4ba3-93d7-71887dbd2b56}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource\Scene\Base">
-      <UniqueIdentifier>{a3250f8e-de77-4cf0-9b20-5cbbe6816c30}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameObject\Component\Camera">
       <UniqueIdentifier>{bceb4b23-6b3e-4e71-9e46-4d7e5caf33b2}</UniqueIdentifier>
@@ -312,23 +332,8 @@
     <Filter Include="Common\Object">
       <UniqueIdentifier>{c6acd6a2-d3ac-45fc-b911-509c885fb478}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObject\Component\Graphics">
-      <UniqueIdentifier>{a0a6814e-9c91-402c-a565-ef1cb8e6566f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Component\Graphics\ConstantBuffer">
-      <UniqueIdentifier>{67f00901-d606-4bd6-a8fa-de7afbd9e207}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Component\Graphics\GraphicDevice">
-      <UniqueIdentifier>{4fc7431d-623f-4a11-ad86-d4dc28c2b6dc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Component\Graphics\Renderer">
-      <UniqueIdentifier>{c4a8a862-4a77-4d98-9145-2a50b2d3bdd4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObject\Component\Collider">
       <UniqueIdentifier>{681842fc-998c-487b-8716-2178b0c1898a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource\Scene\Manager">
-      <UniqueIdentifier>{ab199595-e3a8-4521-9f4d-8e8e5b660f6e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resource\Animation">
       <UniqueIdentifier>{bc05cb5a-2106-4842-ad6c-ab039ef9ca13}</UniqueIdentifier>
@@ -356,6 +361,48 @@
     </Filter>
     <Filter Include="GameObject\Friend\Alphonse">
       <UniqueIdentifier>{c1dfd979-3e54-4146-abab-0eab4190b4bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Monster">
+      <UniqueIdentifier>{2d96f53e-9173-43c1-ba18-d9d3c0c78e82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Object">
+      <UniqueIdentifier>{e37cbf6a-c414-44c7-80ce-dbac51f84348}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Component\MeshRenderer">
+      <UniqueIdentifier>{3d982996-0fe3-414a-b28d-8cc05a9de625}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Component\ParticleSystem">
+      <UniqueIdentifier>{c0f351aa-ffd6-42d6-99ea-2c8a426674ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{a0a6814e-9c91-402c-a565-ef1cb8e6566f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\ConstantBuffer">
+      <UniqueIdentifier>{67f00901-d606-4bd6-a8fa-de7afbd9e207}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\GraphicDevice">
+      <UniqueIdentifier>{4fc7431d-623f-4a11-ad86-d4dc28c2b6dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Renderer">
+      <UniqueIdentifier>{c4a8a862-4a77-4d98-9145-2a50b2d3bdd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\StructedBuffer">
+      <UniqueIdentifier>{a61f7dfd-cd5b-474e-bdc2-060509111715}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Shader\CS">
+      <UniqueIdentifier>{5667dbd5-cdbf-44d0-a7a3-e533f61c3e21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{8bad54af-126b-4f4c-8b4f-89c28c7dd1f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Layer">
+      <UniqueIdentifier>{deb72b9d-f3f1-4ba3-93d7-71887dbd2b56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Base">
+      <UniqueIdentifier>{a3250f8e-de77-4cf0-9b20-5cbbe6816c30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Manager">
+      <UniqueIdentifier>{ab199595-e3a8-4521-9f4d-8e8e5b660f6e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

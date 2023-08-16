@@ -10,6 +10,11 @@
 #include "jsCloudScript.h"
 #include "jsPlayer.h"
 #include "jsPlayerScript.h"
+#include "jsDoor.h"
+#include "jsRenderer.h"
+
+
+extern js::Player* gPlayer;
 
 
 namespace js
@@ -24,19 +29,21 @@ namespace js
 
 	void VellieScene::Initialize()
 	{
-		Player* player = object::Instantiate<Player>(Vector3(-3.0f, 1.5f, 1.0f), eLayerType::Player);
-		player->SetName(L"Otus");
-		Transform* tr = player->GetComponent<Transform>();
-		Collider2D* cd = player->AddComponent<Collider2D>();
-		player->AddComponent<PlayerScript>();
-		player->GetComponent<PlayerScript>()->Initialize();
+		gPlayer = object::Instantiate<Player>(Vector3(0.0f, 0.0f, 1.0f), eLayerType::Player);
+		gPlayer->SetName(L"Otus");
+		Transform* tr = gPlayer->GetComponent<Transform>();
+		Collider2D* cd = gPlayer->AddComponent<Collider2D>();
+		gPlayer->AddComponent<PlayerScript>();
+		gPlayer->GetComponent<PlayerScript>()->Initialize();
+		tr->SetScale(Vector3(2.5f, 2.5f, 1.0f));
+		gPlayer->AddComponent<CameraScript>();
 
 		{
 			GameObject* vellieBG = object::Instantiate<GameObject>(Vector3(-3.0f, 1.5f, 1.999f), eLayerType::Scenery);
 			MeshRenderer* mr = vellieBG->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(Resources::Find<Material>(L"VellieMaterial"));
-			vellieBG->GetComponent<Transform>()->SetScale(Vector3(48.0f, 27.0f, 1.0f));
+			vellieBG->GetComponent<Transform>()->SetScale(Vector3(60.0f, 40.0f, 1.0f));
 		}
 		{
 			// Sky
@@ -48,12 +55,11 @@ namespace js
 			vellieBG->AddComponent<CameraScript>();
 		}
 
-
-
 		{
 			// Main Camera
 			GameObject* camera = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, -10.0f), eLayerType::Player);
 			Camera* cameraComp = camera->AddComponent<Camera>();
+			renderer::mainCamera = cameraComp;
 			cameraComp->TurnLayerMask(eLayerType::UI, false);
 			camera->AddComponent<CameraScript>();
 		}
@@ -65,6 +71,12 @@ namespace js
 			cameraComp->TurnLayerMask(eLayerType::Player, false);
 			cameraComp->TurnLayerMask(eLayerType::BG, false);
 			cameraComp->TurnLayerMask(eLayerType::Scenery, false);
+		}
+
+		{
+			Door* door = object::Instantiate<Door>(Vector3(-27.431f, -15.214f, 1.1f), eLayerType::Artifact);
+			Collider2D* col = door->GetComponent<Collider2D>();
+			col->SetSize(Vector2(1.5f, 1.5f));
 		}
 	}
 
