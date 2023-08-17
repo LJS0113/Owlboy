@@ -39,8 +39,8 @@ namespace js::graphics
 
 		renderer::ParticleCB data = {};
 		data.elementCount = mParticleBuffer->GetStride();
-		data.elapsedTime = Time::DeltaTime();
-
+		data.elapsedTime = elapsedTime;
+		data.deltaTime = Time::DeltaTime();
 		cb->SetData(&data);
 		cb->Bind(eShaderStage::CS);
 	}

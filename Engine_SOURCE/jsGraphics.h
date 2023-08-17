@@ -18,6 +18,7 @@
 #define CBSLOT_ANIMATION2D		3
 #define CBSLOT_SPRITEREVERSE	4
 #define CBSLOT_PARTICLE			5
+#define CBSLOT_NOISE			6
 
 
 namespace js::graphics
@@ -41,6 +42,7 @@ namespace js::graphics
 		Animatior,
 		Reverse,
 		Particle,
+		Noise,
 		End,
 	};
 	

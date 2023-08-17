@@ -51,8 +51,13 @@ namespace renderer
 	{
 		UINT elementCount;
 		float elapsedTime;
-		int padd;
+		float deltaTime;
 		int padd2;
+	};
+
+	CBUFFER(NoiseCB, CBSLOT_SPRITEREVERSE)
+	{
+		Vector4 size;
 	};
 
 	extern js::Mesh* mesh;

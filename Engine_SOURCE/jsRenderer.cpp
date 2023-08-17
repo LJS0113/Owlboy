@@ -307,6 +307,10 @@ namespace renderer
 		constantBuffer[(UINT)eCBType::Particle] = new ConstantBuffer(eCBType::Particle);
 		constantBuffer[(UINT)eCBType::Particle]->Create(sizeof(ParticleCB));
 
+		// NoiseCB
+		constantBuffer[(UINT)eCBType::Noise] = new ConstantBuffer(eCBType::Noise);
+		constantBuffer[(UINT)eCBType::Noise]->Create(sizeof(NoiseCB));
+
 		// light structed buffer
 		lightsBuffer = new StructedBuffer();
 		lightsBuffer->Create(sizeof(LightAttribute), 2, eViewType::SRV, nullptr, true);
@@ -373,6 +377,10 @@ namespace renderer
 
 		std::shared_ptr<Texture> texture = std::make_shared<Texture>();
 		Resources::Load<Texture>(L"BossStage", L"..\\Resources\\Texture\\BossStage.bmp");
+
+		Resources::Load<Texture>(L"Noise01", L"..\\Resources\\noise\\noise_01.png");
+		Resources::Load<Texture>(L"Noise02", L"..\\Resources\\noise\\noise_02.png");
+		Resources::Load<Texture>(L"Noise03", L"..\\Resources\\noise\\noise_03.png");
 
 		texture = std::make_shared<Texture>();
 		texture = Resources::Load<Texture>(L"Masked_Tortoise", L"..\\Resources\\Texture\\Monster\\Masked_Tortoise\\Masked Tortoise.png");
@@ -664,8 +672,33 @@ namespace renderer
 		lightsBuffer->BindSRV(eShaderStage::PS, 13);
 	}
 
+	void BindNoiseTexture()
+	{
+		std::shared_ptr<Texture> texture = Resources::Find<Texture>(L"Noise01");
+
+		texture->BindShaderResource(eShaderStage::VS, 15);
+		texture->BindShaderResource(eShaderStage::HS, 15);
+		texture->BindShaderResource(eShaderStage::DS, 15);
+		texture->BindShaderResource(eShaderStage::GS, 15);
+		texture->BindShaderResource(eShaderStage::PS, 15);
+		texture->BindShaderResource(eShaderStage::CS, 15);
+
+		ConstantBuffer* cb = constantBuffer[(UINT)eCBType::Noise];
+
+		NoiseCB data = {};
+		data.size.x = texture->GetWidth();
+		data.size.y = texture->GetHeight();
+
+		cb->SetData(&data);
+		cb->Bind(eShaderStage::VS);
+		cb->Bind(eShaderStage::GS);
+		cb->Bind(eShaderStage::PS);
+		cb->Bind(eShaderStage::CS);
+	}
+
 	void Render()
 	{
+		BindNoiseTexture();
 		BindLights();
 
 		for (Camera* cam : cameras)
