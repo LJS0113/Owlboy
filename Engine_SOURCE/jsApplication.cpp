@@ -4,6 +4,8 @@
 #include "jsRenderer.h"
 #include "jsSceneManager.h"
 #include "jsCollisionManager.h"
+#include "jsFmod.h"
+#include "jsFontWrapper.h"
 
 namespace js
 {
@@ -27,6 +29,8 @@ namespace js
 	{
 		Time::Initialize();
 		Input::Initialize();
+		Fmod::Initialize();
+		FontWrapper::Initialize();
 
 		renderer::Initialize();
 		SceneManager::Initialize();
@@ -44,10 +48,11 @@ namespace js
 	}
 	void Application::Render()
 	{
-		Time::Render();
 
 		graphicDevice->ClearTarget();
 		graphicDevice->UpdateViewPort();
+		Time::Render();
+		//FontWrapper::DrawFont(L"TEXT", 10.0f, 30.0f, 20, FONT_RGBA(255, 0, 255, 255));
 		
 		renderer::Render();
 	}

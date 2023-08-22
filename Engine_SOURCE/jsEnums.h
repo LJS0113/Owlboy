@@ -15,6 +15,8 @@ namespace js::enums
 		Script,
 		Light,
 		Camera,
+		AudioListener,
+		AudioSource,
 		End,
 	};
 
@@ -41,6 +43,7 @@ namespace js::enums
 		Mesh,
 		Animation,
 		ComputeShader,
+		AudioClip,
 		End,
 	};
 

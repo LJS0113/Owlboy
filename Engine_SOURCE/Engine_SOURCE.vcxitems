@@ -61,6 +61,11 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)jsTexture.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsTime.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsTransform.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsAudioClip.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsAudioListener.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsAudioSource.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsFmod.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsFontWrapper.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)jsAlphonse.cpp" />
@@ -105,6 +110,11 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)jsTexture.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsTime.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsTransform.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsAudioClip.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsAudioListener.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsAudioSource.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsFmod.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsFontWrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)jsMath.inl" />

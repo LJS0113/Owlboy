@@ -20,7 +20,9 @@
 #include "jsComputeShader.h"
 #include "jsPaintShader.h"
 #include "jsParticleSystem.h"
-
+#include "jsAudioClip.h"
+#include "jsAudioListener.h"
+#include "jsAudioSource.h"
 
 namespace js
 {
@@ -72,6 +74,10 @@ namespace js
 			Collider2D* cd = player->AddComponent<Collider2D>();
 			cd->SetSize(Vector2(1.0f, 1.0f));
 			player->AddComponent<MonsterScript>();
+
+			AudioSource* as = player->AddComponent<AudioSource>();
+			as->SetClip(Resources::Load<AudioClip>(L"TestSound", L"..\\Resources\\Sound\\0.mp3"));
+			as->Play();
 		}
 		{
 			GameObject* player = new GameObject();
@@ -100,6 +106,7 @@ namespace js
 			//camera->AddComponent<CameraScript>();
 			renderer::cameras.push_back(cameraComp);
 			renderer::mainCamera = cameraComp;
+			camera->AddComponent<AudioListener>();
 		}
 
 		{

@@ -1,4 +1,5 @@
-﻿// Editor_Window.cpp : 애플리케이션에 대한 진입점을 정의합니다.
+﻿
+// Editor_Window.cpp : 애플리케이션에 대한 진입점을 정의합니다.
 //
 
 #include "framework.h"
@@ -7,6 +8,9 @@
 #include "..\Engine_SOURCE\jsApplication.h"
 #include "..\Engine_SOURCE\jsRenderer.h"
 #include "..\Engine_SOURCE\jsResources.h"
+#include "..\Engine_SOURCE\jsFmod.h"
+#include "..\Engine_SOURCE\jsFontWrapper.h"
+
 #include "LoadScenes.h"
 #include "guiEditor.h"
 
@@ -91,6 +95,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     renderer::Release();
     js::SceneManager::Release();
+    js::Fmod::Release();
+    js::FontWrapper::Release();
     gui::Editor::Release();
     return (int) msg.wParam;
 }

@@ -56,14 +56,12 @@ namespace js
 		mSharedBuffer = new graphics::StructedBuffer();
 		mSharedBuffer->Create(sizeof(ParticleShared), 1, eViewType::UAV, nullptr, true);
 
-		//ParticleShared shareData = {};
-		//shareData.sharedActiveCount = 1000;
-		//mSharedBuffer->SetData(&shareData, 1);
-		//mBuffer->SetData(particles, 100);
 	}
 
 	ParticleSystem::~ParticleSystem()
 	{
+		delete mSharedBuffer;
+		delete mBuffer;
 	}
 
 	void ParticleSystem::Initialize()

@@ -127,6 +127,11 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)jsParticleShader.cpp">
       <Filter>Resource\Shader</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsAudioClip.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsAudioListener.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsAudioSource.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsFmod.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsFontWrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsApplication.h">
@@ -270,6 +275,11 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)jsParticleShader.h">
       <Filter>Resource\Shader</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsAudioClip.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsAudioListener.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsAudioSource.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsFmod.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsFontWrapper.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="High Level Interface">
