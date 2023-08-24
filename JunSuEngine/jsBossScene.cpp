@@ -26,14 +26,14 @@ namespace js
 	}
 	void BossScene::Initialize()
 	{
-		gPlayer = object::Instantiate<Player>(Vector3(-3.0f, -1.5f, 1.0f), eLayerType::Player);
-		gPlayer->SetName(L"Otus");
-		Transform* tr = gPlayer->GetComponent<Transform>();
-		Collider2D* cd = gPlayer->AddComponent<Collider2D>();
-		gPlayer->AddComponent<PlayerScript>();
-		gPlayer->GetComponent<PlayerScript>()->Initialize();
+		Player* player = object::Instantiate<Player>(Vector3(-3.0f, -1.5f, 1.0f), eLayerType::Player);
+		player->SetName(L"Otus");
+		Transform* tr = player->GetComponent<Transform>();
+		Collider2D* cd = player->AddComponent<Collider2D>();
+		player->AddComponent<PlayerScript>();
+		player->GetComponent<PlayerScript>()->Initialize();
 		tr->SetScale(Vector3(2.5f, 2.5f, 1.0f));
-		//gPlayer->AddComponent<CameraScript>();
+		//player->AddComponent<CameraScript>();
 
 		{
 			Monster* monster = object::Instantiate<Monster>(Vector3(0.0f, -1.2f, 1.0f), eLayerType::Monster);

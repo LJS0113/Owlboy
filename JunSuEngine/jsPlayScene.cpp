@@ -75,9 +75,9 @@ namespace js
 			cd->SetSize(Vector2(1.0f, 1.0f));
 			player->AddComponent<MonsterScript>();
 
-			AudioSource* as = player->AddComponent<AudioSource>();
-			as->SetClip(Resources::Load<AudioClip>(L"TestSound", L"..\\Resources\\Sound\\0.mp3"));
-			as->Play();
+			//AudioSource* as = player->AddComponent<AudioSource>();
+			//as->SetClip(Resources::Load<AudioClip>(L"TestSound", L"..\\Resources\\Sound\\0.mp3"));
+			//as->Play();
 		}
 		{
 			GameObject* player = new GameObject();

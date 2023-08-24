@@ -12,9 +12,10 @@
 #include "jsPlayerScript.h"
 #include "jsDoor.h"
 #include "jsRenderer.h"
-
-
-extern js::Player* gPlayer;
+#include "jsGround.h"
+#include "jsRigidBody.h"
+#include "jsDoorScript.h"
+#include "jsCollisionManager.h"
 
 
 namespace js
@@ -29,14 +30,18 @@ namespace js
 
 	void VellieScene::Initialize()
 	{
-		gPlayer = object::Instantiate<Player>(Vector3(0.0f, 0.0f, 1.0f), eLayerType::Player);
-		gPlayer->SetName(L"Otus");
-		Transform* tr = gPlayer->GetComponent<Transform>();
-		Collider2D* cd = gPlayer->AddComponent<Collider2D>();
-		gPlayer->AddComponent<PlayerScript>();
-		gPlayer->GetComponent<PlayerScript>()->Initialize();
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Artifact, true);
+
+		Player* player = object::Instantiate<Player>(Vector3(1.5097f, -1.70f, 1.0f), eLayerType::Player);
+		player->SetName(L"Otus");
+		Transform* tr = player->GetComponent<Transform>();
+		Collider2D* cd = player->AddComponent<Collider2D>();
+		Rigidbody* playerRb = player->AddComponent<Rigidbody>();
+		player->AddComponent<PlayerScript>();
+		player->GetComponent<PlayerScript>()->Initialize();
 		tr->SetScale(Vector3(2.5f, 2.5f, 1.0f));
-		gPlayer->AddComponent<CameraScript>();
+		//player->AddComponent<CameraScript>();
 
 		{
 			GameObject* vellieBG = object::Instantiate<GameObject>(Vector3(-3.0f, 1.5f, 1.999f), eLayerType::Scenery);
@@ -44,6 +49,22 @@ namespace js
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(Resources::Find<Material>(L"VellieMaterial"));
 			vellieBG->GetComponent<Transform>()->SetScale(Vector3(60.0f, 40.0f, 1.0f));
+		}
+		{
+			// House Ground
+			Ground* ground = object::Instantiate<Ground>(Vector3(1.2629f, -2.0f, 2.0f), eLayerType::Ground);
+			ground->SetName(L"HouseGround");
+			ground->GetComponent<Transform>()->SetScale(Vector3(3.5f, 0.2f, 2.0f));
+			Collider2D* cd = ground->AddComponent<Collider2D>();
+			cd->SetColliderOwner(eColliderOwner::Ground);
+		}
+		{
+			// Vellie Ground
+			Ground* ground = object::Instantiate<Ground>(Vector3(-10.0f, -15.6f, 2.0f), eLayerType::Ground);
+			ground->SetName(L"VellieGround");
+			ground->GetComponent<Transform>()->SetScale(Vector3(50.5f, 0.2f, 2.0f));
+			Collider2D* cd = ground->AddComponent<Collider2D>();
+			cd->SetColliderOwner(eColliderOwner::Ground);
 		}
 		{
 			// Sky
@@ -76,7 +97,8 @@ namespace js
 		{
 			Door* door = object::Instantiate<Door>(Vector3(-27.431f, -15.214f, 1.1f), eLayerType::Artifact);
 			Collider2D* col = door->GetComponent<Collider2D>();
-			col->SetSize(Vector2(1.5f, 1.5f));
+			col->SetSize(Vector2(0.5f, 0.5f));
+			door->AddComponent<DoorScript>();
 		}
 	}
 

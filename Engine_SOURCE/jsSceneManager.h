@@ -29,6 +29,7 @@ namespace js
 			return true;
 		}
 
+		static Scene* FindScene(std::wstring name);
 		static Scene* LoadScene(std::wstring name);
 		static Scene* GetActiveScene() { return mActiveScene; }
 

@@ -3,7 +3,6 @@
 
 namespace js
 {
-	Player* gPlayer = nullptr;
 
 	Player::Player()
 	{

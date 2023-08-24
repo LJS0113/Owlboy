@@ -17,5 +17,4 @@ namespace js
 	private:
 
 	};
-	extern Player* gPlayer;
 }

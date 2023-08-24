@@ -26,6 +26,8 @@ namespace js
 		cb = renderer::constantBuffer[(UINT)eCBType::Reverse];
 		cb->SetData(&reverseCB);
 		cb->Bind(eShaderStage::PS);
+
+
 	}
 
 	PlayerScript::~PlayerScript()
@@ -157,7 +159,7 @@ namespace js
 
 		if (Input::GetKey(eKeyCode::UP))
 		{
-			pos.y += 2.0f * Time::DeltaTime();
+			pos.y += 3.0f * Time::DeltaTime();
 			tr->SetPosition(pos);
 
 		}
@@ -351,6 +353,11 @@ namespace js
 			mAnimator->PlayAnimation(L"OtusIdleRight", true);
 			mState = ePlayerState::Idle;
 		}
+	}
+
+	void PlayerScript::bed()
+	{
+		mAnimator->PlayAnimation(L"OtusBed", false);
 	}
 
 	void PlayerScript::OnCollisionEnter(Collider2D* other)

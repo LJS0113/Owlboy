@@ -29,6 +29,12 @@
     <Filter Include="Contents\Script\Monster">
       <UniqueIdentifier>{8b174832-dd84-4811-a3da-255d42f32672}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Script\Artifact">
+      <UniqueIdentifier>{b7048500-359a-4389-997b-5b1863e43448}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Artifact\Door">
+      <UniqueIdentifier>{fb2a526c-4d63-47c0-9724-4de2189bd0fc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="JunSuEngine.cpp" />
@@ -82,6 +88,9 @@
     </ClCompile>
     <ClCompile Include="jsMaskedTortoiseScript.cpp">
       <Filter>Contents\Script\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="jsDoorScript.cpp">
+      <Filter>Contents\Script\Artifact\Door</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +148,9 @@
     </ClInclude>
     <ClInclude Include="jsMaskedTortoiseScript.h">
       <Filter>Contents\Script\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="jsDoorScript.h">
+      <Filter>Contents\Script\Artifact\Door</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

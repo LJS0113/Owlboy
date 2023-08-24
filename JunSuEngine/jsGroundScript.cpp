@@ -30,10 +30,10 @@ namespace js
 		Vector3 grPos = grTr->GetPosition();
 		Vector3 playerPos = playerTr->GetPosition();
 
-		playerPos.y = grPos.y + 0.2f;
+		playerPos.y = grPos.y + 0.3f;
 
 		playerTr->SetPosition(playerPos);
-		//other->GetOwner()->GetComponent<Rigidbody>()->SetGround(true);
+		other->GetOwner()->GetComponent<Rigidbody>()->SetGround(true);
 
 	}
 	void GroundScript::OnCollisionStay(Collider2D* other)
@@ -42,6 +42,6 @@ namespace js
 	}
 	void GroundScript::OnCollisionExit(Collider2D* other)
 	{
-
+		other->GetOwner()->GetComponent<Rigidbody>()->SetGround(false);
 	}
 }
