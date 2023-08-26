@@ -49,6 +49,7 @@ namespace js
 		Events* FindEvents(const std::wstring& name);
 		void PlayAnimation(const std::wstring& name, bool loop);
 		void Binds();
+		bool IsComplete() { return mActiveAnimation->IsComplete(); }
 
 		std::function<void()>& StartEvent(const std::wstring key);
 		std::function<void()>& CompleteEvent(const std::wstring key);

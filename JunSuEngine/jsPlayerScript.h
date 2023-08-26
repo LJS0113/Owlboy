@@ -17,6 +17,7 @@ namespace js
 			Death,
 			Dash,
 			Jump,
+			Fall,
 			Fly,
 		};
 		PlayerScript();
@@ -39,6 +40,7 @@ namespace js
 		void attack();
 		void death();
 		void fly();
+		void fall();
 
 		ePlayerState GetState() { return mState; }
 
@@ -50,7 +52,6 @@ namespace js
 		renderer::SpriteReverseCB reverseCB;
 		ConstantBuffer* cb;
 		Collider2D* cd;
-
 	};
 
 }

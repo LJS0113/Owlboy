@@ -54,7 +54,7 @@ namespace js
 		mAnimator->Create(L"OtusHitRight", atlas, Vector2(0.0f, 96.689f * 14), Vector2(112.0f, 96.689f), 6);
 		mAnimator->Create(L"OtusAttackRight", atlas, Vector2(0.0f, 96.689f * 19), Vector2(112.0f, 96.689f), 5);
 		mAnimator->Create(L"OtusDeadRight", atlas, Vector2(0.0f, 96.689f * 24), Vector2(112.0f, 96.689f), 12);
-		
+
 		mAnimator->Create(L"OtusIdleLeft", atlas, Vector2(1456.0f, 96.689f * 0), Vector2(-112.0f, 96.689f), 3);
 		mAnimator->Create(L"OtusMoveLeft", atlas, Vector2(1456.0f, 96.689f * 1), Vector2(-112.0f, 96.689f), 12);
 		mAnimator->Create(L"OtusFlyLeft", atlas, Vector2(1456.0f, 96.689f * 2), Vector2(-112.0f, 96.689f), 6);
@@ -65,7 +65,7 @@ namespace js
 		mAnimator->Create(L"OtusHitLeft", atlas, Vector2(1456.0f, 96.689f * 14), Vector2(-112.0f, 96.689f), 6);
 		mAnimator->Create(L"OtusAttackLeft", atlas, Vector2(1456.0f, 96.689f * 19), Vector2(-112.0f, 96.689f), 5);
 		mAnimator->Create(L"OtusDeadLeft", atlas, Vector2(1456.0f, 96.689f * 24), Vector2(-112.0f, 96.689f), 12);
-	
+
 		mAnimator->PlayAnimation(L"OtusIdleRight", true);
 		mState = ePlayerState::Idle;
 	}
@@ -117,6 +117,9 @@ namespace js
 		case js::PlayerScript::ePlayerState::Fly:
 			fly();
 			break;
+		case js::PlayerScript::ePlayerState::Fall:
+			fall();
+			break;
 		default:
 			break;
 		}
@@ -132,7 +135,7 @@ namespace js
 	void PlayerScript::move()
 	{
 		Transform* tr = GetOwner()->GetComponent<Transform>();
-		
+
 		Vector3 pos = tr->GetPosition();
 
 		if (Input::GetKey(eKeyCode::LEFT))
@@ -157,21 +160,13 @@ namespace js
 			//mState = ePlayerState::Move;
 		}
 
-		if (Input::GetKey(eKeyCode::UP))
-		{
-			pos.y += 3.0f * Time::DeltaTime();
-			tr->SetPosition(pos);
-
-		}
-
-		if (Input::GetKeyUp(eKeyCode::UP)
-			|| Input::GetKeyUp(eKeyCode::DOWN)
+		if (Input::GetKeyUp(eKeyCode::DOWN)
 			|| Input::GetKeyUp(eKeyCode::LEFT)
 			|| Input::GetKeyUp(eKeyCode::RIGHT))
 		{
 			if (!mbFly)
 			{
-				if(mbRight)
+				if (mbRight)
 					mAnimator->PlayAnimation(L"OtusIdleRight", true);
 				else
 					mAnimator->PlayAnimation(L"OtusIdleLeft", true);
@@ -209,7 +204,7 @@ namespace js
 	{
 		//Animator* at = GetOwner()->GetComponent<Animator>();
 		//at->CompleteEvent(L"Idle") = std::bind(&PlayerScript::Complete, this);
-
+		//Rigidbody* rb = GetOwner()->GetComponent<Rigidbody>();
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		Vector3 pos = tr->GetPosition();
 		cd->SetSize(Vector2(0.1f, 0.2f));
@@ -251,17 +246,18 @@ namespace js
 
 		if (Input::GetKeyDown(eKeyCode::UP))
 		{
-			if(mbRight)
-				mAnimator->PlayAnimation(L"OtusFlyRight", true);
+
+
+			if (mbRight)
+				mAnimator->PlayAnimation(L"OtusJumpRight", false);
 			else
-				mAnimator->PlayAnimation(L"OtusFlyLeft", true);
-			mbFly = true;
-			mState = ePlayerState::Move;
+				mAnimator->PlayAnimation(L"OtusJumpLeft", false);
+			mState = ePlayerState::Jump;
 		}
 
 		if (Input::GetKeyDown(eKeyCode::LBUTTON))
 		{
-			if(mbRight)
+			if (mbRight)
 				mAnimator->PlayAnimation(L"OtusAttackRight", false);
 			else
 				mAnimator->PlayAnimation(L"OtusAttackLeft", false);
@@ -301,18 +297,25 @@ namespace js
 	{
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		Vector3 pos = tr->GetPosition();
+		//Rigidbody* rb = GetOwner()->GetComponent<Rigidbody>();
+		//rb->SetGround(false);
+		pos.y += 3.0f * Time::DeltaTime();
+		tr->SetPosition(pos);
 
-		if (Input::GetKey(eKeyCode::UP))
-		{
-			mAnimator->PlayAnimation(L"OtusFlyRight", true);
-			mState = ePlayerState::Fly;
-		}
-
-		if (Input::GetKeyUp(eKeyCode::UP))
+		if (mAnimator->IsComplete())
 		{
 			if (!mbFly)
-				mState = ePlayerState::Idle;
-
+			{
+				mAnimator->PlayAnimation(L"OtusFallRight", false);
+				mState = ePlayerState::Fall;
+				mbFly = false;
+			}
+		}
+		else if (Input::GetKeyDown(eKeyCode::UP))
+		{
+			mAnimator->PlayAnimation(L"OtusFlyRight", true);
+			mbFly = true;
+			mState = ePlayerState::Fly;
 		}
 	}
 
@@ -331,15 +334,14 @@ namespace js
 
 	void PlayerScript::attack()
 	{
-		if (Input::GetKeyUp(eKeyCode::LBUTTON))
+		if (mAnimator->IsComplete())
 		{
-			if(mbRight)
+			if (mbRight)
 				mAnimator->PlayAnimation(L"OtusIdleRight", true);
 			else
 				mAnimator->PlayAnimation(L"OtusIdleLeft", true);
 			mState = ePlayerState::Idle;
 		}
-
 	}
 
 	void PlayerScript::death()
@@ -348,17 +350,59 @@ namespace js
 
 	void PlayerScript::fly()
 	{
-		if (Input::GetKeyUp(eKeyCode::UP))
+		Rigidbody* rb = GetOwner()->GetComponent<Rigidbody>();
+		Transform* tr = GetOwner()->GetComponent<Transform>();
+		rb->SetGround(true);
+		Vector3 pos = tr->GetPosition();
+
+		if (Input::GetKey(eKeyCode::LEFT))
 		{
+			cd->SetCenter(Vector2(0.1f, -0.05f));
+			pos.x -= 2.0f * Time::DeltaTime();
+			tr->SetPosition(pos);
+			mState = ePlayerState::Fly;
+		}
+		else if (Input::GetKey(eKeyCode::RIGHT))
+		{
+			cd->SetSize(Vector2(0.1f, 0.2f));
+			cd->SetCenter(Vector2(-0.1f, -0.05f));
+			pos.x += 2.0f * Time::DeltaTime();
+			tr->SetPosition(pos);
+			mState = ePlayerState::Fly;
+		}
+		else if (Input::GetKey(eKeyCode::DOWN))
+		{
+			pos.y -= 2.0f * Time::DeltaTime();
+			tr->SetPosition(pos);
+			mState = ePlayerState::Fly;
+		}
+		else if (Input::GetKey(eKeyCode::UP))
+		{
+			pos.y += 2.0f * Time::DeltaTime();
+			tr->SetPosition(pos);
+			mState = ePlayerState::Fly;
+		}
+
+		if (Input::GetKey(eKeyCode::RBUTTON))
+		{
+			mAnimator->PlayAnimation(L"OtusJumpFallRight", true);
+			mState = ePlayerState::Fall;
+		}
+	}
+
+	void PlayerScript::fall()
+	{
+		Rigidbody* rb = GetOwner()->GetComponent<Rigidbody>();
+		rb->SetGround(false);
+		if (mAnimator->IsComplete())
+		{
+			mbFly = false;
 			mAnimator->PlayAnimation(L"OtusIdleRight", true);
 			mState = ePlayerState::Idle;
 		}
 	}
 
-	void PlayerScript::bed()
-	{
-		mAnimator->PlayAnimation(L"OtusBed", false);
-	}
+
 
 	void PlayerScript::OnCollisionEnter(Collider2D* other)
 	{
