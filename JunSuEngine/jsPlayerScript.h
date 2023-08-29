@@ -43,15 +43,16 @@ namespace js
 		void fall();
 
 		ePlayerState GetState() { return mState; }
+		bool GetRightDir() { return mbRight; }
 
 	private:
 		ePlayerState mState;
 		class Animator* mAnimator;
 		bool mbFly;
 		bool mbRight;
+		bool mbHang;
 		renderer::SpriteReverseCB reverseCB;
 		ConstantBuffer* cb;
 		Collider2D* cd;
 	};
-
 }

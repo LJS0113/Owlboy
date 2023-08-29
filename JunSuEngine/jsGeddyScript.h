@@ -10,6 +10,7 @@ namespace js
 		enum class eGeddyState
 		{
 			Idle,
+			Move,
 			Attack,
 			Hang,
 			Fall,
@@ -27,6 +28,7 @@ namespace js
 		virtual void OnCollisionExit(class Collider2D* other) override;
 
 		void idle();
+		void move();
 		void attack();
 		void death();
 		void hang();

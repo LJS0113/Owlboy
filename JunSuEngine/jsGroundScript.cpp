@@ -34,7 +34,6 @@ namespace js
 
 		playerTr->SetPosition(playerPos);
 		other->GetOwner()->GetComponent<Rigidbody>()->SetGround(true);
-
 	}
 	void GroundScript::OnCollisionStay(Collider2D* other)
 	{

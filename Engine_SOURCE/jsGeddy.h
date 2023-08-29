@@ -1,6 +1,7 @@
 #pragma once
 #include "jsGameObject.h"
 
+
 namespace js
 {
 	class Geddy : public GameObject

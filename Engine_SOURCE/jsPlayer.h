@@ -15,6 +15,6 @@ namespace js
 		virtual void LateUpdate() override;
 
 	private:
-
 	};
+	extern Player* gPlayer;
 }

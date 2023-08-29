@@ -34,16 +34,16 @@ namespace js
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Artifact, true);
 
 
-		Player* player = object::Instantiate<Player>(Vector3(-1.0f, 1.5f, 1.0f), eLayerType::Player);
-		player->SetName(L"Otus");
-		MeshRenderer* mr = player->AddComponent<MeshRenderer>();
+		gPlayer = object::Instantiate<Player>(Vector3(-1.0f, 1.5f, 1.0f), eLayerType::Player);
+		gPlayer->SetName(L"Otus");
+		MeshRenderer* mr = gPlayer->AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
-		Transform* tr = player->GetComponent<Transform>();
-		Collider2D* cd = player->AddComponent<Collider2D>();
-		Rigidbody* playerRb = player->AddComponent<Rigidbody>();
-		player->AddComponent<PlayerScript>();
-		player->AddComponent<PlayerScript>()->Initialize();
+		Transform* tr = gPlayer->GetComponent<Transform>();
+		Collider2D* cd = gPlayer->AddComponent<Collider2D>();
+		Rigidbody* playerRb = gPlayer->AddComponent<Rigidbody>();
+		gPlayer->AddComponent<PlayerScript>();
+		gPlayer->AddComponent<PlayerScript>()->Initialize();
 		tr->SetScale(Vector3(2.5f, 2.5f, 1.0f));
 		cd->SetSize(Vector2(0.1f, 0.2f));
 
@@ -58,7 +58,7 @@ namespace js
 			// Bed Ground
 			Ground* ground = object::Instantiate<Ground>(Vector3(-1.0f, 0.5f, 2.0f), eLayerType::Ground);
 			ground->SetName(L"BedGround");
-			ground->GetComponent<Transform>()->SetScale(Vector3(1.5f, 0.2f, 2.0f));
+			ground->GetComponent<Transform>()->SetScale(Vector3(1.3f, 0.2f, 2.0f));
 			Collider2D* cd = ground->AddComponent<Collider2D>();
 			cd->SetColliderOwner(eColliderOwner::Ground);
 		}
@@ -67,7 +67,7 @@ namespace js
 			// Bed Right Ground
 			Ground* ground = object::Instantiate<Ground>(Vector3(1.0f, 0.0f, 2.0f), eLayerType::Ground);
 			ground->SetName(L"BedGround");
-			ground->GetComponent<Transform>()->SetScale(Vector3(1.5f, 0.2f, 2.0f));
+			ground->GetComponent<Transform>()->SetScale(Vector3(1.3f, 0.2f, 2.0f));
 			Collider2D* cd = ground->AddComponent<Collider2D>();
 			cd->SetColliderOwner(eColliderOwner::Ground);
 		}

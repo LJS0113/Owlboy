@@ -1,4 +1,5 @@
 #include "jsDungeonScene.h"
+#include "jsRenderer.h"
 #include "jsInput.h"
 #include "jsSceneManager.h"
 #include "jsCamera.h"
@@ -11,6 +12,9 @@
 #include "jsObject.h"
 #include "jsPlayerScript.h"
 #include "jsPlayer.h"
+#include "jsGround.h"
+#include "jsGroundScript.h"
+#include "jsRigidBody.h"
 
 namespace js
 {
@@ -33,7 +37,7 @@ namespace js
 		player->GetComponent<PlayerScript>()->Initialize();
 		tr->SetScale(Vector3(2.5f, 2.5f, 1.0f));
 		player->AddComponent<CameraScript>();
-
+		Rigidbody* rb = player->AddComponent<Rigidbody>();
 
 		{
 			// 던전 확대버전
@@ -44,23 +48,14 @@ namespace js
 			mr->SetMaterial(Resources::Find<Material>(L"DungeonMaterial"));
 			player->GetComponent<Transform>()->SetScale(Vector3(30.0f, 5.0f, 1.0f));
 		}
-
-
-		// 던전 원본
-		//GameObject* player = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 3.0f), eLayerType::Player);
-		//player->SetName(L"DungeonStage");
-		//MeshRenderer* mr = player->AddComponent<MeshRenderer>();
-		//mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		//mr->SetMaterial(Resources::Find<Material>(L"DungeonMaterial"));
-		//player->GetComponent<Transform>()->SetScale(Vector3(9.0f, 4.5f, 1.0f));
-
-		//player = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 2.0f), eLayerType::Player);
-		//mr = player->AddComponent<MeshRenderer>();
-		//mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		//mr->SetMaterial(Resources::Find<Material>(L"VellieSkyMaterial"));
-		//player->GetComponent<Transform>()->SetScale(Vector3(8.0f, 4.5f, 1.0f));
-		//player->AddComponent<CameraScript>();
-
+		{
+			// Dungeon Ground
+			Ground* ground = object::Instantiate<Ground>(Vector3(-10.0f, -1.5f, 2.0f), eLayerType::Ground);
+			ground->SetName(L"DungeonGround");
+			ground->GetComponent<Transform>()->SetScale(Vector3(30.0f, 0.2f, 2.0f));
+			Collider2D* cd = ground->AddComponent<Collider2D>();
+			cd->SetColliderOwner(eColliderOwner::Ground);
+		}
 		{
 			// coin
 			GameObject* hpBar = object::Instantiate<GameObject>(Vector3(-3.6f, 1.6f, 1.0f), eLayerType::UI);
@@ -101,6 +96,7 @@ namespace js
 			cameraComp = camera->AddComponent<Camera>();
 			cameraComp->TurnLayerMask(eLayerType::UI, false);
 			camera->AddComponent<CameraScript>();
+			renderer::mainCamera = cameraComp;
 		}
 
 		{

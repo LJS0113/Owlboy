@@ -1,4 +1,8 @@
 #include "jsGeddy.h"
+#include "jsGeddyArm.h"
+#include "jsObject.h"
+#include "jsTransform.h"
+#include "jsPlayer.h"
 
 namespace js
 {

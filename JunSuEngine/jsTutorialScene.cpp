@@ -18,6 +18,7 @@
 #include "jsGeddyArm.h"
 
 
+
 namespace js
 {
 	TutorialScene::TutorialScene()
@@ -30,24 +31,40 @@ namespace js
 	{
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
 
-		Player* player = object::Instantiate<Player>(Vector3(0.5f, 0.0f, 1.0f), eLayerType::Player);
-		player->SetName(L"Otus");
-		MeshRenderer* mr = player->AddComponent<MeshRenderer>();
+		gPlayer = object::Instantiate<Player>(Vector3(0.5f, 0.0f, 1.0f), eLayerType::Player);
+		gPlayer->SetName(L"Otus");
+		MeshRenderer* mr = gPlayer->AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
-		player->AddComponent<Transform>();
-		Transform* tr = player->GetComponent<Transform>();
-		Collider2D* cd = player->AddComponent<Collider2D>();
-		Rigidbody* playerRb = player->AddComponent<Rigidbody>();
-		player->AddComponent<PlayerScript>();
-		player->GetComponent<PlayerScript>()->Initialize();
-		tr->SetScale(Vector3(2.5f, 2.5f, 1.0f));
+		gPlayer->AddComponent<Transform>();
+		Transform* otusTr = gPlayer->GetComponent<Transform>();
+		Vector3 otusPos = otusTr->GetPosition();
+		Collider2D* otusCd = gPlayer->AddComponent<Collider2D>();
+		Rigidbody* gPlayerRb = gPlayer->AddComponent<Rigidbody>();
+		gPlayer->AddComponent<PlayerScript>();
+		gPlayer->GetComponent<PlayerScript>()->Initialize();
+		otusTr->SetScale(Vector3(2.5f, 2.5f, 1.0f));
 		//cd->SetSize(Vector2(0.0f, 0.0f));
 		//cd->SetCenter(Vector2(-0.1f, -0.05f));
-		cd->SetColliderOwner(eColliderOwner::Player);
-		cd->SetCenter(Vector2(-0.1f, -0.05f));
+		otusCd->SetColliderOwner(eColliderOwner::Player);
+		otusCd->SetCenter(Vector2(-0.1f, -0.05f));
 
-		
+
+		Geddy* geddy = object::Instantiate<Geddy>(Vector3(otusPos.x, otusPos.y - 0.5f, otusPos.z), eLayerType::Player);
+		geddy->SetName(L"Geddy");
+		mr = geddy->AddComponent<MeshRenderer>();
+		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
+		geddy->AddComponent<Transform>();
+		Transform* geddyTr = geddy->GetComponent<Transform>();
+		Collider2D* geddyCd = geddy->AddComponent<Collider2D>();
+		Rigidbody* geddyRb = geddy->AddComponent<Rigidbody>();
+		geddy->AddComponent<GeddyScript>();
+		geddy->GetComponent<GeddyScript>()->Initialize();
+		geddyTr->SetScale(Vector3(2.5f, 2.5f, 1.0f));
+		geddyCd->SetColliderOwner(eColliderOwner::Player);
+		geddyCd->SetCenter(Vector2(-0.1f, -0.05f));
+
 		{
 			GameObject* player = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 2.0f), eLayerType::BG);
 			MeshRenderer* mr = player->AddComponent<MeshRenderer>();
@@ -57,7 +74,7 @@ namespace js
 		}
 		{
 			Ground* ground = object::Instantiate<Ground>(Vector3(0.0f, -1.9f, 2.0f), eLayerType::Ground);
-			ground->SetName(L"ground"); 
+			ground->SetName(L"ground");
 			//ground->SetPlayer(player);
 			ground->GetComponent<Transform>()->SetScale(Vector3(3.5f, 0.2f, 2.0f));
 			Collider2D* cd = ground->AddComponent<Collider2D>();

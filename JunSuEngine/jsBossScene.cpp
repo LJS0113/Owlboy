@@ -14,7 +14,8 @@
 #include "jsPlayerScript.h"
 #include "jsMaskedTortoiseScript.h"
 #include "jsMonster.h"
-
+#include "jsGround.h"
+#include "jsRigidBody.h"
 
 namespace js
 {
@@ -30,6 +31,7 @@ namespace js
 		player->SetName(L"Otus");
 		Transform* tr = player->GetComponent<Transform>();
 		Collider2D* cd = player->AddComponent<Collider2D>();
+		Rigidbody* playerRb = player->AddComponent<Rigidbody>();
 		player->AddComponent<PlayerScript>();
 		player->GetComponent<PlayerScript>()->Initialize();
 		tr->SetScale(Vector3(2.5f, 2.5f, 1.0f));
@@ -44,7 +46,14 @@ namespace js
 			monster->GetComponent<MaskedTortoiseScript>()->Initialize();
 			tr->SetScale(Vector3(2.0f, 2.0f, 1.0f));
 		}
-
+		{
+			// Boss Ground
+			Ground* ground = object::Instantiate<Ground>(Vector3(0.0f, -2.0f, 2.0f), eLayerType::Ground);
+			ground->SetName(L"BossGround");
+			ground->GetComponent<Transform>()->SetScale(Vector3(10.0f, 0.2f, 2.0f));
+			Collider2D* cd = ground->AddComponent<Collider2D>();
+			cd->SetColliderOwner(eColliderOwner::Ground);
+		}
 		{
 			GameObject* player = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 2.0f), eLayerType::BG);
 			player->SetName(L"BossStage");
@@ -109,6 +118,7 @@ namespace js
 			cameraComp = camera->AddComponent<Camera>();
 			cameraComp->TurnLayerMask(eLayerType::UI, false);
 			camera->AddComponent<CameraScript>();
+			renderer::mainCamera = cameraComp;
 		}
 
 		{

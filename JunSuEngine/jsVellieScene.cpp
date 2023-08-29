@@ -33,13 +33,13 @@ namespace js
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Artifact, true);
 
-		Player* player = object::Instantiate<Player>(Vector3(1.5097f, -1.70f, 1.0f), eLayerType::Player);
-		player->SetName(L"Otus");
-		Transform* tr = player->GetComponent<Transform>();
-		Collider2D* cd = player->AddComponent<Collider2D>();
-		Rigidbody* playerRb = player->AddComponent<Rigidbody>();
-		player->AddComponent<PlayerScript>();
-		player->GetComponent<PlayerScript>()->Initialize();
+		gPlayer = object::Instantiate<Player>(Vector3(1.5097f, -1.70f, 1.0f), eLayerType::Player);
+		gPlayer->SetName(L"Otus");
+		Transform* tr = gPlayer->GetComponent<Transform>();
+		Collider2D* cd = gPlayer->AddComponent<Collider2D>();
+		Rigidbody* otusRb = gPlayer->AddComponent<Rigidbody>();
+		gPlayer->AddComponent<PlayerScript>();
+		gPlayer->GetComponent<PlayerScript>()->Initialize();
 		tr->SetScale(Vector3(2.5f, 2.5f, 1.0f));
 		//player->AddComponent<CameraScript>();
 
