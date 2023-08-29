@@ -41,6 +41,6 @@ namespace js
 	}
 	void GroundScript::OnCollisionExit(Collider2D* other)
 	{
-		//other->GetOwner()->GetComponent<Rigidbody>()->SetGround(false);
+		other->GetOwner()->GetComponent<Rigidbody>()->SetGround(false);
 	}
 }
