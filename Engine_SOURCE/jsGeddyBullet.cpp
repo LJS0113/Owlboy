@@ -4,9 +4,6 @@
 
 namespace js
 {
-
-
-
 	GeddyBullet::GeddyBullet()
 	{
 	}

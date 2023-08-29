@@ -44,6 +44,7 @@ namespace js
 
 		ePlayerState GetState() { return mState; }
 		bool GetRightDir() { return mbRight; }
+		bool GetSummon() { return mbSummon; }
 
 	private:
 		ePlayerState mState;
@@ -51,6 +52,7 @@ namespace js
 		bool mbFly;
 		bool mbRight;
 		bool mbHang;
+		bool mbSummon;
 		renderer::SpriteReverseCB reverseCB;
 		ConstantBuffer* cb;
 		Collider2D* cd;

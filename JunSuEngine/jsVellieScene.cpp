@@ -16,7 +16,8 @@
 #include "jsRigidBody.h"
 #include "jsDoorScript.h"
 #include "jsCollisionManager.h"
-
+#include "jsGeddy.h"
+#include "jsGeddyScript.h"
 
 namespace js
 {
@@ -41,7 +42,7 @@ namespace js
 		gPlayer->AddComponent<PlayerScript>();
 		gPlayer->GetComponent<PlayerScript>()->Initialize();
 		tr->SetScale(Vector3(2.5f, 2.5f, 1.0f));
-		//player->AddComponent<CameraScript>();
+		gPlayer->AddComponent<CameraScript>();
 
 		{
 			GameObject* vellieBG = object::Instantiate<GameObject>(Vector3(-3.0f, 1.5f, 1.999f), eLayerType::Scenery);
@@ -107,6 +108,30 @@ namespace js
 		if (Input::GetKeyState(eKeyCode::N) == eKeyState::Down)
 		{
 			SceneManager::LoadScene(L"DungeonScene");
+		}
+		Transform* otusTr = gPlayer->GetComponent<Transform>();
+		Vector3 otusPos = otusTr->GetPosition();
+		bool summon = gPlayer->GetComponent<PlayerScript>()->GetSummon();
+		if (Input::GetKeyState(eKeyCode::R) == eKeyState::Down)
+		{
+			if (!summon)
+			{
+				gGeddy = object::Instantiate<Geddy>(Vector3(otusPos.x, otusPos.y - 0.5f, otusPos.z), eLayerType::Player);
+				gGeddy->SetName(L"Geddy");
+				MeshRenderer* mr = gGeddy->AddComponent<MeshRenderer>();
+				mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+				mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
+				gGeddy->AddComponent<Transform>();
+				Transform* geddyTr = gGeddy->GetComponent<Transform>();
+				Vector3 geddyPos = geddyTr->GetPosition();
+				Collider2D* geddyCd = gGeddy->AddComponent<Collider2D>();
+				Rigidbody* geddyRb = gGeddy->AddComponent<Rigidbody>();
+				gGeddy->AddComponent<GeddyScript>();
+				gGeddy->GetComponent<GeddyScript>()->Initialize();
+				geddyTr->SetScale(Vector3(2.5f, 2.5f, 1.0f));
+				geddyCd->SetColliderOwner(eColliderOwner::Player);
+				geddyCd->SetCenter(Vector2(-0.1f, -0.05f));
+			}
 		}
 		Scene::Update();
 	}

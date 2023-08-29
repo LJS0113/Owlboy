@@ -6,6 +6,7 @@
 
 namespace js
 {
+	Geddy* gGeddy = nullptr;
 	Geddy::Geddy()
 	{
 	}

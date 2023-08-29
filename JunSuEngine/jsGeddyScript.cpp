@@ -94,21 +94,6 @@ namespace js
 	{
 		Rigidbody* rb = GetOwner()->GetComponent<Rigidbody>();
 
-
-		if (mbHang)
-		{
-			if (mbRight)
-			{
-				mAnimator->PlayAnimation(L"GeddyHangRight", true);
-			}
-			else
-			{
-				mAnimator->PlayAnimation(L"GeddyHangLeft", true);
-			}
-		}
-
-
-
 		if (Input::GetKeyDown(eKeyCode::R))
 		{
 			mbHang = true;
@@ -127,20 +112,6 @@ namespace js
 			}
 		}
 
-		if (Input::GetKey(eKeyCode::RIGHT))
-		{
-			mbHang = true;
-			rb->SetGround(true);
-			//mAnimator->PlayAnimation(L"GeddyHangRight", true);
-			mState = eGeddyState::Hang;
-		}
-		if (Input::GetKey(eKeyCode::LEFT))
-		{
-			mbHang = true;
-			rb->SetGround(true);
-			//mAnimator->PlayAnimation(L"GeddyHangLeft", true);
-			mState = eGeddyState::Hang;
-		}
 	}
 
 	void GeddyScript::move()
@@ -195,15 +166,19 @@ namespace js
 
 		if (Input::GetKeyDown(eKeyCode::RIGHT))
 		{
-			mbHang = true;
-			mAnimator->PlayAnimation(L"GeddyHangRight", true);
-			mState = eGeddyState::Move;
+			if (mbHang)
+			{
+				mAnimator->PlayAnimation(L"GeddyHangRight", true);
+				mState = eGeddyState::Move;
+			}
 		}
 		if (Input::GetKeyDown(eKeyCode::LEFT))
 		{
-			mbHang = true;
-			mAnimator->PlayAnimation(L"GeddyHangLeft", true);
-			mState = eGeddyState::Move;
+			if (mbHang)
+			{
+				mAnimator->PlayAnimation(L"GeddyHangLeft", true);
+				mState = eGeddyState::Move;
+			}
 		}
 
 		if (Input::GetKeyDown(eKeyCode::RBUTTON))
@@ -211,9 +186,9 @@ namespace js
 			mbHang = false;
 			rb->SetGround(false);
 			if(mbRight)
-				mAnimator->PlayAnimation(L"GeddyHangRight", true);
+				mAnimator->PlayAnimation(L"GeddyIdleRight", true);
 			else
-				mAnimator->PlayAnimation(L"GeddyHangLeft", true);
+				mAnimator->PlayAnimation(L"GeddyIdleLeft", true);
 			mState = eGeddyState::Idle;
 		}
 	}

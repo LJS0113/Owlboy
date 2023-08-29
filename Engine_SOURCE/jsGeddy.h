@@ -17,4 +17,5 @@ namespace js
 
 	private:
 	};
+	extern Geddy* gGeddy;
 }

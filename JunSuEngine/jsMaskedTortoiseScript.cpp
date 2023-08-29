@@ -20,6 +20,8 @@ namespace js
 		mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
 		mAnimator = GetOwner()->AddComponent<Animator>();
 		cd = GetOwner()->GetComponent<Collider2D>();
+		cd->SetSize(Vector2(0.35f, 0.35f));
+		cd->SetCenter(Vector2(0.1f, -0.2f));
 
 		std::shared_ptr<Texture> atlas = Resources::Load<Texture>(L"MaskedTortoiseSprite", L"..\\Resources\\Texture\\Monster\\Masked_Tortoise\\Masked Tortoise.png");
 		mAnimator->Create(L"MaskedIdleRight", atlas, Vector2(0.0f, 124.0f * 2), Vector2(129.0f, 124.0f), 1);
@@ -63,11 +65,37 @@ namespace js
 		mAnimator->Create(L"NoMaskedFlyLeft", atlas, Vector2(1215.0f, 124.0f * 14), Vector2(-129.0f, 124.0f), 8);
 		mAnimator->Create(L"NoMaskedHitLeft", atlas, Vector2(1215.0f, 124.0f * 16), Vector2(-129.0f, 124.0f), 6);
 
-
 		mAnimator->PlayAnimation(L"MaskedMoveRight", true);
+		mState = eMaskedState::Idle;
 	}
 	void MaskedTortoiseScript::Update()
 	{
+		switch (mState)
+		{
+		case js::MaskedTortoiseScript::eMaskedState::Idle:
+			idle();
+			break;
+		case js::MaskedTortoiseScript::eMaskedState::Move:
+			move();
+			break;
+		case js::MaskedTortoiseScript::eMaskedState::Attack:
+			attack();
+			break;
+		case js::MaskedTortoiseScript::eMaskedState::Fly:
+			fly();
+			break;
+		case js::MaskedTortoiseScript::eMaskedState::Hit:
+			hit();
+			break;
+		case js::MaskedTortoiseScript::eMaskedState::PickUp:
+			pickup();
+			break;
+		case js::MaskedTortoiseScript::eMaskedState::Death:
+			death();
+			break;
+		default:
+			break;
+		}
 	}
 	void MaskedTortoiseScript::idle()
 	{

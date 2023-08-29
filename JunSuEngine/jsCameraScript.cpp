@@ -11,57 +11,8 @@ namespace js
 	{
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		Vector3 pos = tr->GetPosition();
-
-
-		//if (Input::GetKey(eKeyCode::UP))
-		//{
-		//	pos.y = playerPos.y;
-		//	//pos.y += 2.0f * Time::DeltaTime();
-		//	tr->SetPosition(pos);
-		//}
-		//else if (Input::GetKey(eKeyCode::DOWN))
-		//{
-		//	pos.y = playerPos.y;
-		//	//pos.y -= 2.0f * Time::DeltaTime();
-		//	tr->SetPosition(pos);
-		//}
-		//else if (Input::GetKey(eKeyCode::LEFT))
-		//{
-		//	pos.x = playerPos.x;
-		//	//pos.x -= 2.0f * Time::DeltaTime();
-		//	tr->SetPosition(pos);
-		//}
-		//else if (Input::GetKey(eKeyCode::RIGHT))
-		//{
-		//	pos.x = playerPos.x;
-		//	//pos.x += 2.0f * Time::DeltaTime();
-		//	tr->SetPosition(pos);
-		//}
-
-		//if (Input::GetKey(eKeyCode::UP))
-		//{
-		//	//pos.y = playerPos.y;
-		//	pos.y += 2.0f * Time::DeltaTime();
-		//	tr->SetPosition(pos);
-		//}
-		//else if (Input::GetKey(eKeyCode::DOWN))
-		//{
-		//	//pos.y = playerPos.y;
-		//	pos.y -= 2.0f * Time::DeltaTime();
-		//	tr->SetPosition(pos);
-		//}
-		//else if (Input::GetKey(eKeyCode::LEFT))
-		//{
-		//	//pos.x = playerPos.x;
-		//	pos.x -= 2.0f * Time::DeltaTime();
-		//	tr->SetPosition(pos);
-		//}
-		//else if (Input::GetKey(eKeyCode::RIGHT))
-		//{
-		//	//pos.x = playerPos.x;
-		//	pos.x += 2.0f * Time::DeltaTime();
-		//	tr->SetPosition(pos);
-		//}
+		Transform* playerTr = gPlayer->GetComponent<Transform>();
+		Vector3 playerPos = playerTr->GetPosition();
 
 		if (Input::GetKey(eKeyCode::W))
 		{
@@ -97,5 +48,9 @@ namespace js
 		//	pos.z += 5.0f * Time::DeltaTime();
 		//	tr->SetPosition(pos);
 		//}
+
+		pos.x = playerPos.x;
+		pos.y = playerPos.y;
+		tr->SetPosition(pos);
 	}
 }

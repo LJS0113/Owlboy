@@ -16,6 +16,8 @@
 #include "jsMonster.h"
 #include "jsGround.h"
 #include "jsRigidBody.h"
+#include "jsGeddy.h"
+#include "jsGeddyScript.h"
 
 namespace js
 {
@@ -27,15 +29,15 @@ namespace js
 	}
 	void BossScene::Initialize()
 	{
-		Player* player = object::Instantiate<Player>(Vector3(-3.0f, -1.5f, 1.0f), eLayerType::Player);
-		player->SetName(L"Otus");
-		Transform* tr = player->GetComponent<Transform>();
-		Collider2D* cd = player->AddComponent<Collider2D>();
-		Rigidbody* playerRb = player->AddComponent<Rigidbody>();
-		player->AddComponent<PlayerScript>();
-		player->GetComponent<PlayerScript>()->Initialize();
+		gPlayer = object::Instantiate<Player>(Vector3(-3.0f, -1.5f, 1.0f), eLayerType::Player);
+		gPlayer->SetName(L"Otus");
+		Transform* tr = gPlayer->GetComponent<Transform>();
+		Collider2D* cd = gPlayer->AddComponent<Collider2D>();
+		Rigidbody* gPlayerRb = gPlayer->AddComponent<Rigidbody>();
+		gPlayer->AddComponent<PlayerScript>();
+		gPlayer->GetComponent<PlayerScript>()->Initialize();
 		tr->SetScale(Vector3(2.5f, 2.5f, 1.0f));
-		//player->AddComponent<CameraScript>();
+		//gPlayer->AddComponent<CameraScript>();
 
 		{
 			Monster* monster = object::Instantiate<Monster>(Vector3(0.0f, -1.2f, 1.0f), eLayerType::Monster);
@@ -117,7 +119,7 @@ namespace js
 			GameObject* camera = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, -10.0f), eLayerType::Camera);
 			cameraComp = camera->AddComponent<Camera>();
 			cameraComp->TurnLayerMask(eLayerType::UI, false);
-			camera->AddComponent<CameraScript>();
+			//camera->AddComponent<CameraScript>();
 			renderer::mainCamera = cameraComp;
 		}
 
@@ -133,6 +135,30 @@ namespace js
 	}
 	void BossScene::Update()
 	{
+		Transform* otusTr = gPlayer->GetComponent<Transform>();
+		Vector3 otusPos = otusTr->GetPosition();
+		bool summon = gPlayer->GetComponent<PlayerScript>()->GetSummon();
+		if (Input::GetKeyState(eKeyCode::R) == eKeyState::Down)
+		{
+			if (!summon)
+			{
+				gGeddy = object::Instantiate<Geddy>(Vector3(otusPos.x, otusPos.y - 0.5f, otusPos.z), eLayerType::Player);
+				gGeddy->SetName(L"Geddy");
+				MeshRenderer* mr = gGeddy->AddComponent<MeshRenderer>();
+				mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+				mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
+				gGeddy->AddComponent<Transform>();
+				Transform* geddyTr = gGeddy->GetComponent<Transform>();
+				Vector3 geddyPos = geddyTr->GetPosition();
+				Collider2D* geddyCd = gGeddy->AddComponent<Collider2D>();
+				Rigidbody* geddyRb = gGeddy->AddComponent<Rigidbody>();
+				gGeddy->AddComponent<GeddyScript>();
+				gGeddy->GetComponent<GeddyScript>()->Initialize();
+				geddyTr->SetScale(Vector3(2.5f, 2.5f, 1.0f));
+				geddyCd->SetColliderOwner(eColliderOwner::Player);
+				geddyCd->SetCenter(Vector2(-0.1f, -0.05f));
+			}
+		}
 		if (Input::GetKeyState(eKeyCode::N) == eKeyState::Down)
 		{
 			SceneManager::LoadScene(L"EndingScene");
