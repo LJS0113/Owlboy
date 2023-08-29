@@ -41,6 +41,7 @@ namespace js
 
 	void PlayerScript::Initialize()
 	{
+		int a = 0;
 		MeshRenderer* mr = GetOwner()->AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
