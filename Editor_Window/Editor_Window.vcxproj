@@ -114,6 +114,24 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /R /Y "$(SolutionDir)dll\fmod.dll" "$(SolutionDir)x64\Debug"
+
+xcopy /R /Y "$(SolutionDir)dll\fmodL.dll" "$(SolutionDir)x64\Debug"xcopy /R /Y "$(SolutionDir)dll\fmodstudio.dll" "$(SolutionDir)x64\Debug"
+
+xcopy /R /Y "$(SolutionDir)dll\fmodstudioL.dll" "$(SolutionDir)x64\Debug"
+
+xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapper.dll" "$(SolutionDir)x64\Debug"xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll" "$(SolutionDir)x64\Debug"</Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy /R /Y "$(SolutionDir)dll\fmod.dll" "$(SolutionDir)x64\Debug"
+
+xcopy /R /Y "$(SolutionDir)dll\fmodL.dll" "$(SolutionDir)x64\Debug"xcopy /R /Y "$(SolutionDir)dll\fmodstudio.dll" "$(SolutionDir)x64\Debug"
+
+xcopy /R /Y "$(SolutionDir)dll\fmodstudioL.dll" "$(SolutionDir)x64\Debug"
+
+xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapper.dll" "$(SolutionDir)x64\Debug"xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll" "$(SolutionDir)x64\Debug"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -132,6 +150,24 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /R /Y "$(SolutionDir)dll\fmod.dll" "$(SolutionDir)x64\Debug"
+
+xcopy /R /Y "$(SolutionDir)dll\fmodL.dll" "$(SolutionDir)x64\Debug"xcopy /R /Y "$(SolutionDir)dll\fmodstudio.dll" "$(SolutionDir)x64\Debug"
+
+xcopy /R /Y "$(SolutionDir)dll\fmodstudioL.dll" "$(SolutionDir)x64\Debug"
+
+xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapper.dll" "$(SolutionDir)x64\Debug"xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll" "$(SolutionDir)x64\Debug"</Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy /R /Y "$(SolutionDir)dll\fmod.dll" "$(SolutionDir)x64\Debug"
+
+xcopy /R /Y "$(SolutionDir)dll\fmodL.dll" "$(SolutionDir)x64\Debug"xcopy /R /Y "$(SolutionDir)dll\fmodstudio.dll" "$(SolutionDir)x64\Debug"
+
+xcopy /R /Y "$(SolutionDir)dll\fmodstudioL.dll" "$(SolutionDir)x64\Debug"
+
+xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapper.dll" "$(SolutionDir)x64\Debug"xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll" "$(SolutionDir)x64\Debug"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Editor_Window.h" />

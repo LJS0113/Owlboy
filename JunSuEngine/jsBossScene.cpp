@@ -39,7 +39,6 @@ namespace js
 		tr->SetScale(Vector3(2.5f, 2.5f, 1.0f));
 		//gPlayer->AddComponent<CameraScript>();
 
-		int a = 0;
 		{
 			Monster* monster = object::Instantiate<Monster>(Vector3(0.0f, -1.2f, 1.0f), eLayerType::Monster);
 			monster->SetName(L"MaskedTortoise");

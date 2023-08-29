@@ -132,12 +132,6 @@ namespace js
 		//camera->AddComponent<CameraScript>();
 		renderer::mainCamera = cameraComp;
 
-		{
-			//// UI Camera
-			//GameObject* camera = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, -10.0f), eLayerType::Camera);
-			//Camera* cameraComp = camera->AddComponent<Camera>();
-			//cameraComp->TurnLayerMask(eLayerType::BG, false);
-		}
 	}
 	void TutorialScene::Update()
 	{
