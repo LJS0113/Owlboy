@@ -97,6 +97,14 @@ namespace js
 			cb->Bind(eShaderStage::PS);
 		}
 
+		Transform* tr = GetOwner()->GetComponent<Transform>();
+		Vector2 pos = Input::GetMousePos();
+		Vector3 mousePos = Vector3(pos.x, pos.y, 1.0f);
+		mousePos = tr->GetNDCPos(Vector3(mousePos.x, mousePos.y, mousePos.z));
+
+		float rad = atan2(mousePos.x, mousePos.y);
+		tr->SetRotation(Vector3(0.0f, 0.0f, -rad));
+
 		switch (mState)
 		{
 		case js::PlayerScript::ePlayerState::Idle:
@@ -290,6 +298,7 @@ namespace js
 
 		if (Input::GetKeyDown(eKeyCode::LBUTTON))
 		{
+
 			if (!mbFly)
 			{
 				if (mbRight)
@@ -474,6 +483,9 @@ namespace js
 				mAnimator->PlayAnimation(L"OtusHangLeft", true);
 			mState = ePlayerState::Hang;
 		}
+
+
+
 
 		if (Input::GetKeyDown(eKeyCode::RBUTTON))
 		{

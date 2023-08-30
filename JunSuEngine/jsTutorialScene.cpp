@@ -161,6 +161,14 @@ namespace js
 				geddyTr->SetScale(Vector3(2.5f, 2.5f, 1.0f));
 				geddyCd->SetColliderOwner(eColliderOwner::Player);
 				geddyCd->SetCenter(Vector2(-0.1f, -0.05f));
+
+				GeddyArm* geddyArm = object::Instantiate<GeddyArm>(Vector3(geddyPos.x, geddyPos.y, geddyPos.z-0.01f), eLayerType::Player);
+				geddyArm->SetName(L"Geddy");
+				mr = geddyArm->AddComponent<MeshRenderer>();
+				mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+				mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
+				geddyArm->AddComponent<Transform>();
+				geddyArm->AddComponent<GeddyArmScript>();
 			}
 		}
 		Scene::Update();

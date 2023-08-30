@@ -49,6 +49,8 @@ namespace js
 
 	void GeddyArmScript::Update()
 	{
+
+
 		switch (mState)
 		{
 		case js::GeddyArmScript::eGeddyArmState::Idle:
@@ -74,12 +76,18 @@ namespace js
 		armPos.z -= -0.01f;
 		armTr->SetPosition(armPos);
 
-
+		if (Input::GetKeyDown(eKeyCode::LBUTTON))
+		{
+			mState = eGeddyArmState::Attack;
+		}
 
 	}
 
 	void GeddyArmScript::attack()
 	{
+
+
+		mState = eGeddyArmState::Idle;
 	}
 
 	void GeddyArmScript::OnCollisionEnter(Collider2D* other)

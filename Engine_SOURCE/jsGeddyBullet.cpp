@@ -1,7 +1,6 @@
 #include "jsGeddyBullet.h"
 
 
-
 namespace js
 {
 	GeddyBullet::GeddyBullet()

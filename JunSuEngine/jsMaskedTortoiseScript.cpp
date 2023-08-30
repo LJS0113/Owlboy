@@ -3,7 +3,9 @@
 #include "jsMeshRenderer.h"
 #include "jsResources.h"
 #include "jsGameObject.h"
-
+#include "jsPlayer.h"
+#include "jsPlayerScript.h"
+#include "jsInput.h"
 
 namespace js
 {
@@ -70,6 +72,8 @@ namespace js
 	}
 	void MaskedTortoiseScript::Update()
 	{
+		mbRight = gPlayer->GetComponent<PlayerScript>()->GetRightDir();
+
 		switch (mState)
 		{
 		case js::MaskedTortoiseScript::eMaskedState::Idle:
@@ -99,6 +103,7 @@ namespace js
 	}
 	void MaskedTortoiseScript::idle()
 	{
+		 
 	}
 	void MaskedTortoiseScript::move()
 	{
