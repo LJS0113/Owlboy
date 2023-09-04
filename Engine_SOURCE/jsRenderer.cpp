@@ -311,6 +311,10 @@ namespace renderer
 		constantBuffer[(UINT)eCBType::Noise] = new ConstantBuffer(eCBType::Noise);
 		constantBuffer[(UINT)eCBType::Noise]->Create(sizeof(NoiseCB));
 
+		// CollisionCB
+		constantBuffer[(UINT)eCBType::Collision] = new ConstantBuffer(eCBType::Collision);
+		constantBuffer[(UINT)eCBType::Collision]->Create(sizeof(CollisionCB));
+
 		// light structed buffer
 		lightsBuffer = new StructedBuffer();
 		lightsBuffer->Create(sizeof(LightAttribute), 2, eViewType::SRV, nullptr, true);

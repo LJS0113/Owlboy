@@ -60,6 +60,11 @@ namespace renderer
 		Vector4 size;
 	};
 
+	CBUFFER(CollisionCB, CBSLOT_COLLISION)
+	{
+		UINT collision;
+	};
+
 	extern js::Mesh* mesh;
 	extern js::Shader* shader;
 	extern js::graphics::ConstantBuffer* constantBuffer[(UINT)eCBType::End];

@@ -35,6 +35,9 @@
     <Filter Include="Contents\Script\Artifact\Door">
       <UniqueIdentifier>{fb2a526c-4d63-47c0-9724-4de2189bd0fc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Script\Bullet">
+      <UniqueIdentifier>{67a5e86e-ada8-4c56-9d93-f57c383e2c5a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="JunSuEngine.cpp" />
@@ -91,6 +94,9 @@
     </ClCompile>
     <ClCompile Include="jsDoorScript.cpp">
       <Filter>Contents\Script\Artifact\Door</Filter>
+    </ClCompile>
+    <ClCompile Include="jsBulletScript.cpp">
+      <Filter>Contents\Script\Bullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +157,9 @@
     </ClInclude>
     <ClInclude Include="jsDoorScript.h">
       <Filter>Contents\Script\Artifact\Door</Filter>
+    </ClInclude>
+    <ClInclude Include="jsBulletScript.h">
+      <Filter>Contents\Script\Bullet</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

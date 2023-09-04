@@ -14,7 +14,6 @@ namespace js
 	void GeddyArm::Initialize()
 	{
 		GameObject::Initialize();
-
 	}
 	void GeddyArm::Update()
 	{

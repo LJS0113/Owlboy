@@ -53,8 +53,11 @@ namespace js
 		bool mbRight;
 		bool mbHang;
 		bool mbSummon;
-		renderer::SpriteReverseCB reverseCB;
-		ConstantBuffer* cb;
 		Collider2D* cd;
+
+		renderer::SpriteReverseCB reverseCB;
+		renderer::CollisionCB collisionCB;
+		ConstantBuffer* reverseCb;
+		ConstantBuffer* collisionCb;
 	};
 }

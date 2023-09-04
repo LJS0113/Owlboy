@@ -22,17 +22,23 @@ namespace js
 		, mAnimator(nullptr)
 		, mbRight(true)
 		, mbHang(false)
-		, cb(nullptr)
+		, reverseCb(nullptr)
 		, mbSummon(false)
 		, reverseCB{}
+		, collisionCB{}
+		, collisionCb(nullptr)
 	{
 		reverseCB.reverse = 0;
 
-		cb = renderer::constantBuffer[(UINT)eCBType::Reverse];
-		cb->SetData(&reverseCB);
-		cb->Bind(eShaderStage::PS);
+		reverseCb = renderer::constantBuffer[(UINT)eCBType::Reverse];
+		reverseCb->SetData(&reverseCB);
+		reverseCb->Bind(eShaderStage::PS);
 
+		collisionCB.collision = 0;
 
+		collisionCb = renderer::constantBuffer[(UINT)eCBType::Collision];
+		collisionCb->SetData(&collisionCB);
+		collisionCb->Bind(eShaderStage::PS);
 	}
 
 	PlayerScript::~PlayerScript()
@@ -83,27 +89,27 @@ namespace js
 			// 오른쪽이면 0, 왼쪽이면 1
 			reverseCB.reverse = 0;
 
-			cb = renderer::constantBuffer[(UINT)eCBType::Reverse];
-			cb->SetData(&reverseCB);
-			cb->Bind(eShaderStage::PS);
+			reverseCb = renderer::constantBuffer[(UINT)eCBType::Reverse];
+			reverseCb->SetData(&reverseCB);
+			reverseCb->Bind(eShaderStage::PS);
 		}
 		else
 		{
 			// 오른쪽이면 0, 왼쪽이면 1
 			reverseCB.reverse = 1;
 
-			cb = renderer::constantBuffer[(UINT)eCBType::Reverse];
-			cb->SetData(&reverseCB);
-			cb->Bind(eShaderStage::PS);
+			reverseCb = renderer::constantBuffer[(UINT)eCBType::Reverse];
+			reverseCb->SetData(&reverseCB);
+			reverseCb->Bind(eShaderStage::PS);
 		}
 
-		Transform* tr = GetOwner()->GetComponent<Transform>();
-		Vector2 pos = Input::GetMousePos();
-		Vector3 mousePos = Vector3(pos.x, pos.y, 1.0f);
-		mousePos = tr->GetNDCPos(Vector3(mousePos.x, mousePos.y, mousePos.z));
+		//Transform* tr = GetOwner()->GetComponent<Transform>();
+		//Vector2 pos = Input::GetMousePos();
+		//Vector3 mousePos = Vector3(pos.x, pos.y, 1.0f);
+		//mousePos = tr->GetNDCPos(Vector3(mousePos.x, mousePos.y, mousePos.z));
 
-		float rad = atan2(mousePos.x, mousePos.y);
-		tr->SetRotation(Vector3(0.0f, 0.0f, -rad));
+		//float rad = atan2(mousePos.x, mousePos.y);
+		//tr->SetRotation(Vector3(0.0f, 0.0f, -rad));
 
 		switch (mState)
 		{
@@ -514,14 +520,22 @@ namespace js
 
 	void PlayerScript::OnCollisionEnter(Collider2D* other)
 	{
+		collisionCB.collision = 1;
 
+		collisionCb = renderer::constantBuffer[(UINT)eCBType::Collision];
+		collisionCb->SetData(&collisionCB);
+		collisionCb->Bind(eShaderStage::PS);
 	}
 	void PlayerScript::OnCollisionStay(Collider2D* other)
 	{
 	}
 	void PlayerScript::OnCollisionExit(Collider2D* other)
 	{
+		collisionCB.collision = 0;
 
+		collisionCb = renderer::constantBuffer[(UINT)eCBType::Collision];
+		collisionCb->SetData(&collisionCB);
+		collisionCb->Bind(eShaderStage::PS);
 	}
 
 }

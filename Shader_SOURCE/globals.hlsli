@@ -40,6 +40,11 @@ cbuffer Noise : register(b6)
     float4 noiseTextureSize;
 }
 
+cbuffer Collision : register(b7)
+{
+    uint collision;
+}
+
 Texture2D albedoTexture : register(t0);
 Texture2D atlasTexture : register(t12);
 Texture2D noiseTexture : register(t15);

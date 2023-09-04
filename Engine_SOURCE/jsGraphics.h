@@ -19,7 +19,7 @@
 #define CBSLOT_SPRITEREVERSE	4
 #define CBSLOT_PARTICLE			5
 #define CBSLOT_NOISE			6
-
+#define CBSLOT_COLLISION		7
 
 namespace js::graphics
 {
@@ -43,6 +43,7 @@ namespace js::graphics
 		Reverse,
 		Particle,
 		Noise,
+		Collision,
 		End,
 	};
 	

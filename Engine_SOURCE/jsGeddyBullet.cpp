@@ -1,10 +1,12 @@
 #include "jsGeddyBullet.h"
-
+#include "..\\JunSuEngine\\\jsBulletScript.h"
 
 namespace js
 {
 	GeddyBullet::GeddyBullet()
 	{
+		AddComponent<BulletScript>();
+
 	}
 
 	GeddyBullet::~GeddyBullet()

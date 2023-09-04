@@ -184,6 +184,7 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll" "$(SolutionDir)x64\Debug"</C
   <ItemGroup>
     <ClInclude Include="framework.h" />
     <ClInclude Include="jsBossScene.h" />
+    <ClInclude Include="jsBulletScript.h" />
     <ClInclude Include="jsCameraScript.h" />
     <ClInclude Include="jsCloudScript.h" />
     <ClInclude Include="jsDoorScript.h" />
@@ -205,6 +206,7 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll" "$(SolutionDir)x64\Debug"</C
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="jsBossScene.cpp" />
+    <ClCompile Include="jsBulletScript.cpp" />
     <ClCompile Include="jsCameraScript.cpp" />
     <ClCompile Include="jsCloudScript.cpp" />
     <ClCompile Include="jsDoorScript.cpp" />

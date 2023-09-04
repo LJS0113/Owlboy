@@ -17,7 +17,7 @@
 #include "jsGeddy.h"
 #include "jsGeddyArm.h"
 #include "jsGeddyArmScript.h"
-
+#include "jsGeddyBullet.h"
 
 namespace js
 {
@@ -162,15 +162,25 @@ namespace js
 				geddyCd->SetColliderOwner(eColliderOwner::Player);
 				geddyCd->SetCenter(Vector2(-0.1f, -0.05f));
 
-				GeddyArm* geddyArm = object::Instantiate<GeddyArm>(Vector3(geddyPos.x, geddyPos.y, geddyPos.z-0.01f), eLayerType::Player);
-				geddyArm->SetName(L"Geddy");
+				GeddyArm* geddyArm = object::Instantiate<GeddyArm>(Vector3(2.0f, 2.0f, 1.0f), eLayerType::Player);
+				geddyArm->SetName(L"GeddyArm");
 				mr = geddyArm->AddComponent<MeshRenderer>();
 				mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 				mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
 				geddyArm->AddComponent<Transform>();
+				Transform* geddyArmTr = geddyArm->GetComponent<Transform>();
+				Vector3 geddyArmPos = geddyArmTr->GetPosition();
 				geddyArm->AddComponent<GeddyArmScript>();
+				geddyArm->GetComponent<GeddyArmScript>()->Initialize();
+
 			}
 		}
+
+		if (Input::GetKeyState(eKeyCode::LBUTTON) == eKeyState::Down)
+		{ 
+			//GeddyBullet* bullet = object::Instantiate<GeddyBullet>(Vector3(geddyArmPos.x, ))
+		}
+
 		Scene::Update();
 	}
 	void TutorialScene::LateUpdate()
