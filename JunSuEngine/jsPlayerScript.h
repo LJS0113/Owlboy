@@ -45,6 +45,8 @@ namespace js
 		ePlayerState GetState() { return mState; }
 		bool GetRightDir() { return mbRight; }
 		bool GetSummon() { return mbSummon; }
+		void SetSpeed(float speed) { mSpeed = speed; }
+		float GetSpeed() { return mSpeed; }
 
 	private:
 		ePlayerState mState;
@@ -54,7 +56,7 @@ namespace js
 		bool mbHang;
 		bool mbSummon;
 		Collider2D* cd;
-
+		float mSpeed;
 		renderer::SpriteReverseCB reverseCB;
 		renderer::CollisionCB collisionCB;
 		ConstantBuffer* reverseCb;

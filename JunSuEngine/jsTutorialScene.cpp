@@ -160,7 +160,7 @@ namespace js
 				gGeddy->GetComponent<GeddyScript>()->Initialize();
 				geddyTr->SetScale(Vector3(2.5f, 2.5f, 1.0f));
 				geddyCd->SetColliderOwner(eColliderOwner::Player);
-				geddyCd->SetCenter(Vector2(-0.1f, -0.05f));
+				//geddyCd->SetCenter(Vector2(-0.1f, -0.05f));
 
 				GeddyArm* geddyArm = object::Instantiate<GeddyArm>(Vector3(2.0f, 2.0f, 1.0f), eLayerType::Player);
 				geddyArm->SetName(L"GeddyArm");

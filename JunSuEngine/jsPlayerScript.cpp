@@ -22,8 +22,9 @@ namespace js
 		, mAnimator(nullptr)
 		, mbRight(true)
 		, mbHang(false)
-		, reverseCb(nullptr)
 		, mbSummon(false)
+		, mSpeed(3.0f)
+		, reverseCb(nullptr)
 		, reverseCB{}
 		, collisionCB{}
 		, collisionCb(nullptr)
@@ -47,7 +48,6 @@ namespace js
 
 	void PlayerScript::Initialize()
 	{
-		int a = 0;
 		MeshRenderer* mr = GetOwner()->AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
@@ -148,7 +148,6 @@ namespace js
 
 	void PlayerScript::Complete()
 	{
-		int a = 0;
 	}
 
 
@@ -161,27 +160,28 @@ namespace js
 		if (Input::GetKey(eKeyCode::LEFT))
 		{
 			cd->SetCenter(Vector2(0.1f, -0.05f));
-			pos.x -= 3.0f * Time::DeltaTime();
+			pos.x -= mSpeed * Time::DeltaTime();
 			tr->SetPosition(pos);
 			mState = ePlayerState::Move;
 		}
+
 		else if (Input::GetKey(eKeyCode::RIGHT))
 		{
 			cd->SetSize(Vector2(0.1f, 0.2f));
 			cd->SetCenter(Vector2(-0.1f, -0.05f));
-			pos.x += 3.0f * Time::DeltaTime();
+			pos.x += mSpeed * Time::DeltaTime();
 			tr->SetPosition(pos);
 			mState = ePlayerState::Move;
 		}
 		else if (Input::GetKey(eKeyCode::DOWN))
 		{
-			pos.y -= 3.0f * Time::DeltaTime();
+			pos.y -= mSpeed * Time::DeltaTime();
 			tr->SetPosition(pos);
 			mState = ePlayerState::Move;
 		}
 		else if (Input::GetKey(eKeyCode::UP))
 		{
-			pos.y += 3.0f * Time::DeltaTime();
+			pos.y += mSpeed * Time::DeltaTime();
 			tr->SetPosition(pos);
 			mState = ePlayerState::Move;
 		}
@@ -356,7 +356,7 @@ namespace js
 		Vector3 pos = tr->GetPosition();
 		Rigidbody* rb = GetOwner()->GetComponent<Rigidbody>();
 		rb->SetGround(false);
-		pos.y += 3.0f * Time::DeltaTime();
+		pos.y += mSpeed * Time::DeltaTime();
 		tr->SetPosition(pos);
 
 		if (mAnimator->IsComplete())

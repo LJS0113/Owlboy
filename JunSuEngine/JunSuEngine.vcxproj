@@ -202,6 +202,7 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll" "$(SolutionDir)x64\Debug"</C
     <ClInclude Include="jsTitleScene.h" />
     <ClInclude Include="jsTutorialScene.h" />
     <ClInclude Include="jsVellieScene.h" />
+    <ClInclude Include="jsWallScript.h" />
     <ClInclude Include="LoadScenes.h" />
   </ItemGroup>
   <ItemGroup>
@@ -224,6 +225,7 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll" "$(SolutionDir)x64\Debug"</C
     <ClCompile Include="jsTitleScene.cpp" />
     <ClCompile Include="jsTutorialScene.cpp" />
     <ClCompile Include="jsVellieScene.cpp" />
+    <ClCompile Include="jsWallScript.cpp" />
     <ClCompile Include="JunSuEngine.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

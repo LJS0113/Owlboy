@@ -29,21 +29,24 @@
     <Filter Include="Contents\Script\Monster">
       <UniqueIdentifier>{8b174832-dd84-4811-a3da-255d42f32672}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Script\Artifact">
-      <UniqueIdentifier>{b7048500-359a-4389-997b-5b1863e43448}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Script\Artifact\Door">
-      <UniqueIdentifier>{fb2a526c-4d63-47c0-9724-4de2189bd0fc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\Script\Bullet">
       <UniqueIdentifier>{67a5e86e-ada8-4c56-9d93-f57c383e2c5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Object">
+      <UniqueIdentifier>{b7048500-359a-4389-997b-5b1863e43448}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Object\Door">
+      <UniqueIdentifier>{fb2a526c-4d63-47c0-9724-4de2189bd0fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Object\Wall">
+      <UniqueIdentifier>{0ce9c8e4-7ec4-4fd2-bc2a-df4e6cf3436b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Script\Camera">
+      <UniqueIdentifier>{2d2ecebb-52d4-4cd0-b81e-3fe424b2986b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="JunSuEngine.cpp" />
-    <ClCompile Include="jsCameraScript.cpp">
-      <Filter>Contents\Script</Filter>
-    </ClCompile>
     <ClCompile Include="jsEndingScene.cpp">
       <Filter>Contents\Scene</Filter>
     </ClCompile>
@@ -59,26 +62,14 @@
     <ClCompile Include="jsVellieScene.cpp">
       <Filter>Contents\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="jsGridScript.cpp">
-      <Filter>Contents\Script</Filter>
-    </ClCompile>
     <ClCompile Include="jsBossScene.cpp">
       <Filter>Contents\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="jsMonsterScript.cpp">
-      <Filter>Contents\Script</Filter>
     </ClCompile>
     <ClCompile Include="jsDungeonScene.cpp">
       <Filter>Contents\Scene</Filter>
     </ClCompile>
     <ClCompile Include="jsHouseScene.cpp">
       <Filter>Contents\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="jsCloudScript.cpp">
-      <Filter>Contents\Script</Filter>
-    </ClCompile>
-    <ClCompile Include="jsGroundScript.cpp">
-      <Filter>Contents\Script</Filter>
     </ClCompile>
     <ClCompile Include="jsGeddyArmScript.cpp">
       <Filter>Contents\Script\Player\Geddy</Filter>
@@ -93,19 +84,34 @@
       <Filter>Contents\Script\Monster</Filter>
     </ClCompile>
     <ClCompile Include="jsDoorScript.cpp">
-      <Filter>Contents\Script\Artifact\Door</Filter>
+      <Filter>Contents\Script\Object\Door</Filter>
     </ClCompile>
     <ClCompile Include="jsBulletScript.cpp">
       <Filter>Contents\Script\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="jsWallScript.cpp">
+      <Filter>Contents\Script\Object\Wall</Filter>
+    </ClCompile>
+    <ClCompile Include="jsMonsterScript.cpp">
+      <Filter>Contents\Script\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="jsGroundScript.cpp">
+      <Filter>Contents\Script\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="jsCloudScript.cpp">
+      <Filter>Contents\Script\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="jsCameraScript.cpp">
+      <Filter>Contents\Script\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="jsGridScript.cpp">
+      <Filter>Contents\Script\Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
     <ClInclude Include="LoadScenes.h">
       <Filter>Contents\Load</Filter>
-    </ClInclude>
-    <ClInclude Include="jsCameraScript.h">
-      <Filter>Contents\Script</Filter>
     </ClInclude>
     <ClInclude Include="jsEndingScene.h">
       <Filter>Contents\Scene</Filter>
@@ -122,26 +128,14 @@
     <ClInclude Include="jsVellieScene.h">
       <Filter>Contents\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="jsGridScript.h">
-      <Filter>Contents\Script</Filter>
-    </ClInclude>
     <ClInclude Include="jsBossScene.h">
       <Filter>Contents\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="jsMonsterScript.h">
-      <Filter>Contents\Script</Filter>
     </ClInclude>
     <ClInclude Include="jsDungeonScene.h">
       <Filter>Contents\Scene</Filter>
     </ClInclude>
     <ClInclude Include="jsHouseScene.h">
       <Filter>Contents\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="jsCloudScript.h">
-      <Filter>Contents\Script</Filter>
-    </ClInclude>
-    <ClInclude Include="jsGroundScript.h">
-      <Filter>Contents\Script</Filter>
     </ClInclude>
     <ClInclude Include="jsGeddyArmScript.h">
       <Filter>Contents\Script\Player\Geddy</Filter>
@@ -156,10 +150,28 @@
       <Filter>Contents\Script\Monster</Filter>
     </ClInclude>
     <ClInclude Include="jsDoorScript.h">
-      <Filter>Contents\Script\Artifact\Door</Filter>
+      <Filter>Contents\Script\Object\Door</Filter>
     </ClInclude>
     <ClInclude Include="jsBulletScript.h">
       <Filter>Contents\Script\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="jsWallScript.h">
+      <Filter>Contents\Script\Object\Wall</Filter>
+    </ClInclude>
+    <ClInclude Include="jsMonsterScript.h">
+      <Filter>Contents\Script\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="jsGroundScript.h">
+      <Filter>Contents\Script\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="jsCloudScript.h">
+      <Filter>Contents\Script\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="jsCameraScript.h">
+      <Filter>Contents\Script\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="jsGridScript.h">
+      <Filter>Contents\Script\Camera</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

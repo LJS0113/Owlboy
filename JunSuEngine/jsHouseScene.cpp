@@ -19,6 +19,8 @@
 #include "jsRigidBody.h"
 #include "jsCollisionManager.h"
 #include "jsRenderer.h"
+#include "jsWall.h"
+#include "jsWallScript.h"
 
 namespace js
 {
@@ -53,6 +55,15 @@ namespace js
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(Resources::Find<Material>(L"HouseMaterial"));
 			player->GetComponent<Transform>()->SetScale(Vector3(6.0f, 4.5f, 1.0f));
+		}
+		{
+			// wall
+			Wall* wall= object::Instantiate<Wall>(Vector3(-2.0f, 0.0f, 2.0f), eLayerType::Ground);
+			wall->SetName(L"BedGround");
+			wall->GetComponent<Transform>()->SetScale(Vector3(0.3f, 3.0f, 2.0f));
+			wall->AddComponent<WallScript>();
+			Collider2D* cd = wall->AddComponent<Collider2D>();
+			cd->SetColliderOwner(eColliderOwner::Ground);
 		}
 		{
 			// Bed Ground

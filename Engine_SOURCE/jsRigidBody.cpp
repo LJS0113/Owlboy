@@ -17,6 +17,7 @@ namespace js
 		mLimitedVelocity.x = 200.0f;
 		mLimitedVelocity.y = 1000.0f;
 		mbGround = false;
+		mbWall = false;
 		mGravity = Vector2(0.0f, -3.0f);
 		mFriction = 100.0f;
 	}

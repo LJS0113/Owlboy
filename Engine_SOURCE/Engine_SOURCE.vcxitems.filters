@@ -132,6 +132,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)jsAudioSource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsFmod.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsFontWrapper.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsWall.cpp">
+      <Filter>GameObject\Ground</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsApplication.h">
@@ -280,6 +283,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)jsAudioSource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsFmod.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsFontWrapper.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsWall.h">
+      <Filter>GameObject\Ground</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="High Level Interface">
