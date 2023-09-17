@@ -42,6 +42,7 @@ namespace js
 		renderer::SpriteReverseCB reverseCB;
 		ConstantBuffer* cb;
 		Collider2D* cd;
+		class GeddyBullet* bullet;
 	};
 
 }

@@ -29,6 +29,7 @@ namespace js::enums
 		Grid,
 		Player,
 		Monster,
+		Bullet,
 		Light,
 		Camera,
 		UI,

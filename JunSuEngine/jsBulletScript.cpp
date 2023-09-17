@@ -18,7 +18,7 @@ namespace js
 		MeshRenderer* mr = GetOwner()->AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
-		mAnimator = GetOwner()->AddComponent<Animator>();
+		mAnimator = GetOwner()->GetComponent<Animator>();
 		Collider2D* cd = GetOwner()->GetComponent<Collider2D>();
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		Vector3 geddyPos = tr->GetPosition();
@@ -26,7 +26,7 @@ namespace js
 		std::shared_ptr<Texture> atlas = Resources::Load<Texture>(L"GeddyBulletSprite", L"..\\Resources\\Texture\\mechanicBullet.png");
 		mAnimator->Create(L"GeddyBullet", atlas, Vector2(0.0f, 0.0f), Vector2(33.0f, 13.0f), 8);
 
-		mAnimator->PlayAnimation(L"GeddyBullet", true);
+		mAnimator->PlayAnimation(L"GeddyBullet", false);
 	}
 	void BulletScript::Update()
 	{

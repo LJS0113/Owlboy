@@ -1,5 +1,6 @@
 #pragma once
 #include "jsGameObject.h"
+#include "jsAnimator.h"
 
 namespace js
 {
@@ -15,5 +16,6 @@ namespace js
 		virtual void LateUpdate() override;
 
 	private:
+		Animator* mAnimator;
 	};
 }

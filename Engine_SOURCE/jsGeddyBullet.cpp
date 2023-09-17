@@ -4,9 +4,11 @@
 namespace js
 {
 	GeddyBullet::GeddyBullet()
+		: mAnimator(nullptr)
 	{
+		mAnimator = this->AddComponent<Animator>();
 		AddComponent<BulletScript>();
-
+		GetComponent<BulletScript>()->Initialize();
 	}
 
 	GeddyBullet::~GeddyBullet()

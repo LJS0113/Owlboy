@@ -18,6 +18,7 @@
 #include "jsGeddyArm.h"
 #include "jsGeddyArmScript.h"
 #include "jsGeddyBullet.h"
+#include "jsBulletScript.h"
 
 namespace js
 {
@@ -141,6 +142,8 @@ namespace js
 		}
 		Transform* otusTr = gPlayer->GetComponent<Transform>();
 		Vector3 otusPos = otusTr->GetPosition();
+		Transform* geddyTr;
+		Vector3 geddyPos;
 		bool summon = gPlayer->GetComponent<PlayerScript>()->GetSummon();
 		if (Input::GetKeyState(eKeyCode::R) == eKeyState::Down)
 		{
@@ -152,8 +155,8 @@ namespace js
 				mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 				mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
 				gGeddy->AddComponent<Transform>();
-				Transform* geddyTr = gGeddy->GetComponent<Transform>();
-				Vector3 geddyPos = geddyTr->GetPosition();
+				geddyTr = gGeddy->GetComponent<Transform>();
+				geddyPos = geddyTr->GetPosition();
 				Collider2D* geddyCd = gGeddy->AddComponent<Collider2D>();
 				Rigidbody* geddyRb = gGeddy->AddComponent<Rigidbody>();
 				gGeddy->AddComponent<GeddyScript>();
@@ -172,14 +175,20 @@ namespace js
 				Vector3 geddyArmPos = geddyArmTr->GetPosition();
 				geddyArm->AddComponent<GeddyArmScript>();
 				geddyArm->GetComponent<GeddyArmScript>()->Initialize();
-
 			}
 		}
 
-		if (Input::GetKeyState(eKeyCode::LBUTTON) == eKeyState::Down)
-		{ 
-			//GeddyBullet* bullet = object::Instantiate<GeddyBullet>(Vector3(geddyArmPos.x, ))
-		}
+
+		//if (Input::GetKeyState(eKeyCode::LBUTTON) == eKeyState::Down)
+		//{
+		//	GeddyBullet* bullet = object::Instantiate<GeddyBullet>(Vector3(geddyPos), eLayerType::Bullet);
+		//	MeshRenderer* mr = bullet->AddComponent<MeshRenderer>();
+		//	mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//	mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
+		//	bullet->AddComponent<Transform>();
+		//	bullet->AddComponent<BulletScript>();
+		//	bullet->GetComponent<BulletScript>()->Initialize();
+		//}
 
 		Scene::Update();
 	}

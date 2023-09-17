@@ -9,6 +9,8 @@
 #include "jsPlayerScript.h"
 #include "jsInput.h"
 #include "jsRigidBody.h"
+#include "jsBulletScript.h"
+#include "jsGeddyBullet.h"
 
 namespace js
 {
@@ -16,6 +18,7 @@ namespace js
 		:mState(eGeddyState::Idle)
 		, mbRight(true)
 		, mbHang(false)
+		, bullet(nullptr)
 	{
 	}
 
@@ -151,11 +154,22 @@ namespace js
 		//}
 		geddyTr->SetPosition(geddyPos);
 
+		if (mbRight)
+			mAnimator->PlayAnimation(L"GeddyHangRight", true);
+		else
+			mAnimator->PlayAnimation(L"GeddyHangLeft", true);
+
 		mState = eGeddyState::Hang;
 	}
 
 	void GeddyScript::attack()
 	{
+		Animator* bulletAni = bullet->GetComponent<Animator>();
+
+		if (bulletAni->IsComplete())
+		{
+			mState = eGeddyState::Hang;
+		}
 	}
 
 	void GeddyScript::death()
@@ -181,15 +195,30 @@ namespace js
 		//	geddyPos.x += 0.1f;
 		//}
 		geddyTr->SetPosition(geddyPos);
-
-		if (Input::GetKey(eKeyCode::RIGHT) || Input::GetKeyDown(eKeyCode::LEFT))
+		
+		if (Input::GetKeyDown(eKeyCode::RIGHT))
 		{
-			if (mbRight)
-				mAnimator->PlayAnimation(L"GeddyHangRight", true);
-			else
-				mAnimator->PlayAnimation(L"GeddyHangLeft", true);
+			//if (mbRight)
+			//	mAnimator->PlayAnimation(L"GeddyHangRight", true);
+			//else
+			//	mAnimator->PlayAnimation(L"GeddyHangLeft", true);
 			mState = eGeddyState::Move;
 		}
+		if (Input::GetKeyDown(eKeyCode::LEFT))
+		{
+			//if (mbRight)
+			//	mAnimator->PlayAnimation(L"GeddyHangRight", true);
+			//else
+			//	mAnimator->PlayAnimation(L"GeddyHangLeft", true);
+			mState = eGeddyState::Move;
+		}
+
+		//if (Input::GetKeyDown(eKeyCode::LBUTTON))
+		//{
+		//	bullet = object::Instantiate<GeddyBullet>(Vector3(geddyPos.x, geddyPos.y, geddyPos.z - 0.1f), eLayerType::Bullet);
+
+		//	mState = eGeddyState::Attack;
+		//}
 
 		if (Input::GetKeyDown(eKeyCode::RBUTTON))
 		{
