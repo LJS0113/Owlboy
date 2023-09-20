@@ -49,19 +49,19 @@ namespace js
 			MeshRenderer* mr = vellieBG->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(Resources::Find<Material>(L"VellieMaterial"));
-			vellieBG->GetComponent<Transform>()->SetScale(Vector3(60.0f, 40.0f, 1.0f));
+			vellieBG->GetComponent<Transform>()->SetScale(Vector3(48.0f, 27.0f, 1.0f));
 		}
 		{
 			// House Ground
-			Ground* ground = object::Instantiate<Ground>(Vector3(1.2629f, -2.0f, 2.0f), eLayerType::Ground);
+			Ground* ground = object::Instantiate<Ground>(Vector3(0.2629f, -1.0f, 2.0f), eLayerType::Ground);
 			ground->SetName(L"HouseGround");
-			ground->GetComponent<Transform>()->SetScale(Vector3(3.5f, 0.2f, 2.0f));
+			ground->GetComponent<Transform>()->SetScale(Vector3(3.0f, 0.2f, 2.0f));
 			Collider2D* cd = ground->AddComponent<Collider2D>();
 			cd->SetColliderOwner(eColliderOwner::Ground);
 		}
 		{
 			// Vellie Ground
-			Ground* ground = object::Instantiate<Ground>(Vector3(-10.0f, -15.6f, 2.0f), eLayerType::Ground);
+			Ground* ground = object::Instantiate<Ground>(Vector3(-10.0f, -10.0f, 2.0f), eLayerType::Ground);
 			ground->SetName(L"VellieGround");
 			ground->GetComponent<Transform>()->SetScale(Vector3(50.5f, 0.2f, 2.0f));
 			Collider2D* cd = ground->AddComponent<Collider2D>();

@@ -19,6 +19,7 @@
 #include "jsGeddyArmScript.h"
 #include "jsGeddyBullet.h"
 #include "jsBulletScript.h"
+#include "jsGeddyBulletScript.h"
 
 namespace js
 {
@@ -142,8 +143,7 @@ namespace js
 		}
 		Transform* otusTr = gPlayer->GetComponent<Transform>();
 		Vector3 otusPos = otusTr->GetPosition();
-		Transform* geddyTr;
-		Vector3 geddyPos;
+
 		bool summon = gPlayer->GetComponent<PlayerScript>()->GetSummon();
 		if (Input::GetKeyState(eKeyCode::R) == eKeyState::Down)
 		{
@@ -155,8 +155,8 @@ namespace js
 				mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 				mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
 				gGeddy->AddComponent<Transform>();
-				geddyTr = gGeddy->GetComponent<Transform>();
-				geddyPos = geddyTr->GetPosition();
+				Transform* geddyTr = gGeddy->GetComponent<Transform>();
+				Vector3 geddyPos = geddyTr->GetPosition();
 				Collider2D* geddyCd = gGeddy->AddComponent<Collider2D>();
 				Rigidbody* geddyRb = gGeddy->AddComponent<Rigidbody>();
 				gGeddy->AddComponent<GeddyScript>();
@@ -178,17 +178,23 @@ namespace js
 			}
 		}
 
+		bool hang = gPlayer->GetComponent<PlayerScript>()->IsHang();
+		if (hang && Input::GetKeyState(eKeyCode::LBUTTON) == eKeyState::Down)
+		{
+			Transform* geddyTr = gGeddy->GetComponent<Transform>();
+			Vector3 geddyPos = geddyTr->GetPosition();
 
-		//if (Input::GetKeyState(eKeyCode::LBUTTON) == eKeyState::Down)
-		//{
-		//	GeddyBullet* bullet = object::Instantiate<GeddyBullet>(Vector3(geddyPos), eLayerType::Bullet);
-		//	MeshRenderer* mr = bullet->AddComponent<MeshRenderer>();
-		//	mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		//	mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
-		//	bullet->AddComponent<Transform>();
-		//	bullet->AddComponent<BulletScript>();
-		//	bullet->GetComponent<BulletScript>()->Initialize();
-		//}
+			GeddyBullet* bullet = object::Instantiate<GeddyBullet>(Vector3(geddyPos), eLayerType::Bullet);
+			MeshRenderer* mr = bullet->AddComponent<MeshRenderer>();
+			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
+			bullet->AddComponent<Collider2D>();
+			bullet->AddComponent<Transform>();
+			bullet->AddComponent<GeddyBulletScript>();
+			bullet->GetComponent<GeddyBulletScript>()->Initialize();
+
+			int a = 0;
+		}
 
 		Scene::Update();
 	}

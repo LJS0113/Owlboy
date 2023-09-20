@@ -191,6 +191,7 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll" "$(SolutionDir)x64\Debug"</C
     <ClInclude Include="jsDungeonScene.h" />
     <ClInclude Include="jsEndingScene.h" />
     <ClInclude Include="jsGeddyArmScript.h" />
+    <ClInclude Include="jsGeddyBulletScript.h" />
     <ClInclude Include="jsGeddyScript.h" />
     <ClInclude Include="jsGridScript.h" />
     <ClInclude Include="jsGroundScript.h" />
@@ -214,6 +215,7 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll" "$(SolutionDir)x64\Debug"</C
     <ClCompile Include="jsDungeonScene.cpp" />
     <ClCompile Include="jsEndingScene.cpp" />
     <ClCompile Include="jsGeddyArmScript.cpp" />
+    <ClCompile Include="jsGeddyBulletScript.cpp" />
     <ClCompile Include="jsGeddyScript.cpp" />
     <ClCompile Include="jsGridScript.cpp" />
     <ClCompile Include="jsGroundScript.cpp" />

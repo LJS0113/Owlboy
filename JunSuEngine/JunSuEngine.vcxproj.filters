@@ -44,6 +44,9 @@
     <Filter Include="Contents\Script\Camera">
       <UniqueIdentifier>{2d2ecebb-52d4-4cd0-b81e-3fe424b2986b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Script\Bullet\Geddy">
+      <UniqueIdentifier>{b2a543d8-5173-4b79-96bd-851f580ccf45}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="JunSuEngine.cpp" />
@@ -106,6 +109,9 @@
     </ClCompile>
     <ClCompile Include="jsGridScript.cpp">
       <Filter>Contents\Script\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="jsGeddyBulletScript.cpp">
+      <Filter>Contents\Script\Bullet\Geddy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -172,6 +178,9 @@
     </ClInclude>
     <ClInclude Include="jsGridScript.h">
       <Filter>Contents\Script\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="jsGeddyBulletScript.h">
+      <Filter>Contents\Script\Bullet\Geddy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

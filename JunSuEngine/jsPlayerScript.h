@@ -45,6 +45,7 @@ namespace js
 		ePlayerState GetState() { return mState; }
 		bool GetRightDir() { return mbRight; }
 		bool GetSummon() { return mbSummon; }
+		bool IsHang() { return mbHang; }
 		void SetSpeed(float speed) { mSpeed = speed; }
 		float GetSpeed() { return mSpeed; }
 

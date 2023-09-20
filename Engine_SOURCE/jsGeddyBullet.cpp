@@ -7,8 +7,6 @@ namespace js
 		: mAnimator(nullptr)
 	{
 		mAnimator = this->AddComponent<Animator>();
-		AddComponent<BulletScript>();
-		GetComponent<BulletScript>()->Initialize();
 	}
 
 	GeddyBullet::~GeddyBullet()
@@ -21,14 +19,17 @@ namespace js
 
 	void GeddyBullet::Update()
 	{
+		GameObject::Update();
 	}
 
 	void GeddyBullet::Render()
 	{
+		GameObject::Render();
 	}
 
 	void GeddyBullet::LateUpdate()
 	{
+		GameObject::LateUpdate();
 	}
 
 }

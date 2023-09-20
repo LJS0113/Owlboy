@@ -90,9 +90,6 @@ namespace js
 	void GeddyArmScript::attack()
 	{
 
-
-
-
 		mState = eGeddyArmState::Idle;
 	}
 

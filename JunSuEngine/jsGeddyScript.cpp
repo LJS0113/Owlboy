@@ -54,17 +54,17 @@ namespace js
 
 	void GeddyScript::Update()
 	{
-		//mbRight = gPlayer->GetComponent<PlayerScript>()->GetRightDir();
+		mbRight = gPlayer->GetComponent<PlayerScript>()->GetRightDir();
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		Vector2 pos = Input::GetMousePos();
 		Vector3 mousePos = Vector3(pos.x, pos.y, 1.0f);
 		Vector3 geddyPos = tr->GetPosition();
 		mousePos = tr->GetNDCPos(Vector3(mousePos.x, mousePos.y, mousePos.z));
 
-		if (geddyPos.x <= mousePos.x)
-			mbRight = true;
-		else
-			mbRight = false;
+		//if (geddyPos.x <= mousePos.x)
+		//	mbRight = true;
+		//else
+		//	mbRight = false;
 
 		switch (mState)
 		{
@@ -113,18 +113,6 @@ namespace js
 
 		if (Input::GetKeyDown(eKeyCode::R))
 		{
-			//if (mbHang)
-			//{
-			//	if (mbRight)
-			//	{
-			//		mAnimator->PlayAnimation(L"GeddyHangRight", true);
-			//	}
-			//	else
-			//	{
-			//		mAnimator->PlayAnimation(L"GeddyHangLeft", true);
-			//	}
-			//	mState = eGeddyState::Hang;
-			//}
 			mbHang = true;
 			rb->SetGround(true);
 			if (mbRight)
@@ -144,20 +132,15 @@ namespace js
 
 		geddyPos = otusPos;
 		geddyPos.y -= 0.5f;
-		//if (mbRight)
-		//{
-		//	geddyPos.x -= 0.1f;
-		//}
-		//else
-		//{
-		//	geddyPos.x += 0.1f;
-		//}
-		geddyTr->SetPosition(geddyPos);
-
 		if (mbRight)
-			mAnimator->PlayAnimation(L"GeddyHangRight", true);
+		{
+			geddyPos.x -= 0.1f;
+		}
 		else
-			mAnimator->PlayAnimation(L"GeddyHangLeft", true);
+		{
+			geddyPos.x += 0.1f;
+		}
+		geddyTr->SetPosition(geddyPos);
 
 		mState = eGeddyState::Hang;
 	}
@@ -186,30 +169,24 @@ namespace js
 
 		geddyPos = otusPos;
 		geddyPos.y -= 0.5f;
-		//if (mbRight)
-		//{
-		//	geddyPos.x -= 0.1f;
-		//}
-		//else
-		//{
-		//	geddyPos.x += 0.1f;
-		//}
+		if (mbRight)
+		{
+			geddyPos.x -= 0.1f;
+		}
+		else
+		{
+			geddyPos.x += 0.1f;
+		}
 		geddyTr->SetPosition(geddyPos);
 		
 		if (Input::GetKeyDown(eKeyCode::RIGHT))
 		{
-			//if (mbRight)
-			//	mAnimator->PlayAnimation(L"GeddyHangRight", true);
-			//else
-			//	mAnimator->PlayAnimation(L"GeddyHangLeft", true);
+			mAnimator->PlayAnimation(L"GeddyHangRight", true);
 			mState = eGeddyState::Move;
 		}
 		if (Input::GetKeyDown(eKeyCode::LEFT))
 		{
-			//if (mbRight)
-			//	mAnimator->PlayAnimation(L"GeddyHangRight", true);
-			//else
-			//	mAnimator->PlayAnimation(L"GeddyHangLeft", true);
+			mAnimator->PlayAnimation(L"GeddyHangLeft", true);
 			mState = eGeddyState::Move;
 		}
 
