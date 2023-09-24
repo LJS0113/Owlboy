@@ -30,7 +30,7 @@ namespace js
 		mAnimator->Create(L"GeddyBullet", atlas, Vector2(0.0f, 0.0f), Vector2(13.0f, 13.0f), 8);
 
 		mAnimator->PlayAnimation(L"GeddyBullet", true);
-		mState = eGeddyBulletState::None;
+		mState = eGeddyBulletState::Shoot;
 	}
 	void GeddyBulletScript::Update()
 	{
@@ -70,11 +70,13 @@ namespace js
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		Vector3 mPos = tr->GetPosition();
 		Vector2 pos = Input::GetMousePos();
-		Vector3 mousePos = Vector3(pos.x, pos.y, 1.0f);
+		Vector3 mousePos = Vector3(pos.x, pos.y, 0.0f);
 		mousePos = tr->GetNDCPos(Vector3(mousePos.x, mousePos.y, mousePos.z));
-		
-		//pos.x += 4.0f * Time::DeltaTime();
-		mPos += mousePos * Time::DeltaTime();
+		Vector3 dir = mousePos - mPos;
+		dir.Normalize();
+		// position += direction * speed * time
+		//mPos.y += 4.0f * Time::DeltaTime();
+		mPos += 4.0f * dir * Time::DeltaTime();
 		tr->SetPosition(mPos);
 		mLifeTime += Time::DeltaTime();
 		if (mLifeTime >= 1.5f)
