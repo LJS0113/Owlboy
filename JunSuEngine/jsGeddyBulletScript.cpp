@@ -10,6 +10,7 @@ namespace js
 	GeddyBulletScript::GeddyBulletScript()
 		: mbHit(false)
 		, mLifeTime(0.0f)
+		, dir(Vector3::Zero)
 	{
 	}
 	GeddyBulletScript::~GeddyBulletScript()
@@ -28,8 +29,15 @@ namespace js
 		cd->SetSize(Vector2(0.1f, 0.1f));
 		std::shared_ptr<Texture> atlas = Resources::Load<Texture>(L"GeddyBulletSprite", L"..\\Resources\\Texture\\mechanicBullet.png");
 		mAnimator->Create(L"GeddyBullet", atlas, Vector2(0.0f, 0.0f), Vector2(13.0f, 13.0f), 8);
-
 		mAnimator->PlayAnimation(L"GeddyBullet", true);
+
+		//Transform* tr = GetOwner()->GetComponent<Transform>();
+		Vector3 mPos = tr->GetPosition();
+		Vector2 pos = Input::GetMousePos();
+		Vector3 mousePos = Vector3(pos.x, pos.y, 0.0f);
+		mousePos = tr->GetNDCPos(Vector3(mousePos.x, mousePos.y, mousePos.z));
+		dir = mousePos - mPos;
+		dir.Normalize();
 		mState = eGeddyBulletState::Shoot;
 	}
 	void GeddyBulletScript::Update()
@@ -61,6 +69,8 @@ namespace js
 
 	void GeddyBulletScript::none()
 	{
+
+
 		if (Input::GetKeyDown(eKeyCode::LBUTTON))
 			mState = eGeddyBulletState::Shoot;
 	}
@@ -69,17 +79,11 @@ namespace js
 	{
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		Vector3 mPos = tr->GetPosition();
-		Vector2 pos = Input::GetMousePos();
-		Vector3 mousePos = Vector3(pos.x, pos.y, 0.0f);
-		mousePos = tr->GetNDCPos(Vector3(mousePos.x, mousePos.y, mousePos.z));
-		Vector3 dir = mousePos - mPos;
-		dir.Normalize();
-		// position += direction * speed * time
-		//mPos.y += 4.0f * Time::DeltaTime();
-		mPos += 4.0f * dir * Time::DeltaTime();
+		mPos += 7.0f * dir * Time::DeltaTime();
 		tr->SetPosition(mPos);
+
 		mLifeTime += Time::DeltaTime();
-		if (mLifeTime >= 1.5f)
+		if (mLifeTime >= 2.5f)
 		{
 			if (mbHit)
 				mState = eGeddyBulletState::Hit;

@@ -37,5 +37,6 @@ namespace js
 		bool mbHit;
 
 		float mLifeTime;
+		Vector3 dir;
 	};
 }
