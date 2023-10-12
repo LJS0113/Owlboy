@@ -37,7 +37,7 @@ namespace js
 		gPlayer->SetName(L"Otus");
 		MeshRenderer* mr = gPlayer->AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
+		mr->SetMaterial(Resources::Find<Material>(L"SpriteReverseAnimationMaterial"));
 		gPlayer->AddComponent<Transform>();
 		Transform* otusTr = gPlayer->GetComponent<Transform>();
 		Vector3 otusPos = otusTr->GetPosition();
@@ -184,7 +184,7 @@ namespace js
 			Transform* geddyTr = gGeddy->GetComponent<Transform>();
 			Vector3 geddyPos = geddyTr->GetPosition();
 
-			GeddyBullet* bullet = object::Instantiate<GeddyBullet>(Vector3(geddyPos), eLayerType::Bullet);
+			GeddyBullet* bullet = object::Instantiate<GeddyBullet>(Vector3(geddyPos), eLayerType::PlayerBullet);
 			MeshRenderer* mr = bullet->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));

@@ -30,7 +30,7 @@ namespace js
 	{
 		MeshRenderer* mr = GetOwner()->AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
+		mr->SetMaterial(Resources::Find<Material>(L"SpriteReverseAnimationMaterial"));
 		mAnimator = GetOwner()->AddComponent<Animator>();
 		cd = GetOwner()->GetComponent<Collider2D>();
 		Transform* tr = GetOwner()->GetComponent<Transform>();
@@ -179,12 +179,12 @@ namespace js
 		}
 		geddyTr->SetPosition(geddyPos);
 		
-		if (Input::GetKeyDown(eKeyCode::RIGHT))
+		if (Input::GetKeyDown(eKeyCode::D))
 		{
 			mAnimator->PlayAnimation(L"GeddyHangRight", true);
 			mState = eGeddyState::Move;
 		}
-		if (Input::GetKeyDown(eKeyCode::LEFT))
+		if (Input::GetKeyDown(eKeyCode::A))
 		{
 			mAnimator->PlayAnimation(L"GeddyHangLeft", true);
 			mState = eGeddyState::Move;

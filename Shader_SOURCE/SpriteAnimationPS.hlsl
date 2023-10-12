@@ -33,8 +33,8 @@ float4 main(VSOut In) : SV_TARGET
             || UV.y < SpriteLeftTop.y || UV.y > SpriteLeftTop.y + SpriteSize.y)
             discard;
         
-        if (reverse == 1)
-            UV.x *= -1;
+        //if (reverse == 1)
+        //    UV.x *= -1;
         
         color = atlasTexture.Sample(anisotropicSampler, UV);
     }

@@ -31,7 +31,7 @@ namespace js
 	void DungeonScene::Initialize()
 	{
 
-		gPlayer = object::Instantiate<Player>(Vector3(3.0f, -1.0f, 1.0f), eLayerType::Player);
+		gPlayer = object::Instantiate<Player>(Vector3(0.9f, -1.0f, 1.0f), eLayerType::Player);
 		gPlayer->SetName(L"Otus");
 		Transform* tr = gPlayer->GetComponent<Transform>();
 		Collider2D* cd = gPlayer->AddComponent<Collider2D>();
@@ -48,13 +48,13 @@ namespace js
 			MeshRenderer* mr = player->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 			mr->SetMaterial(Resources::Find<Material>(L"DungeonMaterial"));
-			player->GetComponent<Transform>()->SetScale(Vector3(30.0f, 5.0f, 1.0f));
+			player->GetComponent<Transform>()->SetScale(Vector3(30.0f, 30.0f, 1.0f));
 		}
 		{
 			// Dungeon Ground
-			Ground* ground = object::Instantiate<Ground>(Vector3(-10.0f, -1.5f, 2.0f), eLayerType::Ground);
+			Ground* ground = object::Instantiate<Ground>(Vector3(-10.0f, -1.8f, 2.0f), eLayerType::Ground);
 			ground->SetName(L"DungeonGround");
-			ground->GetComponent<Transform>()->SetScale(Vector3(30.0f, 0.2f, 2.0f));
+			ground->GetComponent<Transform>()->SetScale(Vector3(25.0f, 0.2f, 2.0f));
 			Collider2D* cd = ground->AddComponent<Collider2D>();
 			cd->SetColliderOwner(eColliderOwner::Ground);
 		}

@@ -60,7 +60,7 @@ namespace js
 		float mSpeed;
 		renderer::SpriteReverseCB reverseCB;
 		renderer::CollisionCB collisionCB;
-		ConstantBuffer* reverseCb;
 		ConstantBuffer* collisionCb;
+		ConstantBuffer* reverseCb;
 	};
 }

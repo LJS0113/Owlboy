@@ -14,6 +14,7 @@ namespace js
 			Attack,
 			Fly,
 			Hit,
+			ThrowHead,
 			PickUp,
 			Death,
 		};
@@ -35,14 +36,28 @@ namespace js
 		void hit();
 		void death();
 		void pickup();
+		void throwHead();
+
+		void SetRange(bool range) { mbRange = range; }
+		bool GetRange() { return mbRange; }
 
 	private:
 		eMaskedState mState;
 		class Animator* mAnimator;
-		bool mbRight;
-		renderer::SpriteReverseCB reverseCB;
+		renderer::MonsterReverseCB reverseCB;
+		float mSpeed;
+
+		renderer::CollisionCB collisionCB;
+		ConstantBuffer* collisionCb;
+
+		ConstantBuffer* reverseCb;
 		ConstantBuffer* cb;
+
 		Collider2D* cd;
+		Collider2D* rangeCd;
+
+		bool mbRange;
+		bool mbRight;
 	};
 
 }

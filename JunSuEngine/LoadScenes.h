@@ -27,7 +27,7 @@ namespace js
 		SceneManager::CreateScene<HouseScene>(L"HouseScene");
 		SceneManager::CreateScene<PlayScene>(L"PlayScene");
 		SceneManager::CreateScene<EndingScene>(L"EndingScene");
-
+ 
 		SceneManager::LoadScene(L"PlayScene");
 	}
 }

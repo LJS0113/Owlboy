@@ -14,7 +14,12 @@ namespace js
 		virtual void Render() override;
 		virtual void LateUpdate() override;
 
+		void SetRange(bool range) { mbInRange = range; }
+		bool GetRange() { return mbInRange; }
+
 	private:
+		bool mbInRange;
+
 	};
 	extern Player* gPlayer;
 }

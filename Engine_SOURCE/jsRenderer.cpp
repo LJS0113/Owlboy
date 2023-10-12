@@ -76,6 +76,16 @@ namespace renderer
 			, shader->GetVSCode()
 			, shader->GetInputLayoutAddressOf());
 
+		shader = js::Resources::Find<Shader>(L"SpriteReverseAnimationShader");
+		js::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
+			, shader->GetVSCode()
+			, shader->GetInputLayoutAddressOf());
+
+		shader = js::Resources::Find<Shader>(L"MonsterShader");
+		js::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
+			, shader->GetVSCode()
+			, shader->GetInputLayoutAddressOf());
+
 		shader = js::Resources::Find<Shader>(L"ParticleShader");
 		js::graphics::GetDevice()->CreateInputLayout(arrLayout, 3
 			, shader->GetVSCode()
@@ -315,6 +325,10 @@ namespace renderer
 		constantBuffer[(UINT)eCBType::Collision] = new ConstantBuffer(eCBType::Collision);
 		constantBuffer[(UINT)eCBType::Collision]->Create(sizeof(CollisionCB));
 
+		// MonsterReverseCB
+		constantBuffer[(UINT)eCBType::MonsterReverse] = new ConstantBuffer(eCBType::MonsterReverse);
+		constantBuffer[(UINT)eCBType::MonsterReverse]->Create(sizeof(MonsterReverseCB));
+
 		// light structed buffer
 		lightsBuffer = new StructedBuffer();
 		lightsBuffer->Create(sizeof(LightAttribute), 2, eViewType::SRV, nullptr, true);
@@ -336,6 +350,16 @@ namespace renderer
 		spriteAniShader->Create(eShaderStage::VS, L"SpriteAnimationVS.hlsl", "main");
 		spriteAniShader->Create(eShaderStage::PS, L"SpriteAnimationPS.hlsl", "main");
 		js::Resources::Insert(L"SpriteAnimationShader", spriteAniShader);
+
+		spriteAniShader = std::make_shared<Shader>();
+		spriteAniShader->Create(eShaderStage::VS, L"SpriteReverseAnimationVS.hlsl", "main");
+		spriteAniShader->Create(eShaderStage::PS, L"SpriteReverseAnimationPS.hlsl", "main");
+		js::Resources::Insert(L"SpriteReverseAnimationShader", spriteAniShader);
+
+		spriteAniShader = std::make_shared<Shader>();
+		spriteAniShader->Create(eShaderStage::VS, L"MonsterAnimationVS.hlsl", "main");
+		spriteAniShader->Create(eShaderStage::PS, L"MonsterAnimationPS.hlsl", "main");
+		js::Resources::Insert(L"MonsterShader", spriteAniShader);
 
 		std::shared_ptr<Shader> gridShader = std::make_shared<Shader>();
 		gridShader->Create(eShaderStage::VS, L"GridVS.hlsl", "main");
@@ -395,6 +419,8 @@ namespace renderer
 	{
 		std::shared_ptr<Shader> shader = Resources::Find<Shader>(L"SpriteShader");
 		std::shared_ptr<Shader> spriteAniShader = Resources::Find<Shader>(L"SpriteAnimationShader");
+		std::shared_ptr<Shader> spriteReverseAniShader = Resources::Find<Shader>(L"SpriteReverseAnimationShader");
+		std::shared_ptr<Shader> monsterAniShader = Resources::Find<Shader>(L"MonsterShader");
 
 		std::shared_ptr<Texture> texture = Resources::Load<Texture>(L"Link", L"..\\Resources\\Texture\\link.png");
 		std::shared_ptr<Material> spriteMaterial = std::make_shared<Material>();
@@ -413,6 +439,16 @@ namespace renderer
 		spriteAniMaterial->SetShader(spriteAniShader);
 		spriteAniMaterial->SetRenderingMode(eRenderingMode::Transparent);
 		Resources::Insert(L"SpriteAnimationMaterial", spriteAniMaterial);
+
+		std::shared_ptr<Material> spriteReverseAniMaterial = std::make_shared<Material>();
+		spriteReverseAniMaterial->SetShader(spriteReverseAniShader);
+		spriteReverseAniMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"SpriteReverseAnimationMaterial", spriteReverseAniMaterial);
+
+		std::shared_ptr<Material> monsterAniMaterial = std::make_shared<Material>();
+		monsterAniMaterial->SetShader(monsterAniShader);
+		monsterAniMaterial->SetRenderingMode(eRenderingMode::Transparent);
+		Resources::Insert(L"MonsterAnimationMaterial", monsterAniMaterial);
 
 		std::shared_ptr<Shader> gridShader = Resources::Find<Shader>(L"GridShader");
 		std::shared_ptr<Material> gridMaterial = std::make_shared<Material>();
@@ -563,7 +599,7 @@ namespace renderer
 		Resources::Insert(L"Cloud3Material", cloud3Material);
 #pragma endregion
 #pragma region DungeonScene
-		std::shared_ptr<Texture> dundeonTexture = Resources::Load<Texture>(L"Dungeon", L"..\\Resources\\Texture\\dungeon.bmp");
+		std::shared_ptr<Texture> dundeonTexture = Resources::Load<Texture>(L"Dungeon", L"..\\Resources\\Texture\\dungeon2.png");
 		std::shared_ptr<Material> dungeonMaterial = std::make_shared<Material>();
 		dungeonMaterial->SetShader(shader);
 		dungeonMaterial->SetTexture(dundeonTexture);
@@ -579,7 +615,7 @@ namespace renderer
 #pragma region BossScene
 		// Boss Stage
 		UpLoad(shader, L"BossStage", L"BossStageMaterial");
-		UpLoad(spriteAniShader, L"Masked_Tortoise", L"Masked_Tortoise_Material");
+		UpLoad(monsterAniShader, L"Masked_Tortoise", L"Masked_Tortoise_Material");
 		
 #pragma endregion
 #pragma region EndingScene

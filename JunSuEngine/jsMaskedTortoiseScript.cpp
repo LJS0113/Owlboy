@@ -6,10 +6,17 @@
 #include "jsPlayer.h"
 #include "jsPlayerScript.h"
 #include "jsInput.h"
+#include "jsRenderer.h"
+#include "jsGameObject.h"
+#include "jsTransform.h"
+#include "jsTime.h"
 
 namespace js
 {
 	MaskedTortoiseScript::MaskedTortoiseScript()
+		:mbRange(false)
+		, mbRight(false)
+		, mSpeed(1.0f)
 	{
 	}
 	MaskedTortoiseScript::~MaskedTortoiseScript()
@@ -19,7 +26,7 @@ namespace js
 	{
 		MeshRenderer* mr = GetOwner()->AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
+		mr->SetMaterial(Resources::Find<Material>(L"MonsterAnimationMaterial"));
 		mAnimator = GetOwner()->AddComponent<Animator>();
 		cd = GetOwner()->GetComponent<Collider2D>();
 		cd->SetSize(Vector2(0.35f, 0.35f));
@@ -72,7 +79,6 @@ namespace js
 	}
 	void MaskedTortoiseScript::Update()
 	{
-		mbRight = gPlayer->GetComponent<PlayerScript>()->GetRightDir();
 
 		switch (mState)
 		{
@@ -91,6 +97,9 @@ namespace js
 		case js::MaskedTortoiseScript::eMaskedState::Hit:
 			hit();
 			break;
+		case js::MaskedTortoiseScript::eMaskedState::ThrowHead:
+			throwHead();
+			break;
 		case js::MaskedTortoiseScript::eMaskedState::PickUp:
 			pickup();
 			break;
@@ -103,10 +112,73 @@ namespace js
 	}
 	void MaskedTortoiseScript::idle()
 	{
-		 
+		Transform* monTr = GetOwner()->GetComponent<Transform>();
+		Vector3 monPos = monTr->GetPosition();
+		Transform* playerTr = gPlayer->GetComponent<Transform>();
+		Vector3 playerPos = playerTr->GetPosition();
+
+		if (monPos.x < playerPos.x)
+			mbRight = true;
+		else
+			mbRight = false;
+
+		mbRange = gPlayer->GetRange();
+
+		if (mbRange)
+		{
+			if (mbRight)
+			{
+				reverseCB.monsterReverse = 0;
+				reverseCb = renderer::constantBuffer[(UINT)eCBType::MonsterReverse];
+				reverseCb->SetData(&reverseCB);
+				reverseCb->Bind(eShaderStage::PS);
+				mAnimator->PlayAnimation(L"MaskedMoveRight", true);
+			}
+			else
+			{
+				reverseCB.monsterReverse = 1;
+				reverseCb = renderer::constantBuffer[(UINT)eCBType::MonsterReverse];
+				reverseCb->SetData(&reverseCB);
+				reverseCb->Bind(eShaderStage::PS);
+				mAnimator->PlayAnimation(L"MaskedMoveLeft", true);
+			}
+			mState = eMaskedState::Move;
+		}
+
+		//if (mbRight)
+		//{
+		//	reverseCB.monsterReverse = 0;
+		//	reverseCb = renderer::constantBuffer[(UINT)eCBType::MonsterReverse];
+		//	reverseCb->SetData(&reverseCB);
+		//	reverseCb->Bind(eShaderStage::PS);
+		//	mAnimator->PlayAnimation(L"MaskedMoveRight", true);
+		//}
+		//else
+		//{
+		//	reverseCB.monsterReverse = 1;
+		//	reverseCb = renderer::constantBuffer[(UINT)eCBType::MonsterReverse];
+		//	reverseCb->SetData(&reverseCB);
+		//	reverseCb->Bind(eShaderStage::PS);
+		//	mAnimator->PlayAnimation(L"MaskedMoveLeft", true);
+		//}
+		//mState = eMaskedState::Move;
 	}
 	void MaskedTortoiseScript::move()
 	{
+		Transform* monTr = GetOwner()->GetComponent<Transform>();
+		Vector3 monPos = monTr->GetPosition();
+		Transform* playerTr = GetOwner()->GetComponent<Transform>();
+		Vector3 playerPos = playerTr->GetPosition();
+
+		if (mbRight)
+		{
+			monPos.x += mSpeed * Time::DeltaTime();
+		}
+		else
+		{
+			monPos.x -= mSpeed * Time::DeltaTime();
+		}
+		monTr->SetPosition(monPos);
 	}
 	void MaskedTortoiseScript::attack()
 	{
@@ -123,13 +195,38 @@ namespace js
 	void MaskedTortoiseScript::pickup()
 	{
 	}
+	void MaskedTortoiseScript::throwHead()
+	{
+	}
 	void MaskedTortoiseScript::OnCollisionEnter(Collider2D* other)
 	{
+		collisionCB.collision = 1;
+
+		collisionCb = renderer::constantBuffer[(UINT)eCBType::Collision];
+		collisionCb->SetData(&collisionCB);
+		collisionCb->Bind(eShaderStage::PS);
+
+		if (other->GetOwner()->GetName().compare(L"BossLeftWall") == 0)
+		{
+			mAnimator->PlayAnimation(L"MaskedIdleRight", true);
+			mState = eMaskedState::Idle;
+		}
+		if (other->GetOwner()->GetName().compare(L"BossRightWall") == 0)
+		{
+			mAnimator->PlayAnimation(L"MaskedIdleLeft", true);
+			mState = eMaskedState::Idle;
+		}
 	}
 	void MaskedTortoiseScript::OnCollisionStay(Collider2D* other)
 	{
+
 	}
 	void MaskedTortoiseScript::OnCollisionExit(Collider2D* other)
 	{
+		collisionCB.collision = 0;
+
+		collisionCb = renderer::constantBuffer[(UINT)eCBType::Collision];
+		collisionCb->SetData(&collisionCB);
+		collisionCb->Bind(eShaderStage::PS);
 	}
 }

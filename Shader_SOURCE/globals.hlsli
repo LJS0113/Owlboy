@@ -45,6 +45,11 @@ cbuffer Collision : register(b7)
     uint collision;
 }
 
+cbuffer SpriteReverse : register(b8)
+{
+    uint monsterReverse;
+}
+
 Texture2D albedoTexture : register(t0);
 Texture2D atlasTexture : register(t12);
 Texture2D noiseTexture : register(t15);

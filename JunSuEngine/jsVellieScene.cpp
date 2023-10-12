@@ -18,6 +18,9 @@
 #include "jsCollisionManager.h"
 #include "jsGeddy.h"
 #include "jsGeddyScript.h"
+#include "jsWall.h"
+#include "jsWallScript.h"
+
 
 namespace js
 {
@@ -32,9 +35,10 @@ namespace js
 	void VellieScene::Initialize()
 	{
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Wall, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Artifact, true);
 
-		gPlayer = object::Instantiate<Player>(Vector3(1.5097f, -1.70f, 1.0f), eLayerType::Player);
+		gPlayer = object::Instantiate<Player>(Vector3(1.5097f, -0.80f, 1.0f), eLayerType::Player);
 		gPlayer->SetName(L"Otus");
 		Transform* tr = gPlayer->GetComponent<Transform>();
 		Collider2D* cd = gPlayer->AddComponent<Collider2D>();
@@ -68,6 +72,16 @@ namespace js
 			cd->SetColliderOwner(eColliderOwner::Ground);
 		}
 		{
+			// Vellie Wall
+			Wall* wall = object::Instantiate<Wall>(Vector3(0.0f, -10.0f, 2.0f), eLayerType::Wall);
+			wall->SetName(L"VellieWall");
+			wall->GetComponent<Transform>()->SetScale(Vector3(2.5f, 3.2f, 2.0f));
+			wall->AddComponent<WallScript>();
+			wall->AddComponent<WallScript>()->Initialize();
+			Collider2D* cd = wall->AddComponent<Collider2D>();
+			cd->SetColliderOwner(eColliderOwner::Wall);
+		}
+		{
 			// Sky
 			GameObject* vellieBG = object::Instantiate<GameObject>(Vector3(0.5f, 0.0f, 2.0f), eLayerType::BG);
 			MeshRenderer* mr = vellieBG->AddComponent<MeshRenderer>();
@@ -84,6 +98,8 @@ namespace js
 			renderer::mainCamera = cameraComp;
 			cameraComp->TurnLayerMask(eLayerType::UI, false);
 			camera->AddComponent<CameraScript>();
+			//Collider2D* camCd = camera->AddComponent<Collider2D>();
+			//camCd->SetSize(Vector2(1.5f, 1.5f));
 		}
 
 		{
@@ -92,7 +108,7 @@ namespace js
 			Camera* cameraComp = camera->AddComponent<Camera>();
 			cameraComp->TurnLayerMask(eLayerType::Player, false);
 			cameraComp->TurnLayerMask(eLayerType::BG, false);
-			cameraComp->TurnLayerMask(eLayerType::Scenery, false);
+			cameraComp->TurnLayerMask(eLayerType::Scenery, false); 
 		}
 
 		{

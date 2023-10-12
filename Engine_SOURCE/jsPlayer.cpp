@@ -6,6 +6,7 @@ namespace js
 	Player* gPlayer = nullptr;
 
 	Player::Player()
+		: mbInRange(false)
 	{
 	}
 

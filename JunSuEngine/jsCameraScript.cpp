@@ -14,30 +14,30 @@ namespace js
 		Transform* playerTr = gPlayer->GetComponent<Transform>();
 		Vector3 playerPos = playerTr->GetPosition();
 
-		if (Input::GetKey(eKeyCode::W))
-		{
-			//pos.y = playerPos.y;
-			pos.y += 5.0f * Time::DeltaTime();
-			tr->SetPosition(pos);
-		}
-		else if (Input::GetKey(eKeyCode::S))
-		{
-			//pos.y = playerPos.y;
-			pos.y -= 5.0f * Time::DeltaTime();
-			tr->SetPosition(pos);
-		}
-		else if (Input::GetKey(eKeyCode::A))
-		{
-			//pos.x = playerPos.x;
-			pos.x -= 5.0f * Time::DeltaTime();
-			tr->SetPosition(pos);
-		}
-		else if (Input::GetKey(eKeyCode::D))
-		{
-			//pos.x = playerPos.x;
-			pos.x += 5.0f * Time::DeltaTime();
-			tr->SetPosition(pos);
-		}
+		//if (Input::GetKey(eKeyCode::W))
+		//{
+		//	//pos.y = playerPos.y;
+		//	pos.y += 5.0f * Time::DeltaTime();
+		//	tr->SetPosition(pos);
+		//}
+		//else if (Input::GetKey(eKeyCode::S))
+		//{
+		//	//pos.y = playerPos.y;
+		//	pos.y -= 5.0f * Time::DeltaTime();
+		//	tr->SetPosition(pos);
+		//}
+		//else if (Input::GetKey(eKeyCode::A))
+		//{
+		//	//pos.x = playerPos.x;
+		//	pos.x -= 5.0f * Time::DeltaTime();
+		//	tr->SetPosition(pos);
+		//}
+		//else if (Input::GetKey(eKeyCode::D))
+		//{
+		//	//pos.x = playerPos.x;
+		//	pos.x += 5.0f * Time::DeltaTime();
+		//	tr->SetPosition(pos);
+		//}
 		//else if (Input::GetKey(eKeyCode::Q))
 		//{
 		//	pos.z -= 5.0f * Time::DeltaTime();
@@ -52,5 +52,17 @@ namespace js
 		pos.x = playerPos.x;
 		pos.y = playerPos.y;
 		tr->SetPosition(pos);
+	}
+
+	void CameraScript::OnCollisionEnter(Collider2D* other)
+	{
+	}
+
+	void CameraScript::OnCollisionStay(Collider2D* other)
+	{
+	}
+
+	void CameraScript::OnCollisionExit(Collider2D* other)
+	{
 	}
 }

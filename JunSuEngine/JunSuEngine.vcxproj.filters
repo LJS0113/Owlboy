@@ -113,6 +113,9 @@
     <ClCompile Include="jsGeddyBulletScript.cpp">
       <Filter>Contents\Script\Bullet\Geddy</Filter>
     </ClCompile>
+    <ClCompile Include="jsAttackRangeScript.cpp">
+      <Filter>Contents\Script\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -181,6 +184,9 @@
     </ClInclude>
     <ClInclude Include="jsGeddyBulletScript.h">
       <Filter>Contents\Script\Bullet\Geddy</Filter>
+    </ClInclude>
+    <ClInclude Include="jsAttackRangeScript.h">
+      <Filter>Contents\Script\Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

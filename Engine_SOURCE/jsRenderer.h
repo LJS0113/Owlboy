@@ -65,6 +65,11 @@ namespace renderer
 		UINT collision;
 	};
 
+	CBUFFER(MonsterReverseCB, CBSLOT_MONSTERREVERSE)
+	{
+		UINT monsterReverse;
+	};
+
 	extern js::Mesh* mesh;
 	extern js::Shader* shader;
 	extern js::graphics::ConstantBuffer* constantBuffer[(UINT)eCBType::End];

@@ -25,11 +25,11 @@ namespace js
 	}
 	void WallScript::OnCollisionEnter(Collider2D* other)
 	{
-		other->GetOwner()->GetComponent<PlayerScript>()->SetSpeed(0.0f);
 		float speed = other->GetOwner()->GetComponent<PlayerScript>()->GetSpeed();
 	}
 	void WallScript::OnCollisionStay(Collider2D* other)
 	{
+		other->GetOwner()->GetComponent<PlayerScript>()->SetSpeed(0.0f);
 	}
 	void WallScript::OnCollisionExit(Collider2D* other)
 	{

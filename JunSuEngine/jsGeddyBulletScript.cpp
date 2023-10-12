@@ -26,7 +26,7 @@ namespace js
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		Vector3 geddyPos = tr->GetPosition();
 		tr->SetScale(Vector3(3.0f, 3.0f, 1.0f));
-		cd->SetSize(Vector2(0.1f, 0.1f));
+		cd->SetSize(Vector2(0.05f, 0.05f));
 		std::shared_ptr<Texture> atlas = Resources::Load<Texture>(L"GeddyBulletSprite", L"..\\Resources\\Texture\\mechanicBullet.png");
 		mAnimator->Create(L"GeddyBullet", atlas, Vector2(0.0f, 0.0f), Vector2(13.0f, 13.0f), 8);
 		mAnimator->PlayAnimation(L"GeddyBullet", true);
@@ -36,6 +36,7 @@ namespace js
 		Vector2 pos = Input::GetMousePos();
 		Vector3 mousePos = Vector3(pos.x, pos.y, 0.0f);
 		mousePos = tr->GetNDCPos(Vector3(mousePos.x, mousePos.y, mousePos.z));
+
 		dir = mousePos - mPos;
 		dir.Normalize();
 		mState = eGeddyBulletState::Shoot;
@@ -104,6 +105,8 @@ namespace js
 
 	void GeddyBulletScript::OnCollisionEnter(Collider2D* other)
 	{
+		
+
 	}
 	void GeddyBulletScript::OnCollisionStay(Collider2D* other)
 	{

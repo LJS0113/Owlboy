@@ -135,6 +135,12 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)jsWall.cpp">
       <Filter>GameObject\Ground</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsMasked.cpp">
+      <Filter>GameObject\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsAttackRange.cpp">
+      <Filter>GameObject\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsApplication.h">
@@ -285,6 +291,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)jsFontWrapper.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsWall.h">
       <Filter>GameObject\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsMasked.h">
+      <Filter>GameObject\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsAttackRange.h">
+      <Filter>GameObject\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

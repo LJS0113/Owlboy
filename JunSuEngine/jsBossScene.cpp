@@ -18,6 +18,12 @@
 #include "jsRigidBody.h"
 #include "jsGeddy.h"
 #include "jsGeddyScript.h"
+#include "jsWall.h"
+#include "jsGeddyBullet.h"
+#include "jsGeddyBulletScript.h"
+#include "jsAttackRange.h"
+#include "jsAttackRangeScript.h"
+#include "jsCollisionManager.h"
 
 namespace js
 {
@@ -29,6 +35,16 @@ namespace js
 	}
 	void BossScene::Initialize()
 	{
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::AttackRange, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Wall, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::MonsterBullet, true);
+
+		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Ground, true);
+		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Wall, true);
+		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::PlayerBullet, true);
+
 		gPlayer = object::Instantiate<Player>(Vector3(-3.0f, -1.5f, 1.0f), eLayerType::Player);
 		gPlayer->SetName(L"Otus");
 		Transform* tr = gPlayer->GetComponent<Transform>();
@@ -39,14 +55,24 @@ namespace js
 		tr->SetScale(Vector3(2.5f, 2.5f, 1.0f));
 		//gPlayer->AddComponent<CameraScript>();
 
+		Monster* monster = object::Instantiate<Monster>(Vector3(0.0f, -1.2f, 1.0f), eLayerType::Monster);
+		monster->SetName(L"MaskedTortoise");
+		Transform* monsterTr = monster->GetComponent<Transform>();
+		Collider2D* monsterCd = monster->AddComponent<Collider2D>();
+		monster->AddComponent<MaskedTortoiseScript>();
+		monster->GetComponent<MaskedTortoiseScript>()->Initialize();
+		monsterTr->SetScale(Vector3(2.0f, 2.0f, 1.0f));
+		Vector3 monsterPos = monsterTr->GetPosition();
+
 		{
-			Monster* monster = object::Instantiate<Monster>(Vector3(0.0f, -1.2f, 1.0f), eLayerType::Monster);
-			monster->SetName(L"MaskedTortoise");
-			Transform* tr = monster->GetComponent<Transform>();
-			Collider2D* cd = monster->AddComponent<Collider2D>();
-			monster->AddComponent<MaskedTortoiseScript>();
-			monster->GetComponent<MaskedTortoiseScript>()->Initialize();
-			tr->SetScale(Vector3(2.0f, 2.0f, 1.0f));
+			// AttackRange
+			AttackRange* atRange = object::Instantiate<AttackRange>(monsterPos, eLayerType::AttackRange);
+			atRange->SetName(L"AttackRange");
+			atRange->AddComponent<AttackRangeScript>();
+			atRange->GetComponent<AttackRangeScript>()->Initialize();
+			Transform* atRangeTr = atRange->GetComponent<Transform>();
+			Collider2D* atRangeCd = atRange->AddComponent<Collider2D>();
+			atRangeCd->SetSize(Vector2(3.5f, 3.5f));
 		}
 		{
 			// Boss Ground
@@ -55,6 +81,22 @@ namespace js
 			ground->GetComponent<Transform>()->SetScale(Vector3(10.0f, 0.2f, 2.0f));
 			Collider2D* cd = ground->AddComponent<Collider2D>();
 			cd->SetColliderOwner(eColliderOwner::Ground);
+		}
+		{
+			// Boss Left Wall
+			Wall* wall = object::Instantiate<Wall>(Vector3(-4.0, 0.0f, 2.0f), eLayerType::Wall);
+			wall->SetName(L"BossLeftWall");
+			wall->GetComponent<Transform>()->SetScale(Vector3(0.5f, 5.0f, 1.9f));
+			Collider2D* cd = wall->AddComponent<Collider2D>();
+			cd->SetColliderOwner(eColliderOwner::Wall);
+		}
+		{
+			// Boss Right Wall
+			Wall* wall = object::Instantiate<Wall>(Vector3(4.0, 0.0f, 2.0f), eLayerType::Wall);
+			wall->SetName(L"BossRightWall");
+			wall->GetComponent<Transform>()->SetScale(Vector3(0.5f, 5.0f, 1.9f));
+			Collider2D* cd = wall->AddComponent<Collider2D>();
+			cd->SetColliderOwner(eColliderOwner::Wall);
 		}
 		{
 			GameObject* player = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 2.0f), eLayerType::BG);
@@ -146,7 +188,7 @@ namespace js
 				gGeddy->SetName(L"Geddy");
 				MeshRenderer* mr = gGeddy->AddComponent<MeshRenderer>();
 				mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-				mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
+				mr->SetMaterial(Resources::Find<Material>(L"SpriteReverseAnimationMaterial"));
 				gGeddy->AddComponent<Transform>();
 				Transform* geddyTr = gGeddy->GetComponent<Transform>();
 				Vector3 geddyPos = geddyTr->GetPosition();
@@ -156,9 +198,26 @@ namespace js
 				gGeddy->GetComponent<GeddyScript>()->Initialize();
 				geddyTr->SetScale(Vector3(2.5f, 2.5f, 1.0f));
 				geddyCd->SetColliderOwner(eColliderOwner::Player);
-				geddyCd->SetCenter(Vector2(-0.1f, -0.05f));
+				geddyCd->SetCenter(Vector2(0.0f, -0.05f));
 			}
 		}
+
+		bool hang = gPlayer->GetComponent<PlayerScript>()->IsHang();
+		if (hang && Input::GetKeyState(eKeyCode::LBUTTON) == eKeyState::Down)
+		{
+			Transform* geddyTr = gGeddy->GetComponent<Transform>();
+			Vector3 geddyPos = geddyTr->GetPosition();
+
+			GeddyBullet* bullet = object::Instantiate<GeddyBullet>(Vector3(geddyPos), eLayerType::PlayerBullet);
+			MeshRenderer* mr = bullet->AddComponent<MeshRenderer>();
+			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
+			bullet->AddComponent<Collider2D>();
+			bullet->AddComponent<Transform>();
+			bullet->AddComponent<GeddyBulletScript>();
+			bullet->GetComponent<GeddyBulletScript>()->Initialize();
+		}
+
 		if (Input::GetKeyState(eKeyCode::N) == eKeyState::Down)
 		{
 			SceneManager::LoadScene(L"EndingScene");
