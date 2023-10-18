@@ -41,10 +41,14 @@ namespace js
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Wall, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::MonsterBullet, true);
 
+		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Artifact, true);
 		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Ground, true);
 		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Wall, true);
 		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::PlayerBullet, true);
 		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::PlayerAttack, true);
+
+		CollisionManager::SetLayer(eLayerType::Artifact, eLayerType::Ground, true);
+		CollisionManager::SetLayer(eLayerType::Artifact, eLayerType::Wall, true);
 
 		gPlayer = object::Instantiate<Player>(Vector3(-3.0f, -1.5f, 1.0f), eLayerType::Player);
 		gPlayer->SetName(L"Otus");
@@ -67,7 +71,7 @@ namespace js
 
 		{
 			// Boss Ground
-			Ground* ground = object::Instantiate<Ground>(Vector3(0.0f, -2.0f, 2.0f), eLayerType::Ground);
+			Ground* ground = object::Instantiate<Ground>(Vector3(0.0f, -1.9f, 2.0f), eLayerType::Ground);
 			ground->SetName(L"BossGround");
 			ground->GetComponent<Transform>()->SetScale(Vector3(10.0f, 0.2f, 2.0f));
 			Collider2D* cd = ground->AddComponent<Collider2D>();

@@ -16,6 +16,9 @@
 #include "jsMaskedBullet.h"
 #include "jsMaskedBulletScript.h"
 #include "jsMaskedHead.h"
+#include "jsMaskedHeadScript.h"
+#include "jsRigidBody.h"
+
 
 namespace js
 {
@@ -26,7 +29,7 @@ namespace js
 		, dir(Vector3::Zero)
 		, mTime(0.0f)
 		, atCount(0)
-		
+
 	{
 	}
 	MaskedTortoiseScript::~MaskedTortoiseScript()
@@ -59,10 +62,7 @@ namespace js
 		mAnimator->Create(L"MaskedFlyDeathRight", atlas, Vector2(0.0f, 124.0f * 19), Vector2(129.0f, 124.0f), 1);
 
 		mAnimator->Create(L"NoMaskedIdleRight", atlas, Vector2(129.0f, 124.0f * 2), Vector2(129.0f, 124.0f), 1);
-		mAnimator->Create(L"NoMaskedMoveRight", atlas, Vector2(0.0f, 124.0f * 8), Vector2(129.0f, 124.0f), 8);
 		mAnimator->Create(L"NoMaskedFlyRight", atlas, Vector2(0.0f, 124.0f * 14), Vector2(129.0f, 124.0f), 8);
-		mAnimator->Create(L"NoMaskedHitRight", atlas, Vector2(0.0f, 124.0f * 16), Vector2(129.0f, 124.0f), 6);
-
 
 		mAnimator->Create(L"MaskedIdleLeft", atlas, Vector2(1215.0f, 124.0f * 2), Vector2(-129.0f, 124.0f), 1);
 		mAnimator->Create(L"MaskedMoveLeft", atlas, Vector2(1215.0f, 124.0f * 3), Vector2(-129.0f, 124.0f), 8);
@@ -80,9 +80,15 @@ namespace js
 		mAnimator->Create(L"MaskedFlyDeathLeft", atlas, Vector2(1215.0f, 124.0f * 19), Vector2(-129.0f, 124.0f), 1);
 
 		mAnimator->Create(L"NoMaskedIdleLeft", atlas, Vector2(1086.0f, 124.0f * 2), Vector2(-129.0f, 124.0f), 1);
-		mAnimator->Create(L"NoMaskedMoveLeft", atlas, Vector2(1215.0f, 124.0f * 8), Vector2(-129.0f, 124.0f), 8);
 		mAnimator->Create(L"NoMaskedFlyLeft", atlas, Vector2(1215.0f, 124.0f * 14), Vector2(-129.0f, 124.0f), 8);
-		mAnimator->Create(L"NoMaskedHitLeft", atlas, Vector2(1215.0f, 124.0f * 16), Vector2(-129.0f, 124.0f), 6);
+
+		atlas = Resources::Load<Texture>(L"NoMaskedHit", L"..\\Resources\\Texture\\Monster\\Masked_Tortoise\\sprHit_strip3.png");
+		mAnimator->Create(L"NoMaskedHitRight", atlas, Vector2(0.0f, 0.0f), Vector2(129.0f, 124.0f), 3, Vector2::Zero, 0.5f);
+		mAnimator->Create(L"NoMaskedHitLeft", atlas, Vector2(258.0f, 0.0f), Vector2(-129.0f, 124.0f), 3, Vector2::Zero, 0.5f);
+
+		atlas = Resources::Load<Texture>(L"NoMaskedMove", L"..\\Resources\\Texture\\Monster\\Masked_Tortoise\\sprMoveNoMask_strip8.png");
+		mAnimator->Create(L"NoMaskedMoveRight", atlas, Vector2(0.0f, 0.0f), Vector2(129.0f, 124.0f), 8);
+		mAnimator->Create(L"NoMaskedMoveLeft", atlas, Vector2(903.0f, 0.0f), Vector2(-129.0f, 124.0f), 8);
 
 		mAnimator->PlayAnimation(L"MaskedMoveRight", true);
 		mState = eMaskedState::Idle;
@@ -227,7 +233,7 @@ namespace js
 
 		mTime += Time::DeltaTime();
 		bool isRange = atRange->GetComponent<AttackRangeScript>()->IsRange();
-		
+
 		if (mTime > 0.3f)
 		{
 			MaskedBullet* msBullet = object::Instantiate<MaskedBullet>(monPos, eLayerType::MonsterBullet);
@@ -238,7 +244,7 @@ namespace js
 			atCount++;
 			mTime = 0.0f;
 		}
-				
+
 		if (atCount > 6)
 		{
 			mState = eMaskedState::Move;
@@ -259,15 +265,65 @@ namespace js
 	}
 	void MaskedTortoiseScript::hit()
 	{
+		if (mAnimator->IsComplete())
+		{
+			if(mbRight)
+				mAnimator->PlayAnimation(L"NoMaskedMoveRight", true);
+			else
+				mAnimator->PlayAnimation(L"NoMaskedMoveLeft", true);
+			mState = eMaskedState::ThrowHead;
+		}
+		
 	}
 	void MaskedTortoiseScript::death()
 	{
 	}
 	void MaskedTortoiseScript::pickup()
 	{
+		Transform* monTr = GetOwner()->GetComponent<Transform>();
+		Vector3 monPos = monTr->GetPosition();
+		Transform* playerTr = gPlayer->GetComponent<Transform>();
+		Vector3 playerPos = playerTr->GetPosition();
+
+		if (monPos.x < playerPos.x)
+			mbRight = true;
+		else
+			mbRight = false;
+
+		if (mAnimator->IsComplete())
+		{
+			if (mbRight)
+			{
+				reverseCB.monsterReverse = 0;
+				reverseCb = renderer::constantBuffer[(UINT)eCBType::MonsterReverse];
+				reverseCb->SetData(&reverseCB);
+				reverseCb->Bind(eShaderStage::PS);
+				mAnimator->PlayAnimation(L"MaskedMoveRight", true);
+			}
+			else
+			{
+				reverseCB.monsterReverse = 1;
+				reverseCb = renderer::constantBuffer[(UINT)eCBType::MonsterReverse];
+				reverseCb->SetData(&reverseCB);
+				reverseCb->Bind(eShaderStage::PS);
+				mAnimator->PlayAnimation(L"MaskedMoveLeft", true);
+			}
+			mState = eMaskedState::Move;
+		}
+		
 	}
 	void MaskedTortoiseScript::throwHead()
 	{
+		Transform* monTr = GetOwner()->GetComponent<Transform>();
+		Vector3 monPos = monTr->GetPosition();
+		Transform* headTr = msHead->GetComponent<Transform>();
+		Vector3 headPos = headTr->GetPosition();
+
+		if (monPos.x < headPos.x)
+			monPos.x += 0.5f * Time::DeltaTime();
+		else
+			monPos.x -= 0.5f * Time::DeltaTime();
+		monTr->SetPosition(monPos);
 	}
 	void MaskedTortoiseScript::OnCollisionEnter(Collider2D* other)
 	{
@@ -293,19 +349,47 @@ namespace js
 		}
 		if (other->GetOwner()->GetName().compare(L"PlayerAttack") == 0)
 		{
+			msHead = object::Instantiate<MaskedHead>(Vector3(monPos), eLayerType::Artifact);
+			msHead->SetName(L"msHead");
+			msHead->AddComponent<Animator>();
+			msHead->AddComponent<Collider2D>();
+			msHead->AddComponent<MaskedHeadScript>();
+			msHead->GetComponent<MaskedHeadScript>()->Initialize();
 			if (monPos.x < playerPos.x)
 			{
 				// 왼쪽으로 날아가야함
-				mAnimator->PlayAnimation(L"NoMaskedHitLeft", true);
+				mbRight = false;
+				reverseCB.monsterReverse = 1;
+				reverseCb = renderer::constantBuffer[(UINT)eCBType::MonsterReverse];
+				reverseCb->SetData(&reverseCB);
+				reverseCb->Bind(eShaderStage::PS);
+				mAnimator->PlayAnimation(L"NoMaskedHitLeft", false);
+				msHead->GetComponent<MaskedHeadScript>()->SetRightDir(false);
 			}
 			else
 			{
 				// 오른쪽으로 날아가야함
-				mAnimator->PlayAnimation(L"NoMaskedHitRight", true);
+				mbRight = true;
+				reverseCB.monsterReverse = 0;
+				reverseCb = renderer::constantBuffer[(UINT)eCBType::MonsterReverse];
+				reverseCb->SetData(&reverseCB);
+				reverseCb->Bind(eShaderStage::PS);
+				mAnimator->PlayAnimation(L"NoMaskedHitRight", false);
+				msHead->GetComponent<MaskedHeadScript>()->SetRightDir(true);
 			}
-			msHead = object::Instantiate<MaskedHead>(Vector3(monPos), eLayerType::Monster);
-			msHead->Initialize();
-			mState = eMaskedState::ThrowHead;
+			mState = eMaskedState::Hit;
+		}
+		if (msHead->GetComponent<Rigidbody>()->GetGround())
+		{
+			if (other->GetOwner()->GetName().compare(L"msHead") == 0)
+			{
+				if(mbRight)
+					mAnimator->PlayAnimation(L"MaskedEquipRight", false);
+				else
+					mAnimator->PlayAnimation(L"MaskedEquipLeft", false);
+				mState = eMaskedState::PickUp;
+				msHead->SetState(GameObject::eState::Dead);
+			}
 		}
 	}
 	void MaskedTortoiseScript::OnCollisionStay(Collider2D* other)

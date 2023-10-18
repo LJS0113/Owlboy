@@ -50,6 +50,9 @@
     <Filter Include="Contents\Script\Bullet\Masked">
       <UniqueIdentifier>{7981be56-2b32-4d0b-af30-6907198f2cd4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Script\Monster\Masked">
+      <UniqueIdentifier>{7d64c70e-5ee6-4a10-8169-41ff022843b9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="JunSuEngine.cpp" />
@@ -86,9 +89,6 @@
     <ClCompile Include="jsPlayerScript.cpp">
       <Filter>Contents\Script\Player\Otus</Filter>
     </ClCompile>
-    <ClCompile Include="jsMaskedTortoiseScript.cpp">
-      <Filter>Contents\Script\Monster</Filter>
-    </ClCompile>
     <ClCompile Include="jsDoorScript.cpp">
       <Filter>Contents\Script\Object\Door</Filter>
     </ClCompile>
@@ -121,6 +121,12 @@
     </ClCompile>
     <ClCompile Include="jsMaskedBulletScript.cpp">
       <Filter>Contents\Script\Bullet\Masked</Filter>
+    </ClCompile>
+    <ClCompile Include="jsMaskedTortoiseScript.cpp">
+      <Filter>Contents\Script\Monster\Masked</Filter>
+    </ClCompile>
+    <ClCompile Include="jsMaskedHeadScript.cpp">
+      <Filter>Contents\Script\Monster\Masked</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -161,9 +167,6 @@
     <ClInclude Include="jsPlayerScript.h">
       <Filter>Contents\Script\Player\Otus</Filter>
     </ClInclude>
-    <ClInclude Include="jsMaskedTortoiseScript.h">
-      <Filter>Contents\Script\Monster</Filter>
-    </ClInclude>
     <ClInclude Include="jsDoorScript.h">
       <Filter>Contents\Script\Object\Door</Filter>
     </ClInclude>
@@ -196,6 +199,12 @@
     </ClInclude>
     <ClInclude Include="jsMaskedBulletScript.h">
       <Filter>Contents\Script\Bullet\Masked</Filter>
+    </ClInclude>
+    <ClInclude Include="jsMaskedTortoiseScript.h">
+      <Filter>Contents\Script\Monster\Masked</Filter>
+    </ClInclude>
+    <ClInclude Include="jsMaskedHeadScript.h">
+      <Filter>Contents\Script\Monster\Masked</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
