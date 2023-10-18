@@ -46,10 +46,15 @@ namespace js
 		class Animator* mAnimator;
 		renderer::MonsterReverseCB reverseCB;
 		float mSpeed;
+		float mTime;
+		UINT atCount;
+		Vector3 dir;
+		class AttackRange* atRange;
+		class MaskedHead* msHead;
+		//class MaskedBullet* msBullet;
 
 		renderer::CollisionCB collisionCB;
 		ConstantBuffer* collisionCb;
-
 		ConstantBuffer* reverseCb;
 		ConstantBuffer* cb;
 

@@ -13,6 +13,7 @@
 #include "jsObject.h"
 #include "jsGeddy.h"
 #include "jsGeddyScript.h"
+#include "jsAttackObject.h"
 
 namespace js
 {
@@ -28,6 +29,7 @@ namespace js
 		, reverseCB{}
 		, collisionCB{}
 		, collisionCb(nullptr)
+		, atObj(nullptr)
 	{
 		reverseCB.reverse = 0;
 
@@ -339,6 +341,8 @@ namespace js
 		{
 			if (!mbHang)
 			{
+				atObj = object::Instantiate<AttackObject>(pos, eLayerType::PlayerAttack);
+				atObj->SetName(L"PlayerAttack");
 				if (mbRight)
 					mAnimator->PlayAnimation(L"OtusAttackRight", false);
 				else
@@ -477,6 +481,7 @@ namespace js
 					mAnimator->PlayAnimation(L"OtusFlyLeft", true);
 				mState = ePlayerState::Fly;
 			}
+			atObj->SetState(GameObject::eState::Dead);
 		}
 	}
 
@@ -536,6 +541,8 @@ namespace js
 		{
 			if (!mbHang)
 			{
+				atObj = object::Instantiate<AttackObject>(pos, eLayerType::PlayerAttack);
+				atObj->SetName(L"PlayerAttack");
 				if (mbRight)
 					mAnimator->PlayAnimation(L"OtusAttackRight", false);
 				else

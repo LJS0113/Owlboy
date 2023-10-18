@@ -19,6 +19,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)jsAnimation.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsAnimator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsApplication.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsAttackObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsAttackRange.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsCamera.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsCollider2D.h" />
@@ -41,6 +42,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)jsLayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsLight.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsMasked.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsMaskedBullet.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsMaskedHead.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsMaterial.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsMath.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsMesh.h" />
@@ -75,6 +78,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)jsAnimation.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsAnimator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsApplication.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsAttackObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsAttackRange.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsCamera.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsCollider2D.cpp" />
@@ -94,6 +98,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)jsLayer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsLight.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsMasked.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsMaskedBullet.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsMaskedHead.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsMaterial.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsMath.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsMesh.cpp" />

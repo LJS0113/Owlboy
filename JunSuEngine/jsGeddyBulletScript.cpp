@@ -70,8 +70,6 @@ namespace js
 
 	void GeddyBulletScript::none()
 	{
-
-
 		if (Input::GetKeyDown(eKeyCode::LBUTTON))
 			mState = eGeddyBulletState::Shoot;
 	}

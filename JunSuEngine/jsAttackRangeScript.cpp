@@ -1,10 +1,13 @@
 #include "jsAttackRangeScript.h"
 #include "jsMaskedTortoiseScript.h"
 #include "jsPlayer.h"
+#include "jsGameObject.h"
+#include "jsComponent.h"
 
 namespace js
 {
 	AttackRangeScript::AttackRangeScript()
+		: mbRange(false)
 	{
 	}
 	AttackRangeScript::~AttackRangeScript()
@@ -25,7 +28,7 @@ namespace js
 	}
 	void AttackRangeScript::OnCollisionEnter(Collider2D* other)
 	{
-		gPlayer->SetRange(true);
+		mbRange = true;
 	}
 	void AttackRangeScript::OnCollisionStay(Collider2D* other)
 	{
@@ -33,5 +36,6 @@ namespace js
 	}
 	void AttackRangeScript::OnCollisionExit(Collider2D* other)
 	{
+		mbRange = false;
 	}
 }

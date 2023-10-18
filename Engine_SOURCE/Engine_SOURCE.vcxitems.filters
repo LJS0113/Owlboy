@@ -135,11 +135,20 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)jsWall.cpp">
       <Filter>GameObject\Ground</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)jsMasked.cpp">
-      <Filter>GameObject\Monster</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)jsAttackRange.cpp">
       <Filter>GameObject\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsMasked.cpp">
+      <Filter>GameObject\Monster\MaskedTortoise</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsMaskedBullet.cpp">
+      <Filter>GameObject\Monster\MaskedTortoise</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsAttackObject.cpp">
+      <Filter>GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsMaskedHead.cpp">
+      <Filter>GameObject\Monster\MaskedTortoise</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -292,11 +301,20 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)jsWall.h">
       <Filter>GameObject\Ground</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)jsMasked.h">
-      <Filter>GameObject\Monster</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsAttackRange.h">
       <Filter>GameObject\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsMasked.h">
+      <Filter>GameObject\Monster\MaskedTortoise</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsMaskedBullet.h">
+      <Filter>GameObject\Monster\MaskedTortoise</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsAttackObject.h">
+      <Filter>GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsMaskedHead.h">
+      <Filter>GameObject\Monster\MaskedTortoise</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -431,6 +449,9 @@
     </Filter>
     <Filter Include="Scene\Manager">
       <UniqueIdentifier>{ab199595-e3a8-4521-9f4d-8e8e5b660f6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Monster\MaskedTortoise">
+      <UniqueIdentifier>{e2b6d299-1434-4b8b-877d-2c4ed6d44043}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

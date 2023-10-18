@@ -16,8 +16,11 @@ namespace js
 		virtual void Render() override;
 		virtual void LateUpdate() override;
 
-	private:
+		void SetRange(bool range) { mbRange = range; }
+		bool GetRange() { return mbRange; }
 
+	private:
+		bool mbRange;
 
 	};
 

@@ -52,6 +52,7 @@ namespace js
 	private:
 		ePlayerState mState;
 		class Animator* mAnimator;
+		class AttackObject* atObj;
 		bool mbFly;
 		bool mbRight;
 		bool mbHang;

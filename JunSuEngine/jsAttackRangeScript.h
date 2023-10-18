@@ -19,7 +19,11 @@ namespace js
 		virtual void OnCollisionStay(Collider2D* other) override;
 		virtual void OnCollisionExit(Collider2D* other) override;
 
+		bool IsRange() { return mbRange; }
+
 	private:
+		bool mbRange;
+
 
 	};
 }

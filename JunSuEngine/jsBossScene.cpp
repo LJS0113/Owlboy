@@ -44,6 +44,7 @@ namespace js
 		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Ground, true);
 		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Wall, true);
 		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::PlayerBullet, true);
+		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::PlayerAttack, true);
 
 		gPlayer = object::Instantiate<Player>(Vector3(-3.0f, -1.5f, 1.0f), eLayerType::Player);
 		gPlayer->SetName(L"Otus");
@@ -55,7 +56,7 @@ namespace js
 		tr->SetScale(Vector3(2.5f, 2.5f, 1.0f));
 		//gPlayer->AddComponent<CameraScript>();
 
-		Monster* monster = object::Instantiate<Monster>(Vector3(0.0f, -1.2f, 1.0f), eLayerType::Monster);
+		monster = object::Instantiate<Monster>(Vector3(0.0f, -1.2f, 1.0f), eLayerType::Monster);
 		monster->SetName(L"MaskedTortoise");
 		Transform* monsterTr = monster->GetComponent<Transform>();
 		Collider2D* monsterCd = monster->AddComponent<Collider2D>();
@@ -64,16 +65,6 @@ namespace js
 		monsterTr->SetScale(Vector3(2.0f, 2.0f, 1.0f));
 		Vector3 monsterPos = monsterTr->GetPosition();
 
-		{
-			// AttackRange
-			AttackRange* atRange = object::Instantiate<AttackRange>(monsterPos, eLayerType::AttackRange);
-			atRange->SetName(L"AttackRange");
-			atRange->AddComponent<AttackRangeScript>();
-			atRange->GetComponent<AttackRangeScript>()->Initialize();
-			Transform* atRangeTr = atRange->GetComponent<Transform>();
-			Collider2D* atRangeCd = atRange->AddComponent<Collider2D>();
-			atRangeCd->SetSize(Vector2(3.5f, 3.5f));
-		}
 		{
 			// Boss Ground
 			Ground* ground = object::Instantiate<Ground>(Vector3(0.0f, -2.0f, 2.0f), eLayerType::Ground);
@@ -106,7 +97,6 @@ namespace js
 			mr->SetMaterial(Resources::Find<Material>(L"BossStageMaterial"));
 			player->GetComponent<Transform>()->SetScale(Vector3(8.0f, 4.5f, 1.0f));
 		}
-
 		{
 			// coin
 			GameObject* hpBar = object::Instantiate<GameObject>(Vector3(-3.6f, 1.6f, -5.0f), eLayerType::UI);
@@ -164,7 +154,6 @@ namespace js
 			//camera->AddComponent<CameraScript>();
 			renderer::mainCamera = cameraComp;
 		}
-
 		{
 			// UI Camera
 			GameObject* camera = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, -10.0f), eLayerType::Camera);
@@ -173,7 +162,6 @@ namespace js
 			cameraComp->TurnLayerMask(eLayerType::Monster, false);
 			cameraComp->TurnLayerMask(eLayerType::BG, false);
 		}
-
 	}
 	void BossScene::Update()
 	{

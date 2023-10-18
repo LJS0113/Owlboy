@@ -18,7 +18,7 @@ namespace js
 		virtual void OnExit() override;
 
 	private:
-
+		class Monster* monster;
 	};
 
 }

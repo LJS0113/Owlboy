@@ -47,6 +47,9 @@
     <Filter Include="Contents\Script\Bullet\Geddy">
       <UniqueIdentifier>{b2a543d8-5173-4b79-96bd-851f580ccf45}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Script\Bullet\Masked">
+      <UniqueIdentifier>{7981be56-2b32-4d0b-af30-6907198f2cd4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="JunSuEngine.cpp" />
@@ -115,6 +118,9 @@
     </ClCompile>
     <ClCompile Include="jsAttackRangeScript.cpp">
       <Filter>Contents\Script\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="jsMaskedBulletScript.cpp">
+      <Filter>Contents\Script\Bullet\Masked</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -187,6 +193,9 @@
     </ClInclude>
     <ClInclude Include="jsAttackRangeScript.h">
       <Filter>Contents\Script\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="jsMaskedBulletScript.h">
+      <Filter>Contents\Script\Bullet\Masked</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

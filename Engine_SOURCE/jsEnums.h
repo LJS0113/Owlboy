@@ -30,6 +30,7 @@ namespace js::enums
 		Grid,
 		Player,
 		Monster,
+		PlayerAttack,
 		AttackRange,
 		PlayerBullet,
 		MonsterBullet,
