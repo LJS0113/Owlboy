@@ -48,8 +48,8 @@ namespace js
 		cd->SetSize(Vector2(0.1f, 0.25f));
 		cd->SetCenter(Vector2(0.0f, -0.05f));
 
-		mAnimator->PlayAnimation(L"GeddyHangRight", true);
-		mState = eGeddyState::Idle;
+		mAnimator->PlayAnimation(L"GeddyIdleRight", true);
+		mState = eGeddyState::Hang;
 	}
 
 	void GeddyScript::Update()
@@ -189,13 +189,6 @@ namespace js
 			mAnimator->PlayAnimation(L"GeddyHangLeft", true);
 			mState = eGeddyState::Move;
 		}
-
-		//if (Input::GetKeyDown(eKeyCode::LBUTTON))
-		//{
-		//	bullet = object::Instantiate<GeddyBullet>(Vector3(geddyPos.x, geddyPos.y, geddyPos.z - 0.1f), eLayerType::Bullet);
-
-		//	mState = eGeddyState::Attack;
-		//}
 
 		if (Input::GetKeyDown(eKeyCode::RBUTTON))
 		{

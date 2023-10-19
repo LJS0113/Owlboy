@@ -20,11 +20,13 @@
 #include "jsGeddyScript.h"
 #include "jsWall.h"
 #include "jsWallScript.h"
-
+#include "jsAudioSource.h"
+#include "jsMouseCursor.h"
 
 namespace js
 {
 	VellieScene::VellieScene()
+		: as(nullptr)
 	{
 	}
 
@@ -38,6 +40,9 @@ namespace js
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Wall, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Artifact, true);
 
+		MouseCursor* mouse = object::Instantiate<MouseCursor>(eLayerType::MouseCursor);
+		mouse->Initialize();
+
 		gPlayer = object::Instantiate<Player>(Vector3(1.5097f, -0.80f, 1.0f), eLayerType::Player);
 		gPlayer->SetName(L"Otus");
 		Transform* tr = gPlayer->GetComponent<Transform>();
@@ -48,16 +53,19 @@ namespace js
 		tr->SetScale(Vector3(2.5f, 2.5f, 1.0f));
 		gPlayer->AddComponent<CameraScript>();
 
-		{
-			GameObject* vellieBG = object::Instantiate<GameObject>(Vector3(-3.0f, 1.5f, 1.999f), eLayerType::Scenery);
-			MeshRenderer* mr = vellieBG->AddComponent<MeshRenderer>();
-			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			mr->SetMaterial(Resources::Find<Material>(L"VellieMaterial"));
-			vellieBG->GetComponent<Transform>()->SetScale(Vector3(48.0f, 27.0f, 1.0f));
-		}
+
+		vellieBG = object::Instantiate<GameObject>(Vector3(-3.0f, 1.5f, 1.999f), eLayerType::Scenery);
+		MeshRenderer* mr = vellieBG->AddComponent<MeshRenderer>();
+		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		mr->SetMaterial(Resources::Find<Material>(L"VellieMaterial"));
+		vellieBG->GetComponent<Transform>()->SetScale(Vector3(48.0f, 27.0f, 1.0f));
+		as = vellieBG->AddComponent<AudioSource>();
+		as->SetClip(Resources::Load<AudioClip>(L"VellieSound", L"..\\Resources\\Sound\\OST\\Vellie.mp3"));
+		as->Play();
+
 		{
 			// House Ground
-			Ground* ground = object::Instantiate<Ground>(Vector3(0.2629f, -1.0f, 2.0f), eLayerType::Ground);
+			Ground* ground = object::Instantiate<Ground>(Vector3(0.2629f, -0.9f, 2.0f), eLayerType::Ground);
 			ground->SetName(L"HouseGround");
 			ground->GetComponent<Transform>()->SetScale(Vector3(3.0f, 0.2f, 2.0f));
 			Collider2D* cd = ground->AddComponent<Collider2D>();
@@ -108,11 +116,12 @@ namespace js
 			Camera* cameraComp = camera->AddComponent<Camera>();
 			cameraComp->TurnLayerMask(eLayerType::Player, false);
 			cameraComp->TurnLayerMask(eLayerType::BG, false);
-			cameraComp->TurnLayerMask(eLayerType::Scenery, false); 
+			cameraComp->TurnLayerMask(eLayerType::Scenery, false);
+			cameraComp->TurnLayerMask(eLayerType::MouseCursor, false);
 		}
 
 		{
-			Door* door = object::Instantiate<Door>(Vector3(-27.431f, -15.214f, 1.1f), eLayerType::Artifact);
+			Door* door = object::Instantiate<Door>(Vector3(-22.65f, -9.699f, 1.1f), eLayerType::Artifact);
 			Collider2D* col = door->GetComponent<Collider2D>();
 			col->SetSize(Vector2(0.5f, 0.5f));
 			door->AddComponent<DoorScript>();
@@ -123,31 +132,12 @@ namespace js
 	{
 		if (Input::GetKeyState(eKeyCode::N) == eKeyState::Down)
 		{
-			SceneManager::LoadScene(L"DungeonScene");
+			as->Stop();
+			SceneManager::LoadScene(L"BossScene");
 		}
-		Transform* otusTr = gPlayer->GetComponent<Transform>();
-		Vector3 otusPos = otusTr->GetPosition();
-		bool summon = gPlayer->GetComponent<PlayerScript>()->GetSummon();
-		if (Input::GetKeyState(eKeyCode::R) == eKeyState::Down)
+		if (Input::GetKeyState(eKeyCode::F) == eKeyState::Down)
 		{
-			if (!summon)
-			{
-				gGeddy = object::Instantiate<Geddy>(Vector3(otusPos.x, otusPos.y - 0.5f, otusPos.z), eLayerType::Player);
-				gGeddy->SetName(L"Geddy");
-				MeshRenderer* mr = gGeddy->AddComponent<MeshRenderer>();
-				mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-				mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
-				gGeddy->AddComponent<Transform>();
-				Transform* geddyTr = gGeddy->GetComponent<Transform>();
-				Vector3 geddyPos = geddyTr->GetPosition();
-				Collider2D* geddyCd = gGeddy->AddComponent<Collider2D>();
-				Rigidbody* geddyRb = gGeddy->AddComponent<Rigidbody>();
-				gGeddy->AddComponent<GeddyScript>();
-				gGeddy->GetComponent<GeddyScript>()->Initialize();
-				geddyTr->SetScale(Vector3(2.5f, 2.5f, 1.0f));
-				geddyCd->SetColliderOwner(eColliderOwner::Player);
-				geddyCd->SetCenter(Vector2(-0.1f, -0.05f));
-			}
+			as->Stop();
 		}
 		Scene::Update();
 	}

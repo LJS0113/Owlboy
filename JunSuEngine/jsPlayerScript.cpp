@@ -14,6 +14,13 @@
 #include "jsGeddy.h"
 #include "jsGeddyScript.h"
 #include "jsAttackObject.h"
+#include "jsAudioSource.h"
+#include "jsGeddyArm.h"
+#include "jsGeddyArmScript.h"
+#include "jsGeddyBullet.h"
+#include "jsGeddyBulletScript.h"
+
+extern js::Geddy* gGeddy;
 
 namespace js
 {
@@ -30,6 +37,7 @@ namespace js
 		, collisionCB{}
 		, collisionCb(nullptr)
 		, atObj(nullptr)
+		, as(nullptr)
 	{
 		reverseCB.reverse = 0;
 
@@ -80,8 +88,21 @@ namespace js
 		mAnimator->Create(L"OtusAttackLeft", atlas, Vector2(1456.0f, 96.689f * 19), Vector2(-112.0f, 96.689f), 5);
 		mAnimator->Create(L"OtusDeadLeft", atlas, Vector2(1456.0f, 96.689f * 24), Vector2(-112.0f, 96.689f), 12);
 
+		atlas = Resources::Load<Texture>(L"OtusDashSprite", L"..\\Resources\\Texture\\Otus\\rollGround_strip6.png");
+		mAnimator->Create(L"OtusDashRight", atlas, Vector2(0.0f, 0.0f), Vector2(112.0f, 96.0f), 6, Vector2::Zero, 0.06f);
+		mAnimator->Create(L"OtusDashLeft", atlas, Vector2(560.0f, 0.0f), Vector2(-112.0f, 96.0f), 6, Vector2::Zero, 0.06f);
+
+		atlas = Resources::Load<Texture>(L"OtusFlyDashSprite", L"..\\Resources\\Texture\\Otus\\roll_strip9.png");
+		mAnimator->Create(L"OtusFlyDashRight", atlas, Vector2(0.0f, 0.0f), Vector2(112.0f, 96.0f), 9, Vector2::Zero, 0.06f);
+		mAnimator->Create(L"OtusFlyDashLeft", atlas, Vector2(896.0f, 0.0f), Vector2(-112.0f, 96.0f), 9, Vector2::Zero, 0.06f);
+
 		mAnimator->PlayAnimation(L"OtusIdleRight", true);
 		mState = ePlayerState::Idle;
+
+		atObj = object::Instantiate<AttackObject>(Vector3(1000.0f, 1000.0f, 1000.0f), eLayerType::PlayerAttack);
+		atObj->SetName(L"PlayerAttack");
+
+
 	}
 
 	void PlayerScript::Update()
@@ -155,8 +176,8 @@ namespace js
 
 	void PlayerScript::move()
 	{
+		Rigidbody* rb = GetOwner()->GetComponent<Rigidbody>();
 		Transform* tr = GetOwner()->GetComponent<Transform>();
-
 		Vector3 pos = tr->GetPosition();
 
 		if (Input::GetKey(eKeyCode::A))
@@ -262,18 +283,120 @@ namespace js
 
 		if (Input::GetKeyDown(eKeyCode::LBUTTON))
 		{
+			if (!mbHang)
+			{
+				as = GetOwner()->AddComponent<AudioSource>();
+				as->SetClip(Resources::Load<AudioClip>(L"PlayerAttack", L"..\\Resources\\Sound\\SoundEffect\\attack.mp3"));
+				as->Play();
+				atObj = object::Instantiate<AttackObject>(pos, eLayerType::PlayerAttack);
+				atObj->SetName(L"PlayerAttack");
+				if (mbRight)
+					mAnimator->PlayAnimation(L"OtusAttackRight", false);
+				else
+					mAnimator->PlayAnimation(L"OtusAttackLeft", false);
+
+			}
+			else
+			{
+				Transform* geddyTr = gGeddy->GetComponent<Transform>();
+				Vector3 geddyPos = geddyTr->GetPosition();
+
+				GeddyBullet* bullet = object::Instantiate<GeddyBullet>(Vector3(geddyPos), eLayerType::PlayerBullet);
+				bullet->SetName(L"GeddyBullet");
+				MeshRenderer* mr = bullet->AddComponent<MeshRenderer>();
+				as = GetOwner()->AddComponent<AudioSource>();
+				as->SetClip(Resources::Load<AudioClip>(L"GeddyBulletSound", L"..\\Resources\\Sound\\SoundEffect\\geddyFire.mp3"));
+				as->Play();
+				mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+				mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
+				bullet->AddComponent<Collider2D>();
+				bullet->AddComponent<Transform>();
+				bullet->AddComponent<GeddyBulletScript>();
+				bullet->GetComponent<GeddyBulletScript>()->Initialize();
+			}
 			mState = ePlayerState::Attack;
 		}
 
 		if (Input::GetKeyDown(eKeyCode::R))
 		{
-			mAnimator->PlayAnimation(L"OtusHangRight", true);
+			if (!mbSummon)
+			{
+				// 첫 소환
+				gGeddy = object::Instantiate<Geddy>(Vector3(pos.x, pos.y - 0.5f, pos.z), eLayerType::Player);
+				gGeddy->SetName(L"Geddy");
+				MeshRenderer* mr = gGeddy->AddComponent<MeshRenderer>();
+				mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+				mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
+				gGeddy->AddComponent<Transform>();
+				Transform* geddyTr = gGeddy->GetComponent<Transform>();
+				Vector3 geddyPos = geddyTr->GetPosition();
+				Collider2D* geddyCd = gGeddy->AddComponent<Collider2D>();
+				Rigidbody* geddyRb = gGeddy->AddComponent<Rigidbody>();
+				gGeddy->AddComponent<GeddyScript>();
+				gGeddy->GetComponent<GeddyScript>()->Initialize();
+				geddyTr->SetScale(Vector3(2.5f, 2.5f, 1.0f));
+				geddyCd->SetColliderOwner(eColliderOwner::Player);
+
+				GeddyArm* geddyArm = object::Instantiate<GeddyArm>(Vector3(2.0f, 2.0f, 1.0f), eLayerType::Player);
+				geddyArm->SetName(L"GeddyArm");
+				mr = geddyArm->AddComponent<MeshRenderer>();
+				mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+				mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
+				geddyArm->AddComponent<Transform>();
+				Transform* geddyArmTr = geddyArm->GetComponent<Transform>();
+				Vector3 geddyArmPos = geddyArmTr->GetPosition();
+				geddyArm->AddComponent<GeddyArmScript>();
+				geddyArm->GetComponent<GeddyArmScript>()->Initialize();
+				mbSummon = true;
+				mbHang = true;
+			}
+			mbHang = true;
+
+			if (mbRight)
+				mAnimator->PlayAnimation(L"OtusHangRight", true);
+			else
+				mAnimator->PlayAnimation(L"OtusHangLeft", true);
 			mState = ePlayerState::Hang;
+		}
+
+		if (Input::GetKeyDown(eKeyCode::RBUTTON))
+		{
+			if (!mbHang)
+			{
+				rb->SetGround(false);
+				if (mbRight)
+					mAnimator->PlayAnimation(L"OtusFallRight", true);
+				else
+					mAnimator->PlayAnimation(L"OtusFallLeft", true);
+				mState = ePlayerState::Fall;
+			}
+			else
+			{
+				mbHang = false;
+				if (mbRight)
+					mAnimator->PlayAnimation(L"OtusFlyRight", true);
+				else
+					mAnimator->PlayAnimation(L"OtusFlyLeft", true);
+				mState = ePlayerState::Fly;
+			}
 		}
 
 		if (Input::GetKeyDown(eKeyCode::SPACE))
 		{
-			mAnimator->PlayAnimation(L"OtusDashRight", false);
+			if (mbFly)
+			{
+				if (mbRight)
+					mAnimator->PlayAnimation(L"OtusFlyDashRight", false);
+				else
+					mAnimator->PlayAnimation(L"OtusFlyDashLeft", false);
+			}
+			else
+			{
+				if (mbRight)
+					mAnimator->PlayAnimation(L"OtusDashRight", false);
+				else
+					mAnimator->PlayAnimation(L"OtusDashLeft", false);
+			}
 			mState = ePlayerState::Dash;
 		}
 
@@ -320,7 +443,6 @@ namespace js
 			mState = ePlayerState::Move;
 		}
 
-
 		if (Input::GetKeyDown(eKeyCode::W))
 		{
 			if (!mbFly)
@@ -341,6 +463,9 @@ namespace js
 		{
 			if (!mbHang)
 			{
+				as = GetOwner()->AddComponent<AudioSource>();
+				as->SetClip(Resources::Load<AudioClip>(L"PlayerAttack", L"..\\Resources\\Sound\\SoundEffect\\attack.mp3"));
+				as->Play();
 				atObj = object::Instantiate<AttackObject>(pos, eLayerType::PlayerAttack);
 				atObj->SetName(L"PlayerAttack");
 				if (mbRight)
@@ -360,8 +485,6 @@ namespace js
 			mState = ePlayerState::Dash;
 		}
 
-
-
 		if (Input::GetKeyDown(eKeyCode::RBUTTON))
 		{
 			if (!mbHang)
@@ -378,10 +501,47 @@ namespace js
 
 	void PlayerScript::dash()
 	{
-		if (Input::GetKeyUp(eKeyCode::SPACE))
+		Transform* tr = GetOwner()->GetComponent<Transform>();
+		Vector3 pos = tr->GetPosition();
+		if(mbRight)
+			pos.x += mSpeed * 1.5f * Time::DeltaTime();
+		else
+			pos.x -= mSpeed * 1.5f * Time::DeltaTime();
+
+		tr->SetPosition(pos);
+		if (mAnimator->IsComplete())
 		{
-			mAnimator->PlayAnimation(L"OtusIdleRight", true);
-			mState = ePlayerState::Idle;
+			if (mbHang)
+			{
+				// 메달려있을때
+				if (mbRight)
+					mAnimator->PlayAnimation(L"OtusHangRight", true);
+				else
+					mAnimator->PlayAnimation(L"OtusHangLeft", true);
+				mState = ePlayerState::Hang;
+			}
+			else
+			{
+				// 안 메달려 있을때 
+				if (mbFly)
+				{
+					// 날고 있을때
+					if (mbRight)
+						mAnimator->PlayAnimation(L"OtusFlyRight", true);
+					else
+						mAnimator->PlayAnimation(L"OtusFlyLeft", true);
+					mState = ePlayerState::Fly;
+				}
+				else
+				{
+					// 안날고 있을때
+					if (mbRight)
+						mAnimator->PlayAnimation(L"OtusIdleRight", true);
+					else
+						mAnimator->PlayAnimation(L"OtusIdleLeft", true);
+					mState = ePlayerState::Idle;
+				}
+			}
 		}
 	}
 
@@ -408,6 +568,10 @@ namespace js
 		}
 		else if (Input::GetKeyDown(eKeyCode::W))
 		{
+			as = GetOwner()->AddComponent<AudioSource>();
+			as->SetClip(Resources::Load<AudioClip>(L"PlayerWing", L"..\\Resources\\Sound\\SoundEffect\\wing.mp3"));
+			as->Play();
+
 			if (mbRight)
 				mAnimator->PlayAnimation(L"OtusFlyRight", true);
 			else
@@ -446,6 +610,24 @@ namespace js
 			mState = ePlayerState::Move;
 		}
 
+		if (Input::GetKeyDown(eKeyCode::LBUTTON))
+		{
+			Transform* geddyTr = gGeddy->GetComponent<Transform>();
+			Vector3 geddyPos = geddyTr->GetPosition();
+
+			GeddyBullet* bullet = object::Instantiate<GeddyBullet>(Vector3(geddyPos), eLayerType::PlayerBullet);
+			bullet->SetName(L"GeddyBullet");
+			MeshRenderer* mr = bullet->AddComponent<MeshRenderer>();
+			as = GetOwner()->AddComponent<AudioSource>();
+			as->SetClip(Resources::Load<AudioClip>(L"GeddyBulletSound", L"..\\Resources\\Sound\\SoundEffect\\geddyFire.mp3"));
+			as->Play();
+			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
+			bullet->AddComponent<Collider2D>();
+			bullet->AddComponent<Transform>();
+			bullet->AddComponent<GeddyBulletScript>();
+			bullet->GetComponent<GeddyBulletScript>()->Initialize();
+		}
 		if (Input::GetKeyDown(eKeyCode::RBUTTON))
 		{
 			if (!mbHang)
@@ -457,32 +639,49 @@ namespace js
 					mAnimator->PlayAnimation(L"OtusFallLeft", true);
 				mState = ePlayerState::Fall;
 			}
-			mbHang = false;
-		}
-	}
-
-	void PlayerScript::attack()
-	{
-		if (mAnimator->IsComplete())
-		{
-			if (!mbFly)
+			else
 			{
-				if (mbRight)
-					mAnimator->PlayAnimation(L"OtusIdleRight", true);
-				else
-					mAnimator->PlayAnimation(L"OtusIdleLeft", true);
-				mState = ePlayerState::Idle;
-			}
-			if (mbFly)
-			{
+				mbHang = false;
 				if (mbRight)
 					mAnimator->PlayAnimation(L"OtusFlyRight", true);
 				else
 					mAnimator->PlayAnimation(L"OtusFlyLeft", true);
 				mState = ePlayerState::Fly;
 			}
-			atObj->SetState(GameObject::eState::Dead);
 		}
+	}
+
+	void PlayerScript::attack()
+	{
+		if (!mbHang)
+		{
+			if (mAnimator->IsComplete())
+			{
+				if (!mbFly)
+				{
+					if (mbRight)
+						mAnimator->PlayAnimation(L"OtusIdleRight", true);
+					else
+						mAnimator->PlayAnimation(L"OtusIdleLeft", true);
+					mState = ePlayerState::Idle;
+				}
+				if (mbFly)
+				{
+					if (mbRight)
+						mAnimator->PlayAnimation(L"OtusFlyRight", true);
+					else
+						mAnimator->PlayAnimation(L"OtusFlyLeft", true);
+					mState = ePlayerState::Fly;
+				}
+				atObj->SetState(GameObject::eState::Dead);
+				as->Stop();
+			}
+		}
+		else
+		{
+			mState = ePlayerState::Hang;
+		}
+
 	}
 
 	void PlayerScript::death()
@@ -527,9 +726,38 @@ namespace js
 		if (Input::GetKeyDown(eKeyCode::R))
 		{
 			if (!mbSummon)
-				mbSummon = true;
+			{
+				// 첫 소환
+				gGeddy = object::Instantiate<Geddy>(Vector3(pos.x, pos.y - 0.5f, pos.z), eLayerType::Player);
+				gGeddy->SetName(L"Geddy");
+				MeshRenderer* mr = gGeddy->AddComponent<MeshRenderer>();
+				mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+				mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
+				gGeddy->AddComponent<Transform>();
+				Transform* geddyTr = gGeddy->GetComponent<Transform>();
+				Vector3 geddyPos = geddyTr->GetPosition();
+				Collider2D* geddyCd = gGeddy->AddComponent<Collider2D>();
+				Rigidbody* geddyRb = gGeddy->AddComponent<Rigidbody>();
+				gGeddy->AddComponent<GeddyScript>();
+				gGeddy->GetComponent<GeddyScript>()->Initialize();
+				geddyTr->SetScale(Vector3(2.5f, 2.5f, 1.0f));
+				geddyCd->SetColliderOwner(eColliderOwner::Player);
 
+				GeddyArm* geddyArm = object::Instantiate<GeddyArm>(Vector3(2.0f, 2.0f, 1.0f), eLayerType::Player);
+				geddyArm->SetName(L"GeddyArm");
+				mr = geddyArm->AddComponent<MeshRenderer>();
+				mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+				mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
+				geddyArm->AddComponent<Transform>();
+				Transform* geddyArmTr = geddyArm->GetComponent<Transform>();
+				Vector3 geddyArmPos = geddyArmTr->GetPosition();
+				geddyArm->AddComponent<GeddyArmScript>();
+				geddyArm->GetComponent<GeddyArmScript>()->Initialize();
+				mbHang = true;
+				mbSummon = true;
+			}
 			mbHang = true;
+
 			if (mbRight)
 				mAnimator->PlayAnimation(L"OtusHangRight", true);
 			else
@@ -541,24 +769,31 @@ namespace js
 		{
 			if (!mbHang)
 			{
+				as = GetOwner()->AddComponent<AudioSource>();
+				as->SetClip(Resources::Load<AudioClip>(L"PlayerAttack", L"..\\Resources\\Sound\\SoundEffect\\attack.mp3"));
+				as->Play();
 				atObj = object::Instantiate<AttackObject>(pos, eLayerType::PlayerAttack);
 				atObj->SetName(L"PlayerAttack");
 				if (mbRight)
 					mAnimator->PlayAnimation(L"OtusAttackRight", false);
 				else
 					mAnimator->PlayAnimation(L"OtusAttackLeft", false);
-				mState = ePlayerState::Attack;
 			}
+			mState = ePlayerState::Attack;
 		}
 
 		if (Input::GetKeyDown(eKeyCode::RBUTTON))
 		{
 			rb->SetGround(false);
-			if (mbRight)
-				mAnimator->PlayAnimation(L"OtusJumpFallRight", true);
-			else
-				mAnimator->PlayAnimation(L"OtusJumpFallLeft", true);
-			mState = ePlayerState::Fall;
+			if (!mbHang)
+			{
+				if (mbRight)
+					mAnimator->PlayAnimation(L"OtusJumpFallRight", true);
+				else
+					mAnimator->PlayAnimation(L"OtusJumpFallLeft", true);
+				mState = ePlayerState::Fall;
+				mbHang = false;
+			}
 		}
 	}
 

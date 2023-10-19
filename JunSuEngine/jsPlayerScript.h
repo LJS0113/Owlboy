@@ -1,6 +1,6 @@
 #pragma once
 #include "..\Engine_SOURCE\jsScript.h"
-
+#include "jsAudioSource.h"
 
 namespace js
 {
@@ -53,6 +53,7 @@ namespace js
 		ePlayerState mState;
 		class Animator* mAnimator;
 		class AttackObject* atObj;
+		AudioSource* as;
 		bool mbFly;
 		bool mbRight;
 		bool mbHang;

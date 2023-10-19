@@ -46,7 +46,7 @@ namespace js
 			}
 			if (SceneManager::GetActiveScene() == SceneManager::FindScene(L"VellieScene"))
 			{
-				SceneManager::LoadScene(L"DungeonScene");
+				SceneManager::LoadScene(L"BossScene");
 				return;
 			}
 		}

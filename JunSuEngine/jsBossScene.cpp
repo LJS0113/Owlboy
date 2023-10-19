@@ -24,6 +24,7 @@
 #include "jsAttackRange.h"
 #include "jsAttackRangeScript.h"
 #include "jsCollisionManager.h"
+#include "jsMouseCursor.h"
 
 namespace js
 {
@@ -50,6 +51,8 @@ namespace js
 		CollisionManager::SetLayer(eLayerType::Artifact, eLayerType::Ground, true);
 		CollisionManager::SetLayer(eLayerType::Artifact, eLayerType::Wall, true);
 
+		MouseCursor* mouse = object::Instantiate<MouseCursor>(eLayerType::MouseCursor);
+		mouse->Initialize();
 		gPlayer = object::Instantiate<Player>(Vector3(-3.0f, -1.5f, 1.0f), eLayerType::Player);
 		gPlayer->SetName(L"Otus");
 		Transform* tr = gPlayer->GetComponent<Transform>();
@@ -93,14 +96,17 @@ namespace js
 			Collider2D* cd = wall->AddComponent<Collider2D>();
 			cd->SetColliderOwner(eColliderOwner::Wall);
 		}
-		{
-			GameObject* player = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 2.0f), eLayerType::BG);
-			player->SetName(L"BossStage");
-			MeshRenderer* mr = player->AddComponent<MeshRenderer>();
-			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			mr->SetMaterial(Resources::Find<Material>(L"BossStageMaterial"));
-			player->GetComponent<Transform>()->SetScale(Vector3(8.0f, 4.5f, 1.0f));
-		}
+
+		bossBG = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 2.0f), eLayerType::BG);
+		bossBG->SetName(L"BossStage");
+		MeshRenderer* mr = bossBG->AddComponent<MeshRenderer>();
+		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		mr->SetMaterial(Resources::Find<Material>(L"BossStageMaterial"));
+		bossBG->GetComponent<Transform>()->SetScale(Vector3(8.0f, 4.5f, 1.0f));
+		as = bossBG->AddComponent<AudioSource>();
+		as->SetClip(Resources::Load<AudioClip>(L"BossSound", L"..\\Resources\\Sound\\OST\\Turtle_Guardian_Phase_1.mp3"));
+		as->Play();
+
 		{
 			// coin
 			GameObject* hpBar = object::Instantiate<GameObject>(Vector3(-3.6f, 1.6f, -5.0f), eLayerType::UI);
@@ -165,50 +171,52 @@ namespace js
 			cameraComp->TurnLayerMask(eLayerType::Player, false);
 			cameraComp->TurnLayerMask(eLayerType::Monster, false);
 			cameraComp->TurnLayerMask(eLayerType::BG, false);
+			cameraComp->TurnLayerMask(eLayerType::MouseCursor, false);
 		}
 	}
 	void BossScene::Update()
 	{
-		Transform* otusTr = gPlayer->GetComponent<Transform>();
-		Vector3 otusPos = otusTr->GetPosition();
-		bool summon = gPlayer->GetComponent<PlayerScript>()->GetSummon();
-		if (Input::GetKeyState(eKeyCode::R) == eKeyState::Down)
-		{
-			if (!summon)
-			{
-				gGeddy = object::Instantiate<Geddy>(Vector3(otusPos.x, otusPos.y - 0.5f, otusPos.z), eLayerType::Player);
-				gGeddy->SetName(L"Geddy");
-				MeshRenderer* mr = gGeddy->AddComponent<MeshRenderer>();
-				mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-				mr->SetMaterial(Resources::Find<Material>(L"SpriteReverseAnimationMaterial"));
-				gGeddy->AddComponent<Transform>();
-				Transform* geddyTr = gGeddy->GetComponent<Transform>();
-				Vector3 geddyPos = geddyTr->GetPosition();
-				Collider2D* geddyCd = gGeddy->AddComponent<Collider2D>();
-				Rigidbody* geddyRb = gGeddy->AddComponent<Rigidbody>();
-				gGeddy->AddComponent<GeddyScript>();
-				gGeddy->GetComponent<GeddyScript>()->Initialize();
-				geddyTr->SetScale(Vector3(2.5f, 2.5f, 1.0f));
-				geddyCd->SetColliderOwner(eColliderOwner::Player);
-				geddyCd->SetCenter(Vector2(0.0f, -0.05f));
-			}
-		}
+		//Transform* otusTr = gPlayer->GetComponent<Transform>();
+		//Vector3 otusPos = otusTr->GetPosition();
+		//bool summon = gPlayer->GetComponent<PlayerScript>()->GetSummon();
+		//if (Input::GetKeyState(eKeyCode::R) == eKeyState::Down)
+		//{
+		//	if (!summon)
+		//	{
+		//		gGeddy = object::Instantiate<Geddy>(Vector3(otusPos.x, otusPos.y - 0.5f, otusPos.z), eLayerType::Player);
+		//		gGeddy->SetName(L"Geddy");
+		//		MeshRenderer* mr = gGeddy->AddComponent<MeshRenderer>();
+		//		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//		mr->SetMaterial(Resources::Find<Material>(L"SpriteReverseAnimationMaterial"));
+		//		gGeddy->AddComponent<Transform>();
+		//		Transform* geddyTr = gGeddy->GetComponent<Transform>();
+		//		Vector3 geddyPos = geddyTr->GetPosition();
+		//		Collider2D* geddyCd = gGeddy->AddComponent<Collider2D>();
+		//		Rigidbody* geddyRb = gGeddy->AddComponent<Rigidbody>();
+		//		gGeddy->AddComponent<GeddyScript>();
+		//		gGeddy->GetComponent<GeddyScript>()->Initialize();
+		//		geddyTr->SetScale(Vector3(2.5f, 2.5f, 1.0f));
+		//		geddyCd->SetColliderOwner(eColliderOwner::Player);
+		//		geddyCd->SetCenter(Vector2(0.0f, -0.05f));
+		//	}
+		//}
 
-		bool hang = gPlayer->GetComponent<PlayerScript>()->IsHang();
-		if (hang && Input::GetKeyState(eKeyCode::LBUTTON) == eKeyState::Down)
-		{
-			Transform* geddyTr = gGeddy->GetComponent<Transform>();
-			Vector3 geddyPos = geddyTr->GetPosition();
+		//bool hang = gPlayer->GetComponent<PlayerScript>()->IsHang();
+		//if (hang && Input::GetKeyState(eKeyCode::LBUTTON) == eKeyState::Down)
+		//{
+		//	Transform* geddyTr = gGeddy->GetComponent<Transform>();
+		//	Vector3 geddyPos = geddyTr->GetPosition();
 
-			GeddyBullet* bullet = object::Instantiate<GeddyBullet>(Vector3(geddyPos), eLayerType::PlayerBullet);
-			MeshRenderer* mr = bullet->AddComponent<MeshRenderer>();
-			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
-			bullet->AddComponent<Collider2D>();
-			bullet->AddComponent<Transform>();
-			bullet->AddComponent<GeddyBulletScript>();
-			bullet->GetComponent<GeddyBulletScript>()->Initialize();
-		}
+		//	GeddyBullet* bullet = object::Instantiate<GeddyBullet>(Vector3(geddyPos), eLayerType::PlayerBullet);
+		//	bullet->SetName(L"GeddyBullet");
+		//	MeshRenderer* mr = bullet->AddComponent<MeshRenderer>();
+		//	mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//	mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
+		//	bullet->AddComponent<Collider2D>();
+		//	bullet->AddComponent<Transform>();
+		//	bullet->AddComponent<GeddyBulletScript>();
+		//	bullet->GetComponent<GeddyBulletScript>()->Initialize();
+		//}
 
 		if (Input::GetKeyState(eKeyCode::N) == eKeyState::Down)
 		{

@@ -412,7 +412,7 @@ namespace renderer
 
 		texture = std::make_shared<Texture>();
 		texture = Resources::Load<Texture>(L"Masked_Tortoise", L"..\\Resources\\Texture\\Monster\\Masked_Tortoise\\Masked Tortoise.png");
-
+		texture = Resources::Load<Texture>(L"GurdianStageFloor", L"..\\Resources\\Texture\\Monster\\Guardian\\stonepillarH.png");
 	}
 
 	void LoadMaterial()
@@ -610,6 +610,12 @@ namespace renderer
 		testMaterial->SetShader(shader);
 		testMaterial->SetTexture(testTexture);
 		Resources::Insert(L"TestMaterial", testMaterial);
+
+		std::shared_ptr<Texture> mouseTexture = Resources::Load<Texture>(L"Mouse", L"..\\Resources\\Texture\\cursor_36x36.png");
+		std::shared_ptr<Material> mouseMaterial = std::make_shared<Material>();
+		mouseMaterial->SetShader(shader);
+		mouseMaterial->SetTexture(mouseTexture);
+		Resources::Insert(L"MouseMaterial", mouseMaterial);
 #pragma endregion
 
 #pragma region BossScene
@@ -617,6 +623,8 @@ namespace renderer
 		UpLoad(shader, L"BossStage", L"BossStageMaterial");
 		UpLoad(monsterAniShader, L"Masked_Tortoise", L"Masked_Tortoise_Material");
 		
+		// Guardian Stage 
+
 #pragma endregion
 #pragma region EndingScene
 		// Ending Sky

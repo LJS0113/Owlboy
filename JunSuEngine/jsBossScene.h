@@ -1,5 +1,6 @@
 #pragma once
 #include "..\Engine_SOURCE\jsScene.h"
+#include "..\Engine_SOURCE\jsAudioSource.h"
 
 namespace js
 {
@@ -19,6 +20,8 @@ namespace js
 
 	private:
 		class Monster* monster;
+		AudioSource* as;
+		GameObject* bossBG;
 	};
 
 }

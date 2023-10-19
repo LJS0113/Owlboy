@@ -1,5 +1,7 @@
 #pragma once
 #include "..\Engine_SOURCE\jsScene.h"
+#include "..\Engine_SOURCE\jsAudioSource.h"
+
 
 namespace js
 {
@@ -18,7 +20,8 @@ namespace js
 		virtual void OnExit() override;
 
 	private:
-
+		AudioSource* as;
+		GameObject* vellieBG;
 	};
 
 }

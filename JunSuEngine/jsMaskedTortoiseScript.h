@@ -9,6 +9,7 @@ namespace js
 	public:
 		enum class eMaskedState
 		{
+			Wait,
 			Idle,
 			Move,
 			Attack,
@@ -17,6 +18,7 @@ namespace js
 			ThrowHead,
 			PickUp,
 			Death,
+			Disappear,
 		};
 		MaskedTortoiseScript();
 		~MaskedTortoiseScript();
@@ -29,6 +31,7 @@ namespace js
 		virtual void OnCollisionStay(class Collider2D* other) override;
 		virtual void OnCollisionExit(class Collider2D* other) override;
 
+		void wait();
 		void idle();
 		void move();
 		void attack();
@@ -37,6 +40,7 @@ namespace js
 		void death();
 		void pickup();
 		void throwHead();
+		void disappear();
 
 		void SetRange(bool range) { mbRange = range; }
 		bool GetRange() { return mbRange; }
@@ -47,12 +51,13 @@ namespace js
 		renderer::MonsterReverseCB reverseCB;
 		float mSpeed;
 		float mTime;
+		float deathTime;
 		UINT atCount;
 		Vector3 dir;
 		class AttackRange* atRange;
 		class MaskedHead* msHead;
 		//class MaskedBullet* msBullet;
-
+		float hp;
 		renderer::CollisionCB collisionCB;
 		ConstantBuffer* collisionCb;
 		ConstantBuffer* reverseCb;
@@ -60,9 +65,11 @@ namespace js
 
 		Collider2D* cd;
 		Collider2D* rangeCd;
-
+		bool mbFly;
 		bool mbRange;
 		bool mbRight;
+		bool mbTouch;
+		bool mbHead;
 	};
 
 }

@@ -82,6 +82,7 @@ namespace js
 
 		if (Input::GetKeyDown(eKeyCode::LBUTTON))
 		{
+			mAnimator->PlayAnimation(L"GeddyArmAttackRight", false);
 			mState = eGeddyArmState::Attack;
 		}
 
@@ -89,7 +90,6 @@ namespace js
 
 	void GeddyArmScript::attack()
 	{
-
 		mState = eGeddyArmState::Idle;
 	}
 

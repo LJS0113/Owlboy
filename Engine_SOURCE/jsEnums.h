@@ -24,6 +24,7 @@ namespace js::enums
 	{
 		BG,
 		Scenery,
+		MouseCursor,
 		Ground,
 		Wall,
 		Artifact,

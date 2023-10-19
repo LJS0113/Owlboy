@@ -9,7 +9,9 @@
 #include "jsPlayScene.h"
 #include "jsObject.h"
 #include "jsTime.h"
-
+#include "jsAudioSource.h"
+#include "jsRenderer.h"
+#include "jsAudioListener.h"
 
 namespace js
 {
@@ -26,13 +28,18 @@ namespace js
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(Resources::Find<Material>(L"TitleSkyMaterial"));
 		titleBG1->GetComponent<Transform>()->SetScale(Vector3(9.0f, 4.5f, 1.0f));
-		
+
 
 		titleBG = object::Instantiate<GameObject>(Vector3(0.0f, 0.5f, 1.9999f), eLayerType::BG);
 		mr = titleBG->AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
 		mr->SetMaterial(Resources::Find<Material>(L"TitleCloudMaterial"));
 		titleBG->GetComponent<Transform>()->SetScale(Vector3(5.0f, 4.0f, 1.0f));
+
+		AudioSource* as = titleBG->AddComponent<AudioSource>();
+		as->SetClip(Resources::Load<AudioClip>(L"TitleSound", L"..\\Resources\\Sound\\OST\\Owlboy_Main_Title.mp3"));
+		as->Play();
+
 		//TitleCloudMaterial
 		{
 			// MainRock
@@ -69,6 +76,9 @@ namespace js
 		// Main Camera
 		GameObject* camera = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, -10.0f), eLayerType::Player);
 		Camera* cameraComp = camera->AddComponent<Camera>();
+		renderer::cameras.push_back(cameraComp);
+		renderer::mainCamera = cameraComp;
+		camera->AddComponent<AudioListener>();
 		//camera->AddComponent<CameraScript>();
 	}
 	void TitleScene::Update()
@@ -79,10 +89,11 @@ namespace js
 		const float pi = 3.141592f;
 		float degree = pi / 180.0f;
 
-		titleBG->GetComponent<Transform>()->SetRotation(Vector3(0.0f, 0.0f, degree* chTime));
-
+		titleBG->GetComponent<Transform>()->SetRotation(Vector3(0.0f, 0.0f, degree * chTime));
+		AudioSource* as = titleBG->GetComponent<AudioSource>();
 		if (Input::GetKeyState(eKeyCode::N) == eKeyState::Down)
 		{
+			as->Stop();
 			SceneManager::LoadScene(L"TutorialScene");
 		}
 		Scene::Update();

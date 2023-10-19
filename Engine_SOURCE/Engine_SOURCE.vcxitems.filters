@@ -150,6 +150,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)jsMaskedHead.cpp">
       <Filter>GameObject\Monster\MaskedTortoise</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsMouseCursor.cpp">
+      <Filter>GameObject\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsApplication.h">
@@ -315,6 +318,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)jsMaskedHead.h">
       <Filter>GameObject\Monster\MaskedTortoise</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsMouseCursor.h">
+      <Filter>GameObject\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

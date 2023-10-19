@@ -28,6 +28,6 @@ namespace js
 		SceneManager::CreateScene<PlayScene>(L"PlayScene");
 		SceneManager::CreateScene<EndingScene>(L"EndingScene");
  
-		SceneManager::LoadScene(L"PlayScene");
+		SceneManager::LoadScene(L"TitleScene");
 	}
 }

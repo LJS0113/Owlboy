@@ -49,6 +49,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)jsMesh.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsMeshRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsMonster.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)jsMouseCursor.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsPaintShader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)jsParticleShader.h" />
@@ -105,6 +106,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)jsMesh.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsMeshRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsMonster.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)jsMouseCursor.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsPaintShader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsParticleShader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)jsParticleSystem.cpp" />

@@ -4,6 +4,7 @@
 #include "jsResources.h"
 #include "jsInput.h"
 #include "jsTime.h"
+#include "jsGeddy.h"
 
 namespace js
 {
@@ -31,11 +32,12 @@ namespace js
 		mAnimator->Create(L"GeddyBullet", atlas, Vector2(0.0f, 0.0f), Vector2(13.0f, 13.0f), 8);
 		mAnimator->PlayAnimation(L"GeddyBullet", true);
 
-		//Transform* tr = GetOwner()->GetComponent<Transform>();
-		Vector3 mPos = tr->GetPosition();
+		Transform* geddyTr = gGeddy->GetComponent<Transform>();
+		Vector3 mPos = geddyTr->GetPosition();
 		Vector2 pos = Input::GetMousePos();
 		Vector3 mousePos = Vector3(pos.x, pos.y, 0.0f);
 		mousePos = tr->GetNDCPos(Vector3(mousePos.x, mousePos.y, mousePos.z));
+		mousePos.z = 1.0f;
 
 		dir = mousePos - mPos;
 		dir.Normalize();
@@ -78,7 +80,7 @@ namespace js
 	{
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		Vector3 mPos = tr->GetPosition();
-		mPos += 7.0f * dir * Time::DeltaTime();
+		mPos += 3.0f * dir * Time::DeltaTime();
 		tr->SetPosition(mPos);
 
 		mLifeTime += Time::DeltaTime();

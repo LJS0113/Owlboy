@@ -20,6 +20,8 @@
 #include "jsGeddyBullet.h"
 #include "jsBulletScript.h"
 #include "jsGeddyBulletScript.h"
+#include "jsAudioSource.h"
+#include "jsMouseCursor.h"
 
 namespace js
 {
@@ -32,6 +34,9 @@ namespace js
 	void TutorialScene::Initialize()
 	{
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
+
+		MouseCursor* mouse = object::Instantiate<MouseCursor>(eLayerType::MouseCursor);
+		mouse->Initialize();
 
 		gPlayer = object::Instantiate<Player>(Vector3(0.5f, 0.0f, 1.0f), eLayerType::Player);
 		gPlayer->SetName(L"Otus");
@@ -49,43 +54,12 @@ namespace js
 		otusCd->SetColliderOwner(eColliderOwner::Player);
 		otusCd->SetCenter(Vector2(-0.1f, -0.05f));
 
-		/*gGeddy = object::Instantiate<Geddy>(Vector3(otusPos.x, otusPos.y - 0.5f, otusPos.z), eLayerType::Player);
-		gGeddy->SetName(L"Geddy");
-		mr = gGeddy->AddComponent<MeshRenderer>();
+		player = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 2.0f), eLayerType::BG);
+		mr = player->AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
-		gGeddy->AddComponent<Transform>();
-		Transform* geddyTr = gGeddy->GetComponent<Transform>();
-		Vector3 geddyPos = geddyTr->GetPosition();
-		Collider2D* geddyCd = gGeddy->AddComponent<Collider2D>();
-		Rigidbody* geddyRb = gGeddy->AddComponent<Rigidbody>();
-		gGeddy->AddComponent<GeddyScript>();
-		gGeddy->GetComponent<GeddyScript>()->Initialize();
-		geddyTr->SetScale(Vector3(2.5f, 2.5f, 1.0f));
-		geddyCd->SetColliderOwner(eColliderOwner::Player);
-		geddyCd->SetCenter(Vector2(-0.1f, -0.05f));*/
+		mr->SetMaterial(Resources::Find<Material>(L"TutorialMaterial"));
+		player->GetComponent<Transform>()->SetScale(Vector3(8.0f, 4.5f, 1.0f));
 
-		//{
-		//	GeddyArm* geddyArm = object::Instantiate<GeddyArm>(Vector3(geddyPos.x, geddyPos.y, geddyPos.z - 0.01f), eLayerType::Player);
-		//	geddyArm->SetName(L"GeddyArm");
-		//	mr = geddyArm->AddComponent<MeshRenderer>();
-		//	mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		//	mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
-		//	geddyArm->AddComponent<Transform>();
-		//	Transform* geddyArmTr = geddyArm->GetComponent<Transform>();
-		//	geddyArm->AddComponent<GeddyArmScript>();
-		//	geddyArm->GetComponent<GeddyArmScript>()->Initialize();
-		//	geddyArmTr->SetScale(Vector3(1.5f, 1.5f, 1.0f));
-		//}
-
-
-		{
-			GameObject* player = object::Instantiate<GameObject>(Vector3(0.0f, 0.0f, 2.0f), eLayerType::BG);
-			MeshRenderer* mr = player->AddComponent<MeshRenderer>();
-			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			mr->SetMaterial(Resources::Find<Material>(L"TutorialMaterial"));
-			player->GetComponent<Transform>()->SetScale(Vector3(8.0f, 4.5f, 1.0f));
-		}
 		{
 			Ground* ground = object::Instantiate<Ground>(Vector3(0.0f, -1.9f, 2.0f), eLayerType::Ground);
 			ground->SetName(L"ground");
@@ -141,61 +115,6 @@ namespace js
 		{
 			SceneManager::LoadScene(L"HouseScene");
 		}
-		Transform* otusTr = gPlayer->GetComponent<Transform>();
-		Vector3 otusPos = otusTr->GetPosition();
-
-		bool summon = gPlayer->GetComponent<PlayerScript>()->GetSummon();
-		if (Input::GetKeyState(eKeyCode::R) == eKeyState::Down)
-		{
-			if (!summon)
-			{
-				gGeddy = object::Instantiate<Geddy>(Vector3(otusPos.x, otusPos.y - 0.5f, otusPos.z), eLayerType::Player);
-				gGeddy->SetName(L"Geddy");
-				MeshRenderer* mr = gGeddy->AddComponent<MeshRenderer>();
-				mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-				mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
-				gGeddy->AddComponent<Transform>();
-				Transform* geddyTr = gGeddy->GetComponent<Transform>();
-				Vector3 geddyPos = geddyTr->GetPosition();
-				Collider2D* geddyCd = gGeddy->AddComponent<Collider2D>();
-				Rigidbody* geddyRb = gGeddy->AddComponent<Rigidbody>();
-				gGeddy->AddComponent<GeddyScript>();
-				gGeddy->GetComponent<GeddyScript>()->Initialize();
-				geddyTr->SetScale(Vector3(2.5f, 2.5f, 1.0f));
-				geddyCd->SetColliderOwner(eColliderOwner::Player);
-				//geddyCd->SetCenter(Vector2(-0.1f, -0.05f));
-
-				GeddyArm* geddyArm = object::Instantiate<GeddyArm>(Vector3(2.0f, 2.0f, 1.0f), eLayerType::Player);
-				geddyArm->SetName(L"GeddyArm");
-				mr = geddyArm->AddComponent<MeshRenderer>();
-				mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-				mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
-				geddyArm->AddComponent<Transform>();
-				Transform* geddyArmTr = geddyArm->GetComponent<Transform>();
-				Vector3 geddyArmPos = geddyArmTr->GetPosition();
-				geddyArm->AddComponent<GeddyArmScript>();
-				geddyArm->GetComponent<GeddyArmScript>()->Initialize();
-			}
-		}
-
-		bool hang = gPlayer->GetComponent<PlayerScript>()->IsHang();
-		if (hang && Input::GetKeyState(eKeyCode::LBUTTON) == eKeyState::Down)
-		{
-			Transform* geddyTr = gGeddy->GetComponent<Transform>();
-			Vector3 geddyPos = geddyTr->GetPosition();
-
-			GeddyBullet* bullet = object::Instantiate<GeddyBullet>(Vector3(geddyPos), eLayerType::PlayerBullet);
-			MeshRenderer* mr = bullet->AddComponent<MeshRenderer>();
-			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
-			bullet->AddComponent<Collider2D>();
-			bullet->AddComponent<Transform>();
-			bullet->AddComponent<GeddyBulletScript>();
-			bullet->GetComponent<GeddyBulletScript>()->Initialize();
-
-			int a = 0;
-		}
-
 		Scene::Update();
 	}
 	void TutorialScene::LateUpdate()

@@ -26,6 +26,8 @@ namespace js
 		mAnimator->Create(L"MaskedBullet", atlas, Vector2(0.0f, 0.0f), Vector2(25.0f, 17.0f), 4, Vector2::Zero, 1.0f);
 		mAnimator->PlayAnimation(L"MaskedBullet", false);
 
+		Transform* tr = GetOwner()->GetComponent<Transform>();
+		tr->SetScale(Vector3(1.5f, 1.5f, 1.0f));
 		Collider2D* cd = GetOwner()->GetComponent<Collider2D>();
 		cd->SetSize(Vector2(0.2f, 0.2f));
 

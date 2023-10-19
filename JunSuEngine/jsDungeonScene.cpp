@@ -17,6 +17,8 @@
 #include "jsRigidBody.h"
 #include "jsGeddy.h"
 #include "jsGeddyScript.h"
+#include "jsMouseCursor.h"
+
 
 namespace js
 {
@@ -31,6 +33,9 @@ namespace js
 	void DungeonScene::Initialize()
 	{
 
+		MouseCursor* mouse = object::Instantiate<MouseCursor>(eLayerType::MouseCursor);
+		mouse->Initialize();
+
 		gPlayer = object::Instantiate<Player>(Vector3(0.9f, -1.0f, 1.0f), eLayerType::Player);
 		gPlayer->SetName(L"Otus");
 		Transform* tr = gPlayer->GetComponent<Transform>();
@@ -43,7 +48,7 @@ namespace js
 
 		{
 			// 던전 확대버전
-			GameObject* player = object::Instantiate<GameObject>(Vector3(-10.0f, 0.0f, 3.0f), eLayerType::Player);
+			GameObject* player = object::Instantiate<GameObject>(Vector3(-10.0f, 0.0f, 2.0f), eLayerType::Player);
 			player->SetName(L"DungeonStage");
 			MeshRenderer* mr = player->AddComponent<MeshRenderer>();
 			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -107,6 +112,7 @@ namespace js
 			Camera* cameraComp = camera->AddComponent<Camera>();
 			cameraComp->TurnLayerMask(eLayerType::Player, false);
 			cameraComp->TurnLayerMask(eLayerType::BG, false);
+			cameraComp->TurnLayerMask(eLayerType::MouseCursor, false);
 		}
 
 	}
@@ -117,30 +123,30 @@ namespace js
 		{
 			SceneManager::LoadScene(L"BossScene");
 		}
-		Transform* otusTr = gPlayer->GetComponent<Transform>();
-		Vector3 otusPos = otusTr->GetPosition();
-		bool summon = gPlayer->GetComponent<PlayerScript>()->GetSummon();
-		if (Input::GetKeyState(eKeyCode::R) == eKeyState::Down)
-		{
-			if (!summon)
-			{
-				gGeddy = object::Instantiate<Geddy>(Vector3(otusPos.x, otusPos.y - 0.5f, otusPos.z), eLayerType::Player);
-				gGeddy->SetName(L"Geddy");
-				MeshRenderer* mr = gGeddy->AddComponent<MeshRenderer>();
-				mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-				mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
-				gGeddy->AddComponent<Transform>();
-				Transform* geddyTr = gGeddy->GetComponent<Transform>();
-				Vector3 geddyPos = geddyTr->GetPosition();
-				Collider2D* geddyCd = gGeddy->AddComponent<Collider2D>();
-				Rigidbody* geddyRb = gGeddy->AddComponent<Rigidbody>();
-				gGeddy->AddComponent<GeddyScript>();
-				gGeddy->GetComponent<GeddyScript>()->Initialize();
-				geddyTr->SetScale(Vector3(2.5f, 2.5f, 1.0f));
-				geddyCd->SetColliderOwner(eColliderOwner::Player);
-				geddyCd->SetCenter(Vector2(-0.1f, -0.05f));
-			}
-		}
+		//Transform* otusTr = gPlayer->GetComponent<Transform>();
+		//Vector3 otusPos = otusTr->GetPosition();
+		//bool summon = gPlayer->GetComponent<PlayerScript>()->GetSummon();
+		//if (Input::GetKeyState(eKeyCode::R) == eKeyState::Down)
+		//{
+		//	if (!summon)
+		//	{
+		//		gGeddy = object::Instantiate<Geddy>(Vector3(otusPos.x, otusPos.y - 0.5f, otusPos.z), eLayerType::Player);
+		//		gGeddy->SetName(L"Geddy");
+		//		MeshRenderer* mr = gGeddy->AddComponent<MeshRenderer>();
+		//		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//		mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimationMaterial"));
+		//		gGeddy->AddComponent<Transform>();
+		//		Transform* geddyTr = gGeddy->GetComponent<Transform>();
+		//		Vector3 geddyPos = geddyTr->GetPosition();
+		//		Collider2D* geddyCd = gGeddy->AddComponent<Collider2D>();
+		//		Rigidbody* geddyRb = gGeddy->AddComponent<Rigidbody>();
+		//		gGeddy->AddComponent<GeddyScript>();
+		//		gGeddy->GetComponent<GeddyScript>()->Initialize();
+		//		geddyTr->SetScale(Vector3(2.5f, 2.5f, 1.0f));
+		//		geddyCd->SetColliderOwner(eColliderOwner::Player);
+		//		geddyCd->SetCenter(Vector2(-0.1f, -0.05f));
+		//	}
+		//}
 		Scene::Update();
 	}
 
