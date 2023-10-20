@@ -35,7 +35,7 @@ float4 main(VSOut In) : SV_TARGET
         
         if (monsterReverse == 1)
             UV.x *= -1;
-        
+
         color = atlasTexture.Sample(anisotropicSampler, UV);
     }
     

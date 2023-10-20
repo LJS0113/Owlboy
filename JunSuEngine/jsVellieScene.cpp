@@ -79,16 +79,7 @@ namespace js
 			Collider2D* cd = ground->AddComponent<Collider2D>();
 			cd->SetColliderOwner(eColliderOwner::Ground);
 		}
-		{
-			// Vellie Wall
-			Wall* wall = object::Instantiate<Wall>(Vector3(0.0f, -10.0f, 2.0f), eLayerType::Wall);
-			wall->SetName(L"VellieWall");
-			wall->GetComponent<Transform>()->SetScale(Vector3(2.5f, 3.2f, 2.0f));
-			wall->AddComponent<WallScript>();
-			wall->AddComponent<WallScript>()->Initialize();
-			Collider2D* cd = wall->AddComponent<Collider2D>();
-			cd->SetColliderOwner(eColliderOwner::Wall);
-		}
+
 		{
 			// Sky
 			GameObject* vellieBG = object::Instantiate<GameObject>(Vector3(0.5f, 0.0f, 2.0f), eLayerType::BG);
@@ -135,10 +126,7 @@ namespace js
 			as->Stop();
 			SceneManager::LoadScene(L"BossScene");
 		}
-		if (Input::GetKeyState(eKeyCode::F) == eKeyState::Down)
-		{
-			as->Stop();
-		}
+
 		Scene::Update();
 	}
 
@@ -158,6 +146,7 @@ namespace js
 
 	void VellieScene::OnExit()
 	{
+		as->Stop();
 	}
 
 }

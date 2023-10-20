@@ -36,7 +36,7 @@ namespace js
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Artifact, true);
 
 
-		gPlayer = object::Instantiate<Player>(Vector3(-1.0f, 1.5f, 1.0f), eLayerType::Player);
+		gPlayer = object::Instantiate<Player>(Vector3(0.0f, 1.0f, 1.0f), eLayerType::Player);
 		gPlayer->SetName(L"Otus");
 		MeshRenderer* mr = gPlayer->AddComponent<MeshRenderer>();
 		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
@@ -65,23 +65,23 @@ namespace js
 			Collider2D* cd = wall->AddComponent<Collider2D>();
 			cd->SetColliderOwner(eColliderOwner::Ground);
 		}
-		{
-			// Bed Ground
-			Ground* ground = object::Instantiate<Ground>(Vector3(-1.0f, 0.5f, 2.0f), eLayerType::Ground);
-			ground->SetName(L"BedGround");
-			ground->GetComponent<Transform>()->SetScale(Vector3(1.3f, 0.2f, 2.0f));
-			Collider2D* cd = ground->AddComponent<Collider2D>();
-			cd->SetColliderOwner(eColliderOwner::Ground);
-		}
+		//{
+		//	// Bed Ground
+		//	Ground* ground = object::Instantiate<Ground>(Vector3(-1.0f, 0.5f, 2.0f), eLayerType::Ground);
+		//	ground->SetName(L"BedGround");
+		//	ground->GetComponent<Transform>()->SetScale(Vector3(1.3f, 0.2f, 2.0f));
+		//	Collider2D* cd = ground->AddComponent<Collider2D>();
+		//	cd->SetColliderOwner(eColliderOwner::Ground);
+		//}
 
-		{
-			// Bed Right Ground
-			Ground* ground = object::Instantiate<Ground>(Vector3(1.0f, 0.0f, 2.0f), eLayerType::Ground);
-			ground->SetName(L"BedGround");
-			ground->GetComponent<Transform>()->SetScale(Vector3(1.3f, 0.2f, 2.0f));
-			Collider2D* cd = ground->AddComponent<Collider2D>();
-			cd->SetColliderOwner(eColliderOwner::Ground);
-		}
+		//{
+		//	// Bed Right Ground
+		//	Ground* ground = object::Instantiate<Ground>(Vector3(1.0f, 0.0f, 2.0f), eLayerType::Ground);
+		//	ground->SetName(L"BedGround");
+		//	ground->GetComponent<Transform>()->SetScale(Vector3(1.3f, 0.2f, 2.0f));
+		//	Collider2D* cd = ground->AddComponent<Collider2D>();
+		//	cd->SetColliderOwner(eColliderOwner::Ground);
+		//}
 		{
 			// House Ground
 			Ground* ground = object::Instantiate<Ground>(Vector3(0.0f, -1.5f, 2.0f), eLayerType::Ground);

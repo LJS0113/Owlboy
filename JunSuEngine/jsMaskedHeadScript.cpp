@@ -10,7 +10,7 @@ namespace js
 {
 	MaskedHeadScript::MaskedHeadScript()
 		: mbRight(false)
-		, mSpeed(5.0f)
+		, mSpeed(7.0f)
 	{
 	}
 	MaskedHeadScript::~MaskedHeadScript()

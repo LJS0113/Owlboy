@@ -139,22 +139,22 @@ namespace js
 			mr->SetMaterial(Resources::Find<Material>(L"OtusHpIconMaterial"));
 			hpBar->GetComponent<Transform>()->SetScale(Vector3(0.2f, 0.2f, 1.0f));
 		}
-		{
-			// Boss hp bar
-			GameObject* hpBar = object::Instantiate<GameObject>(Vector3(0.0f, -2.05f, -5.0f), eLayerType::UI);
-			MeshRenderer* mr = hpBar->AddComponent<MeshRenderer>();
-			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			mr->SetMaterial(Resources::Find<Material>(L"BossHpBarMaterial"));
-			hpBar->GetComponent<Transform>()->SetScale(Vector3(3.0f, 0.3f, 1.0f));
-		}
-		{
-			// Boss hp bar
-			GameObject* hpBar = object::Instantiate<GameObject>(Vector3(0.0f, -2.035f, -4.0f), eLayerType::UI);
-			MeshRenderer* mr = hpBar->AddComponent<MeshRenderer>();
-			mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			mr->SetMaterial(Resources::Find<Material>(L"BossHpBarOnMaterial"));
-			hpBar->GetComponent<Transform>()->SetScale(Vector3(2.4f, 0.22f, 1.0f));
-		}
+		//{
+		//	// Boss hp bar
+		//	GameObject* hpBar = object::Instantiate<GameObject>(Vector3(0.0f, -2.05f, -5.0f), eLayerType::UI);
+		//	MeshRenderer* mr = hpBar->AddComponent<MeshRenderer>();
+		//	mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//	mr->SetMaterial(Resources::Find<Material>(L"BossHpBarMaterial"));
+		//	hpBar->GetComponent<Transform>()->SetScale(Vector3(3.0f, 0.3f, 1.0f));
+		//}
+		//{
+		//	// Boss hp bar
+		//	GameObject* hpBar = object::Instantiate<GameObject>(Vector3(0.0f, -2.035f, -4.0f), eLayerType::UI);
+		//	MeshRenderer* mr = hpBar->AddComponent<MeshRenderer>();
+		//	mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//	mr->SetMaterial(Resources::Find<Material>(L"BossHpBarOnMaterial"));
+		//	hpBar->GetComponent<Transform>()->SetScale(Vector3(2.4f, 0.22f, 1.0f));
+		//}
 		Camera* cameraComp = nullptr;
 		{
 			// Main Camera

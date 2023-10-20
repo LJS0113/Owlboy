@@ -29,7 +29,7 @@ namespace js
 		, dir(Vector3::Zero)
 		, mTime(0.0f)
 		, atCount(0)
-		, hp(30.0f)
+		, hp(100.0f)
 		, mbFly(false)
 		, mbTouch(false)
 		, mbHead(true)
@@ -151,7 +151,7 @@ namespace js
 			mState = eMaskedState::Disappear;
 		}
 
-		if (hp == 15.0f)
+		if (hp == 50.0f)
 		{
 			mbFly = true;
 			msHead->SetState(GameObject::eState::Dead);
@@ -419,7 +419,7 @@ namespace js
 			mTime = 0.0f;
 		}
 
-		if (atCount > 6)
+		if (atCount > 9)
 		{
 			mState = eMaskedState::Move;
 			mTime = 0.0f;
@@ -678,8 +678,10 @@ namespace js
 		}
 		if (other->GetOwner()->GetName().compare(L"GeddyBullet") == 0)
 		{
-			if(mbTouch)
+			if (mbTouch)
+			{
 				hp -= 1.0f;
+			}
 		}
 
 	}
